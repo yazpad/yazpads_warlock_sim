@@ -1,13 +1,20 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { initTalents, applyTalentsObject, canChangeTalentPoint, getTalentsObject } from '../src/talents.js';
+import { initTalents, applyTalentsObject, canChangeTalentPoint, getTalentsObject, getTalentFlagsFromRanks } from '../src/talents.js';
 
 const data = JSON.parse(readFileSync(new URL('../data/talents.json', import.meta.url)));
 globalThis.document = { getElementById: () => null, querySelectorAll: () => [] };
 globalThis.fetch = async () => ({ ok: true, json: async () => data });
 await initTalents();
 const can = (tree, name, delta) => canChangeTalentPoint(tree, data.trees[tree].talents.findIndex(t => t.name === name), delta);
+
+test('Shadow Mastery grants two percent Shadow damage per rank in the beta update', () => {
+  for (let rank = 0; rank <= 5; rank++) {
+    const flags = getTalentFlagsFromRanks({ affliction: { shadow_mastery: rank } });
+    assert.equal(flags.shadowMasteryBonus, rank * 0.02);
+  }
+});
 
 test('Refunds preserve row requirements while allowing spare and leaf points', () => {
   applyTalentsObject({ affliction: { suppression: 5, malediction: 1 } });

@@ -236,7 +236,7 @@ export function getTalentFlagsFromRanks(talentTreeRanks = {}) {
     snfChance: destro('shadow and flame') * 0.20,
     snfBonus: destro('shadow and flame') * 0.02,
     dotCrit: 1.0 + 0.50 * (1.0 + aff('pandemic') / 3),
-    shadowMasteryBonus: shadowMastery * 0.01,
+    shadowMasteryBonus: shadowMastery * 0.02,
     shadowMultiplier: 1,
     fireMultiplier: 1,
     corrMultiplier: 0,

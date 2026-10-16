@@ -162,7 +162,7 @@
           "col": 3,
           "icon": "spell_shadow_shadetruesight",
           "desc": [
-            "Increases the damage dealt or life drained by your Shadow spells by 1%."
+            "Increases your Shadow spell damage by 2/4/6/8/10%."
           ]
         },
         {
