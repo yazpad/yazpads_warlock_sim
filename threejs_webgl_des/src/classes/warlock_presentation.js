@@ -5,13 +5,15 @@ const raceDetails = {
     icon: './assets/icons/Achievement_Character_Human_Male.png',
     traits: [
       { name: 'The Human Spirit', icon: 'Spell_Holy_MagicalSentry.png', title: 'The Human Spirit (+5% Spirit)', desc: 'Spirit increased by 5%.' },
-      { name: 'Sword Specialization', icon: 'INV_Sword_27.png', title: 'Sword Specialization (+2% Spell Crit)', desc: 'Increases spell and ability critical strike chance by 2% while a sword is equipped. Sword equipped defaults on in Direct Stats; exclude the bonus from the Spell Crit input.' }
+      { name: 'Ruthless', icon: 'INV_Sword_27.png', title: 'Ruthless (+2% Crit)', desc: 'Increases critical strike chance by 2%, regardless of equipped weapon. Exclude this automatic bonus from the Spell Crit input.' }
     ]
   },
   ORC: {
     icon: './assets/icons/Achievement_Character_Orc_Male.png',
     traits: [
-      { name: 'Blood Fury', icon: 'Racial_Orc_BerserkerStrength.png', title: 'Blood Fury (+10% Spell Power)', desc: 'Increases base spell power by 10% for 15 sec. 120 sec cooldown. A Blood Fury APL row controls activation; older APLs without one use automatic racial timing.' },
+      { name: 'Blood Fury', icon: 'Racial_Orc_BerserkerStrength.png', title: 'Blood Fury (+10% Spell Power)', desc: 'Increases base spell power by 10% for 15 sec. 180 sec cooldown. A Blood Fury APL row controls activation; older APLs without one use automatic racial timing.' },
+      { name: 'Savage', icon: 'INV_Axe_04.png', title: 'Savage (+1% Crit)', desc: 'Increases critical strike chance by 1%, regardless of equipped weapon. Exclude this automatic bonus from the Spell Crit input.' },
+      { name: 'Command', icon: 'Spell_Shadow_AntiShadow.png', title: 'Command (+5% Pet Damage)', desc: 'Increases pet attack damage by 5%.' },
       { name: 'Hardiness', icon: 'Spell_Shadow_AntiShadow.png', title: 'Hardiness (+25% Stun Resist)', desc: 'Chance to resist Stun effects increased by an additional 25%.' }
     ]
   },
@@ -19,7 +21,7 @@ const raceDetails = {
     icon: './assets/icons/Achievement_Character_Undead_Male.png',
     traits: [
       { name: 'Will of the Forsaken', icon: 'Spell_Shadow_RaiseDead.png', title: 'Will of the Forsaken (Charm/Fear/Sleep Immunity)', desc: 'Provides immunity to Charm, Fear, and Sleep effects for 5 sec.' },
-      { name: 'Touch of the Grave', icon: 'Spell_Shadow_LifeDrain02.png', title: 'Touch of the Grave', desc: 'Spell casts have a 10% chance to deal 5% of maximum health as damage. 1 sec cooldown.' }
+      { name: 'Touch of the Grave', icon: 'Spell_Shadow_LifeDrain02.png', title: 'Touch of the Grave', desc: 'Spell casts have a 30% chance to trigger. 25 sec internal cooldown. Retains the simulator’s existing damage of 5% of maximum health, unaffected by Shadow damage bonuses or spell rank.' }
     ]
   },
   TROLL: {
@@ -33,7 +35,7 @@ const raceDetails = {
     icon: './assets/icons/Achievement_Character_Gnome_Male.png',
     traits: [
       { name: 'Expansive Mind', icon: 'INV_Enchant_EssenceEternalLarge.png', title: 'Expansive Mind (+5% Maximum Mana)', desc: 'Maximum Mana increased by 5%. Does not increase Intellect or spell crit.' },
-      { name: 'Eureka!', icon: 'Spell_Nature_WispSplode.png', title: 'Eureka! (+10% Damage, -10% Mana)', desc: 'Empowers the next 3 spells, including their periodic damage. 120 sec cooldown. An Eureka APL row controls activation; older APLs without one use automatic racial timing.' }
+      { name: 'Eureka!', icon: 'Spell_Nature_WispSplode.png', title: 'Eureka! (+10% Damage, -10% Mana)', desc: 'For 8 seconds, spells deal 10% more damage and cost 10% less Mana, with no charge limit. Periodic damage snapshots the bonus on application. 120 sec cooldown. An Eureka APL row controls activation; older APLs without one use automatic racial timing.' }
     ]
   }
 };

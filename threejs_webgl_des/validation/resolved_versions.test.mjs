@@ -42,5 +42,5 @@ test('Human sword selection survives import/export without doubling crit', async
  const noSword=await resolveSavedBuild({...input,stats:{...input.stats,swordEquipped:false}});
  const key=Object.keys((await import('../src/model.js')).CONFIG).indexOf('crit');
  const crit=c=>new Float32Array(packConfig(c).buffer)[key];
- assert.ok(Math.abs(crit(original.config)-crit(noSword.config)-0.02)<1e-7);
+ assert.ok(Math.abs(crit(original.config)-crit(noSword.config))<1e-7);
 });

@@ -146,7 +146,7 @@ float resistanceMultiplier(){
 float currentShadowMult(){return c.shadowMult*(s.now<s.snfShadowEnd?(1.0+c.snfBonus):1.0);}
 float currentFireMult(){return c.fireMult*(s.now<s.snfFireEnd?(1.0+c.snfBonus):1.0);}
 float currentPower(){return c.power+(c.race==1u&&s.now<s.racialEnd?c.basePower*0.10:0.0)+(s.now<s.trinketEnd?c.trinketSP:0.0);}
-float manaMultiplier(){return s.eurekaCharges>0u?0.9:1.0;}
+float manaMultiplier(){return s.now<s.eurekaEnd?0.9:1.0;}
 float hasteMultiplier(){return c.race==2u&&s.now<s.racialEnd?1.10:1.0;}
 float baseCost(uint spell){switch(spell){
  case 0u:return c.boltCost;case 1u:return c.corrCost;case 2u:return 215.0;
@@ -157,9 +157,8 @@ float baseCost(uint spell){switch(spell){
 float cost(uint spell){return baseCost(spell)*manaMultiplier();}
 void spend(uint spell){
  float amount=cost(spell);s.mana-=amount;s.spent+=amount;countCast(spell==13u?7u:spell==23u?13u:spell);
- s.castBonus=s.eurekaCharges>0u?1.10:1.0;
- if(s.eurekaCharges>0u)s.eurekaCharges--;
- if(c.race==4u&&s.now>=s.graveReady&&random01()<0.10){s.graveReady=s.now+1000000u;damage(12u,c.maxHealth*0.05,false);}
+ s.castBonus=s.now<s.eurekaEnd?1.10:1.0;
+ if(c.race==4u&&s.now>=s.graveReady&&random01()<0.30){s.graveReady=s.now+25000000u;damage(12u,c.maxHealth*0.05,false);}
 }
 bool racialInAPL(uint action){
  for(uint r=0u;r<numAplRules;r++)if((aplHeaders0[r]&0xFFu)==action)return true;
@@ -167,21 +166,21 @@ bool racialInAPL(uint action){
 }
 bool eurekaInAPL(){return racialInAPL(20u);}
 void activateBerserking(){s.racialReady=s.now+180000000u;s.racialEnd=s.now+10000000u;}
-void activateBloodFury(){s.racialReady=s.now+120000000u;s.racialEnd=s.now+15000000u;}
-void activateEureka(){s.racialReady=s.now+120000000u;s.eurekaCharges=3u;}
+void activateBloodFury(){s.racialReady=s.now+180000000u;s.racialEnd=s.now+15000000u;}
+void activateEureka(){s.racialReady=s.now+120000000u;s.eurekaEnd=s.now+8000000u;}
 void checkRacial(){
  if((c.race==3u&&eurekaInAPL())||(c.race==1u&&racialInAPL(21u))||(c.race==2u&&racialInAPL(22u)))return;
  if(s.now<s.racialReady)return;
  bool execute=float(s.now)>=float(c.end)*0.65;
- uint cooldown=c.race==2u?180000000u:120000000u;
+ uint cooldown=c.race==3u?120000000u:180000000u;
  bool trigger=c.racialPolicy==1u||execute||(c.racialPolicy==2u&&s.now<1000000u&&float(c.end)*0.65>=float(cooldown));
  if(c.race==1u||c.race==3u){
   uint window=c.race==1u?14000000u:6000000u;
   if(s.doomActive!=0u){if(s.doomEnd>c.end||s.doomEnd-s.now>window)return;trigger=true;}
   else if(c.curseOfDoom!=0u&&c.end-s.now>=60000000u)return;
   if(!trigger)return;
-  s.racialReady=s.now+120000000u;
-  if(c.race==1u)s.racialEnd=s.now+15000000u;else s.eurekaCharges=3u;
+  s.racialReady=s.now+cooldown;
+  if(c.race==1u)s.racialEnd=s.now+15000000u;else s.eurekaEnd=s.now+8000000u;
  }else if(c.race==2u&&trigger){s.racialReady=s.now+180000000u;s.racialEnd=s.now+10000000u;}
 }
 void applyDot(uint spell){
@@ -294,7 +293,7 @@ void tick(Event e){
   s.doomActive=0u;amount=(1742.0+4.0*p)*currentShadowMult()*(1.0+c.shadowMasteryBonus+c.maledictionBonus)*(s.now<s.drainHopeEnd?1.10:1.0);
   bool crit=random01()<c.shadowCrit;if(crit)amount*=c.dotCrit;
   amount*=isbMultiplier();amount*=resistanceMultiplier();
-  damage(6u,amount*(s.eurekaCharges>0u?1.10:1.0),crit);return;
+  damage(6u,amount*(s.now<s.eurekaEnd?1.10:1.0),crit);return;
  }else{return;}
 }
 void gcd(){s.ready=s.now+uint(max(1000000.0,1500000.0/hasteMultiplier()));enqueue(s.ready,5u,0u,0u);}
@@ -417,8 +416,6 @@ void decide(){
  float fightProgress=float(s.now)/max(1.0,float(c.end));
  float targetHpPct=max(0.0,(1.0-fightProgress)*100.0);
  float playerManaPct=(s.mana/c.maxMana)*100.0;
- // C++ uses the final Eureka charge to prepare mana before resuming damage casts.
- if(c.race==3u&&!eurekaInAPL()&&s.eurekaCharges==1u&&playerManaPct<70.0){tap();return;}
 
  for(uint r=0u;r<numAplRules;r++){
   uint header0=aplHeaders0[r];
@@ -441,7 +438,7 @@ void decide(){
 
   // Execute Action
   if(action==20u){ // Eureka is off-GCD; continue evaluating spells in this decision.
-   if(c.race==3u&&s.now>=s.racialReady&&s.eurekaCharges==0u)activateEureka();
+   if(c.race==3u&&s.now>=s.racialReady&&s.now>=s.eurekaEnd)activateEureka();
   }else if(action==21u){ // Blood Fury is off-GCD and follows this APL row.
    if(c.race==1u&&s.now>=s.racialReady)activateBloodFury();
   }else if(action==22u){ // Berserking is off-GCD and follows this APL row.

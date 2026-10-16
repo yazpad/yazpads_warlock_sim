@@ -94,6 +94,9 @@ export function resetTreeTalents(treeIdx, onTalentChange) {
 
 export function applyTalentsObject(talentsObj, onTalentChange) {
   if (!talentData || !talentsObj) return;
+  if (ACTIVE_CLASS.id === 'warlock' && Object.entries(talentsObj.affliction || {}).some(([key, rank]) => key.toLowerCase() === 'malediction' && Number(rank) > 0)) {
+    throw new Error('Malediction was replaced by Grim Reach (2 range-only ranks). Respec this build before applying it.');
+  }
   currentAllocation = {};
 
   for (const [treeKey, treeTalents] of Object.entries(talentsObj)) {
@@ -199,7 +202,9 @@ export function getTalentFlagsFromRanks(talentTreeRanks = {}) {
     felVitality: felVitality > 0,
     felVitalityRank: felVitality,
     felVitalityBonus: felVitality * 0.05,
-    maledictionBonus: aff('malediction') * 0.01,
+    maledictionBonus: 0,
+    afflictionRangeMultiplier: 1 + aff('grim reach') * 0.10,
+    destructionRangeMultiplier: 1 + destro('destructive reach') * 0.10,
     improvedDrainsBonus: improvedDrains >= 3 ? 0.20 : improvedDrains === 2 ? 0.13 : improvedDrains === 1 ? 0.07 : 0,
     malevolence: aff('malevolence'),
     nightfall: aff('nightfall') > 0,

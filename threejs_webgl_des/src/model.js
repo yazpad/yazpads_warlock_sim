@@ -83,6 +83,7 @@ export const DEFAULTS = Object.freeze({
 
 export function validate(input) {
   const c = { ...DEFAULTS, ...input };
+  if (c.maledictionBonus !== 0) throw new Error('Malediction damage was removed. Respec and resolve this build using Grim Reach.');
   const bounds = { maxHealth: [0, 100000], duration: [1, 1800], iterations: [1, 1048576], seed: [0, 4294967295],
     spellPower: [0, 10000], shadowPower: [0, 10000], firePower: [0, 10000],
     intellect: [0, 5000], stamina: [0, 5000], spirit: [0, 5000], hit: [0, 100],
@@ -261,7 +262,7 @@ export const DETAIL_STATE = Object.fromEntries([
   ...UPTIME_EFFECTS.map(([,key]) => [`uptime_${key}`, 'u32']), ['manaWasted', 'f32'],
 ]);
 export const STATE = {
-  racialReady:'u32', racialEnd:'u32', eurekaCharges:'u32', graveReady:'u32', doomEnd:'u32', castBonus:'f32', corrBonus:'f32', agonyBonus:'f32', immBonus:'f32', siphonBonus:'f32', initialized:'u32', done:'u32', now:'u32', size:'u32', events:'u32', highWater:'u32',
+  racialReady:'u32', racialEnd:'u32', eurekaEnd:'u32', graveReady:'u32', doomEnd:'u32', castBonus:'f32', corrBonus:'f32', agonyBonus:'f32', immBonus:'f32', siphonBonus:'f32', initialized:'u32', done:'u32', now:'u32', size:'u32', events:'u32', highWater:'u32',
   casting:'u32', ready:'u32', trance:'u32', tranceEnd:'u32', isbEnd:'u32', isbCharges:'u32',
   corrTicks:'u32', corrGen:'u32', corrEnd:'u32', agonyTicks:'u32', agonyGen:'u32', agonyEnd:'u32',
   immTicks:'u32', immGen:'u32', immEnd:'u32',
@@ -317,9 +318,9 @@ export function packConfig(input) {
   const petChoiceMap = { none: 0, imp: 1, succubus: 2 };
   const rawRules = Array.isArray(c.aplRules) && c.aplRules.length > 0 ? c.aplRules : buildDefaultAPLRules(c);
 
-  const swordCrit = c.race === 'HUMAN' && c.swordEquipped ? 2 : 0;
-  const baseCrit = (1.7 + int / 60.6 + c.crit + swordCrit) / 100;
-  const shadowCrit = (1.7 + int / 60.6 + c.crit + swordCrit + (c.malevolence || 0)) / 100;
+  const racialCrit = c.race === 'HUMAN' ? 2 : c.race === 'ORC' ? 1 : 0;
+  const baseCrit = (1.7 + int / 60.6 + c.crit + racialCrit) / 100;
+  const shadowCrit = (1.7 + int / 60.6 + c.crit + racialCrit + (c.malevolence || 0)) / 100;
 
   const impCorrRanks = c.improvedCorruptionBonus > 0 ? Math.round(c.improvedCorruptionBonus / 0.02) : (c.instantCorruption ? 5 : 0);
   const corrCastTime = Math.max(0, 2.0 - 0.4 * impCorrRanks);
@@ -390,9 +391,9 @@ export function packConfig(input) {
     dotCrit: c.dotCrit !== undefined ? c.dotCrit : 1.5,
     fnbCrit: c.fnbCrit / 100,
     petMult: c.petMult || 1.0,
-    petFireboltMult: c.petFireboltMult || c.petMult || 1.0,
-    petMeleeMult: (c.petMeleeMult || c.petMult || 1.0) * (1.0 - Math.max(0, c.bossArmor !== undefined ? c.bossArmor : 3731.0) / (Math.max(0, c.bossArmor !== undefined ? c.bossArmor : 3731.0) + 400.0 + 85.0 * 60.0)),
-    petLashMult: c.petLashMult || c.petMult || 1.0,
+    petFireboltMult: (c.petFireboltMult || c.petMult || 1.0) * (c.race === 'ORC' ? 1.05 : 1),
+    petMeleeMult: (c.petMeleeMult || c.petMult || 1.0) * (c.race === 'ORC' ? 1.05 : 1) * (1.0 - Math.max(0, c.bossArmor !== undefined ? c.bossArmor : 3731.0) / (Math.max(0, c.bossArmor !== undefined ? c.bossArmor : 3731.0) + 400.0 + 85.0 * 60.0)),
+    petLashMult: (c.petLashMult || c.petMult || 1.0) * (c.race === 'ORC' ? 1.05 : 1),
     brandMult: c.brandMult || 1.0,
     cataclysmCostMult: c.cataclysmCostMult !== undefined ? c.cataclysmCostMult : (c.cataclysmRank === 3 || c.cataclysm === 3 ? 0.90 : c.cataclysmRank === 2 || c.cataclysm === 2 ? 0.94 : c.cataclysmRank === 1 || c.cataclysm === 1 ? 0.97 : 1.0),
     improvedAgonyBonus: c.improvedAgonyBonus !== undefined ? c.improvedAgonyBonus : (c.improvedAgonyRank ? c.improvedAgonyRank * 0.05 : c.improvedAgony ? (typeof c.improvedAgony === 'number' ? c.improvedAgony * 0.05 : 0.10) : 0.0),

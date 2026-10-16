@@ -84,7 +84,6 @@ shader = shader.replace(' uint globalLane=offset+lane;', `
  }
 `);
 shader = shader.replace('seedRandom(mode==2u?0u:(numConfigs>1u?fightInCfg:globalLane));', 'seedRandom(0u);');
-shader = shader.replace('if(c.race==3u&&!eurekaInAPL()&&s.eurekaCharges==1u&&playerManaPct<70.0){tap();return;}', 'if(c.race==3u&&!eurekaInAPL()&&s.eurekaCharges==1u&&playerManaPct<70.0){chosenAction=1u;tap();return;}');
 shader = shader.replace('if(s.mana>=cost(c.filler)){beginCast(c.filler);return;}\n tap();', 'if(s.mana>=cost(c.filler)){chosenAction=c.filler==4u?12u:c.filler==5u?3u:16u;beginCast(c.filler);return;}\n chosenAction=1u;tap();');
 shader = shader.replace('if(s.done!=0u)break;advance();', 'if(s.done!=0u||(mode==3u&&reached))break;advance();');
 shader = shader.replace('if(mode!=2u&&s.done==0u)s.done=6u;', 'if(mode==3u&&reached)s.done=8u;else if(mode!=2u&&s.done==0u)s.done=6u;');

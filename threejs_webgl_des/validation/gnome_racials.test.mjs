@@ -24,11 +24,11 @@ test('Eureka appears in presets, parses, compiles, and round trips as an off-GCD
  assert.equal(result.config.aplRules[0].action,APL_ACTION.EUREKA);
  const values=c=>{const w=packConfig(c),f=new Float32Array(w.buffer);return Object.fromEntries(Object.entries(CONFIG).map(([k,t],i)=>[k,t==='f32'?f[i]:w[i]]));};
  const human=values({race:'HUMAN',swordEquipped:false}),gnome=values({race:'GNOME'});
- assert.equal(human.crit,gnome.crit);
+ assert.ok(Math.abs(human.crit-gnome.crit-0.02)<1e-7);
  assert.ok(Math.abs(gnome.maxMana/human.maxMana-1.05)<1e-6);
 });
 
-test('actual GLSL Eureka honors APL enablement, conditions, race, charges, cooldown and DoT boosts', t => {
+test('actual GLSL Eureka honors APL enablement, conditions, race, duration, cooldown and DoT boosts', t => {
  const cases=[],names=[];
  const add=(name,text,extra={})=>{
   names.push(name);
@@ -40,6 +40,8 @@ test('actual GLSL Eureka honors APL enablement, conditions, race, charges, coold
  add('human','Eureka!\nCorruption if !target.has_debuff("Corruption")\nShadow Bolt',{race:'HUMAN',swordEquipped:false});
  add('cooldown','Eureka!\nShadow Bolt',{duration:125});
  add('legacy','Shadow Bolt',{racialPolicy:'cooldown'});
+ add('timedOn','Eureka!\nSearing Pain',{duration:12});
+ add('timedOff','Eureka! if false\nSearing Pain',{duration:12});
  const dir=mkdtempSync(join(tmpdir(),'warlock-eureka-')),path=join(dir,'cases.json');
  writeFileSync(path,JSON.stringify({vertex:'#version 300 es\n'+VERTEX,detailed:'#version 300 es\n'+FRAGMENT,cases}));
  const run=spawnSync('python3',[fileURLToPath(new URL('./headless_gles.py',import.meta.url)),path],{encoding:'utf8',timeout:120000,maxBuffer:8*1024*1024});
@@ -61,10 +63,16 @@ test('actual GLSL Eureka honors APL enablement, conditions, race, charges, coold
  assert.equal(result.on.corrGen,1);
  assert.equal(result.on.corrGen,result.off.corrGen);
  assert.equal(result.on.events,result.off.events);
- assert.equal(result.on.eurekaCharges,2);
+ assert.equal(result.on.eurekaEnd,8000000);
  assert.ok(result.off.total>0);
  assert.ok(Math.abs(result.on.total/result.off.total-1.1)<1e-5);
  assert.ok(result.on.spent<result.off.spent);
+ // Five Searing Pains complete inside [0, 8s), beyond the old third charge.
+ // Later casts pay full cost: this also verifies that the buff expires.
+ assert.equal(result.timedOn.eurekaEnd,8000000);
+ assert.ok(Math.abs(result.timedOff.spent-result.timedOn.spent-5*168*0.1)<0.01);
+ assert.equal(result.timedOn.gained,result.timedOff.gained);
+ assert.ok(result.timedOn.total>result.timedOff.total);
 });
 
 test('GPU regret replays Eureka before forcing the recorded spell', async t => {

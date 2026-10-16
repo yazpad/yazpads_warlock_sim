@@ -18,7 +18,7 @@ export const TALENT_DEFINITIONS = [
   { id: 'improved_life_tap', name: 'Improved Life Tap', tree: 0, treeName: 'Affliction', row: 1, col: 1, max: 2, req: null },
   { id: 'suppression', name: 'Suppression', tree: 0, treeName: 'Affliction', row: 1, col: 2, max: 5, req: null },
   { id: 'improved_corruption', name: 'Improved Corruption', tree: 0, treeName: 'Affliction', row: 1, col: 3, max: 5, req: null },
-  { id: 'malediction', name: 'Malediction', tree: 0, treeName: 'Affliction', row: 2, col: 1, max: 5, req: null },
+  { id: 'grim_reach', name: 'Grim Reach', tree: 0, treeName: 'Affliction', row: 2, col: 1, max: 2, req: null },
   { id: 'soul_harvesting', name: 'Soul Harvesting', tree: 0, treeName: 'Affliction', row: 2, col: 2, max: 2, req: null },
   { id: 'improved_drains', name: 'Improved Drains', tree: 0, treeName: 'Affliction', row: 2, col: 3, max: 3, req: null },
   { id: 'improved_bane_of_agony', name: 'Improved Bane of Agony', tree: 0, treeName: 'Affliction', row: 3, col: 1, max: 2, req: null },

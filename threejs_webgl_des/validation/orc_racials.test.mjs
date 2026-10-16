@@ -47,6 +47,7 @@ test('actual GLSL Blood Fury is off-GCD and respects race, enablement, condition
   ['delayed-off',config('Blood Fury if false\nShadow Bolt',{duration:7})],
   ['human',config('Blood Fury\nShadow Bolt',{race:'HUMAN',swordEquipped:false})],
   ['cooldown',config('Blood Fury\nShadow Bolt',{duration:125})],
+  ['second-use',config('Blood Fury\nShadow Bolt',{duration:185})],
   ['legacy',config('Shadow Bolt',{racialPolicy:'cooldown'})],
   ['expiry-on',config('Blood Fury\nShadow Bolt',{duration:20})],
   ['expiry-off',config('Blood Fury if false\nShadow Bolt',{duration:20})]
@@ -64,13 +65,15 @@ test('actual GLSL Blood Fury is off-GCD and respects race, enablement, condition
   return [name,decodeStates(w.buffer,1)[0]];
  }));
  for(const state of Object.values(result))assert.equal(state.done,1);
- assert.equal(result.on.racialReady,120000000);
+ assert.equal(result.on.racialReady,180000000);
  assert.equal(result.on.racialEnd,15000000);
  for(const name of ['off','never','human'])assert.equal(result[name].racialReady,0);
- assert.equal(result.delayed.racialReady,126000000);
+ assert.equal(result.delayed.racialReady,186000000);
  // At six seconds the off-GCD activation can precede the same-time impact.
  assert.ok(Math.abs(result.delayed.total-result['delayed-off'].total-500*0.1*(3/3.5)*2)<0.01);
- assert.equal(result.cooldown.racialReady,240000000);
+ assert.equal(result.cooldown.racialReady,180000000);
+ assert.equal(result['second-use'].racialReady,360000000);
+ assert.equal(result.legacy.racialReady,180000000);
  assert.equal(result.legacy.total,result.on.total);
  assert.equal(result.on.events,result.off.events);
  assert.equal(result.on.spent,result.off.spent);

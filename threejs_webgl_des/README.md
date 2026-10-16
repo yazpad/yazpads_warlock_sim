@@ -4,6 +4,14 @@ A new, standalone browser app using **Three.js `WebGLRenderer` and GLSL ES 3.00 
 
 This is a correctness-oriented **single-target core foundation**, not a complete port of every warlock mechanic.
 
+## Forever Beta mechanics update
+
+The Warlock app now uses 2% Shadow Mastery damage per rank, two-rank Grim Reach in place of Malediction, Destruction-only Destructive Reach, unconditional Human/Orc critical strike bonuses of 2%/1%, eight-second chargeless Eureka, three-minute Blood Fury, and a 30% Undead proc with a 25-second internal cooldown. The Undead proc retains the existing 5%-maximum-health damage formula; the supplied patch notes did not change its amount.
+
+Saved builds with invested Malediction require a respec. Existing resolved exports are version-checked and must be rebuilt from logical inputs when their mechanics version differs. Built-in presets spend refunded Malediction points in the earliest available Affliction talents while preserving tree totals. Range talents update metadata; encounter distance still controls projectile travel and does not enforce spell range.
+
+See [BETA_UPDATE_TODO.md](BETA_UPDATE_TODO.md) for scope and validation. Historical CPU/browser parity fixtures describe the earlier mechanics and are not acceptance tests for the beta update. The separate Priest modules and native simulator remain on their existing rules.
+
 ## Run and publish
 
 From this directory:
@@ -20,7 +28,7 @@ WebGL2 and four integer color attachments are required. **WebGPU can be absent o
 
 ## Supported contract
 
-- Level-60 Human, one level-63 target. Raw intellect/spirit are bonuses added to Human base stats; maximum mana is derived, not entered directly. Crit includes base crit and intellect. Human Sword Specialization adds two percentage points only when Sword equipped is checked in Direct Stats. Enter Spell Crit without that racial bonus; the sword selection is saved with the build. Human Spirit is applied by UI/import stat resolution.
+- Level-60 Human, one level-63 target. Raw intellect/spirit are bonuses added to Human base stats; maximum mana is derived, not entered directly. Crit includes base crit and intellect. Human Ruthless adds two critical strike percentage points regardless of weapon. Enter Spell Crit without that racial bonus. Human Spirit is applied by UI/import stat resolution.
 - Shadow Bolt, Corruption, Agony, Immolate, Incinerate, Searing Pain, and Life Tap.
 - Bane fixed at 5/5. Toggles for Improved Corruption 0/5 or 5/5, Nightfall 0/2 or 2/2, Improved Shadow Bolt 0/5 or 5/5, Ruin 0/5 or 5/5, and Improved Life Tap 0/2 or 2/2.
 - Cast completion, independent projectile impact, GCD readiness, periodic ticks, Nightfall expiry, and five-second mana regeneration are actual events.

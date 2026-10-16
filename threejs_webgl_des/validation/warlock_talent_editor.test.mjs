@@ -17,10 +17,10 @@ test('Shadow Mastery grants two percent Shadow damage per rank in the beta updat
 });
 
 test('Refunds preserve row requirements while allowing spare and leaf points', () => {
-  applyTalentsObject({ affliction: { suppression: 5, malediction: 1 } });
+  applyTalentsObject({ affliction: { suppression: 5, grim_reach: 1 } });
   assert.equal(can(0, 'Suppression', -1), false);
-  assert.equal(can(0, 'Malediction', -1), true);
-  applyTalentsObject({ affliction: { suppression: 5, improved_corruption: 1, malediction: 1 } });
+  assert.equal(can(0, 'Grim Reach', -1), true);
+  applyTalentsObject({ affliction: { suppression: 5, improved_corruption: 1, grim_reach: 1 } });
   assert.equal(can(0, 'Suppression', -1), true);
   assert.equal(can(0, 'Improved Corruption', -1), true);
   applyTalentsObject({ affliction: { suppression: 5 } });
@@ -28,9 +28,9 @@ test('Refunds preserve row requirements while allowing spare and leaf points', (
 });
 
 test('Higher-row points cannot pay for lower-row requirements', () => {
-  applyTalentsObject({ affliction: { suppression: 5, malediction: 5, fel_concentration: 3 } });
+  applyTalentsObject({ affliction: { suppression: 5, improved_corruption: 3, grim_reach: 2, fel_concentration: 3 } });
   assert.equal(can(0, 'Suppression', -1), false);
-  assert.equal(can(0, 'Malediction', -1), false);
+  assert.equal(can(0, 'Grim Reach', -1), false);
   assert.equal(can(0, 'Fel Concentration', -1), true);
 });
 
@@ -45,11 +45,11 @@ test('Prerequisites stay fully ranked even when row requirements have spare poin
 });
 
 test('Learning requires earlier-row points and enforces the budget for partially ranked talents', () => {
-  applyTalentsObject({ affliction: { suppression: 4, malediction: 5 } });
+  applyTalentsObject({ affliction: { suppression: 4, grim_reach: 2 } });
   assert.equal(can(0, 'Soul Harvesting', 1), false);
-  applyTalentsObject({ affliction: { suppression: 5, improved_corruption: 5, malediction: 5, improved_drains: 3, fel_concentration: 3, malevolence: 5, nightfall: 2, siphon_life: 1, shadow_mastery: 5 }, demonology: { demonic_embrace: 5, unholy_power: 5, demonic_aegis: 2, fel_vitality: 3, demonic_energies: 1, improved_imp: 1 } });
+  applyTalentsObject({ affliction: { suppression: 5, improved_corruption: 5, improved_life_tap: 2, grim_reach: 2, soul_harvesting: 1, improved_drains: 3, fel_concentration: 3, malevolence: 5, nightfall: 2, siphon_life: 1, shadow_mastery: 5 }, demonology: { demonic_embrace: 5, unholy_power: 5, demonic_aegis: 2, fel_vitality: 3, demonic_energies: 1, improved_imp: 1 } });
   assert.equal(can(0, 'Soul Siphon', 1), false);
   assert.equal(can(1, 'Improved Imp', 1), false);
-  applyTalentsObject({ affliction: { suppression: 5, malediction: 1 } });
-  assert.equal(can(0, 'Malediction', 1), true);
+  applyTalentsObject({ affliction: { suppression: 5, grim_reach: 1 } });
+  assert.equal(can(0, 'Grim Reach', 1), true);
 });

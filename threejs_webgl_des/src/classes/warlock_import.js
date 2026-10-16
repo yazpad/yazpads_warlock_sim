@@ -66,6 +66,11 @@ export function normalizeWarlockImport(staged, { itemDatabase } = {}) {
   }
   keys(c.talents, trees, 'talent tree');
   c.talents = { affliction: {}, demonology: {}, destruction: {}, ...c.talents };
+  if (Object.hasOwn(c.talents.affliction, 'malediction')) {
+    const rank = c.talents.affliction.malediction;
+    if (rank !== 0) throw new Error('Malediction was replaced by Grim Reach (2 range-only ranks). Respec this build and import it with grim_reach; the old damage bonus is no longer available.');
+    delete c.talents.affliction.malediction;
+  }
   const { graph, definitions } = WARLOCK_SEARCH.talents;
   for (let tree = 0; tree < 3; tree++) {
     const ranks = c.talents[trees[tree]];

@@ -36,13 +36,14 @@
           ]
         },
         {
-          "name": "Malediction",
-          "max": 5,
+          "name": "Grim Reach",
+          "max": 2,
           "row": 2,
           "col": 1,
           "icon": "spell_shadow_curseofachimonde",
           "desc": [
-            "Increases all periodic damage done by your Warlock spells by 1%."
+            "Increases the range of your Affliction spells by 10%.",
+            "Increases the range of your Affliction spells by 20%."
           ]
         },
         {
@@ -162,7 +163,11 @@
           "col": 3,
           "icon": "spell_shadow_shadetruesight",
           "desc": [
-            "Increases your Shadow spell damage by 2/4/6/8/10%."
+            "Increases your Shadow spell damage by 2%.",
+            "Increases your Shadow spell damage by 4%.",
+            "Increases your Shadow spell damage by 6%.",
+            "Increases your Shadow spell damage by 8%.",
+            "Increases your Shadow spell damage by 10%."
           ]
         },
         {
@@ -389,7 +394,8 @@
           "col": 1,
           "icon": "spell_shadow_corpseexplode",
           "desc": [
-            "Increases the range of your damaging spells by 10%."
+            "Increases the range of your Destruction spells by 10%.",
+            "Increases the range of your Destruction spells by 20%."
           ]
         },
         {

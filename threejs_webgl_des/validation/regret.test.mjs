@@ -8,8 +8,8 @@ test('regret diagnostics do not change simulation shaders', () => {
  assert.ok(!FRAGMENT.includes('targetDecision'));
  assert.ok(!FAST_FRAGMENT.includes('targetDecision'));
  assert.ok(REGRET_FRAGMENT.includes('uniform highp usampler2D regretJobTex'));
- // Frozen pre-feature shader output: catches accidental changes to the fast path.
- assert.equal(createHash('sha256').update(FAST_FRAGMENT).digest('hex'), '51bd1e26ec8977d35d6bb6e5b486d177e0a7601b07d5498551bf75fd2ed4bc72');
+ // Reviewed beta shader output includes timed Eureka instead of charges.
+ assert.equal(createHash('sha256').update(FAST_FRAGMENT).digest('hex'), '3d8aa2f8d93a2d51749919433c0b9d34d65dc887834a00594ec1e1b0e26112b3');
 });
 
 test('paired differences use full fight duration and uncertainty of differences', () => {
