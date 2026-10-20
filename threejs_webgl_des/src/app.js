@@ -388,7 +388,7 @@ function getEffectiveBuffsAndStats() {
   let addedShadowSP = isShadowPowerElixir ? 40 : 0;
   let addedFireSP = isGreaterFirepowerElixir ? 40 : 0;
 
-  let addedInt = 0, addedStam = 0, addedSpirit = 0;
+  let addedInt = 0, addedStam = activePet === 'imp' ? 54 : 0, addedSpirit = 0;
   if (isArcaneIntellect) addedInt += 31;
   if (isMarkOfTheWild) { addedInt += 12; addedStam += 12; addedSpirit += 12; }
   if (isSongflower) { addedInt += 15; addedStam += 15; addedSpirit += 15; }

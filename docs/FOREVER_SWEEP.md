@@ -40,3 +40,20 @@ Verification:
 ```sh
 node threejs_webgl_des/validation/forever_sweep.test.mjs
 ```
+
+## 2026-10-20 follow-up
+
+The fresh 300-case screen is saved in `FOREVER_SWEEP.*`. A selected 60-case follow-up uses 1,000 fights per engine for five presets, three races and four hit/regeneration profiles:
+
+```sh
+GOCACHE=/tmp/forever-go-cache GOPATH=/tmp/forever-go-path node scripts/sweep_forever_parity.mjs --checkout /tmp/forever-run-source --go /tmp/go/bin/go --matrix fixtures/forever_sweep_followup_matrix.json --iterations 1000 --out FOREVER_SWEEP_FOLLOWUP
+node scripts/investigate_forever_sweep_boundaries.mjs
+```
+
+The second command probes inclusive fight-time and fight-end ordering in memory against the saved follow-up reference; it does not change production shaders. Findings are in [the dated investigation](FOREVER_SWEEP_FINDINGS_2026-10-20.md). Temporary tooling paths must be recreated on a fresh environment.
+
+The [cause follow-up](FOREVER_CAUSES_2026-10-20.md) records MAE/MAPE, reproducible source/GPU traces, and source-backed resource/cooldown probes. Run `node scripts/investigate_forever_resource_causes.mjs` after generating the follow-up report; optional positional probe IDs rerun selected variants. Production is unchanged by these diagnostics.
+
+## Production result after applying the traced fixes
+
+The current `FOREVER_SWEEP.*` contains all 300 cases at **1,000 fights per engine**, MAE **1.945 DPS** / MAPE **0.289%**. The same 60 previously measured high-sample cases improve from 3.554 to 1.792 DPS MAE. See [production changes and validation](FOREVER_PRODUCTION_FIXES_2026-10-20.md). The earlier string-edit cause probes are historical and require their recorded pre-fix kernel; use the regression suite for current production.

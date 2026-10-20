@@ -58,6 +58,6 @@ test('fast and detailed shaders spend 200 mana per Wrack and delay decisions aft
     assert.equal(ticks[0].mana, maxMana - 200, mode);
     const decision = events.find(e => e.kind === 5 && e.time === 6000000 + delay * 1000);
     assert.ok(decision, `${mode}: next decision at channel end + ${delay}ms`);
-    assert.equal(decision.mana, maxMana - 400, mode);
+    assert.ok(Math.abs(decision.mana - (maxMana - 400 + delay / 1000 * (6.25 + 100 / 8))) < 0.02, `${mode}: spirit regenerates during the post-channel delay`);
   });
 });

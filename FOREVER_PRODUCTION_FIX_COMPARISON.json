@@ -1,0 +1,79 @@
+{
+  "status": "complete",
+  "acceptance": "diagnostic-only",
+  "sourceRevision": "86d0920cae8445eaa90de9c17c3583cf171c19c5",
+  "iterationsPerEnginePerCase": 1000,
+  "seed": 101,
+  "fullMatrix": {
+    "cases": 300,
+    "maeDps": 1.9446626885007663,
+    "mapePct": 0.28896128060419374,
+    "biasDps": -0.24319416246241513,
+    "worstAbsolutePct": 1.3546113620941265
+  },
+  "matched60Before": {
+    "cases": 60,
+    "maeDps": 3.5543900250302918,
+    "mapePct": 0.5493712465843514,
+    "biasDps": -1.1548406591092506,
+    "worstAbsolutePct": 3.350188740793017
+  },
+  "matched60After": {
+    "cases": 60,
+    "maeDps": 1.791798692768621,
+    "mapePct": 0.26568459785338383,
+    "biasDps": -0.14378564464172428,
+    "worstAbsolutePct": 1.0011071580396083
+  },
+  "matchedMaeReductionPct": 49.58913680967382,
+  "playerInputDifferenceCases": 0,
+  "referenceReports": {
+    "FOREVER_SWEEP.json": "a6790bc0dbd1c889fece3fbc2c29a5d4b4eb1ce42695a4ae9fa5ccd7b844de5a",
+    "FOREVER_SWEEP_FOLLOWUP.json": "f004543d2dbcb67327bd37a72c0f16474408963593075b6c196ab837c035aa0b"
+  },
+  "validation": {
+    "newResourceRegressions": "passed, detailed and fast modes",
+    "fullSuite": {
+      "passed": 171,
+      "failed": 16,
+      "note": "Failing assertions reproduced against the pre-change HEAD in an isolated source snapshot; not a green full-suite claim."
+    }
+  },
+  "presets": {
+    "sm_ruin": {
+      "cases": 60,
+      "maeDps": 1.6716339732707381,
+      "mapePct": 0.26004689121465574,
+      "biasDps": -0.3973476556860182,
+      "worstAbsolutePct": 0.7796480967800857
+    },
+    "aff_wrack": {
+      "cases": 60,
+      "maeDps": 0.945726985792795,
+      "mapePct": 0.1754043189630145,
+      "biasDps": 0.4770127738980032,
+      "worstAbsolutePct": 0.5733266428345233
+    },
+    "destro": {
+      "cases": 60,
+      "maeDps": 2.082487355343817,
+      "mapePct": 0.32334409863468927,
+      "biasDps": -0.8132657238762921,
+      "worstAbsolutePct": 1.3546113620941265
+    },
+    "demo_shadow_brand": {
+      "cases": 60,
+      "maeDps": 2.2984364529681347,
+      "mapePct": 0.3194331293705809,
+      "biasDps": 1.0894939898044091,
+      "worstAbsolutePct": 1.0057165354857538
+    },
+    "demo_fire_brand": {
+      "cases": 60,
+      "maeDps": 2.7250286751283452,
+      "mapePct": 0.36657796483802835,
+      "biasDps": -1.5718641964521776,
+      "worstAbsolutePct": 1.0011071580396083
+    }
+  }
+}

@@ -1,5 +1,7 @@
 # Wrack/DoT timing, Firebolt and Conflagrate investigation
 
+Current status (2026-10-20): Wrack cost/channel delay, multiplicative talent factors and centered Conflagrate variance are implemented and focused regressions pass. The ordinary-row strict/inclusive `min` predicate and pet runtime inheritance remain open. Earlier proposed fixes and benchmark numbers below are historical; use `FOREVER_SWEEP.md` for the fresh production comparison.
+
 Current follow-up: Wrack cost and completed-channel delay are now fixed and tested in production; the strict/inclusive predicate remains open. The fresh benchmark reports 557.40 WebGL vs 558.98 Forever DPS at 1,000 iterations each. Firebolt stacking and centered Conflagrate variance were also implemented after this investigation. Values below are the original diagnostic evidence.
 
 Source: Forever `86d0920cae8445eaa90de9c17c3583cf171c19c5`. Baseline: saved 1,000-iteration `gear-free-coe-v2` comparison. Production mechanics and the Agony multiplier were not changed during this investigation. All GPU experiments modify configurations/shader strings only in memory.

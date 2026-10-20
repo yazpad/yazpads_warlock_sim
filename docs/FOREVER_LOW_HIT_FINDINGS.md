@@ -1,5 +1,7 @@
 # Low-hit Shadow Brand investigation
 
+Current status (2026-10-20): both the Doom cooldown and explicit Split Boosts/Eureka gates are implemented and focused tests pass. The missing-cooldown and fallback-policy explanations below are historical, not current production behavior. Fresh race/stat results are in `FOREVER_SWEEP.md`.
+
 Follow-up: Doom cooldown is now implemented and tested in production. `FOREVER_DOOM_FIXED_COMPARISON.*` reproduces the cooldown-only diagnostic below. Eureka has been investigated separately in `FOREVER_EUREKA_FINDINGS.md`; its cooldown is correct but its fallback activation policy differs. The original investigation below is retained as evidence.
 
 Forever revision `86d0920cae8445eaa90de9c17c3583cf171c19c5`. Nine targeted race/hit combinations, 1,000 fights per engine, seed 101, same gear-free external-CoE scenario. No production mechanics changed during this investigation.

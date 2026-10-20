@@ -1,5 +1,7 @@
 # Agony investigation — 2026-10-19
 
+Current status (2026-10-20): the explicit off-GCD Amplify action, source consumption fix, Agony spell-power snapshot and multiplicative 1.21 talent factors are implemented. The findings and measurements below are historical. General APL semantics and event/tick parity remain open; see the active parity TODO and fresh race/stat sweep.
+
 Investigated against the current local Forever source and the saved 1,000-iteration `gear-free-coe-v2` comparison. No combat implementation was changed and no new comparison was run during this investigation.
 
 ## Measured differences

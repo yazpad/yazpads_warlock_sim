@@ -80,7 +80,7 @@ export const DEFAULTS = Object.freeze({
   race: 'HUMAN', swordEquipped: true, racialPolicy: 'execute', targetIsBeast: false, maxHealth: 0, statsIncludeBase: false, duration: 180, iterations: 4096, seed: 42, rotation: 'shadow',
   spellPower: 500, shadowPower: 0, firePower: 0, intellect: 200, stamina: 220, spirit: 100, hit: 12, crit: 15, mp5: 20,
   channelClipDelayMs: 0, distance: 30, resistance: 0, penetration: 0, tapThreshold: 25, bossArmor: 3731,
-  book: false, charges: false, partialResists: true, piercing: true,
+  autoCooldowns: false, book: false, charges: false, partialResists: true, piercing: true,
   corruption: true, agony: true, immolate: false, instantCorruption: true,
   nightfall: true, isb: true, ruin: true, improvedTap: true, amplifyCurse: false,
   demonicPact: false, demonicSacrifice: false, felDomination: false, masterSummoner: 0, soulLink: false,
@@ -253,7 +253,7 @@ export function encodeAPLRule(rule) {
 // Explicit word schemas keep JS and GLSL offsets in one place. All scalar
 // members have four-byte alignment. Never encode counters/timestamps as floats.
 export const CONFIG = {
-  channelClipDelay: 'u32', race: 'u32', racialPolicy: 'u32', targetIsBeast: 'u32', basePower: 'f32', maxHealth: 'f32', end: 'u32', travel: 'u32', corrCast: 'u32', filler: 'u32', corr: 'u32', agony: 'u32', immolate: 'u32',
+  autoCooldowns: 'u32', spiritRegen: 'f32', petMaxMana: 'f32', channelClipDelay: 'u32', race: 'u32', racialPolicy: 'u32', targetIsBeast: 'u32', basePower: 'f32', maxHealth: 'f32', end: 'u32', travel: 'u32', corrCast: 'u32', filler: 'u32', corr: 'u32', agony: 'u32', immolate: 'u32',
   baneRank: 'u32', decimationRank: 'u32',
   charges: 'u32', partial: 'u32', piercing: 'u32',
   demonicPact: 'u32', demonicSacrifice: 'u32', felDomination: 'u32', masterSummoner: 'u32', soulLink: 'u32', sacImp: 'u32', sacSucc: 'u32', masterDemo: 'u32',
@@ -319,6 +319,8 @@ Object.assign(STATE, DETAIL_STATE);
 STATE.agonySpellPowerShare = 'f32';
 STATE.amplifyEnd = 'u32';
 STATE.doomReady = 'u32';
+STATE.spiritRegenAt = 'u32';
+STATE.paidChannelEnd = 'u32';
 
 export const STATE_WORDS = Object.keys(STATE).length;
 export const FAST_STATE = Object.fromEntries(Object.entries(STATE).filter(([key]) => !/^(damage|casts|hits|crits|misses)\d+$/.test(key) && !(key in DETAIL_STATE)));
@@ -392,6 +394,9 @@ export function packConfig(input) {
     hellfirePowerOffset: c.firePower - (c.rotation === 'fire' || c.rotation === 'searing' ? c.firePower : c.shadowPower),
     power: c.spellPower + (c.rotation === 'fire' || c.rotation === 'searing' ? c.firePower : c.shadowPower),
     maxMana: ((c.statsIncludeBase ? 1373 - 280 : 1393) + int * 15) * (c.race === 'GNOME' ? 1.05 : 1) * (1.0 + felVitalityBonus),
+    autoCooldowns: c.autoCooldowns ? 1 : 0,
+    spiritRegen: 6.25 + c.spirit / 8,
+    petMaxMana: (c.petChoice === 'imp' ? 576 + 264 * 5 : c.petChoice === 'succubus' ? 1066 + 70 * 11.5 : 0) * (1 + felVitalityBonus),
     tapGain: (424 + c.spirit) * (1 + (c.tapBonus > 0 ? c.tapBonus : c.improvedTap ? 0.2 : 0)),
     tapThreshold: c.tapThreshold,
     mp5: c.mp5,

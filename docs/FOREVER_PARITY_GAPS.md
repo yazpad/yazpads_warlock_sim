@@ -1,6 +1,6 @@
 # Forever parity gaps
 
-Active configurations now use **gear-free-v1** across all five presets. Consult the [current status report](../PARITY_REPORT_FOREVER.md) and [active todo](../FOREVER_PARITY_FRAMEWORK_TODO.md). Gear-related observations below are deferred integration notes; geared SM/Ruin numbers and legacy fixture statuses have been superseded by fresh gear-free captures.
+Active configurations now use **gear-free-coe-v2** across all five presets. Consult the [current status report](../PARITY_REPORT_FOREVER.md) and [active todo](../FOREVER_PARITY_FRAMEWORK_TODO.md). Gear-related observations below are deferred integration notes; geared SM/Ruin numbers and legacy fixture statuses have been superseded by fresh gear-free captures.
 
 Source audit: 2026-10-19. Reproduce with `node scripts/audit_forever_import.mjs`; see `FOREVER_IMPORT_AUDIT.md` and its JSON companion for source paths, translated candidates, and fixture snapshots. These findings describe the local Forever checkout and current bridge, not every feature of Forever.
 
@@ -8,7 +8,7 @@ Use the [active prioritized todo](../FOREVER_PARITY_FRAMEWORK_TODO.md) for work 
 
 ## Resolve configuration before attributing DPS differences
 
-SM/Ruin now has a live source export and its actual ordinary-import configuration; its scoring is blocked because inputs differ. The other four fixtures still contain hand-resolved configurations. See the [SM/Ruin comparison](../FOREVER_INPUT_COMPARISON_sm_ruin.md). A close aggregate DPS result does not establish import or feature parity. Do not tune hit, crit, or multipliers to close a DPS difference without a resolved Go export explaining each contribution.
+All five canonical fixtures now contain live gear-free source exports and ordinary-import configurations. Combat acceptance remains blocked pending complete feature/input checks. See the [SM/Ruin comparison](../FOREVER_INPUT_COMPARISON_sm_ruin.md). A close aggregate DPS result does not establish import or feature parity. Do not tune hit, crit, or multipliers to close a DPS difference without a resolved Go export explaining each contribution.
 
 | Priority | Difference | Required work |
 | --- | --- | --- |
@@ -18,7 +18,7 @@ SM/Ruin now has a live source export and its actual ordinary-import configuratio
 | 1 | Explosive and conjured consumables are dropped | Implement their own actions, charges and cooldowns; include their damage/resources in exports. |
 | 1 | Boolean APL translation loses meaning | Preserve every AND/OR branch, negation, variable semantics, strict/inclusive comparisons and min comparisons. Unknown nodes must produce diagnostics rather than become true. Shader currently allows only two general condition slots. |
 | 1 | Action rewrites override conditions | Preserve racial gates, Soul Fire eligibility, Conflagrate predicates and Nightfall conditions. Amplify now maps to its own explicit off-GCD action, with no automatic activation from talent ownership. Remaining general condition/group losses still require work; see the main parity TODO. |
-| 2 | Wrack cannot be clipped | Add interrupt predicates, tick-boundary reevaluation, clip delay, recast policy, cancellation of future ticks and debuff expiry. Current shader schedules six ticks and the next action at +6s. |
+| 2 | Wrack cannot be clipped | Add interrupt predicates, tick-boundary reevaluation, clip delay, recast policy, cancellation of future ticks and debuff expiry. Completed channels now schedule six ticks and the next action at +6s plus the imported channel delay; interruption remains unsupported. |
 | 2 | Precasting/prepull actions are ignored | Support negative-time scheduling, initial mana/GCD/cooldowns and spell impacts crossing pull. None of the five current source presets supplies prepull actions; add explicit comparison cases before attributing DPS to this gap. |
 | 2 | Gear import preserves only item IDs | Audit enchants, item effects, sets and on-use/proc timing. The bridge silently drops extra equipment metadata. |
 | 2 | Encounter import supplies fixed defaults | Resolve source encounter duration, target and variations. Distance now follows source unless explicitly overridden for a benchmark. |

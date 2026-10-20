@@ -28,7 +28,7 @@ test('Eureka appears in presets, parses, compiles, and round trips as an off-GCD
  assert.ok(Math.abs(gnome.maxMana/human.maxMana-1.05)<1e-6);
 });
 
-test('actual GLSL Eureka honors APL enablement, conditions, race, duration, cooldown and DoT boosts', t => {
+test('actual GLSL Eureka honors APL enablement, conditions, race, duration, cooldown and spell masks', t => {
  const cases=[],names=[];
  const add=(name,text,extra={})=>{
   names.push(name);
@@ -65,8 +65,9 @@ test('actual GLSL Eureka honors APL enablement, conditions, race, duration, cool
  assert.equal(result.on.events,result.off.events);
  assert.equal(result.on.eurekaEnd,8000000);
  assert.ok(result.off.total>0);
- assert.ok(Math.abs(result.on.total/result.off.total-1.1)<1e-5);
- assert.ok(result.on.spent<result.off.spent);
+ // Only Corruption ticks land in this short case; Eureka excludes ordinary DoTs.
+ assert.ok(Math.abs(result.on.total/result.off.total-1)<1e-5);
+ assert.equal(result.on.spent,result.off.spent);
  // Five Searing Pains complete inside [0, 8s), beyond the old third charge.
  // Later casts pay full cost: this also verifies that the buff expires.
  assert.equal(result.timedOn.eurekaEnd,8000000);

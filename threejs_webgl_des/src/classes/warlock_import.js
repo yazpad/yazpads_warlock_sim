@@ -149,7 +149,7 @@ export function resolveWarlockImportEffects(staged, options) {
   if (normalized.kind === 'resolved-config') return normalized;
   const c = normalized.candidate;
   const stats = addWarlockBaseStats(c.stats, c.classOptions.race);
-  const effectiveStats = resolveWarlockBuffEffects(stats, c.buffs, c.classOptions.race, c.encounter.target);
+  const effectiveStats = resolveWarlockBuffEffects(stats, c.buffs, c.classOptions.race, c.encounter.target, c.classOptions.pet);
   Object.assign(effectiveStats, warlockBaseResources(effectiveStats.intellect, effectiveStats.stamina));
   if (c.buffs.warchiefsBlessing) effectiveStats.maxHealth += 300;
   return { ...normalized, effectiveStats };
@@ -175,7 +175,7 @@ export function resolveWarlockImport(staged, options) {
   const config = buildFightConfig({
     base: { ...c.stats, ...effective, race: c.classOptions.race,
       statsIncludeBase: true,
-      ...Object.fromEntries(['channelClipDelayMs', 'book', 'trinketSP', 'trinketDuration', 'trinketCD']
+      ...Object.fromEntries(['autoCooldowns', 'channelClipDelayMs', 'book', 'trinketSP', 'trinketDuration', 'trinketCD']
         .filter(key => Object.hasOwn(c, key)).map(key => [key, c[key]])),
       bossArmor: c.encounter.target.bossArmor, resistance: effective.resistance,
       racialPolicy: c.encounter.target.racialPolicy, targetIsBeast: c.encounter.target.targetIsBeast,

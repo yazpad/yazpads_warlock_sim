@@ -1,0 +1,90 @@
+{
+  "sourceRevision": "86d0920cae8445eaa90de9c17c3583cf171c19c5",
+  "notes": "Source spelldata Cost and class-flag matches against Eureka effect 1/2/3, queried with the prepared source checkout. Class-mask matches alone do not include ProcMask/channel restrictions.",
+  "rows": [
+    {
+      "channelMatch": false,
+      "cost": 380,
+      "costMatch": true,
+      "damageMatch": true,
+      "id": 25307
+    },
+    {
+      "channelMatch": false,
+      "cost": 340,
+      "costMatch": false,
+      "damageMatch": false,
+      "id": 25311
+    },
+    {
+      "channelMatch": false,
+      "cost": 215,
+      "costMatch": false,
+      "damageMatch": false,
+      "id": 11713
+    },
+    {
+      "channelMatch": false,
+      "cost": 300,
+      "costMatch": false,
+      "damageMatch": false,
+      "id": 603
+    },
+    {
+      "channelMatch": false,
+      "cost": 380,
+      "costMatch": true,
+      "damageMatch": true,
+      "id": 25309
+    },
+    {
+      "channelMatch": false,
+      "cost": 325,
+      "costMatch": false,
+      "damageMatch": false,
+      "id": 1293813
+    },
+    {
+      "channelMatch": false,
+      "cost": 168,
+      "costMatch": true,
+      "damageMatch": true,
+      "id": 17923
+    },
+    {
+      "channelMatch": false,
+      "cost": 255,
+      "costMatch": true,
+      "damageMatch": true,
+      "id": 18932
+    },
+    {
+      "channelMatch": false,
+      "cost": 365,
+      "costMatch": true,
+      "damageMatch": true,
+      "id": 18871
+    },
+    {
+      "channelMatch": false,
+      "cost": 335,
+      "costMatch": true,
+      "damageMatch": true,
+      "id": 17924
+    },
+    {
+      "channelMatch": false,
+      "cost": 365,
+      "costMatch": false,
+      "damageMatch": false,
+      "id": 18881
+    },
+    {
+      "channelMatch": true,
+      "cost": 200,
+      "costMatch": true,
+      "damageMatch": false,
+      "id": 1316697
+    }
+  ]
+}

@@ -1,5 +1,7 @@
 # Eureka timing investigation
 
+Current status (2026-10-20): actual Split Boosts gates are implemented and focused import/fast/detailed tests pass. The fallback-policy discrepancy below describes the pre-fix diagnostic. Fresh race/stat results are in `FOREVER_SWEEP.md`.
+
 Implementation follow-up: imported Split Boosts conditions now compile into explicit racial APL actions. Duration-aware time-to-execute and independent Decimation-aura predicates are supported; unconditional Eureka at 0/120 seconds is tested in both shader modes. Measurements below describe the pre-fix diagnostic. Fresh actual-import results are saved in `FOREVER_EUREKA_APL_COMPARISON.*`.
 
 All comparisons here are 180-second gear-free Shadow Brand fights. Eureka spell 1259821 has an 8-second duration and 120-second cooldown in the source data; our cooldown length already matches.

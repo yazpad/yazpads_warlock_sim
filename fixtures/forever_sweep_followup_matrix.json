@@ -1,0 +1,43 @@
+{
+  "description": "Higher-sample follow-up of the 2026-10-20 sweep outlier profiles: five presets \u00d7 Orc/Undead/Gnome \u00d7 hit_5/hit_16/regen_low/regen_high. Diagnostic; selected after screening the 300-case sweep.",
+  "presets": [
+    "sm_ruin",
+    "aff_wrack",
+    "destro",
+    "demo_shadow_brand",
+    "demo_fire_brand"
+  ],
+  "races": [
+    "ORC",
+    "UNDEAD",
+    "GNOME"
+  ],
+  "profiles": [
+    {
+      "id": "hit_5",
+      "stats": {
+        "hit": 5
+      }
+    },
+    {
+      "id": "hit_16",
+      "stats": {
+        "hit": 16
+      }
+    },
+    {
+      "id": "regen_low",
+      "stats": {
+        "spirit": 0,
+        "mp5": 0
+      }
+    },
+    {
+      "id": "regen_high",
+      "stats": {
+        "spirit": 200,
+        "mp5": 100
+      }
+    }
+  ]
+}

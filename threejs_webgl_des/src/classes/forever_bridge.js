@@ -270,7 +270,7 @@ export function convertForeverCondition(condNode, vars = {}) {
       // E.g. Dot floor: min(Corruption rem, Agony rem) >= 4s
       const dotVals = lhsNode.min.vals.filter(v => v.dotRemainingTime);
       if (dotVals.length > 0) {
-        const cmpOp = (op === 'OpGe' || op === 'OpGt') ? '>' : '<=';
+        const cmpOp = ({ OpGe: '>=', OpGt: '>', OpLe: '<=', OpLt: '<' })[op];
         const conds = dotVals.map(v => {
           const spId = v.dotRemainingTime.spellId?.spellId;
           const spName = SPELL_ID_TO_DEBUFF_NAME[spId] || 'Corruption';
@@ -560,7 +560,7 @@ export function convertForeverBuildToCandidate(foreverBuild, { candidateId = 'fo
   const summon = (warlockOpts.summon || '').toLowerCase();
   if (summon.includes('imp')) pet = 'imp';
   else if (summon.includes('succubus')) pet = 'succubus';
-  else if (summon.includes('none')) pet = 'none';
+  else if (summon.includes('none') || summon === 'nosummon') pet = 'none';
 
   const sacrificed = (warlockOpts.sacrificedDemon || '').toLowerCase();
   if (sacrificed.includes('imp')) sacrifice = 'imp';
@@ -598,6 +598,7 @@ export function convertForeverBuildToCandidate(foreverBuild, { candidateId = 'fo
     schemaVersion: 1,
     classId: 'warlock',
     candidateId,
+    autoCooldowns: Boolean(player.rotation?.priorityList?.some(row => !row.hide && row.action?.autocastOtherCooldowns)),
     importDiagnostics,
     encounter: {
       duration: 180,

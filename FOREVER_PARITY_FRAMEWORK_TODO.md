@@ -1,6 +1,8 @@
 # Forever / ThreeJS WebGL parity TODO
 
-Updated: **2026-10-19**. Active configurations are **gear-free**. Gear, enchants, sets and item procs will return as a separate integration phase.
+Current production result (2026-10-20): **MAE 1.945 DPS / MAPE 0.289%**, 300/300 cases at 1,000 fights per engine. The same 60 higher-sample cases improve from **3.554 to 1.792 DPS MAE** (49.59%). All selected player/packed input fields now match. [Production changes, validation and remaining limits](docs/FOREVER_PRODUCTION_FIXES_2026-10-20.md). Historical investigation/probe measurements below are retained; implemented tasks are marked accordingly.
+
+Updated: **2026-10-20**. Active configurations are **gear-free**. Gear, enchants, sets and item procs will return as a separate integration phase.
 
 ## Current configuration contract
 
@@ -13,6 +15,35 @@ Updated: **2026-10-19**. Active configurations are **gear-free**. Gear, enchants
 See the [current generated status report](PARITY_REPORT_FOREVER.md) and each linked input comparison for live evidence. Reference runs use 20 iterations and seed 101; these establish scenario reproducibility, not statistical cross-engine acceptance.
 
 The [diagnostic combat comparison](FOREVER_GEAR_FREE_BENCHMARK.md) now defaults to **1,000 iterations in each engine**, using our detailed/slow mode. It collects per-spell and pet casts, landed events, crits, ticks, misses, direct/periodic damage, mana accounting, our aura/proc counters and raw source aura/resource data. Every damage breakdown must reconcile with total damage. The earlier 10,000-trial fast benchmark is archived under `fixtures/benchmark_history`. The diagnostic additions originally preserved fast shader generation/packing; the later combat corrections intentionally update both execution modes without adding fast-mode diagnostic counters. focused transport/normalization checks cover the detailed additions.
+
+## Current-code audit (2026-10-20)
+
+The earlier benchmark notes below are historical measurements, not the current implementation baseline.
+
+- [x] Wrack costs 200 mana and imports `channelClipDelayMs`; completed channels delay the next decision. `wrack_timing.test.mjs` verifies normal import, packing, mana and tick/decision timestamps in both shader modes.
+- [x] Independent Agony/Corruption/Wrack talent factors multiply; pet Unholy Power and Improved Imp/Sayaad factors also multiply (1.43 for the tested ranks). `talent_stacking.test.mjs` verifies config paths and GPU damage ratios. The former 1.20 versus 1.21 discrepancy is resolved.
+- [x] Conflagrate uses centered variance around `282 + 0.429 * SP` in production. Distribution/event parity still requires comparison.
+- [x] Bane of Doom has its 60-second cooldown, including failed applications; focused GPU regression is in `doom_cooldown.test.mjs`.
+- [x] Split Boosts imports duration-aware time-to-execute and independent Decimation-aura gates into explicit racial rows. `eureka_apl.test.mjs` covers import and both shader modes; this supersedes the earlier omitted-group/fallback explanation.
+- [x] Focused current-code verification: sweep, groups, Wrack timing, talent stacking, Eureka APL, Doom cooldown and breakdown test files all passed on 2026-10-20.
+- [ ] Ordinary (non-group) APL translation remains lossy: long ANDs truncate, OR keeps one branch, unknown conditions become true and some actions override gates. Supported `min` strict/inclusive bounds are now preserved. Group support does not close this general task.
+- [ ] Pet runtime inheritance remains open: Firebolt still reads fixed `c.petSP` and uses `2 / 3.5` rather than the source coefficient; its initial timing is now corrected to 2s. Separating talent multipliers did not implement the 110-to-116 SP transition.
+- [x] Re-run the full 300-case race/stat sweep after this audit: all 300 cases completed at 100 fights/engine, followed by 60 selected cases at 1,000 fights/engine (90,000 fights per engine total). Reports: `FOREVER_SWEEP.*` and `FOREVER_SWEEP_FOLLOWUP.*`; preceding report archived under `fixtures/benchmark_history/race-stat-300-pre-2026-10-20.*` (JSON compressed).
+- [x] Resolve measured Fire Brand initial inputs through Blood Pact: the historical 60 screen / 12 follow-up cases lacked 54 stamina / 540 health; current inputs match. Historical evidence: Source `registerBloodPact` applies the active Imp aura during the build phase; normal imports do not account for it. Other selected player fields match across the remaining 240 screen cases.
+- [ ] Investigate the persistent high-regeneration Gnome Destruction rotation difference: at 1,000 fights source has 3 Doom ticks and 39 Incinerates, ours 2 and 36; total delta -3.35% (−22.76 ± 2.07 DPS, approximate 95%). The shader's `FIGHT_TIME_GE` is strict `>`; three in-memory 1,000-fight probes (inclusive predicate, fight-end +1µs, both) leave this case unchanged. The subsequent traced cause analysis identifies interacting costs, Eureka masks/policy and MP5 affordability timing; see the implementation steps below.
+- [x] Investigate low-regeneration Undead Wrack and Orc hit-16 Fire Brand: Nightfall/spirit regeneration and integer Soul Fire cooldown/pet timing probes explain the selected gaps to within 0.12%; implementation remains open below. Higher-sample results supersede ranking the largest noisy 100-fight totals.
+
+## Next implementation steps from traced causes (2026-10-20)
+
+[Detailed cause analysis, MAE and reproduction](docs/FOREVER_CAUSES_2026-10-20.md). The traced corrections below are now implemented; probe deltas remain historical diagnostics. Use the production report above for current measurements.
+
+- [x] Locate causes using source/GPU action traces and 19 × 1,000-fight GPU probes. Full-screen MAE is **4.642 DPS / 0.702% MAPE**; selected follow-up MAE is **3.554 DPS / 0.549% MAPE**. These matrices differ and are not before/after results.
+- [x] Correct Incinerate base mana **355 → source 325** and Conflagrate **265 → source 255**; add source-compatible MP5 credit/check timing and spirit regeneration with the five-second rule and paid-channel suppression. At 83.5s in the corrected Destruction trace, five-second lump regen leaves 319.2 mana versus source 389.2, changing Corruption into Incinerate. The combined source-backed Destruction probe gives **-0.068%** versus baseline -3.350%, restoring 3 Doom ticks and 39 Incinerates.
+- [x] Apply Nightfall to all eligible Shadow Bolt execution paths, including the higher-priority missing-vulnerability row. With spirit regeneration this moves the selected Wrack case **-1.685% → +0.084%**. The inclusive-min probe alone has no effect in that case; do not claim it explains the deficit.
+- [x] Calculate Soul Fire cooldowns with exact integer microseconds. Float32 at Decimation rank 2 creates **6,000,001µs**, missing the 168.8s decision after a 162.8s completion. Fixing this alone moves Fire Brand **+1.349% → +0.421%**.
+- [x] Derive Imp mana from **576 + 264 × 5**, then apply Fel Vitality, rather than the current 1150 base; preserve the first Firebolt at 2s versus our 0.3s. Together with the integer Soul Fire cooldown, the selected Fire Brand case reaches **+0.113%**, with source-matching 63 Searing Pains and 9 Corruptions. Integrate active-Imp Blood Pact separately to resolve -54 stamina / -540 health.
+- [x] Preserve `autocastOtherCooldowns` policy as well as explicit racial groups. In the Destruction case source Eureka fires at 0/120s, while our fallback waits for Doom. Apply source cost/direct/channel masks: Incinerate, ordinary DoTs and curses are not blanket Eureka recipients. Then specify equal-time periodic/action ordering and strict/inclusive predicates; isolated boundary probes did not explain the entire gap.
+- [x] Add focused fast/detailed regression cases for these specific triggers, then rerun all **300 cases at 1,000 fights per engine** and report global MAE/MAPE plus per-spell/input differences. Three small combined-probe totals do not close broader import/event/pet parity.
 
 ## P0 — Finish gear-free initial-state parity
 
@@ -35,7 +66,7 @@ The [diagnostic combat comparison](FOREVER_GEAR_FREE_BENCHMARK.md) now defaults 
 - [x] Use source intellect-to-crit conversion for total-stat configs and floor primary attributes after multipliers.
 - [x] Fix missing Mana Spring enum values being treated as enabled, which introduced a phantom 25 MP5.
 - [x] Compare actual packed crit, mana and health; allow documented float32 representation tolerances.
-- [ ] Resolve the Fire Brand initial stamina/health difference, including the active Imp's Blood Pact. Diagnose from source contributions; do not copy final values into the fixture.
+- [x] Resolve Fire Brand initial stamina/health through active-Imp Blood Pact in stat aggregation (before primary-stat multipliers); the current 300-case input checks match without fixture substitutions.
 - [ ] Expand initial-state comparison to pet stats/resources, passive multipliers, execute/encounter settings and talent effects. The current eleven player fields and three packed fields are not exhaustive.
 - [ ] Check the shared stat contract across supported races and saved logical/resolved imports, including search and preset comparison paths. Historical direct-stat inputs used a different convention; rebuild old resolved exports with current compatibility IDs.
 
@@ -43,9 +74,9 @@ The [diagnostic combat comparison](FOREVER_GEAR_FREE_BENCHMARK.md) now defaults 
 
 ## P1 — Preserve source APL and combat settings
 
-Agony investigation: [source/data and import findings](docs/FOREVER_AGONY_FINDINGS.md). The original double-dip is fixed upstream in `86d0920`; our explicit Amplify action and Agony spell-power snapshot are implemented. Multiplicative periodic talent factors (1.21 vs 1.20), tick counts and broader APL semantics remain open.
+Agony investigation: [source/data and import findings](docs/FOREVER_AGONY_FINDINGS.md). The original double-dip is fixed upstream in `86d0920`; our explicit Amplify action and Agony spell-power snapshot are implemented. Multiplicative periodic talent factors (1.21 vs 1.20) are now fixed and regression-tested; tick counts and broader APL semantics remain open.
 
-- [ ] Expand named groups at their priority positions, preserving conditions and rejecting missing/cyclic references.
+- [x] Expand named groups at their priority positions, preserving supported conditions and rejecting missing/cyclic references. Nested/repeated groups, scoped variables and hidden rows are covered by `forever_groups.test.mjs`; unsupported grouped actions remain diagnostics, not executable support.
 - [ ] Preserve all AND/OR branches, general negation, variables, positive DoT/aura predicates, comparison bounds and min semantics. Extend the two-slot shader condition representation where necessary.
 - [ ] Diagnose unsupported nodes/actions by source path instead of converting to true or dropping them. Preserve racial, Nightfall, Soul Fire and Conflagrate gates.
 - [x] Implement explicit off-GCD Amplify Curse APL action (24), parser/aliases, aura predicates and source spell 18288 mapping. Remove activation from Agony; talent ownership only enables action availability. Add explicit rows to app-generated defaults and expose the action to synthesis. Preserve cooldown/aura readiness and consume on Agony cast, including failed applications, matching corrected Forever.

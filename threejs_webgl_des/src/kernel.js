@@ -112,11 +112,13 @@ float random01(){
  rng[2]^=rng[0];rng[3]^=rng[1];rng[1]^=rng[2];rng[0]^=rng[3];rng[2]^=t;rng[3]=rot64(rng[3],45u);
  s.rngCalls++;return float(value.y>>8u)*(1.0/16777216.0);
 }
+// Periodic events expire/apply before actions at the same timestamp.
+bool eventBefore(Event a,Event b){return a.at<b.at||(a.at==b.at&&EV_KIND(a)==3u&&EV_KIND(b)!=3u);}
 void enqueue(uint at,uint kind,uint spell,uint generation){
  if(s.size>=${HEAP_CAPACITY}u){s.done=2u;return;}
  uint i=s.size++;s.highWater=max(s.highWater,s.size);Event e=MAKE_EVENT(at,kind,spell,generation);
  for(int guard=0;guard<6;guard++){
-  if(i==0u)break;uint parent=(i-1u)/2u;if(e.at>=queue[parent].at)break;queue[i]=queue[parent];i=parent;
+  if(i==0u)break;uint parent=(i-1u)/2u;if(!eventBefore(e,queue[parent]))break;queue[i]=queue[parent];i=parent;
  }
  queue[i]=e;
 }
@@ -125,8 +127,8 @@ Event dequeue(){
  if(s.size>0u){queue[0]=queue[s.size];uint i=0u;
   for(int guard=0;guard<6;guard++){
    uint left=2u*i+1u,right=left+1u,smallest=i;
-   if(left<s.size){if(queue[left].at<queue[smallest].at)smallest=left;}
-   if(right<s.size){if(queue[right].at<queue[smallest].at)smallest=right;}
+   if(left<s.size){if(eventBefore(queue[left],queue[smallest]))smallest=left;}
+   if(right<s.size){if(eventBefore(queue[right],queue[smallest]))smallest=right;}
    if(smallest==i)break;Event swap=queue[i];queue[i]=queue[smallest];queue[smallest]=swap;i=smallest;
   }
  }return e;
@@ -161,14 +163,14 @@ float manaMultiplier(){return s.now<s.eurekaEnd?0.9:1.0;}
 float hasteMultiplier(){return c.race==2u&&s.now<s.racialEnd?1.10:1.0;}
 float baseCost(uint spell){switch(spell){
  case 0u:return c.boltCost;case 1u:return c.corrCost;case 2u:return 215.0;
- case 3u:return c.immCost;case 4u:return 355.0*c.cataclysmCostMult;case 13u:return 335.0*c.cataclysmCostMult;
- case 23u:return 1300.0*c.cataclysmCostMult;case 6u:return 300.0;case 8u:return 265.0*c.cataclysmCostMult;
+ case 3u:return c.immCost;case 4u:return 325.0*c.cataclysmCostMult;case 13u:return 335.0*c.cataclysmCostMult;
+ case 23u:return 1300.0*c.cataclysmCostMult;case 6u:return 300.0;case 8u:return 255.0*c.cataclysmCostMult;
  case 9u:return 365.0*c.cataclysmCostMult;case 10u:return 365.0;case 11u:return 200.0;
  default:return 168.0*c.cataclysmCostMult;}}
-float cost(uint spell){return baseCost(spell)*manaMultiplier();}
+float cost(uint spell){return baseCost(spell)*((spell==0u||spell==3u||spell==5u||spell==8u||spell==9u||spell==13u||spell==11u)?manaMultiplier():1.0);}
 void spend(uint spell){
- float amount=cost(spell);s.mana-=amount;s.spent+=amount;countCast(spell==13u?7u:spell==23u?13u:spell);
- s.castBonus=s.now<s.eurekaEnd?1.10:1.0;
+ float amount=cost(spell);s.mana-=amount;s.spent+=amount;if(amount>0.0)s.spiritRegenAt=s.now+5000000u;countCast(spell==13u?7u:spell==23u?13u:spell);
+ s.castBonus=(s.now<s.eurekaEnd&&(spell==0u||spell==3u||spell==5u||spell==8u||spell==9u||spell==13u))?1.10:1.0;
  if(c.race==4u&&s.now>=s.graveReady&&random01()<0.30){s.graveReady=s.now+25000000u;damage(12u,c.maxHealth*0.05,false);}
 }
 bool racialInAPL(uint action){
@@ -182,6 +184,7 @@ void activateEureka(){${detailed ? 's.racialCasts++;' : ''}s.racialReady=s.now+1
 void checkRacial(){
  if((c.race==3u&&eurekaInAPL())||(c.race==1u&&racialInAPL(21u))||(c.race==2u&&racialInAPL(22u)))return;
  if(s.now<s.racialReady)return;
+ if(c.race==3u&&c.autoCooldowns!=0u){activateEureka();return;}
  bool execute=float(s.now)>=float(c.end)*0.65;
  uint cooldown=c.race==3u?120000000u:180000000u;
  bool trigger=c.racialPolicy==1u||execute||(c.racialPolicy==2u&&s.now<1000000u&&float(c.end)*0.65>=float(cooldown));
@@ -204,7 +207,7 @@ void immolateImpact(){
  bool crit=random01()<c.fireCrit;
  float amount=(c.immDirect+0.20*currentPower())*(crit?c.directCrit:1.0)*currentFireMult()*(1.0+c.afBonus)*(1.0+c.aftermathBonus);
  amount*=resistanceMultiplier();damage(3u,amount*s.castBonus,crit);
- s.immBonus=s.castBonus;s.immTicks=5u;s.immGen++;s.immEnd=s.now+15000000u;enqueue(s.now+3000000u,3u,3u,s.immGen);
+ s.immBonus=1.0;s.immTicks=5u;s.immGen++;s.immEnd=s.now+15000000u;enqueue(s.now+3000000u,3u,3u,s.immGen);
 }
 void soulFireImpact(){
  if(random01()>=c.hit){countMiss(7u);return;}
@@ -293,7 +296,7 @@ void tick(Event e){
   amount=(36.0+0.143*p)*currentShadowMult()*affBonus*soulSiphonMult;
   bool crit=random01()<c.shadowCrit;if(crit)amount*=c.dotCrit;
   amount*=isbMultiplier();amount*=resistanceMultiplier();
-  ${detailed ? 'periodicDamage' : 'damage'}(11u,amount,crit);
+  ${detailed ? 'periodicDamage' : 'damage'}(11u,amount*(s.now<s.eurekaEnd?1.10:1.0),crit);
   if(c.nightfall>0.0){if(random01()<c.nightfall){s.trance=1u;s.tranceEnd=s.now+10000000u;s.procs++;enqueue(s.tranceEnd,8u,0u,0u);}}
   return;
  }else if(sp==23u){
@@ -307,12 +310,13 @@ void tick(Event e){
   s.doomActive=0u;amount=(1742.0+4.0*p)*currentShadowMult()*(1.0+c.shadowMasteryBonus)*(1.0+c.maledictionBonus)*(s.now<s.drainHopeEnd?1.10:1.0);
   bool crit=random01()<c.shadowCrit;if(crit)amount*=c.dotCrit;
   amount*=isbMultiplier();amount*=resistanceMultiplier();
-  ${detailed ? 'periodicDamage' : 'damage'}(6u,amount*(s.now<s.eurekaEnd?1.10:1.0),crit);return;
+  ${detailed ? 'periodicDamage' : 'damage'}(6u,amount,crit);return;
  }else{return;}
 }
 void gcd(){s.ready=s.now+uint(max(1000000.0,1500000.0/hasteMultiplier()));enqueue(s.ready,5u,0u,0u);}
-void tap(){${detailed ? 's.manaWasted+=max(0.0,s.mana+c.tapGain-c.maxMana);' : ''}s.mana=min(c.maxMana,s.mana+c.tapGain);s.gained+=c.tapGain;s.taps++;if(c.petChoice!=0u&&c.demonicEnergies>0.0){float petMax=(c.petChoice==1u?1150.0:1450.0)*(1.0+c.felVitalityBonus);s.petMana=min(petMax,s.petMana+c.tapGain*0.5*c.demonicEnergies);}gcd();}
+void tap(){${detailed ? 's.manaWasted+=max(0.0,s.mana+c.tapGain-c.maxMana);' : ''}s.mana=min(c.maxMana,s.mana+c.tapGain);s.gained+=c.tapGain;s.taps++;if(c.petChoice!=0u&&c.demonicEnergies>0.0){float petMax=c.petMaxMana;s.petMana=min(petMax,s.petMana+c.tapGain*0.5*c.demonicEnergies);}gcd();}
 void beginCast(uint spell){
+ if(spell==0u&&s.trance!=0u){s.trance=0u;spend(0u);enqueue(s.now+c.travel,2u,0u,uint(s.castBonus>1.0));gcd();return;}
  if(spell==2u||(spell==1u&&c.corrCast==0u)){spend(spell);applyDot(spell);if(spell==2u)s.amplifyEnd=0u;gcd();return;}
  uint duration=2500000u;
  if(spell==1u)duration=c.corrCast;
@@ -400,7 +404,7 @@ bool evalCond(uint cond, float param, uint targetSpell, float playerManaPct, flo
   else if(targetSpell==15u)remSec=(s.siphonTicks>0u&&s.siphonEnd>s.now)?float(s.siphonEnd-s.now)*0.000001:0.0;
   return (cond==23u?remSec<param:(cond==29u?remSec>=param:(cond==30u?remSec>param:remSec<=param)));
  }else if(cond==6u){ // FIGHT_TIME_GE
-  return (c.end>s.now)&&(float(c.end-s.now)>param*1000000.0);
+  return (c.end>=s.now)&&(float(c.end-s.now)>=param*1000000.0);
  }else if(cond==7u){ // FIGHT_TIME_LE
   return (c.end>=s.now)&&(float(c.end-s.now)<=param*1000000.0);
  }else if(cond==8u){ // SHADOW_TRANCE
@@ -519,13 +523,13 @@ void decide(){
   }else if(action==19u){ // HELLFIRE: always complete the 15-second channel
    if(s.mana>=cost(23u)){
     spend(23u);enqueue(s.now+1000000u,3u,23u,1u);
-    s.ready=s.now+15000000u;enqueue(s.ready,5u,0u,0u);return;
+    s.ready=s.now+15000000u;s.paidChannelEnd=s.ready;enqueue(s.ready,5u,0u,0u);return;
    }else{tap();return;}
   }else if(action==18u){ // DRAIN_HOPE (Wrack)
    if(c.drainHope!=0u&&s.now>=s.drainHopeReady){
     if(s.mana>=cost(11u)){
      spend(11u);
-     s.drainHopeEnd=s.now+6000000u;s.drainHopeReady=s.now+6000000u;
+     s.drainHopeEnd=s.now+6000000u;s.drainHopeReady=s.now+6000000u;s.paidChannelEnd=s.drainHopeEnd;
      for(uint i=1u;i<=6u;i++)enqueue(s.now+i*1000000u,3u,16u,0u);
      s.ready=s.drainHopeEnd+c.channelClipDelay;enqueue(s.ready,5u,0u,0u);return;
     }
@@ -545,6 +549,14 @@ void decide(){
  if(s.mana>=cost(c.filler)){beginCast(c.filler);return;}
  tap();
 }
+void creditManaRegen(uint at){
+ float elapsed=float(at-s.now)*0.000001;
+ uint spiritFrom=max(s.now,max(s.spiritRegenAt,s.paidChannelEnd));
+ float gain=c.mp5*elapsed/5.0+(at>spiritFrom?c.spiritRegen*float(at-spiritFrom)*0.000001:0.0);
+ ${detailed ? 's.manaWasted+=max(0.0,s.mana+gain-c.maxMana);' : ''}
+ s.mana=min(c.maxMana,s.mana+gain);s.gained+=gain;
+ if(c.petChoice!=0u)s.petMana=min(c.petMaxMana,s.petMana+c.petMP5*elapsed/5.0);
+}
 void advance(){
  if(s.size==0u){s.done=3u;return;}
  Event e=dequeue();lastEvent=e;
@@ -552,7 +564,7 @@ void advance(){
 ${detailed ? UPTIME_EFFECTS.map(([,key])=>{
  const active={corr:'s.corrTicks>0u',agony:'s.agonyTicks>0u',imm:'s.immTicks>0u',siphon:'s.siphonTicks>0u',doom:'s.doomActive!=0u',trance:'s.trance!=0u'}[key] || 'true';
  return ` if(${active}&&s.${key}End>s.now)s.uptime_${key}+=min(e.at,s.${key}End)-s.now;`;
-}).join('\n')+'\n' : ''} s.now=e.at;s.events++;eventDamage=0.0;eventFlags=0u;
+}).join('\n')+'\n' : ''} creditManaRegen(e.at);s.now=e.at;s.events++;eventDamage=0.0;eventFlags=0u;
  uint ekind=EV_KIND(e),espell=EV_SPELL(e);
  switch(ekind){
  case 13u:s.done=1u;break;
@@ -560,7 +572,7 @@ ${detailed ? UPTIME_EFFECTS.map(([,key])=>{
   s.casting=0u;spend(espell);
   if(espell==1u)applyDot(1u);
   else if(espell==3u)immolateImpact();
-  else if(espell==13u){float sfCD=60.0*(1.0-0.45*float(c.decimationRank));s.soulFireReady=s.now+uint(sfCD*1000000.0);enqueue(s.now+c.travel,2u,13u,uint(s.castBonus>1.0));}
+  else if(espell==13u){s.soulFireReady=s.now+60000000u-27000000u*c.decimationRank;enqueue(s.now+c.travel,2u,13u,uint(s.castBonus>1.0));}
   else enqueue(s.now+c.travel,2u,espell,uint(s.castBonus>1.0));
   if(c.decimation!=0u&&(espell==0u||espell==5u)){
    float fightProg=float(s.now)/max(1.0,float(c.end));
@@ -656,7 +668,7 @@ ${detailed ? UPTIME_EFFECTS.map(([,key])=>{
   }
   break;
  case 8u:if(s.now>=s.tranceEnd)s.trance=0u;break;
- case 10u:${detailed ? 's.manaWasted+=max(0.0,s.mana+c.mp5-c.maxMana);' : ''}s.mana=min(c.maxMana,s.mana+c.mp5);s.gained+=c.mp5;if(c.petChoice!=0u){float petMax=(c.petChoice==1u?1150.0:1450.0)*(1.0+c.felVitalityBonus);s.petMana=min(petMax,s.petMana+c.petMP5);}enqueue(s.now+5000000u,10u,0u,0u);break;
+ case 10u:enqueue(s.now+5000000u,10u,0u,0u);break;
  case 11u:break;
  case 12u:s.trinketEnd=s.now+c.trinketDuration;enqueue(s.trinketEnd,11u,0u,0u);if(s.now+c.trinketCD<=c.end)enqueue(s.now+c.trinketCD,12u,0u,0u);break;
  default:s.done=5u;break;
@@ -713,8 +725,8 @@ void main(){
  seedRandom(mode==2u?0u:(numConfigs>1u?fightInCfg:globalLane));
  enqueue(c.end,13u,0u,0u);enqueue(5000000u,10u,0u,0u);
  if(c.trinketSP>0.0){s.trinketEnd=c.trinketDuration;s.trinketReady=c.trinketCD;enqueue(s.trinketEnd,11u,0u,0u);}
- if(c.petChoice==1u){s.petMana=1150.0*(1.0+c.felVitalityBonus);enqueue(300000u,6u,100u,0u);}
- else if(c.petChoice==2u){s.petMana=1450.0*(1.0+c.felVitalityBonus);enqueue(1000000u,6u,200u,0u);enqueue(500000u,6u,201u,0u);}
+ if(c.petChoice==1u){s.petMana=c.petMaxMana;enqueue(2000000u,6u,100u,0u);}
+ else if(c.petChoice==2u){s.petMana=c.petMaxMana;enqueue(1000000u,6u,200u,0u);enqueue(500000u,6u,201u,0u);}
  decide();
  for(uint step=0u;step<eventBudget;step++){
   if(s.done!=0u)break;advance();if(mode==2u&&s.events==lane+1u)break;

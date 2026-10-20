@@ -1,6 +1,6 @@
 // Combat-form buff/racial arithmetic, preserving current app ordering and rounding.
 // Sacrifice/talent effects belong to the configuration builder and are excluded here.
-export function resolveWarlockBuffEffects(stats, buffs, race, target) {
+export function resolveWarlockBuffEffects(stats, buffs, race, target, pet = 'none') {
   const sp = stats.spellPower, shadowSpBonus = stats.shadowPower, fireSpBonus = stats.firePower;
   const hit = stats.hit, crit = stats.crit, haste = 0;
   const baseInt = stats.intellect, baseStam = stats.stamina, baseSpirit = stats.spirit, baseMp5 = stats.mp5;
@@ -37,7 +37,7 @@ export function resolveWarlockBuffEffects(stats, buffs, race, target) {
   let addedShadowSP = isShadowPowerElixir ? 40 : 0;
   let addedFireSP = isGreaterFirepowerElixir ? 40 : 0;
 
-  let addedInt = 0, addedStam = 0, addedSpirit = 0;
+  let addedInt = 0, addedStam = pet === 'imp' ? 54 : 0, addedSpirit = 0;
   if (isArcaneIntellect) addedInt += 31;
   if (isMarkOfTheWild) { addedInt += 12; addedStam += 12; addedSpirit += 12; }
   if (isSongflower) { addedInt += 15; addedStam += 15; addedSpirit += 15; }
