@@ -7,7 +7,7 @@ import { mapEvaluationResults } from './evaluation.js';
 export function createNativeEvaluator({ classId, classModule = getClassModule(classId), runBatch }) {
   if (classModule.id !== classId) throw new Error('Native evaluator class identity mismatch.');
   requireClassCapability(classModule, 'batchSimulation');
-  return async function evaluateNative(configs, options = {}, { requestId, candidateIds } = {}) {
+  return async function evaluateNative(configs, options = {}, { requestId, candidateIds, objective = 'mean-dps' } = {}) {
     if (typeof requestId !== 'string' || !requestId.trim()) throw new Error('Native evaluation requires requestId.');
     if (!Array.isArray(configs) || !configs.length || !Array.isArray(candidateIds) || candidateIds.length !== configs.length) throw new Error('Native candidate/config count mismatch.');
     const ids = candidateIds.slice();
@@ -15,8 +15,9 @@ export function createNativeEvaluator({ classId, classModule = getClassModule(cl
     const iterations = options.iterations ?? configs[0].iterations;
     if (!Number.isInteger(iterations) || iterations < 1 || iterations > 1048576) throw new Error('Invalid native iterations.');
     if (options.iterations == null && configs.some(c => c.iterations !== iterations)) throw new Error('Native configs require equal iteration counts.');
+    if (!(classModule.capabilities.objectives ?? ['mean-dps']).includes(objective)) throw new Error(`Unsupported objective: ${objective}`);
     const request = { requestId, candidates: ids.map(candidateId => ({ classId, candidateId })),
-      settings: { iterations, mode: options.detailedResults === false ? 'fast' : 'detailed', objective: 'mean-dps' } };
+      settings: { iterations, mode: options.detailedResults === false ? 'fast' : 'detailed', objective } };
     // Exact native input/options references and seeds pass through to the runner.
     const batch = await runBatch(configs, options);
     const fitnessResults = mapEvaluationResults(request, batch);

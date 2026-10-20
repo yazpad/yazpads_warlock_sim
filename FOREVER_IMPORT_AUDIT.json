@@ -1,0 +1,4640 @@
+{
+  "checkout": "/home/aaron-ma/forever",
+  "reports": [
+    {
+      "id": "aff_wrack",
+      "source": "/home/aaron-ma/yazpads_warlock_sim/fixtures/canonical_forever/aff_wrack.fixture.json#sourceBuild",
+      "candidate": {
+        "schemaVersion": 1,
+        "classId": "warlock",
+        "candidateId": "forever-imported",
+        "importDiagnostics": [
+          {
+            "groupPath": [
+              "Boosts"
+            ],
+            "action": {
+              "itemId": 250937,
+              "tag": 0,
+              "rank": 0
+            },
+            "condition": null,
+            "reason": "Unsupported grouped action: {\"itemId\":250937,\"tag\":0,\"rank\":0}"
+          },
+          {
+            "groupPath": [
+              "priorityList"
+            ],
+            "action": {
+              "spellId": 20554,
+              "tag": 0,
+              "rank": 0
+            },
+            "condition": {
+              "uuid": null,
+              "and": {
+                "vals": [
+                  {
+                    "uuid": null,
+                    "dotIsActive": {
+                      "targetUnit": null,
+                      "spellId": {
+                        "spellId": 11713,
+                        "tag": 0,
+                        "rank": 0
+                      }
+                    }
+                  },
+                  {
+                    "uuid": null,
+                    "dotIsActive": {
+                      "targetUnit": null,
+                      "spellId": {
+                        "spellId": 25311,
+                        "tag": 0,
+                        "rank": 0
+                      }
+                    }
+                  },
+                  {
+                    "uuid": null,
+                    "dotIsActive": {
+                      "targetUnit": null,
+                      "spellId": {
+                        "spellId": 18881,
+                        "tag": 0,
+                        "rank": 0
+                      }
+                    }
+                  },
+                  {
+                    "uuid": null,
+                    "dotIsActive": {
+                      "targetUnit": null,
+                      "spellId": {
+                        "spellId": 25309,
+                        "tag": 0,
+                        "rank": 0
+                      }
+                    }
+                  },
+                  {
+                    "uuid": null,
+                    "warlockAssignedCurseIsActive": {
+                      "targetUnit": null
+                    }
+                  }
+                ]
+              }
+            },
+            "reason": "Unsupported Forever group condition: warlockAssignedCurseIsActive"
+          }
+        ],
+        "encounter": {
+          "duration": 180,
+          "distance": 0,
+          "target": {
+            "level": 63,
+            "bossArmor": 3731,
+            "resistance": 0
+          }
+        },
+        "stats": {
+          "swordEquipped": false,
+          "spellPower": 500,
+          "shadowPower": 0,
+          "firePower": 0,
+          "intellect": 200,
+          "stamina": 220,
+          "spirit": 100,
+          "hit": 12,
+          "crit": 15,
+          "mp5": 20,
+          "penetration": 0
+        },
+        "equipment": {
+          "mode": "direct",
+          "items": {}
+        },
+        "buffs": {
+          "curseOfElements": true
+        },
+        "talents": {
+          "affliction": {
+            "improved_life_tap": 2,
+            "suppression": 5,
+            "improved_corruption": 3,
+            "improved_bane_of_agony": 2,
+            "amplify_curse": 1,
+            "pandemic": 3,
+            "malevolence": 5,
+            "nightfall": 2,
+            "siphon_life": 1,
+            "soul_siphon": 3,
+            "shadow_mastery": 5,
+            "wrack": 1
+          },
+          "demonology": {},
+          "destruction": {
+            "improved_shadow_bolt": 5,
+            "bane": 5,
+            "ruin": 5,
+            "agonizing_flames": 3
+          }
+        },
+        "apl": {
+          "kind": "text",
+          "text": "bloodFury\nAmplify Curse if target.debuff_remains(\"Bane of Agony\") <= 0 && !buff.amplify_curse\nBane of Agony if target.debuff_remains(\"Bane of Agony\") <= 0\nCorruption if target.debuff_remains(\"Corruption\") <= 0\nSiphon Life if target.debuff_remains(\"Siphon Life\") <= 0\nImmolate if target.debuff_remains(\"Immolate\") <= 0\nbolt if debuff.isb_missing\nNightfall: Shadow Bolt if buff.shadow_trance\nwrack if target.debuff_remains(\"Corruption\") > 4 && target.debuff_remains(\"Bane of Agony\") > 4\nbolt\nLife Tap"
+        },
+        "classOptions": {
+          "race": "ORC",
+          "pet": "succubus",
+          "sacrifice": "none",
+          "rotation": "shadow"
+        },
+        "channelClipDelayMs": 50,
+        "book": true,
+        "trinketSP": 0,
+        "trinketDuration": 20,
+        "trinketCD": 120
+      },
+      "issues": [
+        {
+          "path": "player.warlock.options.classOptions.curseOptions",
+          "reason": "Not mapped by bridge; combat relevance needs review",
+          "value": "NoCurse"
+        },
+        {
+          "path": "player.warlock.options.classOptions.soulShards",
+          "reason": "Not mapped by bridge; combat relevance needs review",
+          "value": 32
+        },
+        {
+          "path": "encounter",
+          "reason": "Source encounter ignored; bridge supplies 180s / level 63 / armor 3731 / resistance 0",
+          "value": {
+            "apiVersion": 0,
+            "duration": 180,
+            "durationVariation": 0,
+            "executeProportion20": 0.2,
+            "executeProportion25": 0.25,
+            "executeProportion35": 0.35,
+            "executeProportion45": 0.45,
+            "executeProportion90": 0.9,
+            "useHealth": false,
+            "targets": [
+              {
+                "id": 0,
+                "name": "",
+                "level": 63,
+                "mobType": "MobTypeMechanical",
+                "creatureFamily": "CreatureFamilyUnknown",
+                "stats": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  320,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  3731,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "minBaseDamage": 2601,
+                "damageSpread": 0.5,
+                "swingSpeed": 2,
+                "dualWield": false,
+                "dualWieldPenalty": false,
+                "parryHaste": true,
+                "suppressDodge": false,
+                "canCrush": true,
+                "spellSchool": "SpellSchoolPhysical",
+                "tankIndex": 0,
+                "secondTankIndex": 0,
+                "disabledAtStart": false,
+                "targetInputs": []
+              }
+            ],
+            "areaTypes": [],
+            "zoneId": 0
+          }
+        },
+        {
+          "path": "player.profession1",
+          "reason": "Player setting not mapped",
+          "value": "Engineering"
+        },
+        {
+          "path": "player.profession2",
+          "reason": "Player setting not mapped",
+          "value": "ProfessionUnknown"
+        },
+        {
+          "path": "player.bonusStats",
+          "reason": "Player setting not mapped",
+          "value": {
+            "apiVersion": 0,
+            "stats": [
+              0,
+              0,
+              220,
+              200,
+              0,
+              500,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              100,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              20,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "pseudoStats": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              12,
+              0,
+              15,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "path": "player.reactionTimeMs",
+          "reason": "Player setting not mapped",
+          "value": 100
+        },
+        {
+          "path": "player.rotation.priorityList.0.action",
+          "reason": "Automatic cooldown action omitted"
+        },
+        {
+          "path": "player.rotation.priorityList.2.action.castSpell",
+          "reason": "Amplify Curse mapped to Agony rather than independent cooldown"
+        },
+        {
+          "path": "player.rotation.priorityList.6.action",
+          "reason": "Assigned curse action omitted; uptime/GCD/mana not preserved"
+        },
+        {
+          "path": "player.rotation.priorityList.11.action.channelSpell",
+          "reason": "Channel treated as fixed action; interruptIf / allowRecast not preserved",
+          "value": {
+            "spellId": {
+              "spellId": 1316697,
+              "tag": 0,
+              "rank": 0
+            },
+            "target": null,
+            "interruptIf": null,
+            "allowRecast": false
+          }
+        },
+        {
+          "path": "player.rotation.priorityList.11.action.condition",
+          "reason": "Comparison translator conflates strict/inclusive bounds; min uses AND even for less-than",
+          "value": "OpGe"
+        },
+        {
+          "path": "player.rotation.groups.0.actions.1.action.castSpell",
+          "reason": "Spell or item action omitted",
+          "value": {
+            "itemId": 250937,
+            "tag": 0,
+            "rank": 0
+          }
+        },
+        {
+          "path": "player.rotation.groups.Boosts",
+          "reason": "Unsupported grouped action: {\"itemId\":250937,\"tag\":0,\"rank\":0}",
+          "value": {
+            "itemId": 250937,
+            "tag": 0,
+            "rank": 0
+          }
+        },
+        {
+          "path": "player.rotation.groups.priorityList",
+          "reason": "Unsupported Forever group condition: warlockAssignedCurseIsActive",
+          "value": {
+            "spellId": 20554,
+            "tag": 0,
+            "rank": 0
+          }
+        },
+        {
+          "path": "fixture.inputComparison",
+          "reason": "Source capture status: blocked; resolvedConfig is produced by ordinary import"
+        }
+      ],
+      "compilation": [],
+      "fixtureOverrides": [
+        {
+          "key": "race",
+          "value": "ORC"
+        },
+        {
+          "key": "swordEquipped",
+          "value": false
+        },
+        {
+          "key": "racialPolicy",
+          "value": "execute"
+        },
+        {
+          "key": "targetIsBeast",
+          "value": false
+        },
+        {
+          "key": "maxHealth",
+          "value": 4104
+        },
+        {
+          "key": "statsIncludeBase",
+          "value": true
+        },
+        {
+          "key": "duration",
+          "value": 180
+        },
+        {
+          "key": "iterations",
+          "value": 4096
+        },
+        {
+          "key": "seed",
+          "value": 42
+        },
+        {
+          "key": "rotation",
+          "value": "shadow"
+        },
+        {
+          "key": "spellPower",
+          "value": 500
+        },
+        {
+          "key": "shadowPower",
+          "value": 0
+        },
+        {
+          "key": "firePower",
+          "value": 0
+        },
+        {
+          "key": "intellect",
+          "value": 307
+        },
+        {
+          "key": "stamina",
+          "value": 287
+        },
+        {
+          "key": "spirit",
+          "value": 218
+        },
+        {
+          "key": "hit",
+          "value": 17
+        },
+        {
+          "key": "crit",
+          "value": 15
+        },
+        {
+          "key": "mp5",
+          "value": 20
+        },
+        {
+          "key": "distance",
+          "value": 0
+        },
+        {
+          "key": "resistance",
+          "value": 0
+        },
+        {
+          "key": "penetration",
+          "value": 0
+        },
+        {
+          "key": "tapThreshold",
+          "value": 25
+        },
+        {
+          "key": "bossArmor",
+          "value": 3731
+        },
+        {
+          "key": "book",
+          "value": true
+        },
+        {
+          "key": "charges",
+          "value": false
+        },
+        {
+          "key": "partialResists",
+          "value": true
+        },
+        {
+          "key": "piercing",
+          "value": true
+        },
+        {
+          "key": "corruption",
+          "value": true
+        },
+        {
+          "key": "agony",
+          "value": true
+        },
+        {
+          "key": "immolate",
+          "value": true
+        },
+        {
+          "key": "instantCorruption",
+          "value": false
+        },
+        {
+          "key": "nightfall",
+          "value": true
+        },
+        {
+          "key": "isb",
+          "value": true
+        },
+        {
+          "key": "ruin",
+          "value": true
+        },
+        {
+          "key": "improvedTap",
+          "value": true
+        },
+        {
+          "key": "amplifyCurse",
+          "value": true
+        },
+        {
+          "key": "demonicPact",
+          "value": false
+        },
+        {
+          "key": "demonicSacrifice",
+          "value": false
+        },
+        {
+          "key": "felDomination",
+          "value": false
+        },
+        {
+          "key": "masterSummoner",
+          "value": 0
+        },
+        {
+          "key": "soulLink",
+          "value": false
+        },
+        {
+          "key": "sacImp",
+          "value": false
+        },
+        {
+          "key": "sacSucc",
+          "value": false
+        },
+        {
+          "key": "masterDemo",
+          "value": 0
+        },
+        {
+          "key": "petChoice",
+          "value": "succubus"
+        },
+        {
+          "key": "trinketSP",
+          "value": 0
+        },
+        {
+          "key": "trinketDuration",
+          "value": 20
+        },
+        {
+          "key": "trinketCD",
+          "value": 120
+        },
+        {
+          "key": "shadowMultiplier",
+          "value": 1.1
+        },
+        {
+          "key": "fireMultiplier",
+          "value": 1.1
+        },
+        {
+          "key": "tapBonus",
+          "value": 0.2
+        },
+        {
+          "key": "nightfallChance",
+          "value": 0.04
+        },
+        {
+          "key": "isbBonus",
+          "value": 0.2
+        },
+        {
+          "key": "ruinRank",
+          "value": 5
+        },
+        {
+          "key": "shadowMasteryBonus",
+          "value": 0.1
+        },
+        {
+          "key": "improvedCorruptionBonus",
+          "value": 0.06
+        },
+        {
+          "key": "conflagrate",
+          "value": false
+        },
+        {
+          "key": "shadowburn",
+          "value": false
+        },
+        {
+          "key": "curseOfDoom",
+          "value": false
+        },
+        {
+          "key": "incinerate",
+          "value": false
+        },
+        {
+          "key": "decimation",
+          "value": false
+        },
+        {
+          "key": "decimationSearing",
+          "value": false
+        },
+        {
+          "key": "demonicBrand",
+          "value": false
+        },
+        {
+          "key": "demonicBrandRank",
+          "value": 0
+        },
+        {
+          "key": "baneRank",
+          "value": 5
+        },
+        {
+          "key": "decimationRank",
+          "value": 0
+        },
+        {
+          "key": "siphonLife",
+          "value": true
+        },
+        {
+          "key": "drainHope",
+          "value": true
+        },
+        {
+          "key": "malevolence",
+          "value": 5
+        },
+        {
+          "key": "afBonus",
+          "value": 0.1
+        },
+        {
+          "key": "aftermathBonus",
+          "value": 0
+        },
+        {
+          "key": "cataclysmCostMult",
+          "value": 1
+        },
+        {
+          "key": "improvedAgonyBonus",
+          "value": 0.1
+        },
+        {
+          "key": "felVitalityBonus",
+          "value": 0
+        },
+        {
+          "key": "maledictionBonus",
+          "value": 0
+        },
+        {
+          "key": "improvedDrainsBonus",
+          "value": 0
+        },
+        {
+          "key": "soulSiphonBonus",
+          "value": 0.12
+        },
+        {
+          "key": "demonicEnergies",
+          "value": 0
+        },
+        {
+          "key": "demonicKnowledge",
+          "value": 0
+        },
+        {
+          "key": "targetSpellMultiplier",
+          "value": 1.1
+        },
+        {
+          "key": "snfChance",
+          "value": 0
+        },
+        {
+          "key": "snfBonus",
+          "value": 0
+        },
+        {
+          "key": "dotCrit",
+          "value": 2
+        },
+        {
+          "key": "fnbCrit",
+          "value": 0
+        },
+        {
+          "key": "petMult",
+          "value": 1
+        },
+        {
+          "key": "petFireboltMult",
+          "value": 1
+        },
+        {
+          "key": "petMeleeMult",
+          "value": 1
+        },
+        {
+          "key": "petLashMult",
+          "value": 1
+        },
+        {
+          "key": "brandMult",
+          "value": 1
+        },
+        {
+          "key": "corrMultiplier",
+          "value": 1.2760000000000002
+        },
+        {
+          "key": "aplRules",
+          "value": [
+            {
+              "action": 24,
+              "cond": 5,
+              "param": 0,
+              "targetSpell": 2,
+              "cond1": 5,
+              "param1": 0,
+              "targetSpell1": 2,
+              "cond2": 0,
+              "param2": 0,
+              "targetSpell2": 0,
+              "enabled": 1
+            },
+            {
+              "action": 8,
+              "cond": 5,
+              "param": 0,
+              "targetSpell": 2,
+              "cond1": 5,
+              "param1": 0,
+              "targetSpell1": 2,
+              "cond2": 0,
+              "param2": 0,
+              "targetSpell2": 0,
+              "enabled": 1
+            },
+            {
+              "action": 6,
+              "cond": 5,
+              "param": 0,
+              "targetSpell": 1,
+              "cond1": 5,
+              "param1": 0,
+              "targetSpell1": 1,
+              "cond2": 0,
+              "param2": 0,
+              "targetSpell2": 0,
+              "enabled": 1
+            },
+            {
+              "action": 17,
+              "cond": 5,
+              "param": 0,
+              "targetSpell": 15,
+              "cond1": 5,
+              "param1": 0,
+              "targetSpell1": 15,
+              "cond2": 0,
+              "param2": 0,
+              "targetSpell2": 0,
+              "enabled": 1
+            },
+            {
+              "action": 9,
+              "cond": 5,
+              "param": 0,
+              "targetSpell": 3,
+              "cond1": 5,
+              "param1": 0,
+              "targetSpell1": 3,
+              "cond2": 0,
+              "param2": 0,
+              "targetSpell2": 0,
+              "enabled": 1
+            },
+            {
+              "action": 22,
+              "cond": 0,
+              "param": 0,
+              "targetSpell": 0,
+              "cond1": 0,
+              "param1": 0,
+              "targetSpell1": 0,
+              "cond2": 0,
+              "param2": 0,
+              "targetSpell2": 0,
+              "enabled": 1
+            },
+            {
+              "action": 16,
+              "cond": 28,
+              "param": 0,
+              "targetSpell": 0,
+              "cond1": 28,
+              "param1": 0,
+              "targetSpell1": 0,
+              "cond2": 0,
+              "param2": 0,
+              "targetSpell2": 0,
+              "enabled": 1
+            },
+            {
+              "action": 2,
+              "cond": 8,
+              "param": 0,
+              "targetSpell": 0,
+              "cond1": 8,
+              "param1": 0,
+              "targetSpell1": 0,
+              "cond2": 0,
+              "param2": 0,
+              "targetSpell2": 0,
+              "enabled": 1
+            },
+            {
+              "action": 18,
+              "cond": 30,
+              "param": 4,
+              "targetSpell": 1,
+              "cond1": 30,
+              "param1": 4,
+              "targetSpell1": 1,
+              "cond2": 30,
+              "param2": 4,
+              "targetSpell2": 2,
+              "enabled": 1
+            },
+            {
+              "action": 16,
+              "cond": 0,
+              "param": 0,
+              "targetSpell": 0,
+              "cond1": 0,
+              "param1": 0,
+              "targetSpell1": 0,
+              "cond2": 0,
+              "param2": 0,
+              "targetSpell2": 0,
+              "enabled": 1
+            },
+            {
+              "action": 1,
+              "cond": 0,
+              "param": 0,
+              "targetSpell": 0,
+              "cond1": 0,
+              "param1": 0,
+              "targetSpell1": 0,
+              "cond2": 0,
+              "param2": 0,
+              "targetSpell2": 0,
+              "enabled": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "demo_fire_brand",
+      "source": "/home/aaron-ma/yazpads_warlock_sim/fixtures/canonical_forever/demo_fire_brand.fixture.json#sourceBuild",
+      "candidate": {
+        "schemaVersion": 1,
+        "classId": "warlock",
+        "candidateId": "forever-imported",
+        "importDiagnostics": [
+          {
+            "groupPath": [
+              "Boosts"
+            ],
+            "action": {
+              "itemId": 250937,
+              "tag": 0,
+              "rank": 0
+            },
+            "condition": {
+              "and": {
+                "vals": [
+                  {
+                    "uuid": null,
+                    "or": {
+                      "vals": [
+                        {
+                          "uuid": null,
+                          "and": {
+                            "vals": [
+                              {
+                                "uuid": null,
+                                "dotIsActive": {
+                                  "targetUnit": null,
+                                  "spellId": {
+                                    "spellId": 603,
+                                    "tag": 0,
+                                    "rank": 0
+                                  }
+                                }
+                              },
+                              {
+                                "uuid": null,
+                                "cmp": {
+                                  "op": "OpLe",
+                                  "lhs": {
+                                    "uuid": null,
+                                    "dotRemainingTime": {
+                                      "targetUnit": null,
+                                      "spellId": {
+                                        "spellId": 603,
+                                        "tag": 0,
+                                        "rank": 0
+                                      }
+                                    }
+                                  },
+                                  "rhs": {
+                                    "uuid": null,
+                                    "const": {
+                                      "val": "14s"
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "uuid": null,
+                          "and": {
+                            "vals": [
+                              {
+                                "uuid": null,
+                                "not": {
+                                  "val": {
+                                    "uuid": null,
+                                    "dotIsActive": {
+                                      "targetUnit": null,
+                                      "spellId": {
+                                        "spellId": 603,
+                                        "tag": 0,
+                                        "rank": 0
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              {
+                                "uuid": null,
+                                "cmp": {
+                                  "op": "OpLt",
+                                  "lhs": {
+                                    "uuid": null,
+                                    "remainingTime": {}
+                                  },
+                                  "rhs": {
+                                    "uuid": null,
+                                    "const": {
+                                      "val": "60s"
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            "reason": "Unsupported grouped action: {\"itemId\":250937,\"tag\":0,\"rank\":0}"
+          }
+        ],
+        "encounter": {
+          "duration": 180,
+          "distance": 0,
+          "target": {
+            "level": 63,
+            "bossArmor": 3731,
+            "resistance": 0
+          }
+        },
+        "stats": {
+          "swordEquipped": false,
+          "spellPower": 500,
+          "shadowPower": 0,
+          "firePower": 0,
+          "intellect": 200,
+          "stamina": 220,
+          "spirit": 100,
+          "hit": 12,
+          "crit": 15,
+          "mp5": 20,
+          "penetration": 0
+        },
+        "equipment": {
+          "mode": "direct",
+          "items": {}
+        },
+        "buffs": {
+          "curseOfElements": true
+        },
+        "talents": {
+          "affliction": {
+            "suppression": 1,
+            "improved_corruption": 1
+          },
+          "demonology": {
+            "improved_imp": 3,
+            "unholy_power": 5,
+            "fel_vitality": 3,
+            "demonic_energies": 2,
+            "demonic_sacrifice": 1,
+            "master_summoner": 2,
+            "decimation": 2,
+            "demonic_brand": 3,
+            "soul_link": 1,
+            "demonic_knowledge": 3,
+            "master_demonologist": 5,
+            "demonic_pact": 1
+          },
+          "destruction": {
+            "bane": 5,
+            "aftermath": 5,
+            "ruin": 5,
+            "agonizing_flames": 3
+          }
+        },
+        "apl": {
+          "kind": "text",
+          "text": "bloodFury if target.debuff_remains(\"Bane of Doom\") > 0 && target.debuff_remains(\"Bane of Doom\") <= 14\nbloodFury if target.debuff_remains(\"Bane of Doom\") <= 0 && target_ttd < 60\nberserking if target.debuff_remains(\"Bane of Doom\") > 0 && time_to_execute(35) >= 180\neureka if target.debuff_remains(\"Bane of Doom\") > 0 && time_to_execute(35) >= 120\nBane of Doom if target.debuff_remains(\"Bane of Doom\") <= 0 && target_ttd >= 60\nDemonic Brand if debuff.demonic_brand_missing\nBane of Agony if target.debuff_remains(\"Bane of Agony\") <= 0 && target_ttd < 60\nImmolate if target.debuff_remains(\"Immolate\") <= 0\nLife Tap if pet_mana < 115\nberserking if buff.decimation && time_to_execute(35) <= 0\nberserking if buff.decimation && time_to_execute(35) >= 180\neureka if buff.decimation && time_to_execute(35) <= 0\neureka if buff.decimation && time_to_execute(35) >= 120\nDecimation: Soul Fire if decimation.active\nCorruption if target.debuff_remains(\"Corruption\") <= 0\nsearing\nLife Tap"
+        },
+        "classOptions": {
+          "race": "HUMAN",
+          "pet": "imp",
+          "sacrifice": "succubus",
+          "rotation": "shadow"
+        },
+        "channelClipDelayMs": 50,
+        "book": true,
+        "trinketSP": 0,
+        "trinketDuration": 20,
+        "trinketCD": 120
+      },
+      "issues": [
+        {
+          "path": "player.warlock.options.classOptions.curseOptions",
+          "reason": "Not mapped by bridge; combat relevance needs review",
+          "value": "NoCurse"
+        },
+        {
+          "path": "player.warlock.options.classOptions.soulShards",
+          "reason": "Not mapped by bridge; combat relevance needs review",
+          "value": 32
+        },
+        {
+          "path": "encounter",
+          "reason": "Source encounter ignored; bridge supplies 180s / level 63 / armor 3731 / resistance 0",
+          "value": {
+            "apiVersion": 0,
+            "duration": 180,
+            "durationVariation": 0,
+            "executeProportion20": 0.2,
+            "executeProportion25": 0.25,
+            "executeProportion35": 0.35,
+            "executeProportion45": 0.45,
+            "executeProportion90": 0.9,
+            "useHealth": false,
+            "targets": [
+              {
+                "id": 0,
+                "name": "",
+                "level": 63,
+                "mobType": "MobTypeMechanical",
+                "creatureFamily": "CreatureFamilyUnknown",
+                "stats": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  320,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  3731,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "minBaseDamage": 2601,
+                "damageSpread": 0.5,
+                "swingSpeed": 2,
+                "dualWield": false,
+                "dualWieldPenalty": false,
+                "parryHaste": true,
+                "suppressDodge": false,
+                "canCrush": true,
+                "spellSchool": "SpellSchoolPhysical",
+                "tankIndex": 0,
+                "secondTankIndex": 0,
+                "disabledAtStart": false,
+                "targetInputs": []
+              }
+            ],
+            "areaTypes": [],
+            "zoneId": 0
+          }
+        },
+        {
+          "path": "player.profession1",
+          "reason": "Player setting not mapped",
+          "value": "Engineering"
+        },
+        {
+          "path": "player.profession2",
+          "reason": "Player setting not mapped",
+          "value": "ProfessionUnknown"
+        },
+        {
+          "path": "player.bonusStats",
+          "reason": "Player setting not mapped",
+          "value": {
+            "apiVersion": 0,
+            "stats": [
+              0,
+              0,
+              220,
+              200,
+              0,
+              500,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              100,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              20,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "pseudoStats": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              12,
+              0,
+              15,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "path": "player.reactionTimeMs",
+          "reason": "Player setting not mapped",
+          "value": 100
+        },
+        {
+          "path": "player.rotation.priorityList.0.action",
+          "reason": "Automatic cooldown action omitted"
+        },
+        {
+          "path": "player.rotation.priorityList.3.action.condition.and.vals.1",
+          "reason": "Comparison translator conflates strict/inclusive bounds; min uses AND even for less-than",
+          "value": "OpGe"
+        },
+        {
+          "path": "player.rotation.priorityList.5.action.condition",
+          "reason": "AND translation may retain only two predicates"
+        },
+        {
+          "path": "player.rotation.priorityList.5.action.condition.and.vals.2",
+          "reason": "Comparison translator conflates strict/inclusive bounds; min uses AND even for less-than",
+          "value": "OpLt"
+        },
+        {
+          "path": "player.rotation.priorityList.7.action",
+          "reason": "Assigned curse action omitted; uptime/GCD/mana not preserved"
+        },
+        {
+          "path": "player.rotation.priorityList.8.action.condition",
+          "reason": "Comparison translator conflates strict/inclusive bounds; min uses AND even for less-than",
+          "value": "OpLt"
+        },
+        {
+          "path": "player.rotation.priorityList.10.action",
+          "reason": "Action-specific rewrite discards or replaces source condition",
+          "value": "decimateSoulFire"
+        },
+        {
+          "path": "player.rotation.groups.0.actions.1.action.castSpell",
+          "reason": "Spell or item action omitted",
+          "value": {
+            "itemId": 250937,
+            "tag": 0,
+            "rank": 0
+          }
+        },
+        {
+          "path": "player.rotation.valueVariables.2.value",
+          "reason": "Comparison translator conflates strict/inclusive bounds; min uses AND even for less-than",
+          "value": "OpLe"
+        },
+        {
+          "path": "player.rotation.groups.Boosts",
+          "reason": "Unsupported grouped action: {\"itemId\":250937,\"tag\":0,\"rank\":0}",
+          "value": {
+            "itemId": 250937,
+            "tag": 0,
+            "rank": 0
+          }
+        },
+        {
+          "path": "fixture.inputComparison",
+          "reason": "Source capture status: blocked; resolvedConfig is produced by ordinary import"
+        }
+      ],
+      "compilation": [],
+      "fixtureOverrides": [
+        {
+          "key": "race",
+          "value": "HUMAN"
+        },
+        {
+          "key": "swordEquipped",
+          "value": false
+        },
+        {
+          "key": "racialPolicy",
+          "value": "execute"
+        },
+        {
+          "key": "targetIsBeast",
+          "value": false
+        },
+        {
+          "key": "maxHealth",
+          "value": 4084
+        },
+        {
+          "key": "statsIncludeBase",
+          "value": true
+        },
+        {
+          "key": "duration",
+          "value": 180
+        },
+        {
+          "key": "iterations",
+          "value": 4096
+        },
+        {
+          "key": "seed",
+          "value": 42
+        },
+        {
+          "key": "rotation",
+          "value": "shadow"
+        },
+        {
+          "key": "spellPower",
+          "value": 560
+        },
+        {
+          "key": "shadowPower",
+          "value": 0
+        },
+        {
+          "key": "firePower",
+          "value": 0
+        },
+        {
+          "key": "intellect",
+          "value": 310
+        },
+        {
+          "key": "stamina",
+          "value": 285
+        },
+        {
+          "key": "spirit",
+          "value": 225
+        },
+        {
+          "key": "hit",
+          "value": 13
+        },
+        {
+          "key": "crit",
+          "value": 15
+        },
+        {
+          "key": "mp5",
+          "value": 20
+        },
+        {
+          "key": "distance",
+          "value": 0
+        },
+        {
+          "key": "resistance",
+          "value": 0
+        },
+        {
+          "key": "penetration",
+          "value": 0
+        },
+        {
+          "key": "tapThreshold",
+          "value": 25
+        },
+        {
+          "key": "bossArmor",
+          "value": 3731
+        },
+        {
+          "key": "book",
+          "value": true
+        },
+        {
+          "key": "charges",
+          "value": false
+        },
+        {
+          "key": "partialResists",
+          "value": true
+        },
+        {
+          "key": "piercing",
+          "value": true
+        },
+        {
+          "key": "corruption",
+          "value": true
+        },
+        {
+          "key": "agony",
+          "value": true
+        },
+        {
+          "key": "immolate",
+          "value": true
+        },
+        {
+          "key": "instantCorruption",
+          "value": false
+        },
+        {
+          "key": "nightfall",
+          "value": false
+        },
+        {
+          "key": "isb",
+          "value": false
+        },
+        {
+          "key": "ruin",
+          "value": true
+        },
+        {
+          "key": "improvedTap",
+          "value": false
+        },
+        {
+          "key": "amplifyCurse",
+          "value": false
+        },
+        {
+          "key": "demonicPact",
+          "value": true
+        },
+        {
+          "key": "demonicSacrifice",
+          "value": true
+        },
+        {
+          "key": "felDomination",
+          "value": false
+        },
+        {
+          "key": "masterSummoner",
+          "value": 2
+        },
+        {
+          "key": "soulLink",
+          "value": true
+        },
+        {
+          "key": "sacImp",
+          "value": false
+        },
+        {
+          "key": "sacSucc",
+          "value": true
+        },
+        {
+          "key": "masterDemo",
+          "value": 5
+        },
+        {
+          "key": "petChoice",
+          "value": "imp"
+        },
+        {
+          "key": "trinketSP",
+          "value": 0
+        },
+        {
+          "key": "trinketDuration",
+          "value": 20
+        },
+        {
+          "key": "trinketCD",
+          "value": 120
+        },
+        {
+          "key": "shadowMultiplier",
+          "value": 1.1330000000000002
+        },
+        {
+          "key": "fireMultiplier",
+          "value": 1.433245
+        },
+        {
+          "key": "tapBonus",
+          "value": 0
+        },
+        {
+          "key": "nightfallChance",
+          "value": 0
+        },
+        {
+          "key": "isbBonus",
+          "value": 0
+        },
+        {
+          "key": "ruinRank",
+          "value": 5
+        },
+        {
+          "key": "shadowMasteryBonus",
+          "value": 0
+        },
+        {
+          "key": "improvedCorruptionBonus",
+          "value": 0.02
+        },
+        {
+          "key": "conflagrate",
+          "value": false
+        },
+        {
+          "key": "shadowburn",
+          "value": false
+        },
+        {
+          "key": "curseOfDoom",
+          "value": true
+        },
+        {
+          "key": "incinerate",
+          "value": false
+        },
+        {
+          "key": "decimation",
+          "value": true
+        },
+        {
+          "key": "decimationSearing",
+          "value": false
+        },
+        {
+          "key": "demonicBrand",
+          "value": true
+        },
+        {
+          "key": "demonicBrandRank",
+          "value": 3
+        },
+        {
+          "key": "baneRank",
+          "value": 5
+        },
+        {
+          "key": "decimationRank",
+          "value": 2
+        },
+        {
+          "key": "siphonLife",
+          "value": false
+        },
+        {
+          "key": "drainHope",
+          "value": false
+        },
+        {
+          "key": "malevolence",
+          "value": 0
+        },
+        {
+          "key": "afBonus",
+          "value": 0.1
+        },
+        {
+          "key": "aftermathBonus",
+          "value": 0.5
+        },
+        {
+          "key": "cataclysmCostMult",
+          "value": 1
+        },
+        {
+          "key": "improvedAgonyBonus",
+          "value": 0
+        },
+        {
+          "key": "felVitalityBonus",
+          "value": 0.15000000000000002
+        },
+        {
+          "key": "maledictionBonus",
+          "value": 0
+        },
+        {
+          "key": "improvedDrainsBonus",
+          "value": 0
+        },
+        {
+          "key": "soulSiphonBonus",
+          "value": 0
+        },
+        {
+          "key": "demonicEnergies",
+          "value": 2
+        },
+        {
+          "key": "demonicKnowledge",
+          "value": 3
+        },
+        {
+          "key": "targetSpellMultiplier",
+          "value": 1.1
+        },
+        {
+          "key": "snfChance",
+          "value": 0
+        },
+        {
+          "key": "snfBonus",
+          "value": 0
+        },
+        {
+          "key": "dotCrit",
+          "value": 1.5
+        },
+        {
+          "key": "fnbCrit",
+          "value": 0
+        },
+        {
+          "key": "petMult",
+          "value": 1
+        },
+        {
+          "key": "petFireboltMult",
+          "value": 1.5862000000000003
+        },
+        {
+          "key": "petMeleeMult",
+          "value": 1.1330000000000002
+        },
+        {
+          "key": "petLashMult",
+          "value": 1.2463000000000002
+        },
+        {
+          "key": "brandMult",
+          "value": 1.2463000000000002
+        },
+        {
+          "key": "corrMultiplier",
+          "value": 1.1556600000000004
+        },
+        {
+          "key": "aplRules",
+          "value": [
+            {
+              "action": 7,
+              "cond": 5,
+              "param": 0,
+              "targetSpell": 22,
+              "cond1": 5,
+              "param1": 0,
+              "targetSpell1": 22,
+              "cond2": 6,
+              "param2": 60,
+              "targetSpell2": 0,
+              "enabled": 1
+            },
+            {
+              "action": 5,
+              "cond": 11,
+              "param": 0,
+              "targetSpell": 0,
+              "cond1": 11,
+              "param1": 0,
+              "targetSpell1": 0,
+              "cond2": 0,
+              "param2": 0,
+              "targetSpell2": 0,
+              "enabled": 1
+            },
+            {
+              "action": 8,
+              "cond": 5,
+              "param": 0,
+              "targetSpell": 2,
+              "cond1": 5,
+              "param1": 0,
+              "targetSpell1": 2,
+              "cond2": 22,
+              "param2": 60,
+              "targetSpell2": 0,
+              "enabled": 1
+            },
+            {
+              "action": 9,
+              "cond": 5,
+              "param": 0,
+              "targetSpell": 3,
+              "cond1": 5,
+              "param1": 0,
+              "targetSpell1": 3,
+              "cond2": 0,
+              "param2": 0,
+              "targetSpell2": 0,
+              "enabled": 1
+            },
+            {
+              "action": 1,
+              "cond": 24,
+              "param": 115,
+              "targetSpell": 0,
+              "cond1": 24,
+              "param1": 115,
+              "targetSpell1": 0,
+              "cond2": 0,
+              "param2": 0,
+              "targetSpell2": 0,
+              "enabled": 1
+            },
+            {
+              "action": 4,
+              "cond": 9,
+              "param": 35,
+              "targetSpell": 13,
+              "cond1": 9,
+              "param1": 35,
+              "targetSpell1": 13,
+              "cond2": 0,
+              "param2": 0,
+              "targetSpell2": 0,
+              "enabled": 1
+            },
+            {
+              "action": 6,
+              "cond": 5,
+              "param": 0,
+              "targetSpell": 1,
+              "cond1": 5,
+              "param1": 0,
+              "targetSpell1": 1,
+              "cond2": 0,
+              "param2": 0,
+              "targetSpell2": 0,
+              "enabled": 1
+            },
+            {
+              "action": 13,
+              "cond": 0,
+              "param": 0,
+              "targetSpell": 0,
+              "cond1": 0,
+              "param1": 0,
+              "targetSpell1": 0,
+              "cond2": 0,
+              "param2": 0,
+              "targetSpell2": 0,
+              "enabled": 1
+            },
+            {
+              "action": 1,
+              "cond": 0,
+              "param": 0,
+              "targetSpell": 0,
+              "cond1": 0,
+              "param1": 0,
+              "targetSpell1": 0,
+              "cond2": 0,
+              "param2": 0,
+              "targetSpell2": 0,
+              "enabled": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "demo_shadow_brand",
+      "source": "/home/aaron-ma/yazpads_warlock_sim/fixtures/canonical_forever/demo_shadow_brand.fixture.json#sourceBuild",
+      "candidate": {
+        "schemaVersion": 1,
+        "classId": "warlock",
+        "candidateId": "forever-imported",
+        "importDiagnostics": [
+          {
+            "groupPath": [
+              "Boosts"
+            ],
+            "action": {
+              "itemId": 250937,
+              "tag": 0,
+              "rank": 0
+            },
+            "condition": {
+              "and": {
+                "vals": [
+                  {
+                    "uuid": null,
+                    "or": {
+                      "vals": [
+                        {
+                          "uuid": null,
+                          "and": {
+                            "vals": [
+                              {
+                                "uuid": null,
+                                "dotIsActive": {
+                                  "targetUnit": null,
+                                  "spellId": {
+                                    "spellId": 603,
+                                    "tag": 0,
+                                    "rank": 0
+                                  }
+                                }
+                              },
+                              {
+                                "uuid": null,
+                                "cmp": {
+                                  "op": "OpLe",
+                                  "lhs": {
+                                    "uuid": null,
+                                    "dotRemainingTime": {
+                                      "targetUnit": null,
+                                      "spellId": {
+                                        "spellId": 603,
+                                        "tag": 0,
+                                        "rank": 0
+                                      }
+                                    }
+                                  },
+                                  "rhs": {
+                                    "uuid": null,
+                                    "const": {
+                                      "val": "14s"
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "uuid": null,
+                          "and": {
+                            "vals": [
+                              {
+                                "uuid": null,
+                                "not": {
+                                  "val": {
+                                    "uuid": null,
+                                    "dotIsActive": {
+                                      "targetUnit": null,
+                                      "spellId": {
+                                        "spellId": 603,
+                                        "tag": 0,
+                                        "rank": 0
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              {
+                                "uuid": null,
+                                "cmp": {
+                                  "op": "OpLt",
+                                  "lhs": {
+                                    "uuid": null,
+                                    "remainingTime": {}
+                                  },
+                                  "rhs": {
+                                    "uuid": null,
+                                    "const": {
+                                      "val": "60s"
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            "reason": "Unsupported grouped action: {\"itemId\":250937,\"tag\":0,\"rank\":0}"
+          }
+        ],
+        "encounter": {
+          "duration": 180,
+          "distance": 0,
+          "target": {
+            "level": 63,
+            "bossArmor": 3731,
+            "resistance": 0
+          }
+        },
+        "stats": {
+          "swordEquipped": false,
+          "spellPower": 500,
+          "shadowPower": 0,
+          "firePower": 0,
+          "intellect": 200,
+          "stamina": 220,
+          "spirit": 100,
+          "hit": 12,
+          "crit": 15,
+          "mp5": 20,
+          "penetration": 0
+        },
+        "equipment": {
+          "mode": "direct",
+          "items": {}
+        },
+        "buffs": {
+          "curseOfElements": true
+        },
+        "talents": {
+          "affliction": {
+            "suppression": 1,
+            "improved_corruption": 1
+          },
+          "demonology": {
+            "unholy_power": 5,
+            "fel_vitality": 3,
+            "demonic_energies": 2,
+            "improved_sayaad": 3,
+            "demonic_sacrifice": 1,
+            "master_summoner": 2,
+            "decimation": 2,
+            "demonic_brand": 3,
+            "soul_link": 1,
+            "demonic_knowledge": 3,
+            "master_demonologist": 5,
+            "demonic_pact": 1
+          },
+          "destruction": {
+            "improved_shadow_bolt": 5,
+            "bane": 5,
+            "ruin": 5,
+            "agonizing_flames": 3
+          }
+        },
+        "apl": {
+          "kind": "text",
+          "text": "bloodFury if target.debuff_remains(\"Bane of Doom\") > 0 && target.debuff_remains(\"Bane of Doom\") <= 14\nbloodFury if target.debuff_remains(\"Bane of Doom\") <= 0 && target_ttd < 60\nberserking if target.debuff_remains(\"Bane of Doom\") > 0 && time_to_execute(35) >= 180\neureka if target.debuff_remains(\"Bane of Doom\") > 0 && time_to_execute(35) >= 120\nBane of Doom if target.debuff_remains(\"Bane of Doom\") <= 0 && target_ttd >= 60\nDemonic Brand if debuff.demonic_brand_missing\nBane of Agony if target.debuff_remains(\"Bane of Agony\") <= 0 && target_ttd < 60\nImmolate if target.debuff_remains(\"Immolate\") <= 0\nLife Tap if pet_mana < 160\nberserking if buff.decimation && time_to_execute(35) <= 0\nberserking if buff.decimation && time_to_execute(35) >= 180\neureka if buff.decimation && time_to_execute(35) <= 0\neureka if buff.decimation && time_to_execute(35) >= 120\nDecimation: Soul Fire if decimation.active\nCorruption if target.debuff_remains(\"Corruption\") <= 0\nbolt\nLife Tap"
+        },
+        "classOptions": {
+          "race": "HUMAN",
+          "pet": "succubus",
+          "sacrifice": "imp",
+          "rotation": "shadow"
+        },
+        "channelClipDelayMs": 50,
+        "book": true,
+        "trinketSP": 0,
+        "trinketDuration": 20,
+        "trinketCD": 120
+      },
+      "issues": [
+        {
+          "path": "player.warlock.options.classOptions.curseOptions",
+          "reason": "Not mapped by bridge; combat relevance needs review",
+          "value": "NoCurse"
+        },
+        {
+          "path": "player.warlock.options.classOptions.soulShards",
+          "reason": "Not mapped by bridge; combat relevance needs review",
+          "value": 32
+        },
+        {
+          "path": "encounter",
+          "reason": "Source encounter ignored; bridge supplies 180s / level 63 / armor 3731 / resistance 0",
+          "value": {
+            "apiVersion": 0,
+            "duration": 180,
+            "durationVariation": 0,
+            "executeProportion20": 0.2,
+            "executeProportion25": 0.25,
+            "executeProportion35": 0.35,
+            "executeProportion45": 0.45,
+            "executeProportion90": 0.9,
+            "useHealth": false,
+            "targets": [
+              {
+                "id": 0,
+                "name": "",
+                "level": 63,
+                "mobType": "MobTypeMechanical",
+                "creatureFamily": "CreatureFamilyUnknown",
+                "stats": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  320,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  3731,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "minBaseDamage": 2601,
+                "damageSpread": 0.5,
+                "swingSpeed": 2,
+                "dualWield": false,
+                "dualWieldPenalty": false,
+                "parryHaste": true,
+                "suppressDodge": false,
+                "canCrush": true,
+                "spellSchool": "SpellSchoolPhysical",
+                "tankIndex": 0,
+                "secondTankIndex": 0,
+                "disabledAtStart": false,
+                "targetInputs": []
+              }
+            ],
+            "areaTypes": [],
+            "zoneId": 0
+          }
+        },
+        {
+          "path": "player.profession1",
+          "reason": "Player setting not mapped",
+          "value": "Engineering"
+        },
+        {
+          "path": "player.profession2",
+          "reason": "Player setting not mapped",
+          "value": "ProfessionUnknown"
+        },
+        {
+          "path": "player.bonusStats",
+          "reason": "Player setting not mapped",
+          "value": {
+            "apiVersion": 0,
+            "stats": [
+              0,
+              0,
+              220,
+              200,
+              0,
+              500,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              100,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              20,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "pseudoStats": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              12,
+              0,
+              15,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "path": "player.reactionTimeMs",
+          "reason": "Player setting not mapped",
+          "value": 100
+        },
+        {
+          "path": "player.rotation.priorityList.0.action",
+          "reason": "Automatic cooldown action omitted"
+        },
+        {
+          "path": "player.rotation.priorityList.3.action.condition.and.vals.1",
+          "reason": "Comparison translator conflates strict/inclusive bounds; min uses AND even for less-than",
+          "value": "OpGe"
+        },
+        {
+          "path": "player.rotation.priorityList.5.action.condition",
+          "reason": "AND translation may retain only two predicates"
+        },
+        {
+          "path": "player.rotation.priorityList.5.action.condition.and.vals.2",
+          "reason": "Comparison translator conflates strict/inclusive bounds; min uses AND even for less-than",
+          "value": "OpLt"
+        },
+        {
+          "path": "player.rotation.priorityList.7.action",
+          "reason": "Assigned curse action omitted; uptime/GCD/mana not preserved"
+        },
+        {
+          "path": "player.rotation.priorityList.8.action.condition",
+          "reason": "Comparison translator conflates strict/inclusive bounds; min uses AND even for less-than",
+          "value": "OpLt"
+        },
+        {
+          "path": "player.rotation.priorityList.10.action",
+          "reason": "Action-specific rewrite discards or replaces source condition",
+          "value": "decimateSoulFire"
+        },
+        {
+          "path": "player.rotation.groups.0.actions.1.action.castSpell",
+          "reason": "Spell or item action omitted",
+          "value": {
+            "itemId": 250937,
+            "tag": 0,
+            "rank": 0
+          }
+        },
+        {
+          "path": "player.rotation.valueVariables.2.value",
+          "reason": "Comparison translator conflates strict/inclusive bounds; min uses AND even for less-than",
+          "value": "OpLe"
+        },
+        {
+          "path": "player.rotation.groups.Boosts",
+          "reason": "Unsupported grouped action: {\"itemId\":250937,\"tag\":0,\"rank\":0}",
+          "value": {
+            "itemId": 250937,
+            "tag": 0,
+            "rank": 0
+          }
+        },
+        {
+          "path": "fixture.inputComparison",
+          "reason": "Source capture status: blocked; resolvedConfig is produced by ordinary import"
+        }
+      ],
+      "compilation": [],
+      "fixtureOverrides": [
+        {
+          "key": "race",
+          "value": "HUMAN"
+        },
+        {
+          "key": "swordEquipped",
+          "value": false
+        },
+        {
+          "key": "racialPolicy",
+          "value": "execute"
+        },
+        {
+          "key": "targetIsBeast",
+          "value": false
+        },
+        {
+          "key": "maxHealth",
+          "value": 4084
+        },
+        {
+          "key": "statsIncludeBase",
+          "value": true
+        },
+        {
+          "key": "duration",
+          "value": 180
+        },
+        {
+          "key": "iterations",
+          "value": 4096
+        },
+        {
+          "key": "seed",
+          "value": 42
+        },
+        {
+          "key": "rotation",
+          "value": "shadow"
+        },
+        {
+          "key": "spellPower",
+          "value": 560
+        },
+        {
+          "key": "shadowPower",
+          "value": 0
+        },
+        {
+          "key": "firePower",
+          "value": 0
+        },
+        {
+          "key": "intellect",
+          "value": 310
+        },
+        {
+          "key": "stamina",
+          "value": 285
+        },
+        {
+          "key": "spirit",
+          "value": 225
+        },
+        {
+          "key": "hit",
+          "value": 13
+        },
+        {
+          "key": "crit",
+          "value": 15
+        },
+        {
+          "key": "mp5",
+          "value": 20
+        },
+        {
+          "key": "distance",
+          "value": 0
+        },
+        {
+          "key": "resistance",
+          "value": 0
+        },
+        {
+          "key": "penetration",
+          "value": 0
+        },
+        {
+          "key": "tapThreshold",
+          "value": 25
+        },
+        {
+          "key": "bossArmor",
+          "value": 3731
+        },
+        {
+          "key": "book",
+          "value": true
+        },
+        {
+          "key": "charges",
+          "value": false
+        },
+        {
+          "key": "partialResists",
+          "value": true
+        },
+        {
+          "key": "piercing",
+          "value": true
+        },
+        {
+          "key": "corruption",
+          "value": true
+        },
+        {
+          "key": "agony",
+          "value": true
+        },
+        {
+          "key": "immolate",
+          "value": true
+        },
+        {
+          "key": "instantCorruption",
+          "value": false
+        },
+        {
+          "key": "nightfall",
+          "value": false
+        },
+        {
+          "key": "isb",
+          "value": true
+        },
+        {
+          "key": "ruin",
+          "value": true
+        },
+        {
+          "key": "improvedTap",
+          "value": false
+        },
+        {
+          "key": "amplifyCurse",
+          "value": false
+        },
+        {
+          "key": "demonicPact",
+          "value": true
+        },
+        {
+          "key": "demonicSacrifice",
+          "value": true
+        },
+        {
+          "key": "felDomination",
+          "value": false
+        },
+        {
+          "key": "masterSummoner",
+          "value": 2
+        },
+        {
+          "key": "soulLink",
+          "value": true
+        },
+        {
+          "key": "sacImp",
+          "value": true
+        },
+        {
+          "key": "sacSucc",
+          "value": false
+        },
+        {
+          "key": "masterDemo",
+          "value": 5
+        },
+        {
+          "key": "petChoice",
+          "value": "succubus"
+        },
+        {
+          "key": "trinketSP",
+          "value": 0
+        },
+        {
+          "key": "trinketDuration",
+          "value": 20
+        },
+        {
+          "key": "trinketCD",
+          "value": 120
+        },
+        {
+          "key": "shadowMultiplier",
+          "value": 1.433245
+        },
+        {
+          "key": "fireMultiplier",
+          "value": 1.1330000000000002
+        },
+        {
+          "key": "tapBonus",
+          "value": 0
+        },
+        {
+          "key": "nightfallChance",
+          "value": 0
+        },
+        {
+          "key": "isbBonus",
+          "value": 0.2
+        },
+        {
+          "key": "ruinRank",
+          "value": 5
+        },
+        {
+          "key": "shadowMasteryBonus",
+          "value": 0
+        },
+        {
+          "key": "improvedCorruptionBonus",
+          "value": 0.02
+        },
+        {
+          "key": "conflagrate",
+          "value": false
+        },
+        {
+          "key": "shadowburn",
+          "value": false
+        },
+        {
+          "key": "curseOfDoom",
+          "value": true
+        },
+        {
+          "key": "incinerate",
+          "value": false
+        },
+        {
+          "key": "decimation",
+          "value": true
+        },
+        {
+          "key": "decimationSearing",
+          "value": false
+        },
+        {
+          "key": "demonicBrand",
+          "value": true
+        },
+        {
+          "key": "demonicBrandRank",
+          "value": 3
+        },
+        {
+          "key": "baneRank",
+          "value": 5
+        },
+        {
+          "key": "decimationRank",
+          "value": 2
+        },
+        {
+          "key": "siphonLife",
+          "value": false
+        },
+        {
+          "key": "drainHope",
+          "value": false
+        },
+        {
+          "key": "malevolence",
+          "value": 0
+        },
+        {
+          "key": "afBonus",
+          "value": 0.1
+        },
+        {
+          "key": "aftermathBonus",
+          "value": 0
+        },
+        {
+          "key": "cataclysmCostMult",
+          "value": 1
+        },
+        {
+          "key": "improvedAgonyBonus",
+          "value": 0
+        },
+        {
+          "key": "felVitalityBonus",
+          "value": 0.15000000000000002
+        },
+        {
+          "key": "maledictionBonus",
+          "value": 0
+        },
+        {
+          "key": "improvedDrainsBonus",
+          "value": 0
+        },
+        {
+          "key": "soulSiphonBonus",
+          "value": 0
+        },
+        {
+          "key": "demonicEnergies",
+          "value": 2
+        },
+        {
+          "key": "demonicKnowledge",
+          "value": 3
+        },
+        {
+          "key": "targetSpellMultiplier",
+          "value": 1.1
+        },
+        {
+          "key": "snfChance",
+          "value": 0
+        },
+        {
+          "key": "snfBonus",
+          "value": 0
+        },
+        {
+          "key": "dotCrit",
+          "value": 1.5
+        },
+        {
+          "key": "fnbCrit",
+          "value": 0
+        },
+        {
+          "key": "petMult",
+          "value": 1
+        },
+        {
+          "key": "petFireboltMult",
+          "value": 1.2463000000000002
+        },
+        {
+          "key": "petMeleeMult",
+          "value": 1.1330000000000002
+        },
+        {
+          "key": "petLashMult",
+          "value": 1.5862000000000003
+        },
+        {
+          "key": "brandMult",
+          "value": 1.2463000000000002
+        },
+        {
+          "key": "corrMultiplier",
+          "value": 1.4619099000000002
+        },
+        {
+          "key": "aplRules",
+          "value": [
+            {
+              "action": 7,
+              "cond": 5,
+              "param": 0,
+              "targetSpell": 22,
+              "cond1": 5,
+              "param1": 0,
+              "targetSpell1": 22,
+              "cond2": 6,
+              "param2": 60,
+              "targetSpell2": 0,
+              "enabled": 1
+            },
+            {
+              "action": 5,
+              "cond": 11,
+              "param": 0,
+              "targetSpell": 0,
+              "cond1": 11,
+              "param1": 0,
+              "targetSpell1": 0,
+              "cond2": 0,
+              "param2": 0,
+              "targetSpell2": 0,
+              "enabled": 1
+            },
+            {
+              "action": 8,
+              "cond": 5,
+              "param": 0,
+              "targetSpell": 2,
+              "cond1": 5,
+              "param1": 0,
+              "targetSpell1": 2,
+              "cond2": 22,
+              "param2": 60,
+              "targetSpell2": 0,
+              "enabled": 1
+            },
+            {
+              "action": 9,
+              "cond": 5,
+              "param": 0,
+              "targetSpell": 3,
+              "cond1": 5,
+              "param1": 0,
+              "targetSpell1": 3,
+              "cond2": 0,
+              "param2": 0,
+              "targetSpell2": 0,
+              "enabled": 1
+            },
+            {
+              "action": 1,
+              "cond": 24,
+              "param": 160,
+              "targetSpell": 0,
+              "cond1": 24,
+              "param1": 160,
+              "targetSpell1": 0,
+              "cond2": 0,
+              "param2": 0,
+              "targetSpell2": 0,
+              "enabled": 1
+            },
+            {
+              "action": 4,
+              "cond": 9,
+              "param": 35,
+              "targetSpell": 13,
+              "cond1": 9,
+              "param1": 35,
+              "targetSpell1": 13,
+              "cond2": 0,
+              "param2": 0,
+              "targetSpell2": 0,
+              "enabled": 1
+            },
+            {
+              "action": 6,
+              "cond": 5,
+              "param": 0,
+              "targetSpell": 1,
+              "cond1": 5,
+              "param1": 0,
+              "targetSpell1": 1,
+              "cond2": 0,
+              "param2": 0,
+              "targetSpell2": 0,
+              "enabled": 1
+            },
+            {
+              "action": 16,
+              "cond": 0,
+              "param": 0,
+              "targetSpell": 0,
+              "cond1": 0,
+              "param1": 0,
+              "targetSpell1": 0,
+              "cond2": 0,
+              "param2": 0,
+              "targetSpell2": 0,
+              "enabled": 1
+            },
+            {
+              "action": 1,
+              "cond": 0,
+              "param": 0,
+              "targetSpell": 0,
+              "cond1": 0,
+              "param1": 0,
+              "targetSpell1": 0,
+              "cond2": 0,
+              "param2": 0,
+              "targetSpell2": 0,
+              "enabled": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "destro",
+      "source": "/home/aaron-ma/yazpads_warlock_sim/fixtures/canonical_forever/destro.fixture.json#sourceBuild",
+      "candidate": {
+        "schemaVersion": 1,
+        "classId": "warlock",
+        "candidateId": "forever-imported",
+        "importDiagnostics": [
+          {
+            "groupPath": [
+              "Boosts"
+            ],
+            "action": {
+              "itemId": 250937,
+              "tag": 0,
+              "rank": 0
+            },
+            "condition": {
+              "and": {
+                "vals": [
+                  {
+                    "uuid": null,
+                    "or": {
+                      "vals": [
+                        {
+                          "uuid": null,
+                          "and": {
+                            "vals": [
+                              {
+                                "uuid": null,
+                                "dotIsActive": {
+                                  "targetUnit": null,
+                                  "spellId": {
+                                    "spellId": 603,
+                                    "tag": 0,
+                                    "rank": 0
+                                  }
+                                }
+                              },
+                              {
+                                "uuid": null,
+                                "cmp": {
+                                  "op": "OpLe",
+                                  "lhs": {
+                                    "uuid": null,
+                                    "dotRemainingTime": {
+                                      "targetUnit": null,
+                                      "spellId": {
+                                        "spellId": 603,
+                                        "tag": 0,
+                                        "rank": 0
+                                      }
+                                    }
+                                  },
+                                  "rhs": {
+                                    "uuid": null,
+                                    "const": {
+                                      "val": "14s"
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "uuid": null,
+                          "and": {
+                            "vals": [
+                              {
+                                "uuid": null,
+                                "not": {
+                                  "val": {
+                                    "uuid": null,
+                                    "dotIsActive": {
+                                      "targetUnit": null,
+                                      "spellId": {
+                                        "spellId": 603,
+                                        "tag": 0,
+                                        "rank": 0
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              {
+                                "uuid": null,
+                                "cmp": {
+                                  "op": "OpLt",
+                                  "lhs": {
+                                    "uuid": null,
+                                    "remainingTime": {}
+                                  },
+                                  "rhs": {
+                                    "uuid": null,
+                                    "const": {
+                                      "val": "60s"
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            "reason": "Unsupported grouped action: {\"itemId\":250937,\"tag\":0,\"rank\":0}"
+          }
+        ],
+        "encounter": {
+          "duration": 180,
+          "distance": 0,
+          "target": {
+            "level": 63,
+            "bossArmor": 3731,
+            "resistance": 0
+          }
+        },
+        "stats": {
+          "swordEquipped": false,
+          "spellPower": 500,
+          "shadowPower": 0,
+          "firePower": 0,
+          "intellect": 200,
+          "stamina": 220,
+          "spirit": 100,
+          "hit": 12,
+          "crit": 15,
+          "mp5": 20,
+          "penetration": 0
+        },
+        "equipment": {
+          "mode": "direct",
+          "items": {}
+        },
+        "buffs": {
+          "curseOfElements": true
+        },
+        "talents": {
+          "affliction": {
+            "improved_life_tap": 2,
+            "suppression": 5,
+            "improved_corruption": 3,
+            "amplify_curse": 1,
+            "pandemic": 3
+          },
+          "demonology": {
+            "unholy_power": 4
+          },
+          "destruction": {
+            "bane": 5,
+            "cataclysm": 3,
+            "aftermath": 5,
+            "ruin": 5,
+            "shadowburn": 1,
+            "agonizing_flames": 3,
+            "conflagrate": 1,
+            "bane_of_havoc": 1,
+            "fire_and_brimstone": 3,
+            "shadow_and_flame": 5,
+            "incinerate": 1
+          }
+        },
+        "apl": {
+          "kind": "text",
+          "text": "bloodFury if target.debuff_remains(\"Bane of Doom\") > 0 && target.debuff_remains(\"Bane of Doom\") <= 14\nbloodFury if target.debuff_remains(\"Bane of Doom\") <= 0 && target_ttd < 60\nBane of Doom if target.debuff_remains(\"Bane of Doom\") <= 0 && target_ttd >= 60\nBane of Agony if target.debuff_remains(\"Bane of Agony\") <= 0 && target_ttd < 60\nImmolate if target.debuff_remains(\"Immolate\") <= 0\nCorruption if target.debuff_remains(\"Corruption\") <= 0\nconflag\nshadowburn\nincinerate\nLife Tap"
+        },
+        "classOptions": {
+          "race": "GNOME",
+          "pet": "succubus",
+          "sacrifice": "none",
+          "rotation": "shadow"
+        },
+        "channelClipDelayMs": 50,
+        "book": true,
+        "trinketSP": 0,
+        "trinketDuration": 20,
+        "trinketCD": 120
+      },
+      "issues": [
+        {
+          "path": "player.warlock.options.classOptions.curseOptions",
+          "reason": "Not mapped by bridge; combat relevance needs review",
+          "value": "NoCurse"
+        },
+        {
+          "path": "player.warlock.options.classOptions.soulShards",
+          "reason": "Not mapped by bridge; combat relevance needs review",
+          "value": 32
+        },
+        {
+          "path": "encounter",
+          "reason": "Source encounter ignored; bridge supplies 180s / level 63 / armor 3731 / resistance 0",
+          "value": {
+            "apiVersion": 0,
+            "duration": 180,
+            "durationVariation": 0,
+            "executeProportion20": 0.2,
+            "executeProportion25": 0.25,
+            "executeProportion35": 0.35,
+            "executeProportion45": 0.45,
+            "executeProportion90": 0.9,
+            "useHealth": false,
+            "targets": [
+              {
+                "id": 0,
+                "name": "",
+                "level": 63,
+                "mobType": "MobTypeMechanical",
+                "creatureFamily": "CreatureFamilyUnknown",
+                "stats": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  320,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  3731,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "minBaseDamage": 2601,
+                "damageSpread": 0.5,
+                "swingSpeed": 2,
+                "dualWield": false,
+                "dualWieldPenalty": false,
+                "parryHaste": true,
+                "suppressDodge": false,
+                "canCrush": true,
+                "spellSchool": "SpellSchoolPhysical",
+                "tankIndex": 0,
+                "secondTankIndex": 0,
+                "disabledAtStart": false,
+                "targetInputs": []
+              }
+            ],
+            "areaTypes": [],
+            "zoneId": 0
+          }
+        },
+        {
+          "path": "player.profession1",
+          "reason": "Player setting not mapped",
+          "value": "Engineering"
+        },
+        {
+          "path": "player.profession2",
+          "reason": "Player setting not mapped",
+          "value": "ProfessionUnknown"
+        },
+        {
+          "path": "player.bonusStats",
+          "reason": "Player setting not mapped",
+          "value": {
+            "apiVersion": 0,
+            "stats": [
+              0,
+              0,
+              220,
+              200,
+              0,
+              500,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              100,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              20,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "pseudoStats": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              12,
+              0,
+              15,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "path": "player.reactionTimeMs",
+          "reason": "Player setting not mapped",
+          "value": 100
+        },
+        {
+          "path": "player.rotation.priorityList.0.action",
+          "reason": "Automatic cooldown action omitted"
+        },
+        {
+          "path": "player.rotation.priorityList.2.action.condition.and.vals.1",
+          "reason": "Comparison translator conflates strict/inclusive bounds; min uses AND even for less-than",
+          "value": "OpGe"
+        },
+        {
+          "path": "player.rotation.priorityList.3.action.condition",
+          "reason": "AND translation may retain only two predicates"
+        },
+        {
+          "path": "player.rotation.priorityList.3.action.condition.and.vals.2",
+          "reason": "Comparison translator conflates strict/inclusive bounds; min uses AND even for less-than",
+          "value": "OpLt"
+        },
+        {
+          "path": "player.rotation.priorityList.4.action",
+          "reason": "Assigned curse action omitted; uptime/GCD/mana not preserved"
+        },
+        {
+          "path": "player.rotation.priorityList.7.action",
+          "reason": "Action-specific rewrite discards or replaces source condition",
+          "value": "conflag"
+        },
+        {
+          "path": "player.rotation.priorityList.7.action.condition",
+          "reason": "Positive DoT predicate replaced by true or Immolate < 6s",
+          "value": {
+            "targetUnit": null,
+            "spellId": {
+              "spellId": 25309,
+              "tag": 0,
+              "rank": 0
+            }
+          }
+        },
+        {
+          "path": "player.rotation.groups.0.actions.1.action.castSpell",
+          "reason": "Spell or item action omitted",
+          "value": {
+            "itemId": 250937,
+            "tag": 0,
+            "rank": 0
+          }
+        },
+        {
+          "path": "player.rotation.groups.Boosts",
+          "reason": "Unsupported grouped action: {\"itemId\":250937,\"tag\":0,\"rank\":0}",
+          "value": {
+            "itemId": 250937,
+            "tag": 0,
+            "rank": 0
+          }
+        },
+        {
+          "path": "fixture.inputComparison",
+          "reason": "Source capture status: blocked; resolvedConfig is produced by ordinary import"
+        }
+      ],
+      "compilation": [],
+      "fixtureOverrides": [
+        {
+          "key": "race",
+          "value": "GNOME"
+        },
+        {
+          "key": "swordEquipped",
+          "value": false
+        },
+        {
+          "key": "racialPolicy",
+          "value": "execute"
+        },
+        {
+          "key": "targetIsBeast",
+          "value": false
+        },
+        {
+          "key": "maxHealth",
+          "value": 4074
+        },
+        {
+          "key": "statsIncludeBase",
+          "value": true
+        },
+        {
+          "key": "duration",
+          "value": 180
+        },
+        {
+          "key": "iterations",
+          "value": 4096
+        },
+        {
+          "key": "seed",
+          "value": 42
+        },
+        {
+          "key": "rotation",
+          "value": "shadow"
+        },
+        {
+          "key": "spellPower",
+          "value": 500
+        },
+        {
+          "key": "shadowPower",
+          "value": 0
+        },
+        {
+          "key": "firePower",
+          "value": 0
+        },
+        {
+          "key": "intellect",
+          "value": 313
+        },
+        {
+          "key": "stamina",
+          "value": 284
+        },
+        {
+          "key": "spirit",
+          "value": 215
+        },
+        {
+          "key": "hit",
+          "value": 17
+        },
+        {
+          "key": "crit",
+          "value": 15
+        },
+        {
+          "key": "mp5",
+          "value": 20
+        },
+        {
+          "key": "distance",
+          "value": 0
+        },
+        {
+          "key": "resistance",
+          "value": 0
+        },
+        {
+          "key": "penetration",
+          "value": 0
+        },
+        {
+          "key": "tapThreshold",
+          "value": 25
+        },
+        {
+          "key": "bossArmor",
+          "value": 3731
+        },
+        {
+          "key": "book",
+          "value": true
+        },
+        {
+          "key": "charges",
+          "value": false
+        },
+        {
+          "key": "partialResists",
+          "value": true
+        },
+        {
+          "key": "piercing",
+          "value": true
+        },
+        {
+          "key": "corruption",
+          "value": true
+        },
+        {
+          "key": "agony",
+          "value": true
+        },
+        {
+          "key": "immolate",
+          "value": true
+        },
+        {
+          "key": "instantCorruption",
+          "value": false
+        },
+        {
+          "key": "nightfall",
+          "value": false
+        },
+        {
+          "key": "isb",
+          "value": false
+        },
+        {
+          "key": "ruin",
+          "value": true
+        },
+        {
+          "key": "improvedTap",
+          "value": true
+        },
+        {
+          "key": "amplifyCurse",
+          "value": true
+        },
+        {
+          "key": "demonicPact",
+          "value": false
+        },
+        {
+          "key": "demonicSacrifice",
+          "value": false
+        },
+        {
+          "key": "felDomination",
+          "value": false
+        },
+        {
+          "key": "masterSummoner",
+          "value": 0
+        },
+        {
+          "key": "soulLink",
+          "value": false
+        },
+        {
+          "key": "sacImp",
+          "value": false
+        },
+        {
+          "key": "sacSucc",
+          "value": false
+        },
+        {
+          "key": "masterDemo",
+          "value": 0
+        },
+        {
+          "key": "petChoice",
+          "value": "succubus"
+        },
+        {
+          "key": "trinketSP",
+          "value": 0
+        },
+        {
+          "key": "trinketDuration",
+          "value": 20
+        },
+        {
+          "key": "trinketCD",
+          "value": 120
+        },
+        {
+          "key": "shadowMultiplier",
+          "value": 1.1
+        },
+        {
+          "key": "fireMultiplier",
+          "value": 1.1
+        },
+        {
+          "key": "tapBonus",
+          "value": 0.2
+        },
+        {
+          "key": "nightfallChance",
+          "value": 0
+        },
+        {
+          "key": "isbBonus",
+          "value": 0
+        },
+        {
+          "key": "ruinRank",
+          "value": 5
+        },
+        {
+          "key": "shadowMasteryBonus",
+          "value": 0
+        },
+        {
+          "key": "improvedCorruptionBonus",
+          "value": 0.06
+        },
+        {
+          "key": "conflagrate",
+          "value": true
+        },
+        {
+          "key": "shadowburn",
+          "value": true
+        },
+        {
+          "key": "curseOfDoom",
+          "value": true
+        },
+        {
+          "key": "incinerate",
+          "value": true
+        },
+        {
+          "key": "decimation",
+          "value": false
+        },
+        {
+          "key": "decimationSearing",
+          "value": false
+        },
+        {
+          "key": "demonicBrand",
+          "value": false
+        },
+        {
+          "key": "demonicBrandRank",
+          "value": 0
+        },
+        {
+          "key": "baneRank",
+          "value": 5
+        },
+        {
+          "key": "decimationRank",
+          "value": 0
+        },
+        {
+          "key": "siphonLife",
+          "value": false
+        },
+        {
+          "key": "drainHope",
+          "value": false
+        },
+        {
+          "key": "malevolence",
+          "value": 0
+        },
+        {
+          "key": "afBonus",
+          "value": 0.1
+        },
+        {
+          "key": "aftermathBonus",
+          "value": 0.5
+        },
+        {
+          "key": "cataclysmCostMult",
+          "value": 0.9
+        },
+        {
+          "key": "improvedAgonyBonus",
+          "value": 0
+        },
+        {
+          "key": "felVitalityBonus",
+          "value": 0
+        },
+        {
+          "key": "maledictionBonus",
+          "value": 0
+        },
+        {
+          "key": "improvedDrainsBonus",
+          "value": 0
+        },
+        {
+          "key": "soulSiphonBonus",
+          "value": 0
+        },
+        {
+          "key": "demonicEnergies",
+          "value": 0
+        },
+        {
+          "key": "demonicKnowledge",
+          "value": 0
+        },
+        {
+          "key": "targetSpellMultiplier",
+          "value": 1.1
+        },
+        {
+          "key": "snfChance",
+          "value": 1
+        },
+        {
+          "key": "snfBonus",
+          "value": 0.1
+        },
+        {
+          "key": "dotCrit",
+          "value": 2
+        },
+        {
+          "key": "fnbCrit",
+          "value": 25
+        },
+        {
+          "key": "petMult",
+          "value": 1
+        },
+        {
+          "key": "petFireboltMult",
+          "value": 1.08
+        },
+        {
+          "key": "petMeleeMult",
+          "value": 1.08
+        },
+        {
+          "key": "petLashMult",
+          "value": 1.08
+        },
+        {
+          "key": "brandMult",
+          "value": 1.08
+        },
+        {
+          "key": "corrMultiplier",
+          "value": 1.1660000000000001
+        },
+        {
+          "key": "aplRules",
+          "value": [
+            {
+              "action": 7,
+              "cond": 5,
+              "param": 0,
+              "targetSpell": 22,
+              "cond1": 5,
+              "param1": 0,
+              "targetSpell1": 22,
+              "cond2": 6,
+              "param2": 60,
+              "targetSpell2": 0,
+              "enabled": 1
+            },
+            {
+              "action": 8,
+              "cond": 5,
+              "param": 0,
+              "targetSpell": 2,
+              "cond1": 5,
+              "param1": 0,
+              "targetSpell1": 2,
+              "cond2": 22,
+              "param2": 60,
+              "targetSpell2": 0,
+              "enabled": 1
+            },
+            {
+              "action": 9,
+              "cond": 5,
+              "param": 0,
+              "targetSpell": 3,
+              "cond1": 5,
+              "param1": 0,
+              "targetSpell1": 3,
+              "cond2": 0,
+              "param2": 0,
+              "targetSpell2": 0,
+              "enabled": 1
+            },
+            {
+              "action": 6,
+              "cond": 5,
+              "param": 0,
+              "targetSpell": 1,
+              "cond1": 5,
+              "param1": 0,
+              "targetSpell1": 1,
+              "cond2": 0,
+              "param2": 0,
+              "targetSpell2": 0,
+              "enabled": 1
+            },
+            {
+              "action": 10,
+              "cond": 0,
+              "param": 0,
+              "targetSpell": 0,
+              "cond1": 0,
+              "param1": 0,
+              "targetSpell1": 0,
+              "cond2": 0,
+              "param2": 0,
+              "targetSpell2": 0,
+              "enabled": 1
+            },
+            {
+              "action": 11,
+              "cond": 0,
+              "param": 0,
+              "targetSpell": 0,
+              "cond1": 0,
+              "param1": 0,
+              "targetSpell1": 0,
+              "cond2": 0,
+              "param2": 0,
+              "targetSpell2": 0,
+              "enabled": 1
+            },
+            {
+              "action": 12,
+              "cond": 0,
+              "param": 0,
+              "targetSpell": 0,
+              "cond1": 0,
+              "param1": 0,
+              "targetSpell1": 0,
+              "cond2": 0,
+              "param2": 0,
+              "targetSpell2": 0,
+              "enabled": 1
+            },
+            {
+              "action": 1,
+              "cond": 0,
+              "param": 0,
+              "targetSpell": 0,
+              "cond1": 0,
+              "param1": 0,
+              "targetSpell1": 0,
+              "cond2": 0,
+              "param2": 0,
+              "targetSpell2": 0,
+              "enabled": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sm_ruin",
+      "source": "/home/aaron-ma/yazpads_warlock_sim/fixtures/canonical_forever/sm_ruin.fixture.json#sourceBuild",
+      "candidate": {
+        "schemaVersion": 1,
+        "classId": "warlock",
+        "candidateId": "forever-imported",
+        "importDiagnostics": [
+          {
+            "groupPath": [
+              "Boosts"
+            ],
+            "action": {
+              "itemId": 250937,
+              "tag": 0,
+              "rank": 0
+            },
+            "condition": {
+              "and": {
+                "vals": [
+                  {
+                    "uuid": null,
+                    "or": {
+                      "vals": [
+                        {
+                          "uuid": null,
+                          "and": {
+                            "vals": [
+                              {
+                                "uuid": null,
+                                "dotIsActive": {
+                                  "targetUnit": null,
+                                  "spellId": {
+                                    "spellId": 603,
+                                    "tag": 0,
+                                    "rank": 0
+                                  }
+                                }
+                              },
+                              {
+                                "uuid": null,
+                                "cmp": {
+                                  "op": "OpLe",
+                                  "lhs": {
+                                    "uuid": null,
+                                    "dotRemainingTime": {
+                                      "targetUnit": null,
+                                      "spellId": {
+                                        "spellId": 603,
+                                        "tag": 0,
+                                        "rank": 0
+                                      }
+                                    }
+                                  },
+                                  "rhs": {
+                                    "uuid": null,
+                                    "const": {
+                                      "val": "14s"
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "uuid": null,
+                          "and": {
+                            "vals": [
+                              {
+                                "uuid": null,
+                                "not": {
+                                  "val": {
+                                    "uuid": null,
+                                    "dotIsActive": {
+                                      "targetUnit": null,
+                                      "spellId": {
+                                        "spellId": 603,
+                                        "tag": 0,
+                                        "rank": 0
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              {
+                                "uuid": null,
+                                "cmp": {
+                                  "op": "OpLt",
+                                  "lhs": {
+                                    "uuid": null,
+                                    "remainingTime": {}
+                                  },
+                                  "rhs": {
+                                    "uuid": null,
+                                    "const": {
+                                      "val": "60s"
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            "reason": "Unsupported grouped action: {\"itemId\":250937,\"tag\":0,\"rank\":0}"
+          }
+        ],
+        "encounter": {
+          "duration": 180,
+          "distance": 0,
+          "target": {
+            "level": 63,
+            "bossArmor": 3731,
+            "resistance": 0
+          }
+        },
+        "stats": {
+          "swordEquipped": false,
+          "spellPower": 500,
+          "shadowPower": 0,
+          "firePower": 0,
+          "intellect": 200,
+          "stamina": 220,
+          "spirit": 100,
+          "hit": 12,
+          "crit": 15,
+          "mp5": 20,
+          "penetration": 0
+        },
+        "equipment": {
+          "mode": "direct",
+          "items": {}
+        },
+        "buffs": {
+          "curseOfElements": true
+        },
+        "talents": {
+          "affliction": {
+            "improved_life_tap": 2,
+            "suppression": 5,
+            "improved_corruption": 4,
+            "improved_bane_of_agony": 2,
+            "amplify_curse": 1,
+            "pandemic": 3,
+            "malevolence": 5,
+            "nightfall": 2,
+            "siphon_life": 1,
+            "shadow_mastery": 5
+          },
+          "demonology": {},
+          "destruction": {
+            "improved_shadow_bolt": 5,
+            "bane": 5,
+            "cataclysm": 3,
+            "ruin": 5,
+            "agonizing_flames": 3
+          }
+        },
+        "apl": {
+          "kind": "text",
+          "text": "bloodFury if target.debuff_remains(\"Bane of Doom\") > 0 && target.debuff_remains(\"Bane of Doom\") <= 14\nbloodFury if target.debuff_remains(\"Bane of Doom\") <= 0 && target_ttd < 60\nAmplify Curse if target.debuff_remains(\"Bane of Agony\") <= 0 && target_ttd < 60 && !buff.amplify_curse\nBane of Doom if target.debuff_remains(\"Bane of Doom\") <= 0 && target_ttd >= 60\nBane of Agony if target.debuff_remains(\"Bane of Agony\") <= 0 && target_ttd < 60\nCorruption if target.debuff_remains(\"Corruption\") <= 0\nNightfall: Shadow Bolt if buff.shadow_trance\nSiphon Life if target.debuff_remains(\"Siphon Life\") <= 0\nImmolate if target.debuff_remains(\"Immolate\") <= 0\nbolt\nLife Tap"
+        },
+        "classOptions": {
+          "race": "HUMAN",
+          "pet": "succubus",
+          "sacrifice": "none",
+          "rotation": "shadow"
+        },
+        "channelClipDelayMs": 50,
+        "book": true,
+        "trinketSP": 0,
+        "trinketDuration": 20,
+        "trinketCD": 120
+      },
+      "issues": [
+        {
+          "path": "player.warlock.options.classOptions.curseOptions",
+          "reason": "Not mapped by bridge; combat relevance needs review",
+          "value": "NoCurse"
+        },
+        {
+          "path": "player.warlock.options.classOptions.soulShards",
+          "reason": "Not mapped by bridge; combat relevance needs review",
+          "value": 32
+        },
+        {
+          "path": "encounter",
+          "reason": "Source encounter ignored; bridge supplies 180s / level 63 / armor 3731 / resistance 0",
+          "value": {
+            "apiVersion": 0,
+            "duration": 180,
+            "durationVariation": 0,
+            "executeProportion20": 0.2,
+            "executeProportion25": 0.25,
+            "executeProportion35": 0.35,
+            "executeProportion45": 0.45,
+            "executeProportion90": 0.9,
+            "useHealth": false,
+            "targets": [
+              {
+                "id": 0,
+                "name": "",
+                "level": 63,
+                "mobType": "MobTypeMechanical",
+                "creatureFamily": "CreatureFamilyUnknown",
+                "stats": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  320,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  3731,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "minBaseDamage": 2601,
+                "damageSpread": 0.5,
+                "swingSpeed": 2,
+                "dualWield": false,
+                "dualWieldPenalty": false,
+                "parryHaste": true,
+                "suppressDodge": false,
+                "canCrush": true,
+                "spellSchool": "SpellSchoolPhysical",
+                "tankIndex": 0,
+                "secondTankIndex": 0,
+                "disabledAtStart": false,
+                "targetInputs": []
+              }
+            ],
+            "areaTypes": [],
+            "zoneId": 0
+          }
+        },
+        {
+          "path": "player.profession1",
+          "reason": "Player setting not mapped",
+          "value": "Engineering"
+        },
+        {
+          "path": "player.profession2",
+          "reason": "Player setting not mapped",
+          "value": "ProfessionUnknown"
+        },
+        {
+          "path": "player.bonusStats",
+          "reason": "Player setting not mapped",
+          "value": {
+            "apiVersion": 0,
+            "stats": [
+              0,
+              0,
+              220,
+              200,
+              0,
+              500,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              100,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              20,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "pseudoStats": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              12,
+              0,
+              15,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "path": "player.reactionTimeMs",
+          "reason": "Player setting not mapped",
+          "value": 100
+        },
+        {
+          "path": "player.rotation.priorityList.0.action",
+          "reason": "Automatic cooldown action omitted"
+        },
+        {
+          "path": "player.rotation.priorityList.2.action.castSpell",
+          "reason": "Amplify Curse mapped to Agony rather than independent cooldown"
+        },
+        {
+          "path": "player.rotation.priorityList.3.action.condition.and.vals.1",
+          "reason": "Comparison translator conflates strict/inclusive bounds; min uses AND even for less-than",
+          "value": "OpGe"
+        },
+        {
+          "path": "player.rotation.priorityList.8.action",
+          "reason": "Assigned curse action omitted; uptime/GCD/mana not preserved"
+        },
+        {
+          "path": "player.rotation.groups.0.actions.1.action.castSpell",
+          "reason": "Spell or item action omitted",
+          "value": {
+            "itemId": 250937,
+            "tag": 0,
+            "rank": 0
+          }
+        },
+        {
+          "path": "player.rotation.valueVariables.2.value",
+          "reason": "AND translation may retain only two predicates"
+        },
+        {
+          "path": "player.rotation.valueVariables.2.value.and.vals.2",
+          "reason": "Comparison translator conflates strict/inclusive bounds; min uses AND even for less-than",
+          "value": "OpLt"
+        },
+        {
+          "path": "player.rotation.groups.Boosts",
+          "reason": "Unsupported grouped action: {\"itemId\":250937,\"tag\":0,\"rank\":0}",
+          "value": {
+            "itemId": 250937,
+            "tag": 0,
+            "rank": 0
+          }
+        },
+        {
+          "path": "fixture.inputComparison",
+          "reason": "Source capture status: blocked; resolvedConfig is produced by ordinary import"
+        }
+      ],
+      "compilation": [],
+      "fixtureOverrides": [
+        {
+          "key": "race",
+          "value": "HUMAN"
+        },
+        {
+          "key": "swordEquipped",
+          "value": false
+        },
+        {
+          "key": "racialPolicy",
+          "value": "execute"
+        },
+        {
+          "key": "targetIsBeast",
+          "value": false
+        },
+        {
+          "key": "maxHealth",
+          "value": 4084
+        },
+        {
+          "key": "statsIncludeBase",
+          "value": true
+        },
+        {
+          "key": "duration",
+          "value": 180
+        },
+        {
+          "key": "iterations",
+          "value": 4096
+        },
+        {
+          "key": "seed",
+          "value": 42
+        },
+        {
+          "key": "rotation",
+          "value": "shadow"
+        },
+        {
+          "key": "spellPower",
+          "value": 500
+        },
+        {
+          "key": "shadowPower",
+          "value": 0
+        },
+        {
+          "key": "firePower",
+          "value": 0
+        },
+        {
+          "key": "intellect",
+          "value": 310
+        },
+        {
+          "key": "stamina",
+          "value": 285
+        },
+        {
+          "key": "spirit",
+          "value": 225
+        },
+        {
+          "key": "hit",
+          "value": 17
+        },
+        {
+          "key": "crit",
+          "value": 15
+        },
+        {
+          "key": "mp5",
+          "value": 20
+        },
+        {
+          "key": "distance",
+          "value": 0
+        },
+        {
+          "key": "resistance",
+          "value": 0
+        },
+        {
+          "key": "penetration",
+          "value": 0
+        },
+        {
+          "key": "tapThreshold",
+          "value": 25
+        },
+        {
+          "key": "bossArmor",
+          "value": 3731
+        },
+        {
+          "key": "book",
+          "value": true
+        },
+        {
+          "key": "charges",
+          "value": false
+        },
+        {
+          "key": "partialResists",
+          "value": true
+        },
+        {
+          "key": "piercing",
+          "value": true
+        },
+        {
+          "key": "corruption",
+          "value": true
+        },
+        {
+          "key": "agony",
+          "value": true
+        },
+        {
+          "key": "immolate",
+          "value": true
+        },
+        {
+          "key": "instantCorruption",
+          "value": false
+        },
+        {
+          "key": "nightfall",
+          "value": true
+        },
+        {
+          "key": "isb",
+          "value": true
+        },
+        {
+          "key": "ruin",
+          "value": true
+        },
+        {
+          "key": "improvedTap",
+          "value": true
+        },
+        {
+          "key": "amplifyCurse",
+          "value": true
+        },
+        {
+          "key": "demonicPact",
+          "value": false
+        },
+        {
+          "key": "demonicSacrifice",
+          "value": false
+        },
+        {
+          "key": "felDomination",
+          "value": false
+        },
+        {
+          "key": "masterSummoner",
+          "value": 0
+        },
+        {
+          "key": "soulLink",
+          "value": false
+        },
+        {
+          "key": "sacImp",
+          "value": false
+        },
+        {
+          "key": "sacSucc",
+          "value": false
+        },
+        {
+          "key": "masterDemo",
+          "value": 0
+        },
+        {
+          "key": "petChoice",
+          "value": "succubus"
+        },
+        {
+          "key": "trinketSP",
+          "value": 0
+        },
+        {
+          "key": "trinketDuration",
+          "value": 20
+        },
+        {
+          "key": "trinketCD",
+          "value": 120
+        },
+        {
+          "key": "shadowMultiplier",
+          "value": 1.1
+        },
+        {
+          "key": "fireMultiplier",
+          "value": 1.1
+        },
+        {
+          "key": "tapBonus",
+          "value": 0.2
+        },
+        {
+          "key": "nightfallChance",
+          "value": 0.04
+        },
+        {
+          "key": "isbBonus",
+          "value": 0.2
+        },
+        {
+          "key": "ruinRank",
+          "value": 5
+        },
+        {
+          "key": "shadowMasteryBonus",
+          "value": 0.1
+        },
+        {
+          "key": "improvedCorruptionBonus",
+          "value": 0.08
+        },
+        {
+          "key": "conflagrate",
+          "value": false
+        },
+        {
+          "key": "shadowburn",
+          "value": false
+        },
+        {
+          "key": "curseOfDoom",
+          "value": true
+        },
+        {
+          "key": "incinerate",
+          "value": false
+        },
+        {
+          "key": "decimation",
+          "value": false
+        },
+        {
+          "key": "decimationSearing",
+          "value": false
+        },
+        {
+          "key": "demonicBrand",
+          "value": false
+        },
+        {
+          "key": "demonicBrandRank",
+          "value": 0
+        },
+        {
+          "key": "baneRank",
+          "value": 5
+        },
+        {
+          "key": "decimationRank",
+          "value": 0
+        },
+        {
+          "key": "siphonLife",
+          "value": true
+        },
+        {
+          "key": "drainHope",
+          "value": false
+        },
+        {
+          "key": "malevolence",
+          "value": 5
+        },
+        {
+          "key": "afBonus",
+          "value": 0.1
+        },
+        {
+          "key": "aftermathBonus",
+          "value": 0
+        },
+        {
+          "key": "cataclysmCostMult",
+          "value": 0.9
+        },
+        {
+          "key": "improvedAgonyBonus",
+          "value": 0.1
+        },
+        {
+          "key": "felVitalityBonus",
+          "value": 0
+        },
+        {
+          "key": "maledictionBonus",
+          "value": 0
+        },
+        {
+          "key": "improvedDrainsBonus",
+          "value": 0
+        },
+        {
+          "key": "soulSiphonBonus",
+          "value": 0
+        },
+        {
+          "key": "demonicEnergies",
+          "value": 0
+        },
+        {
+          "key": "demonicKnowledge",
+          "value": 0
+        },
+        {
+          "key": "targetSpellMultiplier",
+          "value": 1.1
+        },
+        {
+          "key": "snfChance",
+          "value": 0
+        },
+        {
+          "key": "snfBonus",
+          "value": 0
+        },
+        {
+          "key": "dotCrit",
+          "value": 2
+        },
+        {
+          "key": "fnbCrit",
+          "value": 0
+        },
+        {
+          "key": "petMult",
+          "value": 1
+        },
+        {
+          "key": "petFireboltMult",
+          "value": 1
+        },
+        {
+          "key": "petMeleeMult",
+          "value": 1
+        },
+        {
+          "key": "petLashMult",
+          "value": 1
+        },
+        {
+          "key": "brandMult",
+          "value": 1
+        },
+        {
+          "key": "corrMultiplier",
+          "value": 1.2980000000000003
+        },
+        {
+          "key": "aplRules",
+          "value": [
+            {
+              "action": 24,
+              "cond": 5,
+              "param": 0,
+              "targetSpell": 2,
+              "cond1": 5,
+              "param1": 0,
+              "targetSpell1": 2,
+              "cond2": 22,
+              "param2": 60,
+              "targetSpell2": 0,
+              "enabled": 1
+            },
+            {
+              "action": 7,
+              "cond": 5,
+              "param": 0,
+              "targetSpell": 22,
+              "cond1": 5,
+              "param1": 0,
+              "targetSpell1": 22,
+              "cond2": 6,
+              "param2": 60,
+              "targetSpell2": 0,
+              "enabled": 1
+            },
+            {
+              "action": 8,
+              "cond": 5,
+              "param": 0,
+              "targetSpell": 2,
+              "cond1": 5,
+              "param1": 0,
+              "targetSpell1": 2,
+              "cond2": 22,
+              "param2": 60,
+              "targetSpell2": 0,
+              "enabled": 1
+            },
+            {
+              "action": 6,
+              "cond": 5,
+              "param": 0,
+              "targetSpell": 1,
+              "cond1": 5,
+              "param1": 0,
+              "targetSpell1": 1,
+              "cond2": 0,
+              "param2": 0,
+              "targetSpell2": 0,
+              "enabled": 1
+            },
+            {
+              "action": 2,
+              "cond": 8,
+              "param": 0,
+              "targetSpell": 0,
+              "cond1": 8,
+              "param1": 0,
+              "targetSpell1": 0,
+              "cond2": 0,
+              "param2": 0,
+              "targetSpell2": 0,
+              "enabled": 1
+            },
+            {
+              "action": 17,
+              "cond": 5,
+              "param": 0,
+              "targetSpell": 15,
+              "cond1": 5,
+              "param1": 0,
+              "targetSpell1": 15,
+              "cond2": 0,
+              "param2": 0,
+              "targetSpell2": 0,
+              "enabled": 1
+            },
+            {
+              "action": 9,
+              "cond": 5,
+              "param": 0,
+              "targetSpell": 3,
+              "cond1": 5,
+              "param1": 0,
+              "targetSpell1": 3,
+              "cond2": 0,
+              "param2": 0,
+              "targetSpell2": 0,
+              "enabled": 1
+            },
+            {
+              "action": 16,
+              "cond": 0,
+              "param": 0,
+              "targetSpell": 0,
+              "cond1": 0,
+              "param1": 0,
+              "targetSpell1": 0,
+              "cond2": 0,
+              "param2": 0,
+              "targetSpell2": 0,
+              "enabled": 1
+            },
+            {
+              "action": 1,
+              "cond": 0,
+              "param": 0,
+              "targetSpell": 0,
+              "cond1": 0,
+              "param1": 0,
+              "targetSpell1": 0,
+              "cond2": 0,
+              "param2": 0,
+              "targetSpell2": 0,
+              "enabled": 1
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

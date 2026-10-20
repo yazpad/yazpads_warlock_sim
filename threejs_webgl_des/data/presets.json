@@ -30,7 +30,21 @@
         "cataclysm": 3
       }
     },
-    "rotation": "Demonology Shadow - Corruption + Bane + Demonic Brand + SB"
+    "rotation": "Demonology Shadow - Corruption + Bane + Demonic Brand + SB",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 2,
@@ -63,7 +77,21 @@
         "cataclysm": 3
       }
     },
-    "rotation": "Demonology Shadow - Corruption + Bane + Demonic Brand + SB"
+    "rotation": "Demonology Shadow - Corruption + Bane + Demonic Brand + SB",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 3,
@@ -96,7 +124,21 @@
         "cataclysm": 3
       }
     },
-    "rotation": "Demonology Shadow - Corruption + Bane + Demonic Brand + SB"
+    "rotation": "Demonology Shadow - Corruption + Bane + Demonic Brand + SB",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 4,
@@ -129,7 +171,21 @@
         "cataclysm": 3
       }
     },
-    "rotation": "Demonology Shadow - Corruption + Bane + Demonic Brand + SB"
+    "rotation": "Demonology Shadow - Corruption + Bane + Demonic Brand + SB",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 5,
@@ -162,7 +218,21 @@
         "cataclysm": 3
       }
     },
-    "rotation": "Demonology Shadow - Corruption + Bane + Demonic Brand + SB"
+    "rotation": "Demonology Shadow - Corruption + Bane + Demonic Brand + SB",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 6,
@@ -196,7 +266,21 @@
         "incinerate": 1
       }
     },
-    "rotation": "Fire Destro - Incinerate + Conflag"
+    "rotation": "Fire Destro - Incinerate + Conflag",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 7,
@@ -230,7 +314,21 @@
         "incinerate": 1
       }
     },
-    "rotation": "Fire Destro - Incinerate + Conflag"
+    "rotation": "Fire Destro - Incinerate + Conflag",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 8,
@@ -264,7 +362,21 @@
         "incinerate": 1
       }
     },
-    "rotation": "Fire Destro - Incinerate + Conflag"
+    "rotation": "Fire Destro - Incinerate + Conflag",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 9,
@@ -298,7 +410,21 @@
         "incinerate": 1
       }
     },
-    "rotation": "Fire Destro - Incinerate + Conflag"
+    "rotation": "Fire Destro - Incinerate + Conflag",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 10,
@@ -332,7 +458,21 @@
         "incinerate": 1
       }
     },
-    "rotation": "Fire Destro - Incinerate + Conflag"
+    "rotation": "Fire Destro - Incinerate + Conflag",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 11,
@@ -364,7 +504,21 @@
         "bane": 5
       }
     },
-    "rotation": "Demonology Shadow - Corruption + Bane + SB"
+    "rotation": "Demonology Shadow - Corruption + Bane + SB",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 12,
@@ -396,7 +550,21 @@
         "bane": 5
       }
     },
-    "rotation": "Demonology Shadow - Corruption + Bane + SB"
+    "rotation": "Demonology Shadow - Corruption + Bane + SB",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 13,
@@ -428,7 +596,21 @@
         "bane": 5
       }
     },
-    "rotation": "Demonology Shadow - Corruption + Bane + SB"
+    "rotation": "Demonology Shadow - Corruption + Bane + SB",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 14,
@@ -460,7 +642,21 @@
         "bane": 5
       }
     },
-    "rotation": "Demonology Shadow - Corruption + Bane + SB"
+    "rotation": "Demonology Shadow - Corruption + Bane + SB",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 15,
@@ -492,7 +688,21 @@
         "bane": 5
       }
     },
-    "rotation": "Demonology Shadow - Corruption + Bane + SB"
+    "rotation": "Demonology Shadow - Corruption + Bane + SB",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 16,
@@ -522,7 +732,21 @@
         "agonizing_flames": 3
       }
     },
-    "rotation": "Demonology Shadow - Corruption + Bane + SB"
+    "rotation": "Demonology Shadow - Corruption + Bane + SB",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 17,
@@ -552,7 +776,21 @@
         "agonizing_flames": 3
       }
     },
-    "rotation": "Demonology Shadow - Corruption + Bane + SB"
+    "rotation": "Demonology Shadow - Corruption + Bane + SB",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 18,
@@ -582,7 +820,21 @@
         "agonizing_flames": 3
       }
     },
-    "rotation": "Demonology Shadow - Corruption + Bane + SB"
+    "rotation": "Demonology Shadow - Corruption + Bane + SB",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 19,
@@ -612,7 +864,21 @@
         "agonizing_flames": 3
       }
     },
-    "rotation": "Demonology Shadow - Corruption + Bane + SB"
+    "rotation": "Demonology Shadow - Corruption + Bane + SB",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 20,
@@ -642,7 +908,21 @@
         "agonizing_flames": 3
       }
     },
-    "rotation": "Demonology Shadow - Corruption + Bane + SB"
+    "rotation": "Demonology Shadow - Corruption + Bane + SB",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 21,
@@ -672,7 +952,21 @@
         "agonizing_flames": 3
       }
     },
-    "rotation": "Demonology Shadow - Corruption + Bane + SB"
+    "rotation": "Demonology Shadow - Corruption + Bane + SB",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 22,
@@ -702,7 +996,21 @@
         "agonizing_flames": 3
       }
     },
-    "rotation": "Demonology Shadow - Corruption + Bane + SB"
+    "rotation": "Demonology Shadow - Corruption + Bane + SB",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 23,
@@ -732,7 +1040,21 @@
         "agonizing_flames": 3
       }
     },
-    "rotation": "Demonology Shadow - Corruption + Bane + SB"
+    "rotation": "Demonology Shadow - Corruption + Bane + SB",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 24,
@@ -762,7 +1084,21 @@
         "agonizing_flames": 3
       }
     },
-    "rotation": "Demonology Shadow - Corruption + Bane + SB"
+    "rotation": "Demonology Shadow - Corruption + Bane + SB",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 25,
@@ -792,7 +1128,21 @@
         "agonizing_flames": 3
       }
     },
-    "rotation": "Demonology Shadow - Corruption + Bane + SB"
+    "rotation": "Demonology Shadow - Corruption + Bane + SB",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 26,
@@ -823,7 +1173,21 @@
         "incinerate": 1
       }
     },
-    "rotation": "Shadow & Flame Fire - Incinerate + Conflag + Bane"
+    "rotation": "Shadow & Flame Fire - Incinerate + Conflag + Bane",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 27,
@@ -854,7 +1218,21 @@
         "incinerate": 1
       }
     },
-    "rotation": "Shadow & Flame Fire - Incinerate + Conflag + Bane"
+    "rotation": "Shadow & Flame Fire - Incinerate + Conflag + Bane",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 28,
@@ -885,7 +1263,21 @@
         "incinerate": 1
       }
     },
-    "rotation": "Shadow & Flame Fire - Incinerate + Conflag + Bane"
+    "rotation": "Shadow & Flame Fire - Incinerate + Conflag + Bane",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 29,
@@ -916,7 +1308,21 @@
         "incinerate": 1
       }
     },
-    "rotation": "Shadow & Flame Fire - Incinerate + Conflag + Bane"
+    "rotation": "Shadow & Flame Fire - Incinerate + Conflag + Bane",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 30,
@@ -947,7 +1353,21 @@
         "incinerate": 1
       }
     },
-    "rotation": "Shadow & Flame Fire - Incinerate + Conflag + Bane"
+    "rotation": "Shadow & Flame Fire - Incinerate + Conflag + Bane",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 31,
@@ -977,7 +1397,21 @@
         "shadow_and_flame": 5
       }
     },
-    "rotation": "Shadow Destro - Conflag Weave"
+    "rotation": "Shadow Destro - Conflag Weave",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 32,
@@ -1007,7 +1441,21 @@
         "shadow_and_flame": 5
       }
     },
-    "rotation": "Shadow Destro - Conflag Weave"
+    "rotation": "Shadow Destro - Conflag Weave",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 33,
@@ -1037,7 +1485,21 @@
         "shadow_and_flame": 5
       }
     },
-    "rotation": "Shadow Destro - Conflag Weave"
+    "rotation": "Shadow Destro - Conflag Weave",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 34,
@@ -1067,7 +1529,21 @@
         "shadow_and_flame": 5
       }
     },
-    "rotation": "Shadow Destro - Conflag Weave"
+    "rotation": "Shadow Destro - Conflag Weave",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 35,
@@ -1097,7 +1573,21 @@
         "shadow_and_flame": 5
       }
     },
-    "rotation": "Shadow Destro - Conflag Weave"
+    "rotation": "Shadow Destro - Conflag Weave",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 36,
@@ -1128,7 +1618,21 @@
         "incinerate": 1
       }
     },
-    "rotation": "Shadow & Flame Fire - Incinerate + Conflag + Bane"
+    "rotation": "Shadow & Flame Fire - Incinerate + Conflag + Bane",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 37,
@@ -1159,7 +1663,21 @@
         "incinerate": 1
       }
     },
-    "rotation": "Shadow & Flame Fire - Incinerate + Conflag + Bane"
+    "rotation": "Shadow & Flame Fire - Incinerate + Conflag + Bane",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 38,
@@ -1190,7 +1708,21 @@
         "incinerate": 1
       }
     },
-    "rotation": "Shadow & Flame Fire - Incinerate + Conflag + Bane"
+    "rotation": "Shadow & Flame Fire - Incinerate + Conflag + Bane",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 39,
@@ -1221,7 +1753,21 @@
         "incinerate": 1
       }
     },
-    "rotation": "Shadow & Flame Fire - Incinerate + Conflag + Bane"
+    "rotation": "Shadow & Flame Fire - Incinerate + Conflag + Bane",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 40,
@@ -1252,7 +1798,21 @@
         "incinerate": 1
       }
     },
-    "rotation": "Shadow & Flame Fire - Incinerate + Conflag + Bane"
+    "rotation": "Shadow & Flame Fire - Incinerate + Conflag + Bane",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 41,
@@ -1283,7 +1843,21 @@
         "incinerate": 1
       }
     },
-    "rotation": "Fire Destro - Incinerate + Conflag"
+    "rotation": "Fire Destro - Incinerate + Conflag",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 42,
@@ -1314,7 +1888,21 @@
         "incinerate": 1
       }
     },
-    "rotation": "Fire Destro - Incinerate + Conflag"
+    "rotation": "Fire Destro - Incinerate + Conflag",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 43,
@@ -1345,7 +1933,21 @@
         "incinerate": 1
       }
     },
-    "rotation": "Fire Destro - Incinerate + Conflag"
+    "rotation": "Fire Destro - Incinerate + Conflag",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 44,
@@ -1376,7 +1978,21 @@
         "incinerate": 1
       }
     },
-    "rotation": "Fire Destro - Incinerate + Conflag"
+    "rotation": "Fire Destro - Incinerate + Conflag",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 45,
@@ -1407,7 +2023,21 @@
         "incinerate": 1
       }
     },
-    "rotation": "Fire Destro - Incinerate + Conflag"
+    "rotation": "Fire Destro - Incinerate + Conflag",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 46,
@@ -1437,7 +2067,21 @@
         "shadow_and_flame": 5
       }
     },
-    "rotation": "Shadow Destro - Conflag Weave + Decimation"
+    "rotation": "Shadow Destro - Conflag Weave + Decimation",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 47,
@@ -1467,7 +2111,21 @@
         "shadow_and_flame": 5
       }
     },
-    "rotation": "Shadow Destro - Conflag Weave + Decimation"
+    "rotation": "Shadow Destro - Conflag Weave + Decimation",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 48,
@@ -1497,7 +2155,21 @@
         "shadow_and_flame": 5
       }
     },
-    "rotation": "Shadow Destro - Conflag Weave + Decimation"
+    "rotation": "Shadow Destro - Conflag Weave + Decimation",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 49,
@@ -1527,7 +2199,21 @@
         "shadow_and_flame": 5
       }
     },
-    "rotation": "Shadow Destro - Conflag Weave + Decimation"
+    "rotation": "Shadow Destro - Conflag Weave + Decimation",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 50,
@@ -1557,7 +2243,21 @@
         "shadow_and_flame": 5
       }
     },
-    "rotation": "Shadow Destro - Conflag Weave + Decimation"
+    "rotation": "Shadow Destro - Conflag Weave + Decimation",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 51,
@@ -1587,7 +2287,21 @@
         "shadow_and_flame": 5
       }
     },
-    "rotation": "Fire Destro - Incinerate + Conflag"
+    "rotation": "Fire Destro - Incinerate + Conflag",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 52,
@@ -1617,7 +2331,21 @@
         "shadow_and_flame": 5
       }
     },
-    "rotation": "Fire Destro - Incinerate + Conflag"
+    "rotation": "Fire Destro - Incinerate + Conflag",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 53,
@@ -1647,7 +2375,21 @@
         "shadow_and_flame": 5
       }
     },
-    "rotation": "Fire Destro - Incinerate + Conflag"
+    "rotation": "Fire Destro - Incinerate + Conflag",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 54,
@@ -1677,7 +2419,21 @@
         "shadow_and_flame": 5
       }
     },
-    "rotation": "Fire Destro - Incinerate + Conflag"
+    "rotation": "Fire Destro - Incinerate + Conflag",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 55,
@@ -1707,7 +2463,21 @@
         "shadow_and_flame": 5
       }
     },
-    "rotation": "Fire Destro - Incinerate + Conflag"
+    "rotation": "Fire Destro - Incinerate + Conflag",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 56,
@@ -1739,7 +2509,21 @@
         "incinerate": 1
       }
     },
-    "rotation": "Fire Destro - Incinerate + Conflag"
+    "rotation": "Fire Destro - Incinerate + Conflag",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 57,
@@ -1771,7 +2555,21 @@
         "incinerate": 1
       }
     },
-    "rotation": "Fire Destro - Incinerate + Conflag"
+    "rotation": "Fire Destro - Incinerate + Conflag",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 58,
@@ -1803,7 +2601,21 @@
         "incinerate": 1
       }
     },
-    "rotation": "Fire Destro - Incinerate + Conflag"
+    "rotation": "Fire Destro - Incinerate + Conflag",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 59,
@@ -1835,7 +2647,21 @@
         "incinerate": 1
       }
     },
-    "rotation": "Fire Destro - Incinerate + Conflag"
+    "rotation": "Fire Destro - Incinerate + Conflag",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 60,
@@ -1867,7 +2693,21 @@
         "incinerate": 1
       }
     },
-    "rotation": "Fire Destro - Incinerate + Conflag"
+    "rotation": "Fire Destro - Incinerate + Conflag",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 61,
@@ -1898,7 +2738,21 @@
         "shadow_and_flame": 5
       }
     },
-    "rotation": "Shadow Destro - Conflag Weave + Decimation"
+    "rotation": "Shadow Destro - Conflag Weave + Decimation",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 62,
@@ -1929,7 +2783,21 @@
         "shadow_and_flame": 5
       }
     },
-    "rotation": "Shadow Destro - Conflag Weave + Decimation"
+    "rotation": "Shadow Destro - Conflag Weave + Decimation",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 63,
@@ -1960,7 +2828,21 @@
         "shadow_and_flame": 5
       }
     },
-    "rotation": "Shadow Destro - Conflag Weave + Decimation"
+    "rotation": "Shadow Destro - Conflag Weave + Decimation",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 64,
@@ -1991,7 +2873,21 @@
         "shadow_and_flame": 5
       }
     },
-    "rotation": "Shadow Destro - Conflag Weave + Decimation"
+    "rotation": "Shadow Destro - Conflag Weave + Decimation",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 65,
@@ -2022,7 +2918,21 @@
         "shadow_and_flame": 5
       }
     },
-    "rotation": "Shadow Destro - Conflag Weave + Decimation"
+    "rotation": "Shadow Destro - Conflag Weave + Decimation",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 66,
@@ -2053,7 +2963,21 @@
         "conflagrate": 1
       }
     },
-    "rotation": "Demonology Fire - Searing Pain"
+    "rotation": "Demonology Fire - Searing Pain",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 67,
@@ -2084,7 +3008,21 @@
         "conflagrate": 1
       }
     },
-    "rotation": "Demonology Fire - Searing Pain"
+    "rotation": "Demonology Fire - Searing Pain",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 68,
@@ -2115,7 +3053,21 @@
         "conflagrate": 1
       }
     },
-    "rotation": "Demonology Fire - Searing Pain"
+    "rotation": "Demonology Fire - Searing Pain",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 69,
@@ -2146,7 +3098,21 @@
         "conflagrate": 1
       }
     },
-    "rotation": "Demonology Fire - Searing Pain"
+    "rotation": "Demonology Fire - Searing Pain",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 70,
@@ -2177,7 +3143,21 @@
         "conflagrate": 1
       }
     },
-    "rotation": "Demonology Fire - Searing Pain"
+    "rotation": "Demonology Fire - Searing Pain",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 71,
@@ -2208,7 +3188,21 @@
         "incinerate": 1
       }
     },
-    "rotation": "Fire Destro - Incinerate + Conflag (No Corruption)"
+    "rotation": "Fire Destro - Incinerate + Conflag (No Corruption)",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 72,
@@ -2239,7 +3233,21 @@
         "incinerate": 1
       }
     },
-    "rotation": "Fire Destro - Incinerate + Conflag (No Corruption)"
+    "rotation": "Fire Destro - Incinerate + Conflag (No Corruption)",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 73,
@@ -2270,7 +3278,21 @@
         "incinerate": 1
       }
     },
-    "rotation": "Fire Destro - Incinerate + Conflag (No Corruption)"
+    "rotation": "Fire Destro - Incinerate + Conflag (No Corruption)",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 74,
@@ -2301,7 +3323,21 @@
         "incinerate": 1
       }
     },
-    "rotation": "Fire Destro - Incinerate + Conflag (No Corruption)"
+    "rotation": "Fire Destro - Incinerate + Conflag (No Corruption)",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 75,
@@ -2332,7 +3368,21 @@
         "incinerate": 1
       }
     },
-    "rotation": "Fire Destro - Incinerate + Conflag (No Corruption)"
+    "rotation": "Fire Destro - Incinerate + Conflag (No Corruption)",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 76,
@@ -2360,7 +3410,21 @@
         "agonizing_flames": 3
       }
     },
-    "rotation": "Shadow Mastery - DoTs + SB"
+    "rotation": "Shadow Mastery - DoTs + SB",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 77,
@@ -2388,7 +3452,21 @@
         "agonizing_flames": 3
       }
     },
-    "rotation": "Shadow Mastery - DoTs + SB"
+    "rotation": "Shadow Mastery - DoTs + SB",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 78,
@@ -2416,7 +3494,21 @@
         "agonizing_flames": 3
       }
     },
-    "rotation": "Shadow Mastery - DoTs + SB"
+    "rotation": "Shadow Mastery - DoTs + SB",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 79,
@@ -2444,7 +3536,21 @@
         "agonizing_flames": 3
       }
     },
-    "rotation": "Shadow Mastery - DoTs + SB"
+    "rotation": "Shadow Mastery - DoTs + SB",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 80,
@@ -2472,7 +3578,21 @@
         "agonizing_flames": 3
       }
     },
-    "rotation": "Shadow Mastery - DoTs + SB"
+    "rotation": "Shadow Mastery - DoTs + SB",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 81,
@@ -2503,7 +3623,21 @@
         "agonizing_flames": 3
       }
     },
-    "rotation": "Shadow Destro - Conflag Weave + Decimation"
+    "rotation": "Shadow Destro - Conflag Weave + Decimation",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 82,
@@ -2534,7 +3668,21 @@
         "agonizing_flames": 3
       }
     },
-    "rotation": "Shadow Destro - Conflag Weave + Decimation"
+    "rotation": "Shadow Destro - Conflag Weave + Decimation",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 83,
@@ -2565,7 +3713,21 @@
         "agonizing_flames": 3
       }
     },
-    "rotation": "Shadow Destro - Conflag Weave + Decimation"
+    "rotation": "Shadow Destro - Conflag Weave + Decimation",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 84,
@@ -2596,7 +3758,21 @@
         "agonizing_flames": 3
       }
     },
-    "rotation": "Shadow Destro - Conflag Weave + Decimation"
+    "rotation": "Shadow Destro - Conflag Weave + Decimation",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 85,
@@ -2627,7 +3803,21 @@
         "agonizing_flames": 3
       }
     },
-    "rotation": "Shadow Destro - Conflag Weave + Decimation"
+    "rotation": "Shadow Destro - Conflag Weave + Decimation",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 86,
@@ -2638,24 +3828,42 @@
         "improved_life_tap": 2,
         "suppression": 5,
         "improved_corruption": 5,
-        "grim_reach": 2,
-        "soul_harvesting": 2,
-        "improved_drains": 1,
+        "grim_reach": 1,
+        "improved_bane_of_agony": 2,
+        "amplify_curse": 1,
         "pandemic": 3,
         "malevolence": 5,
         "nightfall": 2,
+        "siphon_life": 1,
         "shadow_mastery": 5
       },
       "demonology": {},
       "destruction": {
         "improved_shadow_bolt": 5,
         "bane": 5,
+        "aftermath": 1,
         "ruin": 5,
-        "shadowburn": 1,
         "agonizing_flames": 3
       }
     },
-    "rotation": "Shadow Mastery - DoTs + SB"
+    "rotation": "Shadow Mastery - DoTs + SB",
+    "pet": "succubus",
+    "sac": "none",
+    "aplText": "berserking\nimmolate if target_ttd >= 12 && target.debuff_remains(\"Immolate\") <= 0\ncorruption if target_ttd >= 12 && target.debuff_remains(\"Corruption\") <= 0\nsiphon_life if target.debuff_remains(\"Siphon Life\") <= 0 && target_ttd >= 12\neureka\nbane_of_doom if target_ttd >= 60 && !target.has_debuff(\"Bane of Doom\")\nblood_fury\nnightfall if buff.shadow_trance\namplify_curse if !target.has_debuff(\"Bane of Doom\") && target.debuff_remains(\"Bane of Agony\") <= 0\nbane_of_agony if !target.has_debuff(\"Bane of Doom\") && target.debuff_remains(\"Bane of Agony\") <= 0\nshadow_bolt\nsearing_pain\nlife_tap if mana_remaining <= 20%\nhellfire if target_ttd >= 15s",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 87,
@@ -2666,24 +3874,42 @@
         "improved_life_tap": 2,
         "suppression": 5,
         "improved_corruption": 5,
-        "grim_reach": 2,
-        "soul_harvesting": 2,
-        "improved_drains": 1,
+        "grim_reach": 1,
+        "improved_bane_of_agony": 2,
+        "amplify_curse": 1,
         "pandemic": 3,
         "malevolence": 5,
         "nightfall": 2,
+        "siphon_life": 1,
         "shadow_mastery": 5
       },
       "demonology": {},
       "destruction": {
         "improved_shadow_bolt": 5,
         "bane": 5,
+        "aftermath": 1,
         "ruin": 5,
-        "shadowburn": 1,
         "agonizing_flames": 3
       }
     },
-    "rotation": "Shadow Mastery - DoTs + SB"
+    "rotation": "Shadow Mastery - DoTs + SB",
+    "pet": "succubus",
+    "sac": "none",
+    "aplText": "berserking\nimmolate if target_ttd >= 12 && target.debuff_remains(\"Immolate\") <= 0\ncorruption if target_ttd >= 12 && target.debuff_remains(\"Corruption\") <= 0\nsiphon_life if target.debuff_remains(\"Siphon Life\") <= 0 && target_ttd >= 12\neureka\nbane_of_doom if target_ttd >= 60 && !target.has_debuff(\"Bane of Doom\")\nblood_fury\nnightfall if buff.shadow_trance\namplify_curse if !target.has_debuff(\"Bane of Doom\") && target.debuff_remains(\"Bane of Agony\") <= 0\nbane_of_agony if !target.has_debuff(\"Bane of Doom\") && target.debuff_remains(\"Bane of Agony\") <= 0\nshadow_bolt\nsearing_pain\nlife_tap if mana_remaining <= 20%\nhellfire if target_ttd >= 15s",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 88,
@@ -2694,24 +3920,42 @@
         "improved_life_tap": 2,
         "suppression": 5,
         "improved_corruption": 5,
-        "grim_reach": 2,
-        "soul_harvesting": 2,
-        "improved_drains": 1,
+        "grim_reach": 1,
+        "improved_bane_of_agony": 2,
+        "amplify_curse": 1,
         "pandemic": 3,
         "malevolence": 5,
         "nightfall": 2,
+        "siphon_life": 1,
         "shadow_mastery": 5
       },
       "demonology": {},
       "destruction": {
         "improved_shadow_bolt": 5,
         "bane": 5,
+        "aftermath": 1,
         "ruin": 5,
-        "shadowburn": 1,
         "agonizing_flames": 3
       }
     },
-    "rotation": "Shadow Mastery - DoTs + SB"
+    "rotation": "Shadow Mastery - DoTs + SB",
+    "pet": "succubus",
+    "sac": "none",
+    "aplText": "berserking\nimmolate if target_ttd >= 12 && target.debuff_remains(\"Immolate\") <= 0\ncorruption if target_ttd >= 12 && target.debuff_remains(\"Corruption\") <= 0\nsiphon_life if target.debuff_remains(\"Siphon Life\") <= 0 && target_ttd >= 12\neureka\nbane_of_doom if target_ttd >= 60 && !target.has_debuff(\"Bane of Doom\")\nblood_fury\nnightfall if buff.shadow_trance\namplify_curse if !target.has_debuff(\"Bane of Doom\") && target.debuff_remains(\"Bane of Agony\") <= 0\nbane_of_agony if !target.has_debuff(\"Bane of Doom\") && target.debuff_remains(\"Bane of Agony\") <= 0\nshadow_bolt\nsearing_pain\nlife_tap if mana_remaining <= 20%\nhellfire if target_ttd >= 15s",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 89,
@@ -2722,24 +3966,42 @@
         "improved_life_tap": 2,
         "suppression": 5,
         "improved_corruption": 5,
-        "grim_reach": 2,
-        "soul_harvesting": 2,
-        "improved_drains": 1,
+        "grim_reach": 1,
+        "improved_bane_of_agony": 2,
+        "amplify_curse": 1,
         "pandemic": 3,
         "malevolence": 5,
         "nightfall": 2,
+        "siphon_life": 1,
         "shadow_mastery": 5
       },
       "demonology": {},
       "destruction": {
         "improved_shadow_bolt": 5,
         "bane": 5,
+        "aftermath": 1,
         "ruin": 5,
-        "shadowburn": 1,
         "agonizing_flames": 3
       }
     },
-    "rotation": "Shadow Mastery - DoTs + SB"
+    "rotation": "Shadow Mastery - DoTs + SB",
+    "pet": "succubus",
+    "sac": "none",
+    "aplText": "berserking\nimmolate if target_ttd >= 12 && target.debuff_remains(\"Immolate\") <= 0\ncorruption if target_ttd >= 12 && target.debuff_remains(\"Corruption\") <= 0\nsiphon_life if target.debuff_remains(\"Siphon Life\") <= 0 && target_ttd >= 12\neureka\nbane_of_doom if target_ttd >= 60 && !target.has_debuff(\"Bane of Doom\")\nblood_fury\nnightfall if buff.shadow_trance\namplify_curse if !target.has_debuff(\"Bane of Doom\") && target.debuff_remains(\"Bane of Agony\") <= 0\nbane_of_agony if !target.has_debuff(\"Bane of Doom\") && target.debuff_remains(\"Bane of Agony\") <= 0\nshadow_bolt\nsearing_pain\nlife_tap if mana_remaining <= 20%\nhellfire if target_ttd >= 15s",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 90,
@@ -2750,24 +4012,42 @@
         "improved_life_tap": 2,
         "suppression": 5,
         "improved_corruption": 5,
-        "grim_reach": 2,
-        "soul_harvesting": 2,
-        "improved_drains": 1,
+        "grim_reach": 1,
+        "improved_bane_of_agony": 2,
+        "amplify_curse": 1,
         "pandemic": 3,
         "malevolence": 5,
         "nightfall": 2,
+        "siphon_life": 1,
         "shadow_mastery": 5
       },
       "demonology": {},
       "destruction": {
         "improved_shadow_bolt": 5,
         "bane": 5,
+        "aftermath": 1,
         "ruin": 5,
-        "shadowburn": 1,
         "agonizing_flames": 3
       }
     },
-    "rotation": "Shadow Mastery - DoTs + SB"
+    "rotation": "Shadow Mastery - DoTs + SB",
+    "pet": "succubus",
+    "sac": "none",
+    "aplText": "berserking\nimmolate if target_ttd >= 12 && target.debuff_remains(\"Immolate\") <= 0\ncorruption if target_ttd >= 12 && target.debuff_remains(\"Corruption\") <= 0\nsiphon_life if target.debuff_remains(\"Siphon Life\") <= 0 && target_ttd >= 12\neureka\nbane_of_doom if target_ttd >= 60 && !target.has_debuff(\"Bane of Doom\")\nblood_fury\nnightfall if buff.shadow_trance\namplify_curse if !target.has_debuff(\"Bane of Doom\") && target.debuff_remains(\"Bane of Agony\") <= 0\nbane_of_agony if !target.has_debuff(\"Bane of Doom\") && target.debuff_remains(\"Bane of Agony\") <= 0\nshadow_bolt\nsearing_pain\nlife_tap if mana_remaining <= 20%\nhellfire if target_ttd >= 15s",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 91,
@@ -2799,7 +4079,21 @@
       },
       "destruction": {}
     },
-    "rotation": "Deep Affliction - Wrack (SB Filler)"
+    "rotation": "Deep Affliction - Wrack (SB Filler)",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 92,
@@ -2831,7 +4125,21 @@
       },
       "destruction": {}
     },
-    "rotation": "Deep Affliction - Wrack (SB Filler)"
+    "rotation": "Deep Affliction - Wrack (SB Filler)",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 93,
@@ -2863,7 +4171,21 @@
       },
       "destruction": {}
     },
-    "rotation": "Deep Affliction - Wrack (SB Filler)"
+    "rotation": "Deep Affliction - Wrack (SB Filler)",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 94,
@@ -2895,7 +4217,21 @@
       },
       "destruction": {}
     },
-    "rotation": "Deep Affliction - Wrack (SB Filler)"
+    "rotation": "Deep Affliction - Wrack (SB Filler)",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 95,
@@ -2927,7 +4263,21 @@
       },
       "destruction": {}
     },
-    "rotation": "Deep Affliction - Wrack (SB Filler)"
+    "rotation": "Deep Affliction - Wrack (SB Filler)",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 96,
@@ -2961,7 +4311,21 @@
         "incinerate": 1
       }
     },
-    "rotation": "Fire Destro - Incinerate + Conflag (No Corruption)"
+    "rotation": "Fire Destro - Incinerate + Conflag (No Corruption)",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 97,
@@ -2995,7 +4359,21 @@
         "incinerate": 1
       }
     },
-    "rotation": "Fire Destro - Incinerate + Conflag (No Corruption)"
+    "rotation": "Fire Destro - Incinerate + Conflag (No Corruption)",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 98,
@@ -3029,7 +4407,21 @@
         "incinerate": 1
       }
     },
-    "rotation": "Fire Destro - Incinerate + Conflag (No Corruption)"
+    "rotation": "Fire Destro - Incinerate + Conflag (No Corruption)",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 99,
@@ -3063,7 +4455,21 @@
         "incinerate": 1
       }
     },
-    "rotation": "Fire Destro - Incinerate + Conflag (No Corruption)"
+    "rotation": "Fire Destro - Incinerate + Conflag (No Corruption)",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 100,
@@ -3097,7 +4503,21 @@
         "incinerate": 1
       }
     },
-    "rotation": "Fire Destro - Incinerate + Conflag (No Corruption)"
+    "rotation": "Fire Destro - Incinerate + Conflag (No Corruption)",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 101,
@@ -3127,7 +4547,21 @@
         "bane": 5
       }
     },
-    "rotation": "Deep Affliction - Wrack (SB Filler)"
+    "rotation": "Deep Affliction - Wrack (SB Filler)",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 102,
@@ -3157,7 +4591,21 @@
         "bane": 5
       }
     },
-    "rotation": "Deep Affliction - Wrack (SB Filler)"
+    "rotation": "Deep Affliction - Wrack (SB Filler)",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 103,
@@ -3187,7 +4635,21 @@
         "bane": 5
       }
     },
-    "rotation": "Deep Affliction - Wrack (SB Filler)"
+    "rotation": "Deep Affliction - Wrack (SB Filler)",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 104,
@@ -3217,7 +4679,21 @@
         "bane": 5
       }
     },
-    "rotation": "Deep Affliction - Wrack (SB Filler)"
+    "rotation": "Deep Affliction - Wrack (SB Filler)",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 105,
@@ -3247,7 +4723,21 @@
         "bane": 5
       }
     },
-    "rotation": "Deep Affliction - Wrack (SB Filler)"
+    "rotation": "Deep Affliction - Wrack (SB Filler)",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 106,
@@ -3285,7 +4775,21 @@
     "rotation": "Demonology Fire - Searing Pain + Decimation",
     "pet": "imp",
     "sac": "succubus",
-    "aplText": "decimate_soul_fire if decimation.active\nbane_of_doom if target_ttd >= 61s\nsearing_pain if target_hp <= 12%\ndemonic_brand if debuff.demonic_brand_missing\nimmolate if dot_remains(\"Immolate\") <= 1.6s\ncorruption if dot_remains(\"Corruption\") <= 2.1s\nlife_tap if mana_remaining <= 41%\nbane_of_agony if !target.has_debuff(\"Bane of Doom\") && target.debuff_remains(\"Bane of Agony\") <= 0"
+    "aplText": "decimate_soul_fire if decimation.active\nbane_of_doom if target_ttd >= 61s\nsearing_pain if target_hp <= 12%\ndemonic_brand if debuff.demonic_brand_missing\nimmolate if dot_remains(\"Immolate\") <= 1.6s\ncorruption if dot_remains(\"Corruption\") <= 2.1s\nlife_tap if mana_remaining <= 41%\nbane_of_agony if !target.has_debuff(\"Bane of Doom\") && target.debuff_remains(\"Bane of Agony\") <= 0",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 107,
@@ -3323,7 +4827,21 @@
     "rotation": "Demonology Fire - Searing Pain + Decimation",
     "pet": "imp",
     "sac": "succubus",
-    "aplText": "decimate_soul_fire if decimation.active\nbane_of_doom if target_ttd >= 61s\nsearing_pain if target_hp <= 12%\ndemonic_brand if debuff.demonic_brand_missing\nimmolate if dot_remains(\"Immolate\") <= 1.6s\ncorruption if dot_remains(\"Corruption\") <= 2.1s\nlife_tap if mana_remaining <= 41%\nbane_of_agony if !target.has_debuff(\"Bane of Doom\") && target.debuff_remains(\"Bane of Agony\") <= 0"
+    "aplText": "decimate_soul_fire if decimation.active\nbane_of_doom if target_ttd >= 61s\nsearing_pain if target_hp <= 12%\ndemonic_brand if debuff.demonic_brand_missing\nimmolate if dot_remains(\"Immolate\") <= 1.6s\ncorruption if dot_remains(\"Corruption\") <= 2.1s\nlife_tap if mana_remaining <= 41%\nbane_of_agony if !target.has_debuff(\"Bane of Doom\") && target.debuff_remains(\"Bane of Agony\") <= 0",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 108,
@@ -3361,7 +4879,21 @@
     "rotation": "Demonology Fire - Searing Pain + Decimation",
     "pet": "imp",
     "sac": "succubus",
-    "aplText": "decimate_soul_fire if decimation.active\nbane_of_doom if target_ttd >= 61s\nsearing_pain if target_hp <= 12%\ndemonic_brand if debuff.demonic_brand_missing\nimmolate if dot_remains(\"Immolate\") <= 1.6s\ncorruption if dot_remains(\"Corruption\") <= 2.1s\nlife_tap if mana_remaining <= 41%\nbane_of_agony if !target.has_debuff(\"Bane of Doom\") && target.debuff_remains(\"Bane of Agony\") <= 0"
+    "aplText": "decimate_soul_fire if decimation.active\nbane_of_doom if target_ttd >= 61s\nsearing_pain if target_hp <= 12%\ndemonic_brand if debuff.demonic_brand_missing\nimmolate if dot_remains(\"Immolate\") <= 1.6s\ncorruption if dot_remains(\"Corruption\") <= 2.1s\nlife_tap if mana_remaining <= 41%\nbane_of_agony if !target.has_debuff(\"Bane of Doom\") && target.debuff_remains(\"Bane of Agony\") <= 0",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 109,
@@ -3399,7 +4931,21 @@
     "rotation": "Demonology Fire - Searing Pain + Decimation",
     "pet": "imp",
     "sac": "succubus",
-    "aplText": "decimate_soul_fire if decimation.active\nbane_of_doom if target_ttd >= 61s\nsearing_pain if target_hp <= 12%\ndemonic_brand if debuff.demonic_brand_missing\nimmolate if dot_remains(\"Immolate\") <= 1.6s\ncorruption if dot_remains(\"Corruption\") <= 2.1s\nlife_tap if mana_remaining <= 41%\nbane_of_agony if !target.has_debuff(\"Bane of Doom\") && target.debuff_remains(\"Bane of Agony\") <= 0"
+    "aplText": "decimate_soul_fire if decimation.active\nbane_of_doom if target_ttd >= 61s\nsearing_pain if target_hp <= 12%\ndemonic_brand if debuff.demonic_brand_missing\nimmolate if dot_remains(\"Immolate\") <= 1.6s\ncorruption if dot_remains(\"Corruption\") <= 2.1s\nlife_tap if mana_remaining <= 41%\nbane_of_agony if !target.has_debuff(\"Bane of Doom\") && target.debuff_remains(\"Bane of Agony\") <= 0",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 110,
@@ -3437,7 +4983,21 @@
     "rotation": "Demonology Fire - Searing Pain + Decimation",
     "pet": "imp",
     "sac": "succubus",
-    "aplText": "decimate_soul_fire if decimation.active\nbane_of_doom if target_ttd >= 61s\nsearing_pain if target_hp <= 12%\ndemonic_brand if debuff.demonic_brand_missing\nimmolate if dot_remains(\"Immolate\") <= 1.6s\ncorruption if dot_remains(\"Corruption\") <= 2.1s\nlife_tap if mana_remaining <= 41%\nbane_of_agony if !target.has_debuff(\"Bane of Doom\") && target.debuff_remains(\"Bane of Agony\") <= 0"
+    "aplText": "decimate_soul_fire if decimation.active\nbane_of_doom if target_ttd >= 61s\nsearing_pain if target_hp <= 12%\ndemonic_brand if debuff.demonic_brand_missing\nimmolate if dot_remains(\"Immolate\") <= 1.6s\ncorruption if dot_remains(\"Corruption\") <= 2.1s\nlife_tap if mana_remaining <= 41%\nbane_of_agony if !target.has_debuff(\"Bane of Doom\") && target.debuff_remains(\"Bane of Agony\") <= 0",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 111,
@@ -3472,7 +5032,21 @@
       }
     },
     "rotation": "Demonology Fire - Searing Pain + Decimation",
-    "aplText": "bane_of_doom if target_ttd >= 60 && !target.has_debuff(\"Bane of Doom\")\ndemonic_brand if debuff.demonic_brand_missing\ncorruption if target_ttd >= 12 && target.debuff_remains(\"Corruption\") <= 0\nimmolate if target_ttd >= 12 && target.debuff_remains(\"Immolate\") <= 0\nbane_of_agony if !target.has_debuff(\"Bane of Doom\") && target.debuff_remains(\"Bane of Agony\") <= 0\nshadow_bolt\ndecimate_soul_fire if decimation.active\ndecimate_searing if target_hp_pct <= 35 && decimation.inactive\nhellfire if target_ttd >= 15s\nlife_tap if mana_remaining <= 20%\nsearing_pain"
+    "aplText": "bane_of_doom if target_ttd >= 60 && !target.has_debuff(\"Bane of Doom\")\ndemonic_brand if debuff.demonic_brand_missing\ncorruption if target_ttd >= 12 && target.debuff_remains(\"Corruption\") <= 0\nimmolate if target_ttd >= 12 && target.debuff_remains(\"Immolate\") <= 0\nbane_of_agony if !target.has_debuff(\"Bane of Doom\") && target.debuff_remains(\"Bane of Agony\") <= 0\nshadow_bolt\ndecimate_soul_fire if decimation.active\ndecimate_searing if target_hp_pct <= 35 && decimation.inactive\nhellfire if target_ttd >= 15s\nlife_tap if mana_remaining <= 20%\nsearing_pain",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 112,
@@ -3507,7 +5081,21 @@
       }
     },
     "rotation": "Demonology Fire - Searing Pain + Decimation",
-    "aplText": "bane_of_doom if target_ttd >= 60 && !target.has_debuff(\"Bane of Doom\")\ndemonic_brand if debuff.demonic_brand_missing\ncorruption if target_ttd >= 12 && target.debuff_remains(\"Corruption\") <= 0\nimmolate if target_ttd >= 12 && target.debuff_remains(\"Immolate\") <= 0\nbane_of_agony if !target.has_debuff(\"Bane of Doom\") && target.debuff_remains(\"Bane of Agony\") <= 0\nshadow_bolt\ndecimate_soul_fire if decimation.active\ndecimate_searing if target_hp_pct <= 35 && decimation.inactive\nhellfire if target_ttd >= 15s\nlife_tap if mana_remaining <= 20%\nsearing_pain"
+    "aplText": "bane_of_doom if target_ttd >= 60 && !target.has_debuff(\"Bane of Doom\")\ndemonic_brand if debuff.demonic_brand_missing\ncorruption if target_ttd >= 12 && target.debuff_remains(\"Corruption\") <= 0\nimmolate if target_ttd >= 12 && target.debuff_remains(\"Immolate\") <= 0\nbane_of_agony if !target.has_debuff(\"Bane of Doom\") && target.debuff_remains(\"Bane of Agony\") <= 0\nshadow_bolt\ndecimate_soul_fire if decimation.active\ndecimate_searing if target_hp_pct <= 35 && decimation.inactive\nhellfire if target_ttd >= 15s\nlife_tap if mana_remaining <= 20%\nsearing_pain",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 113,
@@ -3542,7 +5130,21 @@
       }
     },
     "rotation": "Demonology Fire - Searing Pain + Decimation",
-    "aplText": "bane_of_doom if target_ttd >= 60 && !target.has_debuff(\"Bane of Doom\")\ndemonic_brand if debuff.demonic_brand_missing\ncorruption if target_ttd >= 12 && target.debuff_remains(\"Corruption\") <= 0\nimmolate if target_ttd >= 12 && target.debuff_remains(\"Immolate\") <= 0\nbane_of_agony if !target.has_debuff(\"Bane of Doom\") && target.debuff_remains(\"Bane of Agony\") <= 0\nshadow_bolt\ndecimate_soul_fire if decimation.active\ndecimate_searing if target_hp_pct <= 35 && decimation.inactive\nhellfire if target_ttd >= 15s\nlife_tap if mana_remaining <= 20%\nsearing_pain"
+    "aplText": "bane_of_doom if target_ttd >= 60 && !target.has_debuff(\"Bane of Doom\")\ndemonic_brand if debuff.demonic_brand_missing\ncorruption if target_ttd >= 12 && target.debuff_remains(\"Corruption\") <= 0\nimmolate if target_ttd >= 12 && target.debuff_remains(\"Immolate\") <= 0\nbane_of_agony if !target.has_debuff(\"Bane of Doom\") && target.debuff_remains(\"Bane of Agony\") <= 0\nshadow_bolt\ndecimate_soul_fire if decimation.active\ndecimate_searing if target_hp_pct <= 35 && decimation.inactive\nhellfire if target_ttd >= 15s\nlife_tap if mana_remaining <= 20%\nsearing_pain",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 114,
@@ -3577,7 +5179,21 @@
       }
     },
     "rotation": "Demonology Fire - Searing Pain + Decimation",
-    "aplText": "bane_of_doom if target_ttd >= 60 && !target.has_debuff(\"Bane of Doom\")\ndemonic_brand if debuff.demonic_brand_missing\ncorruption if target_ttd >= 12 && target.debuff_remains(\"Corruption\") <= 0\nimmolate if target_ttd >= 12 && target.debuff_remains(\"Immolate\") <= 0\nbane_of_agony if !target.has_debuff(\"Bane of Doom\") && target.debuff_remains(\"Bane of Agony\") <= 0\nshadow_bolt\ndecimate_soul_fire if decimation.active\ndecimate_searing if target_hp_pct <= 35 && decimation.inactive\nhellfire if target_ttd >= 15s\nlife_tap if mana_remaining <= 20%\nsearing_pain"
+    "aplText": "bane_of_doom if target_ttd >= 60 && !target.has_debuff(\"Bane of Doom\")\ndemonic_brand if debuff.demonic_brand_missing\ncorruption if target_ttd >= 12 && target.debuff_remains(\"Corruption\") <= 0\nimmolate if target_ttd >= 12 && target.debuff_remains(\"Immolate\") <= 0\nbane_of_agony if !target.has_debuff(\"Bane of Doom\") && target.debuff_remains(\"Bane of Agony\") <= 0\nshadow_bolt\ndecimate_soul_fire if decimation.active\ndecimate_searing if target_hp_pct <= 35 && decimation.inactive\nhellfire if target_ttd >= 15s\nlife_tap if mana_remaining <= 20%\nsearing_pain",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   },
   {
     "id": 115,
@@ -3612,6 +5228,20 @@
       }
     },
     "rotation": "Demonology Fire - Searing Pain + Decimation",
-    "aplText": "bane_of_doom if target_ttd >= 60 && !target.has_debuff(\"Bane of Doom\")\ndemonic_brand if debuff.demonic_brand_missing\ncorruption if target_ttd >= 12 && target.debuff_remains(\"Corruption\") <= 0\nimmolate if target_ttd >= 12 && target.debuff_remains(\"Immolate\") <= 0\nbane_of_agony if !target.has_debuff(\"Bane of Doom\") && target.debuff_remains(\"Bane of Agony\") <= 0\nshadow_bolt\ndecimate_soul_fire if decimation.active\ndecimate_searing if target_hp_pct <= 35 && decimation.inactive\nhellfire if target_ttd >= 15s\nlife_tap if mana_remaining <= 20%\nsearing_pain"
+    "aplText": "bane_of_doom if target_ttd >= 60 && !target.has_debuff(\"Bane of Doom\")\ndemonic_brand if debuff.demonic_brand_missing\ncorruption if target_ttd >= 12 && target.debuff_remains(\"Corruption\") <= 0\nimmolate if target_ttd >= 12 && target.debuff_remains(\"Immolate\") <= 0\nbane_of_agony if !target.has_debuff(\"Bane of Doom\") && target.debuff_remains(\"Bane of Agony\") <= 0\nshadow_bolt\ndecimate_soul_fire if decimation.active\ndecimate_searing if target_hp_pct <= 35 && decimation.inactive\nhellfire if target_ttd >= 15s\nlife_tap if mana_remaining <= 20%\nsearing_pain",
+    "gearMode": "direct",
+    "gear": {},
+    "stats": {
+      "spellPower": 500,
+      "shadowPower": 0,
+      "firePower": 0,
+      "intellect": 200,
+      "stamina": 220,
+      "spirit": 100,
+      "hit": 12,
+      "crit": 15,
+      "mp5": 20,
+      "penetration": 0
+    }
   }
 ]

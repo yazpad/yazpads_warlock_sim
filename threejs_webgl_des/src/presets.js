@@ -178,6 +178,7 @@ export function renderPresetsLeaderboard(onSelectPreset) {
         <th style="width: 68px; text-align: center;">Pet / Sac</th>
         <th style="min-width: 140px;">Action Priority Chain</th>
         <th style="width: 90px; text-align: right;">${showPctLeader ? '% from Leader' : 'Mean DPS'}</th>
+        <th style="width: 90px; text-align: right;" title="95th percentile of simulated fight DPS">95th % DPS</th>
         ${showStdDev ? '<th style="width: 65px; text-align: right;">+/- SD</th>' : ''}
         ${showStatWeights ? `
           <th style="width: 60px; text-align: right;">DPS/SP</th>
@@ -208,12 +209,14 @@ export function renderPresetsLeaderboard(onSelectPreset) {
     // Strip leading x/y/z and trailing (Race) suffix from spec name
     const cleanSpecName = p.name.replace(/^\s*\d+\s*\/\s*\d+\s*\/\s*\d+\s*/, '').replace(/\s*\([^)]*\)\s*$/, '').trim();
 
+    const escapeAttr = str => String(str).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
     const aplIconsHtml = aplRules.map(r => {
       const spellName = r.spell || r.id || 'Spell';
       const iconKey = (r.id || '').toUpperCase().replace(/[\s-]/g, '_');
       const icon = r.icon || SPELL_ICONS[iconKey] || 'Spell_Shadow_ShadowBolt.png';
       const cond = r.condition || r.rawCond || 'Active';
-      return `<img src="./assets/icons/${icon}" class="apl-mini-icon" alt="${spellName}" title="${spellName}: ${cond}" onerror="this.src='./assets/icons/Spell_Shadow_ShadowBolt.png'">`;
+      return `<img src="./assets/icons/${escapeAttr(icon)}" class="apl-mini-icon" alt="${escapeAttr(spellName)}" title="${escapeAttr(spellName)}: ${escapeAttr(cond)}" onerror="this.src='./assets/icons/Spell_Shadow_ShadowBolt.png'">`;
     }).join('');
 
     const petHtml = pet ? `<img src="./assets/icons/${SPELL_ICONS[pet]}" class="pet-mini-icon" alt="Pet" title="Pet: ${pet.replace('PET_', '')}">` : '<span style="color:#666;">--</span>';
@@ -294,6 +297,9 @@ export function renderPresetsLeaderboard(onSelectPreset) {
       </td>
       <td class="dps-col" style="text-align: right;">
         ${dpsCellContent}
+      </td>
+      <td class="p95-dps-col" style="text-align: right; font-family: var(--font-mono);" title="95th percentile of simulated fight DPS">
+        ${isSim && Number.isFinite(p.max_dps) ? p.max_dps.toFixed(1) : '--'}
       </td>
       ${extraColsHtml}
     `;

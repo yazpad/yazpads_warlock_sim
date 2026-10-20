@@ -35,13 +35,13 @@ test('Higher-row points cannot pay for lower-row requirements', () => {
 });
 
 test('Prerequisites stay fully ranked even when row requirements have spare points', () => {
-  applyTalentsObject({ destruction: { improved_shadow_bolt: 5, bane: 5, molten_skin: 5, ruin: 1 } });
+  applyTalentsObject({ destruction: { bane: 5, improved_shadow_bolt: 5, cataclysm: 3, aftermath: 5, agonizing_flames: 3, conflagrate: 1, fire_and_brimstone: 1 } });
   const before = getTalentsObject();
-  assert.equal(can(2, 'Improved Shadow Bolt', -1), false);
-  assert.equal(can(2, 'Bane', -1), true);
+  assert.equal(can(2, 'Conflagrate', -1), false);
+  assert.equal(can(2, 'Aftermath', -1), true);
   assert.deepEqual(getTalentsObject(), before);
-  applyTalentsObject({ destruction: { improved_shadow_bolt: 4, bane: 5, molten_skin: 5 } });
-  assert.equal(can(2, 'Ruin', 1), false);
+  applyTalentsObject({ destruction: { bane: 5, improved_shadow_bolt: 5, cataclysm: 3, aftermath: 5, agonizing_flames: 3, conflagrate: 0 } });
+  assert.equal(can(2, 'Fire and Brimstone', 1), false);
 });
 
 test('Learning requires earlier-row points and enforces the budget for partially ranked talents', () => {

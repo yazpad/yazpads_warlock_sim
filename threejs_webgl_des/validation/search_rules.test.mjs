@@ -161,14 +161,14 @@ test('synthesis eligibility gates talent actions and retains baseline actions in
   const gates = { nightfall: 'nightfall', incinerate: 'incinerate', conflag: 'conflagrate',
     shadowburn: 'shadowburn', siphon: 'siphonLife', wrack: 'wrack', brand: 'demonicBrand',
     decimateSearing: 'decimation', decimateSoulFire: 'decimation' };
-  const baseline = aplSearch.actions.filter(a => !gates[a.id]).map(a => a.id);
+  const baseline = aplSearch.actions.filter(a => a.id !== 'petSwap' && !gates[a.id]).map(a => a.id);
   assert.ok(baseline.includes('hellfire'));
   assert.deepEqual(aplSearch.availableActions().map(a => a.id), baseline);
   assert.deepEqual(aplSearch.availableActions(null).map(a => a.id), baseline);
   for (const talent of new Set(Object.values(gates))) {
     const flags = { [talent]: true };
     const available = aplSearch.availableActions(flags);
-    assert.deepEqual(available.map(a => a.id), aplSearch.actions.filter(a => !gates[a.id] || gates[a.id] === talent).map(a => a.id));
+    assert.deepEqual(available.map(a => a.id), aplSearch.actions.filter(a => a.id !== 'petSwap' && (!gates[a.id] || gates[a.id] === talent)).map(a => a.id));
     for (const action of available) assert.equal(action, aplSearch.actions.find(a => a.id === action.id));
   }
 });

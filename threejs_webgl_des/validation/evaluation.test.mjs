@@ -39,3 +39,16 @@ test('runner errors and cancellation reject without invented candidate scores',a
  const evaluate=createEvaluator({resolveCandidate:resolveWarlockImport,runBatch:async()=>{throw error;}});
  await assert.rejects(evaluate(input),e=>e===error);
 });
+
+test('P95 requests are supported and score percentiles independently of the mean', async () => {
+ const input = await request();
+ input.settings.objective = 'p95-dps';
+ assert.equal(validateEvaluationRequest(input), input);
+ const batch = {results: input.candidates.map((_, i) => ({
+  states: [{done:1,total:100},{done:1,total:200}],
+  summary: {mean:100+i,p95:200-i,sd:2},
+ }))};
+ const result = mapEvaluationResults(input, batch);
+ assert.deepEqual(result.map(r=>r.objective.value), [200,199]);
+ assert.ok(result.every(r=>r.status === 'complete' && r.uncertainty === null));
+});

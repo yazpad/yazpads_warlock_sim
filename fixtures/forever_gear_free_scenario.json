@@ -1,0 +1,19 @@
+{
+  "scenarioId": "gear-free-coe-v2",
+  "description": "Bonus stats above racial/class base; empty gear, external Curse of Elements only, no other external buffs or consumables. Assigned curse disabled.",
+  "bonusStats": {
+    "spellPower": 500,
+    "shadowPower": 0,
+    "firePower": 0,
+    "intellect": 200,
+    "stamina": 220,
+    "spirit": 100,
+    "hit": 12,
+    "crit": 15,
+    "mp5": 20,
+    "penetration": 0
+  },
+  "externalDebuffs": {
+    "curseOfElements": true
+  }
+}

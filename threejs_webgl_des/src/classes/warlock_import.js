@@ -1,6 +1,6 @@
 import { buildFightConfig } from '../config_builder.js';
 import { resolveWarlockBuffEffects } from './warlock_import_buffs.js';
-import { resolveWarlockEquipment } from './warlock_equipment.js';
+import { addWarlockBaseStats, warlockBaseResources } from './warlock_base_stats.js';
 import { WARLOCK_SEARCH } from './warlock_search.js';
 import { DEFAULTS, validate, MAX_APL_RULES, APL_ACTION, APL_COND } from '../model.js';
 import { parseAPLText, compileAPLToBytecode, ACTION_INFO } from '../apl.js';
@@ -32,7 +32,11 @@ export function normalizeWarlockImport(staged, { itemDatabase } = {}) {
         if (!Object.values(APL_ACTION).includes(rule.action)) throw new Error('Unsupported resolved APL action.');
         for (const field of ['cond', 'cond1', 'cond2']) if (Object.hasOwn(rule, field) && !Object.values(APL_COND).includes(rule[field])) throw new Error('Unsupported resolved APL condition.');
         for (const field of ['param', 'param1', 'param2']) if (Object.hasOwn(rule, field) && !Number.isFinite(rule[field])) throw new Error('Invalid resolved APL parameter.');
-        for (const field of ['targetSpell', 'targetSpell1', 'targetSpell2']) if (Object.hasOwn(rule, field) && ![0,1,2,3,5,13,15,22].includes(rule[field])) throw new Error('Unsupported resolved APL target.');
+        for (const [field, cond] of [['targetSpell', rule.cond ?? rule.cond1], ['targetSpell1', rule.cond1 ?? rule.cond], ['targetSpell2', rule.cond2]]) {
+          if (!Object.hasOwn(rule, field)) continue;
+          const executeTime = [APL_COND.TIME_TO_EXECUTE_LE, APL_COND.TIME_TO_EXECUTE_GE, APL_COND.TIME_TO_EXECUTE_LT, APL_COND.TIME_TO_EXECUTE_GT].includes(cond);
+          if (executeTime ? !Number.isInteger(rule[field]) || rule[field] < 0 || rule[field] > 100 : ![0,1,2,3,5,13,15,22].includes(rule[field])) throw new Error('Unsupported resolved APL target.');
+        }
         if (![0, 1, false, true].includes(rule.enabled)) throw new Error('Invalid resolved APL enabled flag.');
       }
     }
@@ -60,9 +64,8 @@ export function normalizeWarlockImport(staged, { itemDatabase } = {}) {
   if (!Object.hasOwn(c.equipment, 'mode')) c.equipment.mode = 'direct';
   record(c.equipment.items, 'Equipment items');
   if (!['direct', 'equipped'].includes(c.equipment.mode)) throw new Error('Unsupported equipment mode.');
-  if (c.equipment.mode === 'equipped' || Object.keys(c.equipment.items).length) {
-    const equipped = resolveWarlockEquipment(c.equipment.items, itemDatabase);
-    if (c.equipment.mode === 'equipped') c.stats = { ...equipped, swordEquipped: c.stats.swordEquipped };
+  if (c.equipment.mode !== 'direct' || Object.keys(c.equipment.items).length) {
+    throw new Error('Gear is deferred. Use direct bonus stats and empty equipment.');
   }
   keys(c.talents, trees, 'talent tree');
   c.talents = { affliction: {}, demonology: {}, destruction: {}, ...c.talents };
@@ -98,6 +101,7 @@ export function normalizeWarlockImport(staged, { itemDatabase } = {}) {
   keys(evaluationDefaults, ['iterations', 'mode'], 'evaluation default');
   if (!['fast', 'detailed'].includes(evaluationDefaults.mode)) throw new Error('Unsupported output mode.');
   validate({ ...c.stats, duration: c.encounter.duration, distance: c.encounter.distance,
+    channelClipDelayMs: c.channelClipDelayMs ?? 0,
     iterations: evaluationDefaults.iterations, race: options.race, rotation: options.rotation,
     petChoice: options.pet, bossArmor: target.bossArmor, resistance: target.resistance,
     racialPolicy: target.racialPolicy, targetIsBeast: target.targetIsBeast });
@@ -144,8 +148,11 @@ export function resolveWarlockImportEffects(staged, options) {
   const normalized = normalizeWarlockImport(staged, options);
   if (normalized.kind === 'resolved-config') return normalized;
   const c = normalized.candidate;
-  return { ...normalized, effectiveStats: resolveWarlockBuffEffects(
-    c.stats, c.buffs, c.classOptions.race, c.encounter.target) };
+  const stats = addWarlockBaseStats(c.stats, c.classOptions.race);
+  const effectiveStats = resolveWarlockBuffEffects(stats, c.buffs, c.classOptions.race, c.encounter.target);
+  Object.assign(effectiveStats, warlockBaseResources(effectiveStats.intellect, effectiveStats.stamina));
+  if (c.buffs.warchiefsBlessing) effectiveStats.maxHealth += 300;
+  return { ...normalized, effectiveStats };
 }
 
 // Resolve once at the import boundary using the existing configuration builder.
@@ -167,6 +174,10 @@ export function resolveWarlockImport(staged, options) {
   const { haste, maxMana, ...effective } = normalized.effectiveStats;
   const config = buildFightConfig({
     base: { ...c.stats, ...effective, race: c.classOptions.race,
+      statsIncludeBase: true,
+      ...Object.fromEntries(['channelClipDelayMs', 'book', 'trinketSP', 'trinketDuration', 'trinketCD']
+        .filter(key => Object.hasOwn(c, key)).map(key => [key, c[key]])),
+      bossArmor: c.encounter.target.bossArmor, resistance: effective.resistance,
       racialPolicy: c.encounter.target.racialPolicy, targetIsBeast: c.encounter.target.targetIsBeast,
       duration: c.encounter.duration, distance: c.encounter.distance,
       iterations: normalized.evaluationDefaults.iterations },

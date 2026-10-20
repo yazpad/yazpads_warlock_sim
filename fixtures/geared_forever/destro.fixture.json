@@ -1,0 +1,1079 @@
+{
+  "schemaVersion": 1,
+  "presetId": "destro",
+  "classId": "warlock",
+  "buildSource": "/home/aaron-ma/forever/ui/specs/warlock/dps/builds/destro.build.json",
+  "candidate": {
+    "schemaVersion": 1,
+    "classId": "warlock",
+    "candidateId": "destro",
+    "encounter": {
+      "duration": 180,
+      "target": {
+        "level": 63,
+        "bossArmor": 3731,
+        "resistance": 0
+      }
+    },
+    "stats": {},
+    "equipment": {
+      "mode": "direct",
+      "items": {}
+    },
+    "buffs": {
+      "arcaneIntellect": true,
+      "markOfTheWild": true,
+      "blessingOfKings": true,
+      "blessingOfWisdom": true,
+      "manaSpringTotem": true,
+      "flaskSupremePower": true,
+      "wizardOil": true,
+      "nightfinSoup": true,
+      "greaterArcaneElixir": true
+    },
+    "talents": {
+      "affliction": {
+        "improved_life_tap": 2,
+        "suppression": 5,
+        "improved_corruption": 3,
+        "amplify_curse": 1,
+        "pandemic": 3
+      },
+      "demonology": {
+        "unholy_power": 4
+      },
+      "destruction": {
+        "bane": 5,
+        "cataclysm": 3,
+        "aftermath": 5,
+        "ruin": 5,
+        "shadowburn": 1,
+        "agonizing_flames": 3,
+        "conflagrate": 1,
+        "bane_of_havoc": 1,
+        "fire_and_brimstone": 3,
+        "shadow_and_flame": 5,
+        "incinerate": 1
+      }
+    },
+    "apl": {
+      "kind": "text",
+      "text": "Bane of Doom if target.debuff_remains(\"Bane of Doom\") <= 0 && target_ttd >= 60\nBane of Agony if target.debuff_remains(\"Bane of Agony\") <= 0 && target_ttd < 60\nImmolate if target.debuff_remains(\"Immolate\") <= 0\nCorruption if target.debuff_remains(\"Corruption\") <= 0\nconflag\nshadowburn\nincinerate\nLife Tap"
+    },
+    "classOptions": {
+      "race": "ORC",
+      "pet": "succubus",
+      "sacrifice": "none",
+      "rotation": "shadow"
+    }
+  },
+  "resolvedConfig": {
+    "race": "GNOME",
+    "swordEquipped": true,
+    "racialPolicy": "execute",
+    "targetIsBeast": false,
+    "maxHealth": 4050,
+    "duration": 180,
+    "iterations": 4096,
+    "seed": 42,
+    "rotation": "shadow",
+    "spellPower": 535,
+    "shadowPower": 0,
+    "firePower": 0,
+    "intellect": 336,
+    "stamina": 376,
+    "spirit": 282,
+    "hit": 7,
+    "crit": 14.744,
+    "mp5": 93,
+    "distance": 0,
+    "resistance": 0,
+    "penetration": 0,
+    "tapThreshold": 25,
+    "bossArmor": 3731,
+    "book": true,
+    "charges": false,
+    "partialResists": true,
+    "piercing": true,
+    "corruption": true,
+    "agony": true,
+    "immolate": true,
+    "instantCorruption": false,
+    "nightfall": false,
+    "isb": false,
+    "ruin": true,
+    "improvedTap": true,
+    "amplifyCurse": true,
+    "demonicPact": false,
+    "demonicSacrifice": false,
+    "felDomination": false,
+    "masterSummoner": 0,
+    "soulLink": false,
+    "sacImp": false,
+    "sacSucc": false,
+    "masterDemo": 0,
+    "petChoice": "succubus",
+    "trinketSP": 47,
+    "trinketDuration": 30,
+    "trinketCD": 120,
+    "shadowMultiplier": 1,
+    "fireMultiplier": 1,
+    "tapBonus": 0.2,
+    "nightfallChance": 0,
+    "isbBonus": 0,
+    "ruinRank": 5,
+    "shadowMasteryBonus": 0,
+    "improvedCorruptionBonus": 0.06,
+    "conflagrate": true,
+    "shadowburn": true,
+    "curseOfDoom": true,
+    "incinerate": true,
+    "decimation": false,
+    "decimationSearing": false,
+    "demonicBrand": false,
+    "demonicBrandRank": 0,
+    "baneRank": 5,
+    "decimationRank": 0,
+    "siphonLife": false,
+    "drainHope": false,
+    "malevolence": 0,
+    "afBonus": 0.1,
+    "aftermathBonus": 0.5,
+    "cataclysmCostMult": 0.9,
+    "improvedAgonyBonus": 0,
+    "felVitalityBonus": 0,
+    "maledictionBonus": 0,
+    "improvedDrainsBonus": 0,
+    "soulSiphonBonus": 0,
+    "demonicEnergies": 0,
+    "demonicKnowledge": 0,
+    "snfChance": 1,
+    "snfBonus": 0.1,
+    "dotCrit": 2,
+    "fnbCrit": 25,
+    "petMult": 1,
+    "petFireboltMult": 1.08,
+    "petMeleeMult": 1.08,
+    "petLashMult": 1.08,
+    "brandMult": 1.08,
+    "corrMultiplier": 1.06,
+    "aplRules": [
+      {
+        "action": 7,
+        "cond": 5,
+        "param": 0,
+        "targetSpell": 22,
+        "cond1": 5,
+        "param1": 0,
+        "targetSpell1": 22,
+        "cond2": 6,
+        "param2": 60,
+        "targetSpell2": 0,
+        "enabled": 1
+      },
+      {
+        "action": 8,
+        "cond": 5,
+        "param": 0,
+        "targetSpell": 2,
+        "cond1": 5,
+        "param1": 0,
+        "targetSpell1": 2,
+        "cond2": 22,
+        "param2": 60,
+        "targetSpell2": 0,
+        "enabled": 1
+      },
+      {
+        "action": 9,
+        "cond": 5,
+        "param": 0,
+        "targetSpell": 3,
+        "cond1": 5,
+        "param1": 0,
+        "targetSpell1": 3,
+        "cond2": 0,
+        "param2": 0,
+        "targetSpell2": 0,
+        "enabled": 1
+      },
+      {
+        "action": 6,
+        "cond": 5,
+        "param": 0,
+        "targetSpell": 1,
+        "cond1": 5,
+        "param1": 0,
+        "targetSpell1": 1,
+        "cond2": 0,
+        "param2": 0,
+        "targetSpell2": 0,
+        "enabled": 1
+      },
+      {
+        "action": 10,
+        "cond": 0,
+        "param": 0,
+        "targetSpell": 0,
+        "cond1": 0,
+        "param1": 0,
+        "targetSpell1": 0,
+        "cond2": 0,
+        "param2": 0,
+        "targetSpell2": 0,
+        "enabled": 1
+      },
+      {
+        "action": 11,
+        "cond": 0,
+        "param": 0,
+        "targetSpell": 0,
+        "cond1": 0,
+        "param1": 0,
+        "targetSpell1": 0,
+        "cond2": 0,
+        "param2": 0,
+        "targetSpell2": 0,
+        "enabled": 1
+      },
+      {
+        "action": 12,
+        "cond": 0,
+        "param": 0,
+        "targetSpell": 0,
+        "cond1": 0,
+        "param1": 0,
+        "targetSpell1": 0,
+        "cond2": 0,
+        "param2": 0,
+        "targetSpell2": 0,
+        "enabled": 1
+      },
+      {
+        "action": 1,
+        "cond": 0,
+        "param": 0,
+        "targetSpell": 0,
+        "cond1": 0,
+        "param1": 0,
+        "targetSpell1": 0,
+        "cond2": 0,
+        "param2": 0,
+        "targetSpell2": 0,
+        "enabled": 1
+      }
+    ]
+  },
+  "foreverResults": {
+    "TestDestruction-AllItems-AdaptiveCombatAssistant-272437": {
+      "dps": 630.73207,
+      "tps": 366.7136,
+      "dtps": 9.14719,
+      "hps": 8.27298
+    },
+    "TestDestruction-AllItems-Admiral'sHat-10030": {
+      "dps": 628.78482,
+      "tps": 366.25164,
+      "dtps": 9.00285,
+      "hps": 8.15693
+    },
+    "TestDestruction-AllItems-AnkhofLife-1713": {
+      "dps": 632.21162,
+      "tps": 367.32481,
+      "dtps": 9.24984,
+      "hps": 8.27298
+    },
+    "TestDestruction-AllItems-ArcaniteChampion-12790": {
+      "dps": 637.63367,
+      "tps": 370.3197,
+      "dtps": 9.14719,
+      "hps": 8.31579
+    },
+    "TestDestruction-AllItems-ArenaGrandMaster-19024": {
+      "dps": 630.73207,
+      "tps": 366.7136,
+      "dtps": 9.14719,
+      "hps": 8.27298
+    },
+    "TestDestruction-AllItems-BadgeoftheSwarmguard-21670": {
+      "dps": 630.73207,
+      "tps": 366.7136,
+      "dtps": 9.14719,
+      "hps": 8.27298
+    },
+    "TestDestruction-AllItems-BladeofHanna-2801": {
+      "dps": 637.63367,
+      "tps": 370.3197,
+      "dtps": 9.14719,
+      "hps": 8.31579
+    },
+    "TestDestruction-AllItems-BlazefuryMedallion-17111": {
+      "dps": 624.92505,
+      "tps": 363.7275,
+      "dtps": 8.98785,
+      "hps": 8.11862
+    },
+    "TestDestruction-AllItems-BlazingEmblem-2802": {
+      "dps": 630.73207,
+      "tps": 366.7136,
+      "dtps": 9.14719,
+      "hps": 8.27298
+    },
+    "TestDestruction-AllItems-BlazingRapier-12777": {
+      "dps": 637.63367,
+      "tps": 370.3197,
+      "dtps": 9.14719,
+      "hps": 8.31579
+    },
+    "TestDestruction-AllItems-BristleconeCloak-275833": {
+      "dps": 622.61135,
+      "tps": 362.77942,
+      "dtps": 9.2485,
+      "hps": 8.31579
+    },
+    "TestDestruction-AllItems-Champion'sDreadgear": {
+      "dps": 658.20877,
+      "tps": 381.29458,
+      "dtps": 9.57241,
+      "hps": 0
+    },
+    "TestDestruction-AllItems-Champion'sThreads": {
+      "dps": 616.5542,
+      "tps": 359.69259,
+      "dtps": 9.44031,
+      "hps": 0
+    },
+    "TestDestruction-AllItems-CloakofFire-14134": {
+      "dps": 631.23077,
+      "tps": 367.71024,
+      "dtps": 8.70497,
+      "hps": 8.2394
+    },
+    "TestDestruction-AllItems-CloakofFlames-3475": {
+      "dps": 624.10151,
+      "tps": 363.1564,
+      "dtps": 9.37975,
+      "hps": 8.23782
+    },
+    "TestDestruction-AllItems-ColdBasiliskEye-5079": {
+      "dps": 630.73207,
+      "tps": 366.7136,
+      "dtps": 9.14719,
+      "hps": 8.27298
+    },
+    "TestDestruction-AllItems-DarkmoonCard:BlueDragon-19288": {
+      "dps": 640.11392,
+      "tps": 372.09944,
+      "dtps": 8.88328,
+      "hps": 8.19501
+    },
+    "TestDestruction-AllItems-DarkmoonCard:Heroism-19287": {
+      "dps": 630.73207,
+      "tps": 366.7136,
+      "dtps": 9.14719,
+      "hps": 8.27298
+    },
+    "TestDestruction-AllItems-DarkmoonCard:Maelstrom-19289": {
+      "dps": 630.73207,
+      "tps": 366.7136,
+      "dtps": 9.14719,
+      "hps": 8.27298
+    },
+    "TestDestruction-AllItems-DeathmistRaiment": {
+      "dps": 650.76839,
+      "tps": 374.70236,
+      "dtps": 9.49463,
+      "hps": 0
+    },
+    "TestDestruction-AllItems-Defender'sGripStabilizer-272440": {
+      "dps": 630.73207,
+      "tps": 366.7136,
+      "dtps": 9.14719,
+      "hps": 8.27298
+    },
+    "TestDestruction-AllItems-Defiler'sTalisman-20072": {
+      "dps": 630.73207,
+      "tps": 366.7136,
+      "dtps": 9.14719,
+      "hps": 8.27298
+    },
+    "TestDestruction-AllItems-Defiler'sTalisman-21115": {
+      "dps": 630.73207,
+      "tps": 366.7136,
+      "dtps": 9.14719,
+      "hps": 8.27298
+    },
+    "TestDestruction-AllItems-Defiler'sTalisman-21116": {
+      "dps": 630.73207,
+      "tps": 366.7136,
+      "dtps": 9.14719,
+      "hps": 8.27298
+    },
+    "TestDestruction-AllItems-DemonheartRaiment": {
+      "dps": 600.24187,
+      "tps": 351.22758,
+      "dtps": 8.90585,
+      "hps": 0
+    },
+    "TestDestruction-AllItems-Demoniac'sThreads": {
+      "dps": 648.79122,
+      "tps": 377.66461,
+      "dtps": 8.80194,
+      "hps": 8.2349
+    },
+    "TestDestruction-AllItems-Doombringer-13053": {
+      "dps": 637.63367,
+      "tps": 370.3197,
+      "dtps": 9.14719,
+      "hps": 8.31579
+    },
+    "TestDestruction-AllItems-Doomcaller'sAttire": {
+      "dps": 736.62199,
+      "tps": 422.54701,
+      "dtps": 9.70895,
+      "hps": 0
+    },
+    "TestDestruction-AllItems-DormantHeartoftheMountain-249473": {
+      "dps": 630.73207,
+      "tps": 366.7136,
+      "dtps": 9.00842,
+      "hps": 8.27298
+    },
+    "TestDestruction-AllItems-DreadmistRaiment": {
+      "dps": 614.79028,
+      "tps": 357.48308,
+      "dtps": 8.83405,
+      "hps": 8.23782
+    },
+    "TestDestruction-AllItems-EarthenSigil-20525": {
+      "dps": 630.56205,
+      "tps": 366.5568,
+      "dtps": 8.68884,
+      "hps": 8.28514
+    },
+    "TestDestruction-AllItems-Earthstrike-21180": {
+      "dps": 630.73207,
+      "tps": 366.7136,
+      "dtps": 9.14719,
+      "hps": 8.27298
+    },
+    "TestDestruction-AllItems-ElectrifiedDagger-19100": {
+      "dps": 637.63367,
+      "tps": 370.3197,
+      "dtps": 9.14719,
+      "hps": 8.31579
+    },
+    "TestDestruction-AllItems-Enchant2HWeapon-GrandArcanist-7941": {
+      "dps": 677.67971,
+      "tps": 392.23342,
+      "dtps": 9.14719,
+      "hps": 8.31579
+    },
+    "TestDestruction-AllItems-Enchant:FieryBlaze-36": {
+      "dps": 637.63367,
+      "tps": 370.3197,
+      "dtps": 9.14719,
+      "hps": 8.31579
+    },
+    "TestDestruction-AllItems-EnchantChest-Absorption-8220": {
+      "dps": 637.63367,
+      "tps": 370.3197,
+      "dtps": 9.14719,
+      "hps": 8.31579
+    },
+    "TestDestruction-AllItems-EnchantChest-LesserAbsorption-63": {
+      "dps": 637.63367,
+      "tps": 370.3197,
+      "dtps": 9.14719,
+      "hps": 8.31579
+    },
+    "TestDestruction-AllItems-EnchantChest-MinorAbsorption-44": {
+      "dps": 637.63367,
+      "tps": 370.3197,
+      "dtps": 9.14719,
+      "hps": 8.31579
+    },
+    "TestDestruction-AllItems-EnchantCloak-Subtlety-2621": {
+      "dps": 637.63367,
+      "tps": 363.86833,
+      "dtps": 9.14719,
+      "hps": 8.31579
+    },
+    "TestDestruction-AllItems-EnchantGloves-Threat-2613": {
+      "dps": 637.63367,
+      "tps": 376.77106,
+      "dtps": 9.14719,
+      "hps": 8.31579
+    },
+    "TestDestruction-AllItems-EnchantWeapon-Crusader-1900": {
+      "dps": 637.63367,
+      "tps": 370.3197,
+      "dtps": 9.14719,
+      "hps": 8.31579
+    },
+    "TestDestruction-AllItems-EnchantWeapon-GrandSorcerer-7942": {
+      "dps": 655.05809,
+      "tps": 379.84854,
+      "dtps": 9.14719,
+      "hps": 8.31579
+    },
+    "TestDestruction-AllItems-EnchantWeapon-Insight-8216": {
+      "dps": 640.0247,
+      "tps": 371.8623,
+      "dtps": 8.99138,
+      "hps": 8.53014
+    },
+    "TestDestruction-AllItems-EnchantWeapon-Recovery-8721": {
+      "dps": 637.63367,
+      "tps": 370.3197,
+      "dtps": 9.14719,
+      "hps": 8.31579
+    },
+    "TestDestruction-AllItems-EnchantWeapon-Revelation-8217": {
+      "dps": 659.38303,
+      "tps": 382.50608,
+      "dtps": 9.14719,
+      "hps": 8.31579
+    },
+    "TestDestruction-AllItems-EssenceofthePureFlame-18815": {
+      "dps": 630.73207,
+      "tps": 366.7136,
+      "dtps": 9.14719,
+      "hps": 8.27298
+    },
+    "TestDestruction-AllItems-EverlookDeliveryBot-274760": {
+      "dps": 629.21333,
+      "tps": 365.92269,
+      "dtps": 8.71373,
+      "hps": 8.2825
+    },
+    "TestDestruction-AllItems-EverlookPathcarver-274759": {
+      "dps": 628.5931,
+      "tps": 365.40795,
+      "dtps": 8.87347,
+      "hps": 8.27298
+    },
+    "TestDestruction-AllItems-EyeofDiminution-23001": {
+      "dps": 639.34491,
+      "tps": 370.7854,
+      "dtps": 9.31916,
+      "hps": 8.43833
+    },
+    "TestDestruction-AllItems-EyeofMoam-21473": {
+      "dps": 646.67365,
+      "tps": 375.57746,
+      "dtps": 9.14719,
+      "hps": 8.27298
+    },
+    "TestDestruction-AllItems-EyeoftheDead-23047": {
+      "dps": 630.73207,
+      "tps": 366.7136,
+      "dtps": 9.14719,
+      "hps": 8.27298
+    },
+    "TestDestruction-AllItems-FetishofChitinousSpikes-21488": {
+      "dps": 630.73207,
+      "tps": 366.7136,
+      "dtps": 9.14719,
+      "hps": 8.27298
+    },
+    "TestDestruction-AllItems-FetishoftheSandReaver-21647": {
+      "dps": 630.73207,
+      "tps": 366.7136,
+      "dtps": 9.14719,
+      "hps": 8.27298
+    },
+    "TestDestruction-AllItems-FieldMarshal'sThreads": {
+      "dps": 644.39471,
+      "tps": 373.85387,
+      "dtps": 9.81136,
+      "hps": 0
+    },
+    "TestDestruction-AllItems-FlameSearedSignet-282080": {
+      "dps": 634.5588,
+      "tps": 369.05575,
+      "dtps": 9.02023,
+      "hps": 8.31579
+    },
+    "TestDestruction-AllItems-Frostguard-12797": {
+      "dps": 637.63367,
+      "tps": 370.3197,
+      "dtps": 9.14719,
+      "hps": 8.31579
+    },
+    "TestDestruction-AllItems-FrozenHeartoftheMountain-249469": {
+      "dps": 643.03979,
+      "tps": 373.53011,
+      "dtps": 9.26527,
+      "hps": 8.27298
+    },
+    "TestDestruction-AllItems-GlacialBlade-19099": {
+      "dps": 637.63367,
+      "tps": 370.3197,
+      "dtps": 9.14719,
+      "hps": 8.31579
+    },
+    "TestDestruction-AllItems-GlyphofDeflection-23040": {
+      "dps": 630.73207,
+      "tps": 366.7136,
+      "dtps": 9.14719,
+      "hps": 8.27298
+    },
+    "TestDestruction-AllItems-GoblinConstructionHelmet-10543": {
+      "dps": 628.78482,
+      "tps": 366.25164,
+      "dtps": 9.00285,
+      "hps": 8.15693
+    },
+    "TestDestruction-AllItems-GoldenBanana-270226": {
+      "dps": 630.79563,
+      "tps": 366.74919,
+      "dtps": 9.14719,
+      "hps": 8.27298
+    },
+    "TestDestruction-AllItems-GutRipper-2164": {
+      "dps": 637.63367,
+      "tps": 370.3197,
+      "dtps": 9.14719,
+      "hps": 8.31579
+    },
+    "TestDestruction-AllItems-Hameya'sSlayer-15814": {
+      "dps": 637.63367,
+      "tps": 370.3197,
+      "dtps": 9.14719,
+      "hps": 8.31579
+    },
+    "TestDestruction-AllItems-HanzoSword-8190": {
+      "dps": 637.63367,
+      "tps": 370.3197,
+      "dtps": 9.14719,
+      "hps": 8.31579
+    },
+    "TestDestruction-AllItems-Hazza'rah'sCharmofDestruction-19957": {
+      "dps": 632.83678,
+      "tps": 367.89223,
+      "dtps": 9.14719,
+      "hps": 8.27298
+    },
+    "TestDestruction-AllItems-HeartoftheScale-13164": {
+      "dps": 630.73207,
+      "tps": 366.7136,
+      "dtps": 9.14719,
+      "hps": 8.27298
+    },
+    "TestDestruction-AllItems-HibernationCrystal-20636": {
+      "dps": 630.73207,
+      "tps": 366.7136,
+      "dtps": 9.14719,
+      "hps": 8.27298
+    },
+    "TestDestruction-AllItems-ImplementsofUnspokenNames": {
+      "dps": 642.43383,
+      "tps": 372.51208,
+      "dtps": 9.41432,
+      "hps": 8.3541
+    },
+    "TestDestruction-AllItems-JomGabbar-23570": {
+      "dps": 630.73207,
+      "tps": 366.7136,
+      "dtps": 9.14719,
+      "hps": 8.27298
+    },
+    "TestDestruction-AllItems-Julie'sDagger-6660": {
+      "dps": 637.63367,
+      "tps": 370.3197,
+      "dtps": 9.14719,
+      "hps": 8.31579
+    },
+    "TestDestruction-AllItems-KissoftheSpider-22954": {
+      "dps": 649.51634,
+      "tps": 376.58272,
+      "dtps": 9.54221,
+      "hps": 8.31579
+    },
+    "TestDestruction-AllItems-LieutenantCommander'sDreadgear": {
+      "dps": 658.20877,
+      "tps": 381.29458,
+      "dtps": 9.57241,
+      "hps": 0
+    },
+    "TestDestruction-AllItems-LieutenantCommander'sThreads": {
+      "dps": 616.5542,
+      "tps": 359.69259,
+      "dtps": 9.44031,
+      "hps": 0
+    },
+    "TestDestruction-AllItems-Linken'sBoomerang-11905": {
+      "dps": 630.73207,
+      "tps": 366.7136,
+      "dtps": 9.14719,
+      "hps": 8.27298
+    },
+    "TestDestruction-AllItems-Linken'sSwordofMastery-11902": {
+      "dps": 588.08822,
+      "tps": 343.14286,
+      "dtps": 9.26733,
+      "hps": 8.19501
+    },
+    "TestDestruction-AllItems-Loatheb'sReflection-23042": {
+      "dps": 630.73207,
+      "tps": 366.7136,
+      "dtps": 8.9581,
+      "hps": 8.27298
+    },
+    "TestDestruction-AllItems-Magister'sRegalia": {
+      "dps": 622.45587,
+      "tps": 359.94326,
+      "dtps": 9.24665,
+      "hps": 0
+    },
+    "TestDestruction-AllItems-MajorRecombobulator-18637": {
+      "dps": 630.73207,
+      "tps": 366.7136,
+      "dtps": 9.14719,
+      "hps": 8.27298
+    },
+    "TestDestruction-AllItems-MarkofResolution-17759": {
+      "dps": 630.73207,
+      "tps": 366.7136,
+      "dtps": 9.14719,
+      "hps": 8.27298
+    },
+    "TestDestruction-AllItems-MarkoftheChampion-23206": {
+      "dps": 630.73207,
+      "tps": 366.7136,
+      "dtps": 9.14719,
+      "hps": 8.27298
+    },
+    "TestDestruction-AllItems-MarkoftheChampion-23207": {
+      "dps": 630.73207,
+      "tps": 366.7136,
+      "dtps": 9.14719,
+      "hps": 8.27298
+    },
+    "TestDestruction-AllItems-MarkoftheRedFlight-282778": {
+      "dps": 630.73207,
+      "tps": 366.7136,
+      "dtps": 9.14719,
+      "hps": 8.27298
+    },
+    "TestDestruction-AllItems-MoltenHeartoftheMountain-249470": {
+      "dps": 630.73207,
+      "tps": 366.7136,
+      "dtps": 9.00842,
+      "hps": 8.27298
+    },
+    "TestDestruction-AllItems-Nightblade-1982": {
+      "dps": 637.63367,
+      "tps": 370.3197,
+      "dtps": 9.14719,
+      "hps": 8.31579
+    },
+    "TestDestruction-AllItems-OrbofFire-12805": {
+      "dps": 630.73207,
+      "tps": 366.7136,
+      "dtps": 9.14719,
+      "hps": 8.27298
+    },
+    "TestDestruction-AllItems-PetrifiedScarab-21685": {
+      "dps": 630.73207,
+      "tps": 366.7136,
+      "dtps": 9.14719,
+      "hps": 8.27298
+    },
+    "TestDestruction-AllItems-PhantomBlade-7961": {
+      "dps": 637.63367,
+      "tps": 370.3197,
+      "dtps": 9.14719,
+      "hps": 8.31579
+    },
+    "TestDestruction-AllItems-PlagueheartRaiment": {
+      "dps": 807.86124,
+      "tps": 424.6969,
+      "dtps": 9.37473,
+      "hps": 0
+    },
+    "TestDestruction-AllItems-RingofSaviors-1447": {
+      "dps": 630.87231,
+      "tps": 367.03951,
+      "dtps": 9.02023,
+      "hps": 8.31579
+    },
+    "TestDestruction-AllItems-SerenityField-272439": {
+      "dps": 642.29669,
+      "tps": 373.0063,
+      "dtps": 8.96888,
+      "hps": 8.27298
+    },
+    "TestDestruction-AllItems-SerpentSlicer-13035": {
+      "dps": 637.63367,
+      "tps": 370.3197,
+      "dtps": 9.14719,
+      "hps": 8.31579
+    },
+    "TestDestruction-AllItems-ShardoftheFallenStar-21891": {
+      "dps": 634.13683,
+      "tps": 368.53038,
+      "dtps": 8.98068,
+      "hps": 8.35889
+    },
+    "TestDestruction-AllItems-ShortswordofVengeance-754": {
+      "dps": 637.63367,
+      "tps": 370.3197,
+      "dtps": 9.14719,
+      "hps": 8.31579
+    },
+    "TestDestruction-AllItems-Slayer'sCrest-23041": {
+      "dps": 630.73207,
+      "tps": 366.7136,
+      "dtps": 9.14719,
+      "hps": 8.27298
+    },
+    "TestDestruction-AllItems-SmokingHeartoftheMountain-11811": {
+      "dps": 630.73207,
+      "tps": 366.7136,
+      "dtps": 9.00842,
+      "hps": 8.27298
+    },
+    "TestDestruction-AllItems-Sorcerer'sRegalia": {
+      "dps": 654.92881,
+      "tps": 378.37752,
+      "dtps": 9.4471,
+      "hps": 0
+    },
+    "TestDestruction-AllItems-SwordofZeal-6622": {
+      "dps": 588.08822,
+      "tps": 343.14286,
+      "dtps": 9.26733,
+      "hps": 8.19501
+    },
+    "TestDestruction-AllItems-TalismanofArathor-20071": {
+      "dps": 630.73207,
+      "tps": 366.7136,
+      "dtps": 9.14719,
+      "hps": 8.27298
+    },
+    "TestDestruction-AllItems-TalismanofArathor-21117": {
+      "dps": 630.73207,
+      "tps": 366.7136,
+      "dtps": 9.14719,
+      "hps": 8.27298
+    },
+    "TestDestruction-AllItems-TalismanofArathor-21118": {
+      "dps": 630.73207,
+      "tps": 366.7136,
+      "dtps": 9.14719,
+      "hps": 8.27298
+    },
+    "TestDestruction-AllItems-TalismanofAscendance-22678": {
+      "dps": 658.62895,
+      "tps": 381.93551,
+      "dtps": 9.14719,
+      "hps": 8.3541
+    },
+    "TestDestruction-AllItems-TalismanofEphemeralPower-18820": {
+      "dps": 652.82932,
+      "tps": 378.86157,
+      "dtps": 9.14719,
+      "hps": 8.27298
+    },
+    "TestDestruction-AllItems-Teebu'sBlazingLongsword-1728": {
+      "dps": 588.08822,
+      "tps": 343.14286,
+      "dtps": 9.26733,
+      "hps": 8.19501
+    },
+    "TestDestruction-AllItems-TheBlackBook-19337": {
+      "dps": 640.06788,
+      "tps": 366.7136,
+      "dtps": 9.14719,
+      "hps": 8.27298
+    },
+    "TestDestruction-AllItems-TheBurrower'sShell-23558": {
+      "dps": 630.73207,
+      "tps": 366.7136,
+      "dtps": 9.14719,
+      "hps": 8.27298
+    },
+    "TestDestruction-AllItems-TheLobotomizer-19324": {
+      "dps": 637.63367,
+      "tps": 370.3197,
+      "dtps": 9.14719,
+      "hps": 8.31579
+    },
+    "TestDestruction-AllItems-TheRestrainedEssenceofSapphiron-23046": {
+      "dps": 671.85601,
+      "tps": 389.20793,
+      "dtps": 9.14719,
+      "hps": 8.27298
+    },
+    "TestDestruction-AllItems-ThrashBlade-17705": {
+      "dps": 637.63367,
+      "tps": 370.3197,
+      "dtps": 9.14719,
+      "hps": 8.31579
+    },
+    "TestDestruction-AllItems-Thunderbrew'sBootFlask-744": {
+      "dps": 626.28147,
+      "tps": 363.98174,
+      "dtps": 9.19645,
+      "hps": 8.27298
+    },
+    "TestDestruction-AllItems-Thunderfury,BlessedBladeoftheWindseeker-19019": {
+      "dps": 637.63367,
+      "tps": 370.3197,
+      "dtps": 9.14719,
+      "hps": 8.31579
+    },
+    "TestDestruction-AllItems-ToySoldier-274386": {
+      "dps": 630.73207,
+      "tps": 366.7136,
+      "dtps": 9.14719,
+      "hps": 8.27298
+    },
+    "TestDestruction-AllItems-Uther'sStrength-11302": {
+      "dps": 634.39616,
+      "tps": 368.71747,
+      "dtps": 9.14719,
+      "hps": 8.27298
+    },
+    "TestDestruction-AllItems-VestmentsoftheDevout": {
+      "dps": 598.80196,
+      "tps": 349.09149,
+      "dtps": 8.91066,
+      "hps": 0
+    },
+    "TestDestruction-AllItems-VestmentsoftheVirtuous": {
+      "dps": 637.48617,
+      "tps": 368.52925,
+      "dtps": 9.27997,
+      "hps": 0
+    },
+    "TestDestruction-AllItems-Warlord'sThreads": {
+      "dps": 644.39471,
+      "tps": 373.85387,
+      "dtps": 9.81136,
+      "hps": 0
+    },
+    "TestDestruction-AllItems-WarmthofForgiveness-23027": {
+      "dps": 630.33148,
+      "tps": 365.83229,
+      "dtps": 8.94233,
+      "hps": 8.31922
+    },
+    "TestDestruction-AllItems-Witchfury-13051": {
+      "dps": 637.63367,
+      "tps": 370.3197,
+      "dtps": 9.14719,
+      "hps": 8.31579
+    },
+    "TestDestruction-AllItems-WrathofCenarius-21190": {
+      "dps": 649.66105,
+      "tps": 377.30933,
+      "dtps": 9.02023,
+      "hps": 8.31579
+    },
+    "TestDestruction-AllItems-ZandalarianHeroBadge-19948": {
+      "dps": 630.73207,
+      "tps": 366.7136,
+      "dtps": 9.14719,
+      "hps": 8.27298
+    },
+    "TestDestruction-AllItems-ZandalarianHeroCharm-19950": {
+      "dps": 645.70994,
+      "tps": 374.90377,
+      "dtps": 9.14719,
+      "hps": 8.27298
+    },
+    "TestDestruction-AllItems-ZandalarianHeroMedallion-19949": {
+      "dps": 630.73207,
+      "tps": 366.7136,
+      "dtps": 9.14719,
+      "hps": 8.27298
+    },
+    "TestDestruction-Average-Default": {
+      "dps": 646.41529,
+      "tps": 374.94044,
+      "dtps": 9.10174,
+      "hps": 8.18115
+    },
+    "TestDestruction-Settings-Gnome-preraid-Destruction-destro-FullBuffs-0.0yards-LongMultiTarget": {
+      "dps": 715.76942,
+      "tps": 1297.90834,
+      "dtps": 8.88527,
+      "hps": 8.53523
+    },
+    "TestDestruction-Settings-Gnome-preraid-Destruction-destro-FullBuffs-0.0yards-LongSingleTarget": {
+      "dps": 631.35557,
+      "tps": 366.00689,
+      "dtps": 9.02936,
+      "hps": 8.35889
+    },
+    "TestDestruction-Settings-Gnome-preraid-Destruction-destro-FullBuffs-0.0yards-ShortSingleTarget": {
+      "dps": 677.60469,
+      "tps": 361.75717,
+      "dtps": 13.50805,
+      "hps": 8.55882
+    },
+    "TestDestruction-Settings-Gnome-preraid-Destruction-destro-NoBuffs-0.0yards-LongMultiTarget": {
+      "dps": 392.04799,
+      "tps": 1362.1522,
+      "dtps": 0,
+      "hps": 6.99824
+    },
+    "TestDestruction-Settings-Gnome-preraid-Destruction-destro-NoBuffs-0.0yards-LongSingleTarget": {
+      "dps": 392.04799,
+      "tps": 337.92553,
+      "dtps": 0,
+      "hps": 6.99824
+    },
+    "TestDestruction-Settings-Gnome-preraid-Destruction-destro-NoBuffs-0.0yards-ShortSingleTarget": {
+      "dps": 424.01651,
+      "tps": 342.29837,
+      "dtps": 0,
+      "hps": 7.09063
+    },
+    "TestDestruction-Settings-Orc-preraid-Destruction-destro-FullBuffs-0.0yards-LongMultiTarget": {
+      "dps": 717.42242,
+      "tps": 1317.89704,
+      "dtps": 8.96368,
+      "hps": 8.32562
+    },
+    "TestDestruction-Settings-Orc-preraid-Destruction-destro-FullBuffs-0.0yards-LongSingleTarget": {
+      "dps": 637.63367,
+      "tps": 370.3197,
+      "dtps": 9.14719,
+      "hps": 8.31579
+    },
+    "TestDestruction-Settings-Orc-preraid-Destruction-destro-FullBuffs-0.0yards-ShortSingleTarget": {
+      "dps": 690.46264,
+      "tps": 370.4415,
+      "dtps": 13.61099,
+      "hps": 8.55882
+    },
+    "TestDestruction-Settings-Orc-preraid-Destruction-destro-NoBuffs-0.0yards-LongMultiTarget": {
+      "dps": 400.2284,
+      "tps": 1384.18584,
+      "dtps": 0,
+      "hps": 6.99824
+    },
+    "TestDestruction-Settings-Orc-preraid-Destruction-destro-NoBuffs-0.0yards-LongSingleTarget": {
+      "dps": 400.2284,
+      "tps": 345.12334,
+      "dtps": 0,
+      "hps": 6.99824
+    },
+    "TestDestruction-Settings-Orc-preraid-Destruction-destro-NoBuffs-0.0yards-ShortSingleTarget": {
+      "dps": 427.28432,
+      "tps": 348.72425,
+      "dtps": 0,
+      "hps": 6.8478
+    },
+    "TestDestruction-SwitchInFrontOfTarget-Default": {
+      "dps": 628.51598,
+      "tps": 370.3197,
+      "dtps": 9.14719,
+      "hps": 8.31579
+    }
+  }
+}

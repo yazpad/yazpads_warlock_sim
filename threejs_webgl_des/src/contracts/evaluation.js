@@ -32,7 +32,7 @@ export function validateEvaluationRequest(request) {
   if (Object.keys(settings.seedSchedule).some(k=>!['kind','seed'].includes(k)) || settings.seedSchedule.kind !== 'existing-warlock-v1') throw new Error('Unsupported seed schedule.');
   const seed = settings.seedSchedule.seed;
   if (!Number.isInteger(seed) || seed < 0 || seed > 4294967295) throw new Error('Invalid seed.');
-  if (!['fast','detailed'].includes(settings.mode) || settings.objective !== 'mean-dps') throw new Error('Unsupported evaluation mode/objective.');
+  if (!['fast','detailed'].includes(settings.mode) || !['mean-dps', 'p95-dps'].includes(settings.objective)) throw new Error('Unsupported evaluation mode/objective.');
   if (settings.batchSize !== undefined && (!Number.isInteger(settings.batchSize) || settings.batchSize < 1)) throw new Error('Invalid batchSize.');
   requireClassEvaluation(getClassModule(classId), settings);
   return request;
@@ -45,12 +45,13 @@ export function mapEvaluationResults(request, batch) {
     const states = result?.states;
     const completed = Array.isArray(states) ? states.filter(s=>s?.done === 1 && Number.isFinite(s.total)).length : 0;
     const mean = result?.summary?.mean;
-    const complete = completed === request.settings.iterations && states.length === completed && Number.isFinite(mean);
+    const score = request.settings.objective === 'p95-dps' ? result?.summary?.p95 : mean;
+    const complete = completed === request.settings.iterations && states.length === completed && Number.isFinite(mean) && Number.isFinite(score);
     const sd = result?.summary?.sd;
     return { schemaVersion: 1, requestId: request.requestId, candidateId: candidate.candidateId,
       classId: candidate.classId, status: complete ? 'complete' : 'incomplete', sampleCount: completed,
-      objective: { id: request.settings.objective, value: complete ? mean : null },
-      uncertainty: complete && completed > 1 && Number.isFinite(sd) && sd >= 0 ?
+      objective: { id: request.settings.objective, value: complete ? score : null },
+      uncertainty: request.settings.objective === 'mean-dps' && complete && completed > 1 && Number.isFinite(sd) && sd >= 0 ?
         { kind: 'standard-error', value: sd / Math.sqrt(completed) } : null,
       detail: complete && request.settings.mode === 'detailed' ? result : null,
       error: complete ? null : { code: 'INCOMPLETE_RESULT', message: 'Expected completed finite samples and a finite fitness value.' } };

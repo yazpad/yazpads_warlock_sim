@@ -1,0 +1,19 @@
+{
+  "description": "Full preset × race × profile sweep. Profiles change one baseline stat at a time, except regeneration profiles which jointly change spirit and mp5. All stats are bonuses above racial/class bases. Gear-free, 180s, zero distance, external CoE only, no consumables. Source APLs are retained, including their race-specific action IDs; this measures import behavior rather than optimizing each race's rotation.",
+  "presets": ["sm_ruin", "aff_wrack", "destro", "demo_shadow_brand", "demo_fire_brand"],
+  "races": ["HUMAN", "ORC", "UNDEAD", "TROLL", "GNOME"],
+  "profiles": [
+    {"id": "baseline", "stats": {}},
+    {"id": "sp_250", "stats": {"spellPower": 250}},
+    {"id": "sp_1000", "stats": {"spellPower": 1000}},
+    {"id": "int_0", "stats": {"intellect": 0}},
+    {"id": "int_400", "stats": {"intellect": 400}},
+    {"id": "hit_0", "stats": {"hit": 0}},
+    {"id": "hit_5", "stats": {"hit": 5}},
+    {"id": "hit_16", "stats": {"hit": 16}},
+    {"id": "crit_0", "stats": {"crit": 0}},
+    {"id": "crit_30", "stats": {"crit": 30}},
+    {"id": "regen_low", "stats": {"spirit": 0, "mp5": 0}},
+    {"id": "regen_high", "stats": {"spirit": 200, "mp5": 100}}
+  ]
+}

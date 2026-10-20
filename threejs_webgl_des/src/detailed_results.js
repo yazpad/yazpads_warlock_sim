@@ -12,6 +12,7 @@ export function summarizeDetails(totals, count, duration, sortedDps) {
     uptimes: UPTIME_EFFECTS.map(([name, key]) => ({name, fraction: average(`uptime_${key}`)})),
     histogram: bins,
     manaSpent: average('spent'), manaWasted: average('manaWasted'),
+    manaGained: average('gained'), manaEnd: average('mana'),
     tapsPerMinute: average('taps') * 60 / duration,
     nightfallPerMinute: average('procs') * 60 / duration,
     isbPerMinute: average('isbProcs') * 60 / duration,
@@ -37,6 +38,6 @@ export function renderDetailedResults(container, summary, duration) {
     <h4>DoT and buff uptimes</h4>
     <div class="damage-table-wrapper"><table class="damage-table detail-uptimes"><thead><tr><th>Effect</th><th>Uptime</th><th>Active time</th><th>Inactive time</th></tr></thead><tbody>${details.uptimes.map(effect => `<tr><td>${effect.name}</td><td>${fmt(effect.fraction*100)}%</td><td>${fmt(effect.fraction*duration)}s</td><td>${fmt((1-effect.fraction)*duration)}s</td></tr>`).join('')}</tbody></table></div>
     <h4>Spell statistics</h4>
-    <div class="damage-table-wrapper"><table class="damage-table"><thead><tr><th>Spell</th><th>Damage share</th><th>Casts/min</th><th>Misses/fight</th><th>Crits / damage events</th><th>Damage/event</th></tr></thead><tbody>${summary.spells.filter(spell=>spell.casts>0||spell.damage>0).map(spell=>`<tr><td>${spell.name}</td><td>${fmt(spell.damage/summary.damage*100)}%</td><td>${fmt(spell.casts*60/duration)}</td><td>${fmt(spell.misses)}</td><td>${fmt(spell.hits?spell.crits/spell.hits*100:0)}%</td><td>${spell.hits?fmt(spell.damage/spell.hits):'—'}</td></tr>`).join('')}</tbody></table></div>
+    <div class="damage-table-wrapper"><table class="damage-table"><thead><tr><th>Spell</th><th>Damage share</th><th>Casts/min</th><th>Misses/fight</th><th>Ticks/fight</th><th>Periodic DPS</th><th>Crits / damage events</th><th>Damage/event</th></tr></thead><tbody>${summary.spells.filter(spell=>spell.casts>0||spell.damage>0).map(spell=>`<tr><td>${spell.name}</td><td>${fmt(spell.damage/summary.damage*100)}%</td><td>${fmt(spell.casts*60/duration)}</td><td>${fmt(spell.misses)}</td><td>${spell.ticks==null?'—':fmt(spell.ticks)}</td><td>${spell.periodicDamage==null?'—':fmt(spell.periodicDamage/duration)}</td><td>${fmt(spell.hits?spell.crits/spell.hits*100:0)}%</td><td>${spell.hits?fmt(spell.damage/spell.hits):'—'}</td></tr>`).join('')}</tbody></table></div>
     `;
 }

@@ -77,3 +77,31 @@ test('Undead GPU proc has a 25-second cooldown and flat damage independent of Sh
     assert.ok(Math.abs(states[i + 1].total - states[i].total - delta) < 0.1);
   }
 });
+
+test('Amplify Curse boosts all Agony damage including spell power by 50%', t => {
+  const inputs = [0, 500, 2000].flatMap(spellPower => [false, true].map(amplifyCurse => ({
+    duration: 25, distance: 0, hit: 100, spellPower, amplifyCurse,
+    nightfall: false, isb: false, partialResists: false,
+    aplRules: compileAPLToBytecode(parseAPLText('Bane of Agony if target.debuff_remains("Bane of Agony") <= 0')),
+  })));
+  const cases = inputs.map(config => ({ mode: 'detailed', width: 1, height: Math.ceil(STATE_WORDS / 16), configWords: Array.from(packConfig(config)),
+    uniforms: { numConfigs: 1, fightsPerConfig: 1, seed: 42, offset: 0, count: 1, gridWidth: 1, mode: 1, eventBudget: 65536 } }));
+  const path = join(mkdtempSync(join(tmpdir(), 'warlock-amplify-')), 'cases.json');
+  writeFileSync(path, JSON.stringify({ vertex: '#version 300 es\n' + VERTEX, detailed: '#version 300 es\n' + FRAGMENT, cases }));
+  const run = spawnSync('python3', [fileURLToPath(new URL('./headless_gles.py', import.meta.url)), path], { encoding: 'utf8', timeout: 120000, maxBuffer: 8 * 1024 * 1024 });
+  assert.equal(run.status, 0, run.stderr || String(run.error));
+  const { outputs, renderer } = JSON.parse(run.stdout); t.diagnostic(renderer);
+  const states = outputs.map(out => {
+    const words = new Uint32Array(STATE_WORDS);
+    for (let i = 0; i < words.length; i++) words[i] = out[Math.floor(i % 16 / 4)][Math.floor(i / 16) * 4 + i % 4];
+    return decodeStates(words.buffer, 1)[0];
+  });
+  for (let i = 0; i < states.length; i += 2) {
+    const plain = states[i], amplified = states[i + 1];
+    assert.equal(plain.done, 1); assert.equal(amplified.done, 1);
+    assert.equal(plain.hits2, 12); assert.equal(amplified.hits2, 12);
+    assert.ok(plain.damage2 > 0);
+    assert.ok(Math.abs(amplified.damage2 - plain.damage2 * 1.5) < 0.02,
+      `spell power ${inputs[i].spellPower}: ${amplified.damage2} vs ${plain.damage2 * 1.5}`);
+  }
+});

@@ -13,25 +13,14 @@ const DEFAULT_ENCHANTS = {
 };
 
 export async function initGear(onStatsChange) {
-  try {
-    const res = await fetch(new URL('../data/items.json', import.meta.url));
-    itemDb = await res.json();
-  } catch (err) {
-    console.error('Failed to load items.json:', err);
-    return;
-  }
-
-  // Set default to Phase 6 BiS
-  loadBiSPreset('p6', false);
-  renderPaperdoll();
-  renderBiSButtons();
-
-  if (onStatsChange) {
-    onStatsChange(calculateEquippedStats());
-  }
+  // Gear is deferred; direct configurations have no catalog or BiS dependency.
+  itemDb = { slots: [], items: [], presets: {} };
+  activeGear = {};
+  setGearMode('direct');
 }
 
 export function setGearMode(mode) {
+  if (mode !== 'direct') throw new Error('Gear is deferred. Use direct bonus stats.');
   gearMode = mode;
   const paperdollContainer = document.getElementById('paperdoll-view');
   const directStatsContainer = document.getElementById('direct-stats-view');

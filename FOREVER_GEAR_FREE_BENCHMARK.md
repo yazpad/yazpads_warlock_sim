@@ -1,0 +1,277 @@
+# Gear-free diagnostic DPS comparison
+
+Fresh run after production Doom cooldown correction (60 seconds, including misses). Forever revision `86d0920cae8445eaa90de9c17c3583cf171c19c5`. Previous capture: `fixtures/benchmark_history/gear-free-coe-1000-before-doom-cooldown.*`. Shadow Brand now +0.34%, Fire Brand -0.44%; other three presets unchanged. Eureka investigation is diagnostic only; production behavior is unchanged.
+
+1,000 iterations per preset **in each engine**, seed 101, 180 seconds. Our shader uses **detailed/slow mode** for counters and damage splits. Explicit bonus stats, empty equipment and external CoE only; no other external buffs/consumables.
+
+**Diagnostic results, not accepted parity.** Normal imports are evaluated as implemented, with known APL gaps and Fire Brand initial-state differences. No configuration values were adjusted to close the DPS gap.
+
+Intervals are approximate 95% confidence intervals for the means. Delta uncertainty uses independent-engine standard errors; equal seeds do not imply paired random outcomes. These intervals describe Monte Carlo uncertainty, not uncertainty from missing features or formulas.
+
+| Preset | Forever DPS ±95% CI | Our WebGL DPS ±95% CI | Ours − Forever | Delta % | Delta ±95% CI |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| sm_ruin | 653.96 ± 2.12 | 648.73 ± 2.01 | -5.23 | -0.80% | ±2.92 |
+| aff_wrack | 558.98 ± 1.22 | 557.40 ± 1.16 | -1.59 | -0.28% | ±1.68 |
+| destro | 637.71 ± 1.43 | 639.08 ± 1.42 | 1.38 | 0.22% | ±2.02 |
+| demo_shadow_brand | 715.71 ± 2.04 | 718.17 ± 2.02 | 2.45 | 0.34% | ±2.87 |
+| demo_fire_brand | 752.84 ± 1.41 | 749.50 ± 1.40 | -3.34 | -0.44% | ±1.99 |
+
+## Pet damage contributions
+
+| Preset | Forever pet DPS | Our pet DPS |
+| --- | ---: | ---: |
+| sm_ruin | 43.94 | 42.24 |
+| aff_wrack | 43.55 | 43.93 |
+| destro | 46.58 | 44.61 |
+| demo_shadow_brand | 131.17 | 127.72 |
+| demo_fire_brand | 182.63 | 178.99 |
+
+## sm_ruin: spell and pet breakdown
+
+Each pair is **Forever / ours**, averaged per fight. Landed events include crits and ticks; misses are failed applications/attacks. Resisted-hit counters are subsets and are not added again. Damage is inclusive; crit and periodic damage are subsets, not additional damage.
+
+| Action | DPS F / O | Δ DPS | Casts F / O | Landed F / O | Crits F / O | Ticks F / O | Misses F / O |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Shadow Bolt | 301.17 / 299.40 | -1.77 | 41.22 / 41.10 | 41.22 / 41.00 | 11.88 / 11.83 | 0.00 / 0.00 | 0.00 / 0.00 |
+| Succubus melee | 36.12 / 34.74 | -1.38 | 90.01 / 90.00 | 84.16 / 84.15 | 17.03 / 21.45 | 0.00 / 0.00 | 5.85 / 5.85 |
+| Bane of Agony | 38.68 / 37.72 | -0.96 | 3.00 / 3.00 | 27.09 / 26.28 | 7.85 / 7.69 | 27.09 / 26.28 | 0.00 / 0.00 |
+| Siphon Life | 35.73 / 35.15 | -0.58 | 6.00 / 6.00 | 56.14 / 55.34 | 16.04 / 15.89 | 56.14 / 55.34 | 0.00 / 0.00 |
+| Immolate | 64.07 / 63.65 | -0.42 | 9.09 / 9.08 | 53.62 / 53.38 | 12.84 / 12.65 | 44.53 / 44.30 | 0.00 / 0.00 |
+| Succubus Lash of Pain | 7.82 / 7.49 | -0.33 | 16.00 / 15.00 | 16.00 / 15.00 | 3.81 / 4.33 | 0.00 / 0.00 | 0.00 / 0.00 |
+| Bane of Doom | 73.64 / 73.88 | 0.24 | 2.00 / 2.00 | 2.00 / 2.00 | 0.57 / 0.58 | 2.00 / 2.00 | 0.00 / 0.00 |
+| Corruption | 96.72 / 96.70 | -0.03 | 9.57 / 9.55 | 53.76 / 53.74 | 15.52 / 15.56 | 53.76 / 53.74 | 0.00 / 0.00 |
+| Life Tap | 0.00 / 0.00 | 0.00 | 23.06 / 23.04 | 0.00 / 0.00 | 0.00 / 0.00 | 0.00 / 0.00 | 0.00 / 0.00 |
+| Amplify Curse | 0.00 / 0.00 | 0.00 | 1.00 / 1.00 | 0.00 / 0.00 | 0.00 / 0.00 | 0.00 / 0.00 | 0.00 / 0.00 |
+
+### Damage components
+
+| Action | Direct DPS F / O | Periodic DPS F / O | Damage/landed event F / O |
+| --- | ---: | ---: | ---: |
+| Shadow Bolt | 301.17 / 299.40 | 0.00 / 0.00 | 1315.26 / 1314.53 |
+| Succubus melee | 36.12 / 34.74 | 0.00 / 0.00 | 77.25 / 74.31 |
+| Bane of Agony | 0.00 / 0.00 | 38.68 / 37.72 | 257.04 / 258.32 |
+| Siphon Life | 0.00 / 0.00 | 35.73 / 35.15 | 114.56 / 114.33 |
+| Immolate | 19.56 / 19.41 | 44.51 / 44.24 | 215.10 / 214.64 |
+| Succubus Lash of Pain | 7.82 / 7.49 | 0.00 / 0.00 | 87.96 / 89.92 |
+| Bane of Doom | 0.00 / 0.00 | 73.64 / 73.88 | 6627.82 / 6649.56 |
+| Corruption | 0.00 / 0.00 | 96.72 / 96.70 | 323.86 / 323.91 |
+
+### Mana accounting
+
+| Metric per fight | Forever | Ours |
+| --- | ---: | ---: |
+| manaSpent | 23892.09 | 23840.15 |
+| manaGained | 18716.53 | 18657.33 |
+| manaActualGain | 18716.53 | 18657.33 |
+| manaWasted | 0.00 | 0.00 |
+| manaEnd | — | 560.18 |
+| lifeTaps | 23.06 | 23.04 |
+
+Damage reconciliation error per fight: Forever 0.000000, ours -0.031466. All damage sources are retained, including source-only actions.
+
+JSON also contains periodic crit counts/damage, per-action source identities, glances, source resource/aura metrics, our aura uptimes and proc totals. A dash denotes an absent/unavailable counterpart; it is not a measured zero. Pet critical damage is not separately collected on our side; Brand independent cast/hit/crit/miss counts are collected. Amplify Curse counts our automatic activations, which need not have identical action semantics to the source APL.
+
+## aff_wrack: spell and pet breakdown
+
+Each pair is **Forever / ours**, averaged per fight. Landed events include crits and ticks; misses are failed applications/attacks. Resisted-hit counters are subsets and are not added again. Damage is inclusive; crit and periodic damage are subsets, not additional damage.
+
+| Action | DPS F / O | Δ DPS | Casts F / O | Landed F / O | Crits F / O | Ticks F / O | Misses F / O |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Wrack | 70.56 / 66.45 | -4.11 | 8.92 / 8.25 | 52.33 / 48.21 | 14.45 / 13.34 | 52.33 / 48.21 | 0.00 / 0.00 |
+| Shadow Bolt | 151.12 / 154.39 | 3.26 | 21.83 / 22.28 | 21.83 / 22.27 | 6.12 / 6.19 | 0.00 / 0.00 | 0.00 / 0.00 |
+| Corruption | 91.16 / 90.18 | -0.97 | 9.01 / 9.00 | 52.27 / 51.65 | 14.32 / 14.27 | 52.27 / 51.65 | 0.00 / 0.00 |
+| Bane of Agony | 108.36 / 107.63 | -0.72 | 7.96 / 7.95 | 85.75 / 85.49 | 23.64 / 23.84 | 85.75 / 85.49 | 0.00 / 0.00 |
+| Succubus melee | 35.75 / 36.11 | 0.36 | 90.01 / 90.00 | 84.16 / 84.22 | 16.05 / 20.41 | 0.00 / 0.00 | 5.85 / 5.78 |
+| Immolate | 62.17 / 62.47 | 0.30 | 9.07 / 9.01 | 52.06 / 52.38 | 11.89 / 12.08 | 42.99 / 43.36 | 0.00 / 0.00 |
+| Siphon Life | 32.07 / 32.35 | 0.28 | 5.86 / 5.92 | 52.60 / 53.34 | 14.55 / 14.59 | 52.60 / 53.34 | 0.00 / 0.00 |
+| Succubus Lash of Pain | 7.80 / 7.82 | 0.02 | 16.00 / 15.00 | 16.00 / 15.00 | 3.68 / 4.13 | 0.00 / 0.00 | 0.00 / 0.00 |
+| Life Tap | 0.00 / 0.00 | 0.00 | 18.21 / 18.95 | 0.00 / 0.00 | 0.00 / 0.00 | 0.00 / 0.00 | 0.00 / 0.00 |
+| Amplify Curse | 0.00 / 0.00 | 0.00 | 1.01 / 1.00 | 0.00 / 0.00 | 0.00 / 0.00 | 0.00 / 0.00 | 0.00 / 0.00 |
+| Blood Fury | 0.00 / 0.00 | 0.00 | 1.11 / 1.01 | 0.00 / 0.00 | 0.00 / 0.00 | 0.00 / 0.00 | 0.00 / 0.00 |
+
+### Damage components
+
+| Action | Direct DPS F / O | Periodic DPS F / O | Damage/landed event F / O |
+| --- | ---: | ---: | ---: |
+| Wrack | 0.00 / 0.00 | 70.56 / 66.45 | 242.70 / 248.10 |
+| Shadow Bolt | 151.12 / 154.39 | 0.00 / 0.00 | 1246.10 / 1247.56 |
+| Corruption | 0.00 / 0.00 | 91.16 / 90.18 | 313.88 / 314.26 |
+| Bane of Agony | 0.00 / 0.00 | 108.36 / 107.63 | 227.47 / 226.61 |
+| Succubus melee | 35.75 / 36.11 | 0.00 / 0.00 | 76.46 / 77.18 |
+| Immolate | 19.51 / 19.31 | 42.66 / 43.16 | 214.94 / 214.68 |
+| Siphon Life | 0.00 / 0.00 | 32.07 / 32.35 | 109.73 / 109.15 |
+| Succubus Lash of Pain | 7.80 / 7.82 | 0.00 / 0.00 | 87.79 / 93.86 |
+
+### Mana accounting
+
+| Metric per fight | Forever | Ours |
+| --- | ---: | ---: |
+| manaSpent | 20438.98 | 20473.49 |
+| manaGained | 15250.73 | 15309.65 |
+| manaActualGain | 15250.73 | 15309.65 |
+| manaWasted | 0.00 | 0.00 |
+| manaEnd | — | 534.17 |
+| lifeTaps | 18.21 | 18.95 |
+
+Damage reconciliation error per fight: Forever 0.000000, ours 0.012791. All damage sources are retained, including source-only actions.
+
+JSON also contains periodic crit counts/damage, per-action source identities, glances, source resource/aura metrics, our aura uptimes and proc totals. A dash denotes an absent/unavailable counterpart; it is not a measured zero. Pet critical damage is not separately collected on our side; Brand independent cast/hit/crit/miss counts are collected. Amplify Curse counts our automatic activations, which need not have identical action semantics to the source APL.
+
+## destro: spell and pet breakdown
+
+Each pair is **Forever / ours**, averaged per fight. Landed events include crits and ticks; misses are failed applications/attacks. Resisted-hit counters are subsets and are not added again. Damage is inclusive; crit and periodic damage are subsets, not additional damage.
+
+| Action | DPS F / O | Δ DPS | Casts F / O | Landed F / O | Crits F / O | Ticks F / O | Misses F / O |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Immolate | 87.21 / 92.82 | 5.61 | 10.00 / 11.00 | 59.00 / 61.00 | 12.79 / 13.21 | 49.00 / 50.00 | 0.00 / 0.00 |
+| Incinerate | 212.37 / 207.39 | -4.99 | 34.00 / 33.00 | 34.00 / 33.00 | 7.50 / 7.29 | 0.00 / 0.00 | 0.00 / 0.00 |
+| Bane of Doom | 61.08 / 64.02 | 2.94 | 2.00 / 2.00 | 2.00 / 2.00 | 0.43 / 0.42 | 2.00 / 2.00 | 0.00 / 0.00 |
+| Succubus melee | 38.20 / 36.77 | -1.42 | 90.01 / 90.00 | 84.16 / 84.11 | 15.18 / 19.58 | 0.00 / 0.00 | 5.85 / 5.89 |
+| Bane of Agony | 25.11 / 24.27 | -0.84 | 3.00 / 3.00 | 28.00 / 27.00 | 6.20 / 5.85 | 28.00 / 27.00 | 0.00 / 0.00 |
+| Shadowburn | 44.60 / 45.24 | 0.64 | 10.00 / 10.00 | 10.00 / 10.00 | 2.24 / 2.23 | 0.00 / 0.00 | 0.00 / 0.00 |
+| Succubus Lash of Pain | 8.38 / 7.84 | -0.55 | 16.00 / 15.00 | 16.00 / 15.00 | 3.56 / 3.25 | 0.00 / 0.00 | 0.00 / 0.00 |
+| Conflagrate | 85.80 / 85.54 | -0.25 | 16.00 / 16.00 | 16.00 / 16.00 | 7.52 / 7.42 | 0.00 / 0.00 | 0.00 / 0.00 |
+| Corruption | 74.95 / 75.19 | 0.24 | 9.00 / 9.00 | 50.00 / 50.00 | 10.80 / 10.99 | 50.00 / 50.00 | 0.00 / 0.00 |
+| Life Tap | 0.00 / 0.00 | 0.00 | 24.00 / 25.00 | 0.00 / 0.00 | 0.00 / 0.00 | 0.00 / 0.00 | 0.00 / 0.00 |
+| Eureka! | 0.00 / 0.00 | 0.00 | 2.00 / 2.00 | 0.00 / 0.00 | 0.00 / 0.00 | 0.00 / 0.00 | 0.00 / 0.00 |
+
+### Damage components
+
+| Action | Direct DPS F / O | Periodic DPS F / O | Damage/landed event F / O |
+| --- | ---: | ---: | ---: |
+| Immolate | 34.79 / 38.56 | 52.42 / 54.26 | 266.08 / 273.91 |
+| Incinerate | 212.37 / 207.39 | 0.00 / 0.00 | 1124.33 / 1131.20 |
+| Bane of Doom | 0.00 / 0.00 | 61.08 / 64.02 | 5496.77 / 5761.43 |
+| Succubus melee | 38.20 / 36.77 | 0.00 / 0.00 | 81.69 / 78.69 |
+| Bane of Agony | 0.00 / 0.00 | 25.11 / 24.27 | 161.45 / 161.82 |
+| Shadowburn | 44.60 / 45.24 | 0.00 / 0.00 | 802.80 / 814.24 |
+| Succubus Lash of Pain | 8.38 / 7.84 | 0.00 / 0.00 | 94.31 / 94.05 |
+| Conflagrate | 85.80 / 85.54 | 0.00 / 0.00 | 965.20 / 962.38 |
+| Corruption | 0.00 / 0.00 | 74.95 / 75.19 | 269.83 / 270.67 |
+
+### Mana accounting
+
+| Metric per fight | Forever | Ours |
+| --- | ---: | ---: |
+| manaSpent | 24537.00 | 25524.45 |
+| manaGained | 19123.20 | 19870.00 |
+| manaActualGain | 19123.20 | 19870.00 |
+| manaWasted | 0.00 | 0.00 |
+| manaEnd | — | 422.95 |
+| lifeTaps | 24.00 | 25.00 |
+
+Damage reconciliation error per fight: Forever 0.000000, ours -0.092537. All damage sources are retained, including source-only actions.
+
+JSON also contains periodic crit counts/damage, per-action source identities, glances, source resource/aura metrics, our aura uptimes and proc totals. A dash denotes an absent/unavailable counterpart; it is not a measured zero. Pet critical damage is not separately collected on our side; Brand independent cast/hit/crit/miss counts are collected. Amplify Curse counts our automatic activations, which need not have identical action semantics to the source APL.
+
+## demo_shadow_brand: spell and pet breakdown
+
+Each pair is **Forever / ours**, averaged per fight. Landed events include crits and ticks; misses are failed applications/attacks. Resisted-hit counters are subsets and are not added again. Damage is inclusive; crit and periodic damage are subsets, not additional damage.
+
+| Action | DPS F / O | Δ DPS | Casts F / O | Landed F / O | Crits F / O | Ticks F / O | Misses F / O |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Bane of Doom | 71.93 / 74.10 | 2.17 | 2.00 / 2.00 | 1.92 / 1.94 | 0.41 / 0.47 | 1.92 / 1.94 | 0.08 / 0.07 |
+| Corruption | 84.06 / 86.01 | 1.95 | 8.30 / 8.35 | 46.53 / 47.49 | 11.17 / 11.32 | 46.53 / 47.49 | 0.35 / 0.32 |
+| Soul Fire | 44.47 / 46.32 | 1.85 | 5.41 / 5.61 | 5.18 / 5.38 | 1.25 / 1.32 | 0.00 / 0.00 | 0.24 / 0.23 |
+| Searing Pain | 50.11 / 48.51 | -1.59 | 15.57 / 14.98 | 14.93 / 14.39 | 4.96 / 4.82 | 0.00 / 0.00 | 0.64 / 0.58 |
+| Succubus melee | 41.40 / 39.85 | -1.55 | 90.01 / 90.00 | 84.16 / 84.25 | 17.03 / 21.30 | 0.00 / 0.00 | 5.85 / 5.75 |
+| Succubus Lash of Pain | 17.05 / 15.55 | -1.51 | 16.00 / 15.00 | 15.41 / 14.42 | 3.76 / 3.48 | 0.00 / 0.00 | 0.59 / 0.58 |
+| Shadow Bolt | 231.34 / 232.73 | 1.39 | 27.61 / 27.72 | 26.45 / 26.63 | 6.32 / 6.34 | 0.00 / 0.00 | 1.16 / 1.09 |
+| Succubus Demonic Brand | 72.72 / 72.33 | -0.39 | 0.00 / 80.26 | 77.44 / 77.09 | 18.42 / 18.20 | 0.00 / 0.00 | 3.27 / 3.17 |
+| Immolate | 74.30 / 74.44 | 0.14 | 10.38 / 10.41 | 56.83 / 56.76 | 13.45 / 13.58 | 46.90 / 46.78 | 0.44 / 0.43 |
+| Bane of Agony | 28.33 / 28.34 | 0.01 | 3.06 / 3.11 | 25.69 / 25.68 | 6.03 / 6.08 | 25.69 / 25.68 | 0.11 / 0.13 |
+| Life Tap | 0.00 / 0.00 | 0.00 | 25.02 / 25.05 | 0.00 / 0.00 | 0.00 / 0.00 | 0.00 / 0.00 | 0.00 / 0.00 |
+
+### Damage components
+
+| Action | Direct DPS F / O | Periodic DPS F / O | Damage/landed event F / O |
+| --- | ---: | ---: | ---: |
+| Bane of Doom | 0.00 / 0.00 | 71.93 / 74.10 | 6729.37 / 6892.86 |
+| Corruption | 0.00 / 0.00 | 84.06 / 86.01 | 325.19 / 325.97 |
+| Soul Fire | 44.47 / 46.32 | 0.00 / 0.00 | 1546.57 / 1550.82 |
+| Searing Pain | 50.11 / 48.51 | 0.00 / 0.00 | 604.22 / 606.61 |
+| Succubus melee | 41.40 / 39.85 | 0.00 / 0.00 | 88.54 / 85.13 |
+| Succubus Lash of Pain | 17.05 / 15.55 | 0.00 / 0.00 | 199.18 / 194.01 |
+| Shadow Bolt | 231.34 / 232.73 | 0.00 / 0.00 | 1574.47 / 1573.27 |
+| Succubus Demonic Brand | 72.72 / 72.33 | 0.00 / 0.00 | 169.02 / 168.88 |
+| Immolate | 22.99 / 23.16 | 51.31 / 51.28 | 235.33 / 236.07 |
+| Bane of Agony | 0.00 / 0.00 | 28.33 / 28.34 | 198.49 / 198.59 |
+
+### Mana accounting
+
+| Metric per fight | Forever | Ours |
+| --- | ---: | ---: |
+| manaSpent | 22940.86 | 22992.47 |
+| manaGained | 16966.94 | 16970.97 |
+| manaActualGain | 16966.94 | 16970.97 |
+| manaWasted | 0.00 | 0.00 |
+| manaEnd | — | 582.95 |
+| lifeTaps | 25.02 | 25.05 |
+
+Damage reconciliation error per fight: Forever 0.000000, ours 0.022779. All damage sources are retained, including source-only actions.
+
+JSON also contains periodic crit counts/damage, per-action source identities, glances, source resource/aura metrics, our aura uptimes and proc totals. A dash denotes an absent/unavailable counterpart; it is not a measured zero. Pet critical damage is not separately collected on our side; Brand independent cast/hit/crit/miss counts are collected. Amplify Curse counts our automatic activations, which need not have identical action semantics to the source APL.
+
+## demo_fire_brand: spell and pet breakdown
+
+Each pair is **Forever / ours**, averaged per fight. Landed events include crits and ticks; misses are failed applications/attacks. Resisted-hit counters are subsets and are not added again. Damage is inclusive; crit and periodic damage are subsets, not additional damage.
+
+| Action | DPS F / O | Δ DPS | Casts F / O | Landed F / O | Crits F / O | Ticks F / O | Misses F / O |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Imp Firebolt | 106.66 / 103.48 | -3.19 | 90.00 / 90.00 | 86.36 / 86.37 | 20.66 / 20.69 | 0.00 / 0.00 | 3.63 / 3.63 |
+| Searing Pain | 259.96 / 263.10 | 3.14 | 64.06 / 64.53 | 61.47 / 61.91 | 20.71 / 21.03 | 0.00 / 0.00 | 2.59 / 2.61 |
+| Soul Fire | 58.64 / 55.52 | -3.13 | 5.64 / 5.35 | 5.42 / 5.14 | 1.28 / 1.21 | 0.00 / 0.00 | 0.22 / 0.20 |
+| Immolate | 114.62 / 112.02 | -2.60 | 10.91 / 10.41 | 60.09 / 59.18 | 14.25 / 14.05 | 49.62 / 49.18 | 0.44 / 0.42 |
+| Corruption | 62.35 / 63.89 | 1.54 | 8.41 / 8.90 | 46.94 / 48.05 | 11.11 / 11.48 | 46.94 / 48.05 | 0.32 / 0.35 |
+| Bane of Doom | 53.31 / 54.10 | 0.79 | 2.00 / 2.00 | 1.92 / 1.93 | 0.41 / 0.46 | 1.92 / 1.93 | 0.08 / 0.07 |
+| Bane of Agony | 21.31 / 21.89 | 0.57 | 3.10 / 3.12 | 25.43 / 26.27 | 6.00 / 6.16 | 25.43 / 26.27 | 0.13 / 0.13 |
+| Imp Demonic Brand | 75.97 / 75.51 | -0.45 | 0.00 / 83.92 | 80.87 / 80.45 | 19.31 / 19.07 | 0.00 / 0.00 | 3.43 / 3.46 |
+| Life Tap | 0.00 / 0.00 | 0.00 | 22.00 / 21.95 | 0.00 / 0.00 | 0.00 / 0.00 | 0.00 / 0.00 | 0.00 / 0.00 |
+
+### Damage components
+
+| Action | Direct DPS F / O | Periodic DPS F / O | Damage/landed event F / O |
+| --- | ---: | ---: | ---: |
+| Imp Firebolt | 106.66 / 103.48 | 0.00 / 0.00 | 222.30 / 215.65 |
+| Searing Pain | 259.96 / 263.10 | 0.00 / 0.00 | 761.23 / 764.91 |
+| Soul Fire | 58.64 / 55.52 | 0.00 / 0.00 | 1946.10 / 1943.42 |
+| Immolate | 45.89 / 43.89 | 68.73 / 68.12 | 343.35 / 340.71 |
+| Corruption | 0.00 / 0.00 | 62.35 / 63.89 | 239.10 / 239.34 |
+| Bane of Doom | 0.00 / 0.00 | 53.31 / 54.10 | 4992.81 / 5050.99 |
+| Bane of Agony | 0.00 / 0.00 | 21.31 / 21.89 | 150.90 / 149.97 |
+| Imp Demonic Brand | 75.97 / 75.51 | 0.00 / 0.00 | 169.09 / 168.95 |
+
+### Mana accounting
+
+| Metric per fight | Forever | Ours |
+| --- | ---: | ---: |
+| manaSpent | 20925.68 | 20885.86 |
+| manaGained | 14999.45 | 14955.72 |
+| manaActualGain | 14999.45 | 14955.72 |
+| manaWasted | 0.00 | 0.00 |
+| manaEnd | — | 674.31 |
+| lifeTaps | 22.00 | 21.95 |
+
+Damage reconciliation error per fight: Forever -0.000000, ours 0.154893. All damage sources are retained, including source-only actions.
+
+JSON also contains periodic crit counts/damage, per-action source identities, glances, source resource/aura metrics, our aura uptimes and proc totals. A dash denotes an absent/unavailable counterpart; it is not a measured zero. Pet critical damage is not separately collected on our side; Brand independent cast/hit/crit/miss counts are collected. Amplify Curse counts our automatic activations, which need not have identical action semantics to the source APL.
+
+## Effect of replacing the 20-iteration reference
+
+| Preset | Old 20-trial Forever DPS | New Forever DPS |
+| --- | ---: | ---: |
+| sm_ruin | 658.82 | 653.96 |
+| aff_wrack | 558.39 | 558.98 |
+| destro | 640.24 | 637.71 |
+| demo_shadow_brand | 710.66 | 715.71 |
+| demo_fire_brand | 745.38 | 752.84 |
+
+Renderer: AMD Ryzen 9 9950X 16-Core Processor (radeonsi, raphael_mendocino, LLVM 20.1.2, DRM 3.64, 7.0.0-38-generic). Actual GLSL ES shaders run through headless EGL; this is not a browser integration or performance measurement. All shader lanes completed successfully.
+
+The JSON companion records sample standard deviations, counts, configs, exact requests, hashes, captured source provenance, source action metrics and blockers. Source requests are checked against the canonical captures; only iteration count and seed may differ.
+
+Reproduce:
+
+```sh
+node scripts/benchmark_forever_gear_free.mjs /path/to/forever go 1000 101
+```

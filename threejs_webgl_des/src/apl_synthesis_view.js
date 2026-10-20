@@ -85,6 +85,7 @@ export function readAPLGAConfig() {
     selectedActionIds: document.getElementById('apl-ga-spell-selection')
       ? Array.from(document.querySelectorAll('#apl-ga-spell-selection input:checked'), el => el.dataset.actionId)
       : undefined,
+    objective: getBool('apl-ga-optimize-p95', false) ? 'p95-dps' : 'mean-dps',
     generations: getNum('apl-ga-generations', 15),
     populationSize: getNum('apl-ga-pop-size', 500),
     screeningSims: getNum('apl-ga-screening-sims', 100),
@@ -153,7 +154,7 @@ export function setAPLGAExecutionResults(results) {
 
   if (results.bestCandidate) {
     const bestDpsEl = document.getElementById('apl-ga-stat-best-dps');
-    if (bestDpsEl) bestDpsEl.textContent = `${results.bestCandidate.meanDps.toFixed(1)} DPS`;
+    if (bestDpsEl) bestDpsEl.textContent = `${(results.bestCandidate.score ?? results.bestCandidate.meanDps).toFixed(1)} DPS`;
   }
 
   renderAPLGALeaderboard();
@@ -169,6 +170,13 @@ export function getEffectiveRules(rules = []) {
 }
 
 export function renderAPLGALeaderboard() {
+  const metric = currentAPLCandidates[0]?.objective === 'p95-dps' ? 'P95 DPS' : 'Mean DPS';
+  const pane = document.getElementById('tab-apl-synthesis');
+  const metricHeader = pane?.querySelector('thead th[data-search-metric]');
+  if (metricHeader) metricHeader.textContent = metric;
+  const chartTitle = pane?.querySelector('.ga-chart-title');
+  if (chartTitle) chartTitle.textContent = `Convergence: ${metric} vs Generation`;
+
   const tbody = document.getElementById('apl-ga-leaderboard-body');
   if (!tbody) return;
 
@@ -177,7 +185,7 @@ export function renderAPLGALeaderboard() {
     return;
   }
 
-  const leaderDps = currentAPLCandidates[0]?.meanDps || 1;
+  const leaderDps = (currentAPLCandidates[0]?.score ?? currentAPLCandidates[0]?.meanDps) || 1;
   const isPctLeader = document.getElementById('apl-ga-chk-pct-leader')?.checked;
   const isShowSd = document.getElementById('apl-ga-chk-show-sd')?.checked;
 
@@ -195,9 +203,10 @@ export function renderAPLGALeaderboard() {
       `<span class="rank-badge">${cand.rank}</span>`;
 
     // Action priority chain preview (effective rules without truncation)
+    const escapeAttr = str => String(str).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
     const effectiveRules = getEffectiveRules(cand.rules);
     const chainIcons = effectiveRules.map(r => `
-      <img src="./assets/icons/${['eureka', 'bloodFury', 'berserking'].includes(r.id) ? getSpellIcon(r.spell) : r.icon}" alt="${r.spell}" title="${r.spell}: ${r.condition}" class="prio-chain-icon" onerror="this.src='./assets/icons/Spell_Shadow_ShadowBolt.png'">
+      <img src="./assets/icons/${escapeAttr(['eureka', 'bloodFury', 'berserking'].includes(r.id) ? getSpellIcon(r.spell) : r.icon)}" alt="${escapeAttr(r.spell)}" title="${escapeAttr(r.spell)}: ${escapeAttr(r.condition)}" class="prio-chain-icon" onerror="this.src='./assets/icons/Spell_Shadow_ShadowBolt.png'">
     `).join('');
 
     // Damage Split calculation
@@ -215,14 +224,15 @@ export function renderAPLGALeaderboard() {
     }
 
     // DPS metric formatting
-    let dpsDisplay = `${cand.meanDps.toFixed(1)}`;
+    let dpsDisplay = `${(cand.score ?? cand.meanDps).toFixed(1)}`;
     if (isPctLeader && cand.rank > 1) {
-      const diffPct = ((cand.meanDps - leaderDps) / leaderDps) * 100;
-      dpsDisplay = `${cand.meanDps.toFixed(1)} <span style="font-size:0.75rem; color:#f87171;">(${diffPct.toFixed(1)}%)</span>`;
+      const diffPct = (((cand.score ?? cand.meanDps) - leaderDps) / leaderDps) * 100;
+      dpsDisplay = `${(cand.score ?? cand.meanDps).toFixed(1)} <span style="font-size:0.75rem; color:#f87171;">(${diffPct.toFixed(1)}%)</span>`;
     } else if (isPctLeader && cand.rank === 1) {
-      dpsDisplay = `${cand.meanDps.toFixed(1)} <span style="font-size:0.75rem; color:#4ade80;">(Leader)</span>`;
+      dpsDisplay = `${(cand.score ?? cand.meanDps).toFixed(1)} <span style="font-size:0.75rem; color:#4ade80;">(Leader)</span>`;
     }
 
+    if (cand.objective === 'p95-dps') dpsDisplay += `<br><small>P95 · Mean ${cand.meanDps.toFixed(1)}</small>`;
     if (isShowSd && cand.stdDev > 0) {
       dpsDisplay += `<br><span style="font-size:0.68rem; color:var(--text-dim);">±${cand.stdDev.toFixed(1)}</span>`;
     }

@@ -13,7 +13,7 @@ const classes = Object.freeze({
       features: Object.freeze({ simulation: true, batchSimulation: true,
         buildSearch: true, aplSearch: true, importBuild: true, regretScan: true }),
       modes: Object.freeze(['fast', 'detailed']),
-      objectives: Object.freeze(['mean-dps']),
+      objectives: Object.freeze(['mean-dps', 'p95-dps']),
       seedSchedules: Object.freeze(['existing-warlock-v1']),
     }),
     presentation: WARLOCK_PRESENTATION,

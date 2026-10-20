@@ -12,6 +12,7 @@ export const APL_SYNTHESIS_ACTIONS = [
   { id: 'decimateSearing', spell: 'Decimation: Searing Pain', icon: 'Spell_Fire_SoulBurn.png', action: APL_ACTION.DECIMATION_SEARING_PAIN, category: 'Execute', defaultRaw: 'decimation.inactive' },
   { id: 'decimateSoulFire', spell: 'Decimation: Soul Fire', icon: 'Spell_Fire_Fireball.png', action: APL_ACTION.DECIMATION_SOUL_FIRE, category: 'Execute', defaultRaw: 'decimation.active' },
   { id: 'curse', spell: 'Bane of Doom', icon: 'Spell_Shadow_AuraOfDarkness.png', action: APL_ACTION.CURSE_OF_DOOM, category: 'Curse', defaultRaw: 'target_ttd >= 60 && !target.has_debuff("Bane of Doom")' },
+  { id: 'amplify', spell: 'Amplify Curse', icon: 'Spell_Shadow_Contagion.png', action: APL_ACTION.AMPLIFY_CURSE, category: 'Cooldown', defaultRaw: '!buff.amplify_curse' },
   { id: 'agony', spell: 'Bane of Agony', icon: 'Spell_Shadow_CurseOfSargeras.png', action: APL_ACTION.CURSE_OF_AGONY, category: 'Curse', defaultRaw: '!target.has_debuff("Bane of Doom") && !target.has_debuff("Bane of Agony")' },
   { id: 'corr', spell: 'Corruption', icon: 'Spell_Shadow_AbominationExplosion.png', action: APL_ACTION.CORRUPTION, category: 'DoT', defaultRaw: 'target_ttd >= 12 && !target.has_debuff("Corruption")' },
   { id: 'immo', spell: 'Immolate', icon: 'Spell_Fire_Immolation.png', action: APL_ACTION.IMMOLATE, category: 'DoT', defaultRaw: 'target_ttd >= 12 && !target.has_debuff("Immolate")' },
@@ -22,7 +23,8 @@ export const APL_SYNTHESIS_ACTIONS = [
   { id: 'siphon', spell: 'Siphon Life', icon: 'Spell_Shadow_Requiem.png', action: APL_ACTION.SIPHON_LIFE, category: 'DoT', defaultRaw: 'target.debuff_remains("Siphon Life") <= 0 && target_ttd >= 12' },
   { id: 'hellfire', spell: 'Hellfire', icon: 'Spell_Fire_Incinerate.png', action: APL_ACTION.HELLFIRE, category: 'Channel', defaultRaw: 'target_ttd >= 15' },
   { id: 'wrack', spell: 'Wrack', icon: 'ability_deathknight_hemorrhagicfever.png', action: APL_ACTION.DRAIN_HOPE, category: 'Channel', defaultRaw: 'true' },
-  { id: 'bolt', spell: 'Shadow Bolt', icon: 'Spell_Shadow_ShadowBolt.png', action: APL_ACTION.SHADOW_BOLT_FILLER, category: 'Direct', defaultRaw: 'true' }
+  { id: 'bolt', spell: 'Shadow Bolt', icon: 'Spell_Shadow_ShadowBolt.png', action: APL_ACTION.SHADOW_BOLT_FILLER, category: 'Direct', defaultRaw: 'true' },
+  { id: 'petSwap', spell: 'Sacrifice Succubus + Fel Domination: Summon Imp', icon: 'Spell_Shadow_SummonImp.png', action: APL_ACTION.SACRIFICE_SUCCUBUS_SUMMON_IMP, category: 'Pet', defaultRaw: 'target_hp_pct <= 35' }
 ];
 
 export const TOTAL_APL_RULES = APL_SYNTHESIS_ACTIONS.length; // One copy per action, with two conditions.
@@ -40,6 +42,7 @@ export const SPELL_IDS = {
 
 // Full Condition Types Definition & Continuous Ranges
 export const CONDITION_TYPES = {
+  AMPLIFY_INACTIVE: { id: 'AMPLIFY_INACTIVE', name: 'Amplify Curse inactive', type: 'boolean', min: 0, max: 0, step: 0, unit: '', condEnum: APL_COND.AMPLIFY_INACTIVE },
   NEVER: { id: 'NEVER', name: 'Never Use', type: 'boolean', min: 0, max: 0, step: 0, unit: '' },
   ALWAYS: { id: 'ALWAYS', name: 'Always', type: 'boolean', min: 0, max: 0, step: 0, unit: '' },
   MANA_LE: { id: 'MANA_LE', name: 'Mana <= X%', type: 'continuous', min: 5, max: 90, step: 1, unit: '%', condEnum: APL_COND.MANA_LE },
@@ -64,8 +67,10 @@ export const CONDITION_TYPES = {
 
 // Authentic action condition sets (which conditions make sense for each action)
 export const ACTION_VALID_CONDITIONS = {
+  petSwap: ['ALWAYS', 'NEVER', 'TARGET_HP_LE', 'TARGET_HP_LT', 'FIGHT_TIME_LE', 'MANA_GE'],
   berserking: ['ALWAYS', 'NEVER', 'TARGET_HP_LE', 'TARGET_HP_LT', 'FIGHT_TIME_LE', 'MANA_GE', 'ISB_ACTIVE'],
   bloodFury: ['ALWAYS', 'NEVER', 'TARGET_HP_LE', 'TARGET_HP_LT', 'FIGHT_TIME_LE', 'MANA_GE', 'ISB_ACTIVE'],
+  amplify: ['ALWAYS', 'NEVER', 'DOT_REM_LE', 'DOOM_MISSING', 'FIGHT_TIME_LE', 'AMPLIFY_INACTIVE'],
   eureka: ['ALWAYS', 'NEVER', 'TARGET_HP_LE', 'TARGET_HP_LT', 'FIGHT_TIME_LE', 'MANA_GE', 'DOT_REM_LE', 'ISB_ACTIVE'],
   tap: ['MANA_LE', 'MANA_LT', 'MANA_GE', 'ALWAYS', 'NEVER'],
   nightfall: ['SHADOW_TRANCE', 'ALWAYS', 'NEVER'],
@@ -91,6 +96,8 @@ export function getAvailableActionsForSpec(talentFlags = {}) {
   const tf = talentFlags || {};
   return APL_SYNTHESIS_ACTIONS.filter(act => {
     switch (act.id) {
+      case 'petSwap': return Boolean(tf.demonicPact && tf.sacRank && tf.felDomination);
+      case 'amplify': return Boolean(tf.amplifyCurse);
       case 'nightfall': return Boolean(tf.nightfall);
       case 'incinerate': return Boolean(tf.incinerate);
       case 'conflag': return Boolean(tf.conflagrate);
@@ -128,9 +135,10 @@ const ACTION_MAP_BY_ID = new Map(APL_SYNTHESIS_ACTIONS.map(a => [a.id, a]));
 export function createRuleCondition(actionId, condKey, param = 0.0) {
   const cDef = CONDITION_TYPES[condKey] || CONDITION_TYPES.ALWAYS;
   const actInfo = ACTION_MAP_BY_ID.get(actionId) || APL_SYNTHESIS_ACTIONS[0];
+  const conditionSpell = actionId === 'amplify' ? 'Bane of Agony' : actInfo.spell;
   let targetSpell = 0;
   if (actionId === 'corr') targetSpell = 1;
-  else if (actionId === 'agony') targetSpell = 2;
+  else if (actionId === 'agony' || actionId === 'amplify') targetSpell = 2;
   else if (actionId === 'immo') targetSpell = 3;
   else if (actionId === 'conflag') targetSpell = 3;
   else if (actionId === 'curse') targetSpell = 22;
@@ -181,7 +189,7 @@ export function createRuleCondition(actionId, condKey, param = 0.0) {
     const op = condKey === 'DOT_REM_LT' ? '<' : '<=';
     condEnum = condKey === 'DOT_REM_LT' ? APL_COND.DOT_REM_LT : APL_COND.DOT_REM_LE;
     conditionText = cleanParam === 0 ? 'DoT Expired' : `DoT Remains ${op} ${cleanParam}s`;
-    rawCond = `target.debuff_remains("${actInfo.spell}") ${op} ${cleanParam}`;
+    rawCond = `target.debuff_remains("${conditionSpell}") ${op} ${cleanParam}`;
   } else if (condKey === 'FIGHT_TIME_GE') {
     cleanParam = Math.round(Math.max(10, Math.min(180, cleanParam)));
     condEnum = APL_COND.FIGHT_TIME_GE;
@@ -224,13 +232,18 @@ export function createRuleCondition(actionId, condKey, param = 0.0) {
     cleanParam = Math.round(Math.max(10, Math.min(90, cleanParam)));
     condEnum = APL_COND.FIGHT_GE_DOT_MISSING;
     conditionText = `TTDie >= ${cleanParam}s & Missing`;
-    rawCond = `target_ttd >= ${cleanParam} && !target.has_debuff("${actInfo.spell}")`;
+    rawCond = `target_ttd >= ${cleanParam} && !target.has_debuff("${conditionSpell}")`;
   } else if (condKey === 'FIGHT_GE_DOOM_AGONY_MISSING') {
     cleanParam = Math.round(Math.max(15, Math.min(90, cleanParam)));
     condEnum = APL_COND.FIGHT_GE_DOOM_AGONY_MISSING;
     conditionText = `TTDie >= ${cleanParam}s & No Curses`;
     rawCond = `target_ttd >= ${cleanParam} && !target.has_debuff("Bane of Doom") && !target.has_debuff("Bane of Agony")`;
     targetSpell = 2;
+  } else if (condKey === 'AMPLIFY_INACTIVE') {
+    condEnum = APL_COND.AMPLIFY_INACTIVE;
+    conditionText = 'Amplify Curse inactive';
+    rawCond = '!buff.amplify_curse';
+    cleanParam = 0;
   } else if (condKey === 'ISB_ACTIVE') {
     condEnum = APL_COND.ISB_ACTIVE;
     conditionText = 'ISB active';
@@ -252,6 +265,7 @@ export function createRuleCondition(actionId, condKey, param = 0.0) {
 // Create a single APL Rule with up to 2 distinct conditions evaluated together
 export function createTwoConditionRule(actionId, condKey1 = 'ALWAYS', param1 = 0.0, condKey2 = 'ALWAYS', param2 = 0.0) {
   const actInfo = ACTION_MAP_BY_ID.get(actionId) || APL_SYNTHESIS_ACTIONS[0];
+  const conditionSpell = actionId === 'amplify' ? 'Bane of Agony' : actInfo.spell;
   const c1 = createRuleCondition(actionId, condKey1, param1);
   const c2 = createRuleCondition(actionId, condKey2, param2);
 
@@ -310,6 +324,7 @@ export function createRule(actionId, condKey = 'ALWAYS', param = 0.0, condKey2 =
 // Handcrafted starting conditions for each action
 export function getHandcraftedRuleForAction(actionId) {
   switch (actionId) {
+    case 'petSwap': return createTwoConditionRule('petSwap', 'TARGET_HP_LE', 35.0, 'ALWAYS', 0);
     case 'curse': // Doom: 60s left in fight + no bane on target
       return createTwoConditionRule('curse', 'FIGHT_TIME_GE', 60.0, 'DOOM_MISSING', 0);
     case 'nightfall': // Nightfall: shadow trance active
@@ -410,7 +425,7 @@ export function createDefaultIndividual(availableActions = APL_SYNTHESIS_ACTIONS
   const tf = talentFlags || {};
 
   const order = [
-    'tap', 'eureka', 'bloodFury', 'berserking', 'nightfall', 'brand', 'decimateSearing', 'decimateSoulFire',
+    'tap', 'amplify', 'eureka', 'bloodFury', 'berserking', 'nightfall', 'brand', 'decimateSearing', 'decimateSoulFire',
     'curse', 'agony', 'corr', 'immo', 'conflag', 'siphon', 'shadowburn', 'wrack', 'hellfire'
   ];
 

@@ -1,0 +1,1093 @@
+{
+  "schemaVersion": 1,
+  "presetId": "demo_fire_brand",
+  "classId": "warlock",
+  "buildSource": "/home/aaron-ma/forever/ui/specs/warlock/dps/builds/demo_fire_brand.build.json",
+  "candidate": {
+    "schemaVersion": 1,
+    "classId": "warlock",
+    "candidateId": "demo_fire_brand",
+    "encounter": {
+      "duration": 180,
+      "target": {
+        "level": 63,
+        "bossArmor": 3731,
+        "resistance": 0
+      }
+    },
+    "stats": {},
+    "equipment": {
+      "mode": "direct",
+      "items": {}
+    },
+    "buffs": {
+      "arcaneIntellect": true,
+      "markOfTheWild": true,
+      "blessingOfKings": true,
+      "blessingOfWisdom": true,
+      "manaSpringTotem": true,
+      "flaskSupremePower": true,
+      "wizardOil": true,
+      "nightfinSoup": true,
+      "greaterArcaneElixir": true
+    },
+    "talents": {
+      "affliction": {
+        "suppression": 1,
+        "improved_corruption": 1
+      },
+      "demonology": {
+        "improved_imp": 3,
+        "unholy_power": 5,
+        "fel_vitality": 3,
+        "demonic_energies": 2,
+        "demonic_sacrifice": 1,
+        "master_summoner": 2,
+        "decimation": 2,
+        "demonic_brand": 3,
+        "soul_link": 1,
+        "demonic_knowledge": 3,
+        "master_demonologist": 5,
+        "demonic_pact": 1
+      },
+      "destruction": {
+        "bane": 5,
+        "aftermath": 5,
+        "ruin": 5,
+        "agonizing_flames": 3
+      }
+    },
+    "apl": {
+      "kind": "text",
+      "text": "Bane of Doom if target.debuff_remains(\"Bane of Doom\") <= 0 && target_ttd >= 60\nDemonic Brand if debuff.demonic_brand_missing\nBane of Agony if target.debuff_remains(\"Bane of Agony\") <= 0 && target_ttd < 60\nImmolate if target.debuff_remains(\"Immolate\") <= 0\nLife Tap if pet_mana < 115\nDecimation: Soul Fire if decimation.active\nCorruption if target.debuff_remains(\"Corruption\") <= 0\nsearing\nLife Tap"
+    },
+    "classOptions": {
+      "race": "ORC",
+      "pet": "imp",
+      "sacrifice": "succubus",
+      "rotation": "shadow"
+    }
+  },
+  "resolvedConfig": {
+    "race": "HUMAN",
+    "swordEquipped": true,
+    "racialPolicy": "execute",
+    "targetIsBeast": false,
+    "maxHealth": 4050,
+    "duration": 180,
+    "iterations": 4096,
+    "seed": 42,
+    "rotation": "shadow",
+    "spellPower": 595,
+    "shadowPower": 0,
+    "firePower": 0,
+    "intellect": 336,
+    "stamina": 376,
+    "spirit": 282,
+    "hit": 3,
+    "crit": 14.744,
+    "mp5": 93,
+    "distance": 0,
+    "resistance": 0,
+    "penetration": 0,
+    "tapThreshold": 25,
+    "bossArmor": 3731,
+    "book": true,
+    "charges": false,
+    "partialResists": true,
+    "piercing": true,
+    "corruption": true,
+    "agony": true,
+    "immolate": true,
+    "instantCorruption": false,
+    "nightfall": false,
+    "isb": false,
+    "ruin": true,
+    "improvedTap": false,
+    "amplifyCurse": false,
+    "demonicPact": true,
+    "demonicSacrifice": true,
+    "felDomination": false,
+    "masterSummoner": 2,
+    "soulLink": true,
+    "sacImp": false,
+    "sacSucc": true,
+    "masterDemo": 5,
+    "petChoice": "imp",
+    "trinketSP": 0,
+    "trinketDuration": 20,
+    "trinketCD": 120,
+    "shadowMultiplier": 1.1330000000000002,
+    "fireMultiplier": 1.433245,
+    "tapBonus": 0,
+    "nightfallChance": 0,
+    "isbBonus": 0,
+    "ruinRank": 5,
+    "shadowMasteryBonus": 0,
+    "improvedCorruptionBonus": 0.02,
+    "conflagrate": false,
+    "shadowburn": false,
+    "curseOfDoom": true,
+    "incinerate": false,
+    "decimation": true,
+    "decimationSearing": false,
+    "demonicBrand": true,
+    "demonicBrandRank": 3,
+    "baneRank": 5,
+    "decimationRank": 2,
+    "siphonLife": false,
+    "drainHope": false,
+    "malevolence": 0,
+    "afBonus": 0.1,
+    "aftermathBonus": 0.5,
+    "cataclysmCostMult": 1,
+    "improvedAgonyBonus": 0,
+    "felVitalityBonus": 0.15000000000000002,
+    "maledictionBonus": 0,
+    "improvedDrainsBonus": 0,
+    "soulSiphonBonus": 0,
+    "demonicEnergies": 2,
+    "demonicKnowledge": 0,
+    "snfChance": 0,
+    "snfBonus": 0,
+    "dotCrit": 1.5,
+    "fnbCrit": 0,
+    "petMult": 1,
+    "petFireboltMult": 1.5862000000000003,
+    "petMeleeMult": 1.1330000000000002,
+    "petLashMult": 1.2463000000000002,
+    "brandMult": 1.2463000000000002,
+    "corrMultiplier": 1.0506,
+    "aplRules": [
+      {
+        "action": 7,
+        "cond": 5,
+        "param": 0,
+        "targetSpell": 22,
+        "cond1": 5,
+        "param1": 0,
+        "targetSpell1": 22,
+        "cond2": 6,
+        "param2": 60,
+        "targetSpell2": 0,
+        "enabled": 1
+      },
+      {
+        "action": 5,
+        "cond": 11,
+        "param": 0,
+        "targetSpell": 0,
+        "cond1": 11,
+        "param1": 0,
+        "targetSpell1": 0,
+        "cond2": 0,
+        "param2": 0,
+        "targetSpell2": 0,
+        "enabled": 1
+      },
+      {
+        "action": 8,
+        "cond": 5,
+        "param": 0,
+        "targetSpell": 2,
+        "cond1": 5,
+        "param1": 0,
+        "targetSpell1": 2,
+        "cond2": 22,
+        "param2": 60,
+        "targetSpell2": 0,
+        "enabled": 1
+      },
+      {
+        "action": 9,
+        "cond": 5,
+        "param": 0,
+        "targetSpell": 3,
+        "cond1": 5,
+        "param1": 0,
+        "targetSpell1": 3,
+        "cond2": 0,
+        "param2": 0,
+        "targetSpell2": 0,
+        "enabled": 1
+      },
+      {
+        "action": 1,
+        "cond": 24,
+        "param": 115,
+        "targetSpell": 0,
+        "cond1": 24,
+        "param1": 115,
+        "targetSpell1": 0,
+        "cond2": 0,
+        "param2": 0,
+        "targetSpell2": 0,
+        "enabled": 1
+      },
+      {
+        "action": 4,
+        "cond": 9,
+        "param": 35,
+        "targetSpell": 13,
+        "cond1": 9,
+        "param1": 35,
+        "targetSpell1": 13,
+        "cond2": 0,
+        "param2": 0,
+        "targetSpell2": 0,
+        "enabled": 1
+      },
+      {
+        "action": 6,
+        "cond": 5,
+        "param": 0,
+        "targetSpell": 1,
+        "cond1": 5,
+        "param1": 0,
+        "targetSpell1": 1,
+        "cond2": 0,
+        "param2": 0,
+        "targetSpell2": 0,
+        "enabled": 1
+      },
+      {
+        "action": 13,
+        "cond": 0,
+        "param": 0,
+        "targetSpell": 0,
+        "cond1": 0,
+        "param1": 0,
+        "targetSpell1": 0,
+        "cond2": 0,
+        "param2": 0,
+        "targetSpell2": 0,
+        "enabled": 1
+      },
+      {
+        "action": 1,
+        "cond": 0,
+        "param": 0,
+        "targetSpell": 0,
+        "cond1": 0,
+        "param1": 0,
+        "targetSpell1": 0,
+        "cond2": 0,
+        "param2": 0,
+        "targetSpell2": 0,
+        "enabled": 1
+      }
+    ]
+  },
+  "foreverResults": {
+    "TestDemonologyFireBrand-AllItems-AdaptiveCombatAssistant-272437": {
+      "dps": 711.44143,
+      "tps": 411.63466,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-Admiral'sHat-10030": {
+      "dps": 703.0417,
+      "tps": 406.54814,
+      "dtps": 8.01723,
+      "hps": 9.54527
+    },
+    "TestDemonologyFireBrand-AllItems-AnkhofLife-1713": {
+      "dps": 712.67435,
+      "tps": 412.43606,
+      "dtps": 8.08708,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-ArcaniteChampion-12790": {
+      "dps": 718.86928,
+      "tps": 415.92549,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-ArenaGrandMaster-19024": {
+      "dps": 711.44143,
+      "tps": 411.63466,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-BadgeoftheSwarmguard-21670": {
+      "dps": 711.44143,
+      "tps": 411.63466,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-BladeofHanna-2801": {
+      "dps": 718.86928,
+      "tps": 415.92549,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-BlazefuryMedallion-17111": {
+      "dps": 708.94731,
+      "tps": 410.29286,
+      "dtps": 8.14892,
+      "hps": 9.54527
+    },
+    "TestDemonologyFireBrand-AllItems-BlazingEmblem-2802": {
+      "dps": 711.44143,
+      "tps": 411.63466,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-BlazingRapier-12777": {
+      "dps": 718.86928,
+      "tps": 415.92549,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-BristleconeCloak-275833": {
+      "dps": 702.29766,
+      "tps": 407.82711,
+      "dtps": 8.06184,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-Champion'sDreadgear": {
+      "dps": 729.95895,
+      "tps": 421.53684,
+      "dtps": 8.73947,
+      "hps": 0
+    },
+    "TestDemonologyFireBrand-AllItems-Champion'sThreads": {
+      "dps": 692.84701,
+      "tps": 402.07003,
+      "dtps": 8.31824,
+      "hps": 0
+    },
+    "TestDemonologyFireBrand-AllItems-CloakofFire-14134": {
+      "dps": 693.7919,
+      "tps": 399.92817,
+      "dtps": 8.16543,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-CloakofFlames-3475": {
+      "dps": 703.03765,
+      "tps": 406.00173,
+      "dtps": 8.31088,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-ColdBasiliskEye-5079": {
+      "dps": 711.44143,
+      "tps": 411.63466,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-DarkmoonCard:BlueDragon-19288": {
+      "dps": 712.72974,
+      "tps": 412.29701,
+      "dtps": 8.48896,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-DarkmoonCard:Heroism-19287": {
+      "dps": 711.44143,
+      "tps": 411.63466,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-DarkmoonCard:Maelstrom-19289": {
+      "dps": 711.44143,
+      "tps": 411.63466,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-DeathmistRaiment": {
+      "dps": 725.83487,
+      "tps": 415.47054,
+      "dtps": 8.66034,
+      "hps": 0
+    },
+    "TestDemonologyFireBrand-AllItems-Defender'sGripStabilizer-272440": {
+      "dps": 711.44143,
+      "tps": 411.63466,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-Defiler'sTalisman-20072": {
+      "dps": 711.44143,
+      "tps": 411.63466,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-Defiler'sTalisman-21115": {
+      "dps": 711.44143,
+      "tps": 411.63466,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-Defiler'sTalisman-21116": {
+      "dps": 711.44143,
+      "tps": 411.63466,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-DemonheartRaiment": {
+      "dps": 687.46398,
+      "tps": 398.4382,
+      "dtps": 8.17236,
+      "hps": 0
+    },
+    "TestDemonologyFireBrand-AllItems-Demoniac'sThreads": {
+      "dps": 732.2036,
+      "tps": 424.35066,
+      "dtps": 8.06894,
+      "hps": 9.54527
+    },
+    "TestDemonologyFireBrand-AllItems-Doombringer-13053": {
+      "dps": 718.86928,
+      "tps": 415.92549,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-Doomcaller'sAttire": {
+      "dps": 810.03093,
+      "tps": 465.88634,
+      "dtps": 8.39998,
+      "hps": 0
+    },
+    "TestDemonologyFireBrand-AllItems-DormantHeartoftheMountain-249473": {
+      "dps": 711.44143,
+      "tps": 411.63466,
+      "dtps": 8.5247,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-DreadmistRaiment": {
+      "dps": 696.14444,
+      "tps": 403.06431,
+      "dtps": 8.42497,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-EarthenSigil-20525": {
+      "dps": 706.42027,
+      "tps": 408.84527,
+      "dtps": 8.80337,
+      "hps": 9.67547
+    },
+    "TestDemonologyFireBrand-AllItems-Earthstrike-21180": {
+      "dps": 711.44143,
+      "tps": 411.63466,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-ElectrifiedDagger-19100": {
+      "dps": 718.86928,
+      "tps": 415.92549,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-Enchant2HWeapon-GrandArcanist-7941": {
+      "dps": 767.54882,
+      "tps": 444.50605,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-Enchant:FieryBlaze-36": {
+      "dps": 718.86928,
+      "tps": 415.92549,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-EnchantChest-Absorption-8220": {
+      "dps": 718.86928,
+      "tps": 415.92549,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-EnchantChest-LesserAbsorption-63": {
+      "dps": 718.86928,
+      "tps": 415.92549,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-EnchantChest-MinorAbsorption-44": {
+      "dps": 718.86928,
+      "tps": 415.92549,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-EnchantCloak-Subtlety-2621": {
+      "dps": 718.86928,
+      "tps": 408.29233,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-EnchantGloves-Threat-2613": {
+      "dps": 718.86928,
+      "tps": 423.55865,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-EnchantWeapon-Crusader-1900": {
+      "dps": 718.86928,
+      "tps": 415.92549,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-EnchantWeapon-GrandSorcerer-7942": {
+      "dps": 741.12673,
+      "tps": 428.97276,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-EnchantWeapon-Insight-8216": {
+      "dps": 725.76697,
+      "tps": 420.47718,
+      "dtps": 8.26449,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-EnchantWeapon-Recovery-8721": {
+      "dps": 718.86928,
+      "tps": 415.92549,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-EnchantWeapon-Revelation-8217": {
+      "dps": 736.22197,
+      "tps": 427.58649,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-EssenceofthePureFlame-18815": {
+      "dps": 711.44143,
+      "tps": 411.63466,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-EverlookDeliveryBot-274760": {
+      "dps": 701.33938,
+      "tps": 403.83175,
+      "dtps": 8.9235,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-EverlookPathcarver-274759": {
+      "dps": 707.64338,
+      "tps": 408.37118,
+      "dtps": 8.41622,
+      "hps": 9.54527
+    },
+    "TestDemonologyFireBrand-AllItems-EyeofDiminution-23001": {
+      "dps": 720.64046,
+      "tps": 416.86704,
+      "dtps": 8.59062,
+      "hps": 9.71062
+    },
+    "TestDemonologyFireBrand-AllItems-EyeofMoam-21473": {
+      "dps": 727.17158,
+      "tps": 421.71495,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-EyeoftheDead-23047": {
+      "dps": 711.44143,
+      "tps": 411.63466,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-FetishofChitinousSpikes-21488": {
+      "dps": 711.44143,
+      "tps": 411.63466,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-FetishoftheSandReaver-21647": {
+      "dps": 711.44143,
+      "tps": 411.63466,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-FieldMarshal'sThreads": {
+      "dps": 721.92246,
+      "tps": 417.54214,
+      "dtps": 8.31769,
+      "hps": 0
+    },
+    "TestDemonologyFireBrand-AllItems-FlameSearedSignet-282080": {
+      "dps": 714.43777,
+      "tps": 413.76962,
+      "dtps": 8.65829,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-Frostguard-12797": {
+      "dps": 718.86928,
+      "tps": 415.92549,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-FrozenHeartoftheMountain-249469": {
+      "dps": 724.82023,
+      "tps": 419.58387,
+      "dtps": 8.28929,
+      "hps": 9.54527
+    },
+    "TestDemonologyFireBrand-AllItems-GlacialBlade-19099": {
+      "dps": 718.86928,
+      "tps": 415.92549,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-GlyphofDeflection-23040": {
+      "dps": 711.44143,
+      "tps": 411.63466,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-GoblinConstructionHelmet-10543": {
+      "dps": 703.0417,
+      "tps": 406.54814,
+      "dtps": 8.01723,
+      "hps": 9.54527
+    },
+    "TestDemonologyFireBrand-AllItems-GoldenBanana-270226": {
+      "dps": 711.65203,
+      "tps": 411.77618,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-GutRipper-2164": {
+      "dps": 718.86928,
+      "tps": 415.92549,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-Hameya'sSlayer-15814": {
+      "dps": 718.86928,
+      "tps": 415.92549,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-HanzoSword-8190": {
+      "dps": 718.86928,
+      "tps": 415.92549,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-Hazza'rah'sCharmofDestruction-19957": {
+      "dps": 716.26056,
+      "tps": 414.87311,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-HeartoftheScale-13164": {
+      "dps": 711.44143,
+      "tps": 411.63466,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-HibernationCrystal-20636": {
+      "dps": 711.44143,
+      "tps": 411.63466,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-ImplementsofUnspokenNames": {
+      "dps": 725.06317,
+      "tps": 419.61947,
+      "dtps": 8.32021,
+      "hps": 9.62639
+    },
+    "TestDemonologyFireBrand-AllItems-JomGabbar-23570": {
+      "dps": 711.44143,
+      "tps": 411.63466,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-Julie'sDagger-6660": {
+      "dps": 718.86928,
+      "tps": 415.92549,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-KissoftheSpider-22954": {
+      "dps": 728.59131,
+      "tps": 421.604,
+      "dtps": 8.40097,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-LieutenantCommander'sDreadgear": {
+      "dps": 729.95895,
+      "tps": 421.53684,
+      "dtps": 8.73947,
+      "hps": 0
+    },
+    "TestDemonologyFireBrand-AllItems-LieutenantCommander'sThreads": {
+      "dps": 692.84701,
+      "tps": 402.07003,
+      "dtps": 8.31824,
+      "hps": 0
+    },
+    "TestDemonologyFireBrand-AllItems-Linken'sBoomerang-11905": {
+      "dps": 711.44143,
+      "tps": 411.63466,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-Linken'sSwordofMastery-11902": {
+      "dps": 667.4588,
+      "tps": 385.61094,
+      "dtps": 8.04988,
+      "hps": 9.54527
+    },
+    "TestDemonologyFireBrand-AllItems-Loatheb'sReflection-23042": {
+      "dps": 711.44143,
+      "tps": 411.63466,
+      "dtps": 8.43511,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-Magister'sRegalia": {
+      "dps": 702.37262,
+      "tps": 404.53632,
+      "dtps": 8.52706,
+      "hps": 0
+    },
+    "TestDemonologyFireBrand-AllItems-MajorRecombobulator-18637": {
+      "dps": 711.44143,
+      "tps": 411.63466,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-MarkofResolution-17759": {
+      "dps": 711.44143,
+      "tps": 411.63466,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-MarkoftheChampion-23206": {
+      "dps": 711.44143,
+      "tps": 411.63466,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-MarkoftheChampion-23207": {
+      "dps": 711.44143,
+      "tps": 411.63466,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-MarkoftheRedFlight-282778": {
+      "dps": 711.44143,
+      "tps": 411.63466,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-MoltenHeartoftheMountain-249470": {
+      "dps": 711.44143,
+      "tps": 411.63466,
+      "dtps": 8.5247,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-Nightblade-1982": {
+      "dps": 718.86928,
+      "tps": 415.92549,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-OrbofFire-12805": {
+      "dps": 711.44143,
+      "tps": 411.63466,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-PetrifiedScarab-21685": {
+      "dps": 711.44143,
+      "tps": 411.63466,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-PhantomBlade-7961": {
+      "dps": 718.86928,
+      "tps": 415.92549,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-PlagueheartRaiment": {
+      "dps": 891.00531,
+      "tps": 470.57573,
+      "dtps": 8.71819,
+      "hps": 0
+    },
+    "TestDemonologyFireBrand-AllItems-RingofSaviors-1447": {
+      "dps": 710.3991,
+      "tps": 411.40647,
+      "dtps": 8.65829,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-SerenityField-272439": {
+      "dps": 724.78548,
+      "tps": 419.92764,
+      "dtps": 8.14741,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-SerpentSlicer-13035": {
+      "dps": 718.86928,
+      "tps": 415.92549,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-ShardoftheFallenStar-21891": {
+      "dps": 716.50104,
+      "tps": 413.8017,
+      "dtps": 8.61743,
+      "hps": 9.54527
+    },
+    "TestDemonologyFireBrand-AllItems-ShortswordofVengeance-754": {
+      "dps": 718.86928,
+      "tps": 415.92549,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-Slayer'sCrest-23041": {
+      "dps": 711.44143,
+      "tps": 411.63466,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-SmokingHeartoftheMountain-11811": {
+      "dps": 711.44143,
+      "tps": 411.63466,
+      "dtps": 8.5247,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-Sorcerer'sRegalia": {
+      "dps": 738.47094,
+      "tps": 426.70875,
+      "dtps": 8.60657,
+      "hps": 0
+    },
+    "TestDemonologyFireBrand-AllItems-SwordofZeal-6622": {
+      "dps": 667.4588,
+      "tps": 385.61094,
+      "dtps": 8.04988,
+      "hps": 9.54527
+    },
+    "TestDemonologyFireBrand-AllItems-TalismanofArathor-20071": {
+      "dps": 711.44143,
+      "tps": 411.63466,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-TalismanofArathor-21117": {
+      "dps": 711.44143,
+      "tps": 411.63466,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-TalismanofArathor-21118": {
+      "dps": 711.44143,
+      "tps": 411.63466,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-TalismanofAscendance-22678": {
+      "dps": 741.89929,
+      "tps": 429.4375,
+      "dtps": 8.59062,
+      "hps": 9.54527
+    },
+    "TestDemonologyFireBrand-AllItems-TalismanofEphemeralPower-18820": {
+      "dps": 733.59698,
+      "tps": 424.8682,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-Teebu'sBlazingLongsword-1728": {
+      "dps": 667.4588,
+      "tps": 385.61094,
+      "dtps": 8.04988,
+      "hps": 9.54527
+    },
+    "TestDemonologyFireBrand-AllItems-TheBlackBook-19337": {
+      "dps": 736.63562,
+      "tps": 411.63466,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-TheBurrower'sShell-23558": {
+      "dps": 711.44143,
+      "tps": 411.63466,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-TheLobotomizer-19324": {
+      "dps": 718.86928,
+      "tps": 415.92549,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-TheRestrainedEssenceofSapphiron-23046": {
+      "dps": 757.2049,
+      "tps": 438.36213,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-ThrashBlade-17705": {
+      "dps": 718.86928,
+      "tps": 415.92549,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-Thunderbrew'sBootFlask-744": {
+      "dps": 722.16442,
+      "tps": 418.49626,
+      "dtps": 8.95931,
+      "hps": 9.67547
+    },
+    "TestDemonologyFireBrand-AllItems-Thunderfury,BlessedBladeoftheWindseeker-19019": {
+      "dps": 718.86928,
+      "tps": 415.92549,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-ToySoldier-274386": {
+      "dps": 711.44143,
+      "tps": 411.63466,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-Uther'sStrength-11302": {
+      "dps": 715.46422,
+      "tps": 413.988,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-VestmentsoftheDevout": {
+      "dps": 672.43992,
+      "tps": 388.39761,
+      "dtps": 8.15014,
+      "hps": 0
+    },
+    "TestDemonologyFireBrand-AllItems-VestmentsoftheVirtuous": {
+      "dps": 719.46762,
+      "tps": 415.9426,
+      "dtps": 8.08826,
+      "hps": 0
+    },
+    "TestDemonologyFireBrand-AllItems-Warlord'sThreads": {
+      "dps": 721.92246,
+      "tps": 417.54214,
+      "dtps": 8.31769,
+      "hps": 0
+    },
+    "TestDemonologyFireBrand-AllItems-WarmthofForgiveness-23027": {
+      "dps": 716.41455,
+      "tps": 413.56427,
+      "dtps": 8.79602,
+      "hps": 9.54527
+    },
+    "TestDemonologyFireBrand-AllItems-Witchfury-13051": {
+      "dps": 718.86928,
+      "tps": 415.92549,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-WrathofCenarius-21190": {
+      "dps": 734.18238,
+      "tps": 425.31195,
+      "dtps": 8.65829,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-ZandalarianHeroBadge-19948": {
+      "dps": 711.44143,
+      "tps": 411.63466,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-ZandalarianHeroCharm-19950": {
+      "dps": 728.28122,
+      "tps": 421.48224,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-AllItems-ZandalarianHeroMedallion-19949": {
+      "dps": 711.44143,
+      "tps": 411.63466,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-Average-Default": {
+      "dps": 722.5483,
+      "tps": 416.49256,
+      "dtps": 8.56262,
+      "hps": 9.3277
+    },
+    "TestDemonologyFireBrand-Settings-Human-preraid-Fire Brand-demo_fire_brand-FullBuffs-0.0yards-LongMultiTarget": {
+      "dps": 816.72478,
+      "tps": 1128.80776,
+      "dtps": 8.13107,
+      "hps": 9.71062
+    },
+    "TestDemonologyFireBrand-Settings-Human-preraid-Fire Brand-demo_fire_brand-FullBuffs-0.0yards-LongSingleTarget": {
+      "dps": 716.58749,
+      "tps": 414.00591,
+      "dtps": 8.18948,
+      "hps": 9.71062
+    },
+    "TestDemonologyFireBrand-Settings-Human-preraid-Fire Brand-demo_fire_brand-FullBuffs-0.0yards-ShortSingleTarget": {
+      "dps": 739.97159,
+      "tps": 416.10908,
+      "dtps": 12.74908,
+      "hps": 8.79778
+    },
+    "TestDemonologyFireBrand-Settings-Human-preraid-Fire Brand-demo_fire_brand-NoBuffs-0.0yards-LongMultiTarget": {
+      "dps": 478.62091,
+      "tps": 1180.9917,
+      "dtps": 0,
+      "hps": 8.0271
+    },
+    "TestDemonologyFireBrand-Settings-Human-preraid-Fire Brand-demo_fire_brand-NoBuffs-0.0yards-LongSingleTarget": {
+      "dps": 478.62091,
+      "tps": 380.0599,
+      "dtps": 0,
+      "hps": 8.0271
+    },
+    "TestDemonologyFireBrand-Settings-Human-preraid-Fire Brand-demo_fire_brand-NoBuffs-0.0yards-ShortSingleTarget": {
+      "dps": 496.2671,
+      "tps": 377.30147,
+      "dtps": 0,
+      "hps": 7.94253
+    },
+    "TestDemonologyFireBrand-Settings-Orc-preraid-Fire Brand-demo_fire_brand-FullBuffs-0.0yards-LongMultiTarget": {
+      "dps": 813.79042,
+      "tps": 1127.08527,
+      "dtps": 8.15966,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-Settings-Orc-preraid-Fire Brand-demo_fire_brand-FullBuffs-0.0yards-LongSingleTarget": {
+      "dps": 718.86928,
+      "tps": 415.92549,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    },
+    "TestDemonologyFireBrand-Settings-Orc-preraid-Fire Brand-demo_fire_brand-FullBuffs-0.0yards-ShortSingleTarget": {
+      "dps": 746.03259,
+      "tps": 420.03979,
+      "dtps": 12.74908,
+      "hps": 8.79778
+    },
+    "TestDemonologyFireBrand-Settings-Orc-preraid-Fire Brand-demo_fire_brand-NoBuffs-0.0yards-LongMultiTarget": {
+      "dps": 471.89303,
+      "tps": 1170.5405,
+      "dtps": 0,
+      "hps": 7.81646
+    },
+    "TestDemonologyFireBrand-Settings-Orc-preraid-Fire Brand-demo_fire_brand-NoBuffs-0.0yards-LongSingleTarget": {
+      "dps": 471.89303,
+      "tps": 372.27661,
+      "dtps": 0,
+      "hps": 7.81646
+    },
+    "TestDemonologyFireBrand-Settings-Orc-preraid-Fire Brand-demo_fire_brand-NoBuffs-0.0yards-ShortSingleTarget": {
+      "dps": 498.10301,
+      "tps": 379.46471,
+      "dtps": 0,
+      "hps": 7.94253
+    },
+    "TestDemonologyFireBrand-SwitchInFrontOfTarget-Default": {
+      "dps": 718.86928,
+      "tps": 415.92549,
+      "dtps": 8.59062,
+      "hps": 9.58808
+    }
+  }
+}

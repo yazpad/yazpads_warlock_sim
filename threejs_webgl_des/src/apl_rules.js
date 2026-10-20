@@ -106,3 +106,23 @@ export function getAPLUnreachableFlags(rules = []) {
   });
 }
 
+
+// Explain why a configured swap did not produce Imp damage in this result.
+export function describePetSwapOutcome(config, summary) {
+  const rules = config.aplRules || [];
+  const index = rules.findIndex(rule => rule.action === APL_ACTION.SACRIFICE_SUCCUBUS_SUMMON_IMP && isAPLRuleEnabled(rule));
+  if (index < 0 || summary.detailed === false) return '';
+  if (summary.petSwaps > 0) {
+    return summary.spells?.some(spell => spell.name === 'Imp Firebolt' && spell.casts > 0)
+      ? 'Pet swap executed. Imp attacks appear as Imp Firebolt.'
+      : 'Pet swap started, but the fight ended before the Imp could attack.';
+  }
+  const missing = [];
+  if (!config.demonicPact) missing.push('Demonic Pact');
+  if (!config.demonicSacrifice) missing.push('Demonic Sacrifice');
+  if (!config.felDomination) missing.push('Fel Domination');
+  if (missing.length) return `Pet swap did not execute: requires ${missing.join(', ')}.`;
+  if (config.petChoice !== 'succubus') return 'Pet swap did not execute: start the fight with an active Succubus.';
+  if (getAPLUnreachableFlags(rules)[index]) return 'Pet swap did not execute: an unconditional action above it blocks this row. Move the swap above the filler.';
+  return 'Pet swap did not execute: its conditions were not met when reached, or there was insufficient mana. Place it above the filler so it can be evaluated.';
+}

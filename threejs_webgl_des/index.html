@@ -18,7 +18,7 @@
         <button type="button" class="class-icon-btn active" id="btn-class-warlock" title="Warlock (Active)">
           <img src="./assets/icons/Class_Warlock.png" alt="Warlock">
         </button>
-        <button type="button" class="class-icon-btn disabled" id="btn-class-priest" title="Priest is experimental and temporarily unavailable" disabled>
+        <button type="button" class="class-icon-btn" id="btn-class-priest" title="Switch to Priest" hidden style="display: none;">
           <img src="./assets/icons/Class_Priest.png" alt="Priest">
         </button>
       </div>
@@ -144,7 +144,7 @@
                 <!-- Mode Switcher: Direct Stats vs Equipped Items -->
                 <div class="mode-toggle-group">
                   <button type="button" class="wow-button wow-btn-small active" id="btn-mode-direct">Direct Stats</button>
-                  <button type="button" class="wow-button wow-btn-small" id="btn-mode-equipped">Equipped Items</button>
+                  <button type="button" class="wow-button wow-btn-small" id="btn-mode-equipped" disabled title="Gear support is deferred">Equipped Items (Later)</button>
                 </div>
 
                 <!-- Equipped Items View (Paperdoll) -->
@@ -159,6 +159,7 @@
 
                 <!-- Direct Stats View -->
                 <div id="direct-stats-view" data-shared-panel="direct-stats">
+                  <p class="muted">Enter bonus stats above racial and class base stats. Equipment is empty.</p>
                   <div class="direct-stats-grid">
                     <div class="stat-field">
                       <label>Spell Power</label>
@@ -250,6 +251,7 @@
                           <tr><td><code>decimate_searing</code></td><td>Decimation: Searing Pain</td></tr>
                           <tr><td><code>decimate_soul_fire</code></td><td>Decimation: Soul Fire</td></tr>
                           <tr><td><code>hellfire</code></td><td>Hellfire</td></tr>
+                          <tr><td><code>sacrifice_succubus_summon_imp</code></td><td>Sacrifice Succubus → Fel Domination → Summon Imp. Once per fight; requires Demonic Pact, Demonic Sacrifice, Fel Domination, and an active Succubus. Grants +15% Fire damage with the Imp active. Example: <code>sacrifice_succubus_summon_imp if target_hp_pct &lt;= 35</code></td></tr>
                         </tbody>
                       </table>
                     </div>
@@ -722,10 +724,11 @@
                 <th style="width: 65px; text-align: center;">Pet / Sac</th>
                 <th>Action Priority Chain</th>
                 <th style="width: 75px; text-align: right;">Mean DPS</th>
+                <th style="width: 90px; text-align: right;" title="95th percentile of simulated fight DPS">95th % DPS</th>
               </tr>
             </thead>
             <tbody id="presets-leaderboard-body">
-              <tr><td colspan="6" style="text-align: center; color: var(--text-dim); padding: 2rem;">Loading meta presets…</td></tr>
+              <tr><td colspan="7" style="text-align: center; color: var(--text-dim); padding: 2rem;">Loading meta presets…</td></tr>
             </tbody>
           </table>
         </div>
@@ -761,6 +764,9 @@
             </div>
             
             <div style="display: flex; flex-direction: column; gap: 4px; margin-top: 10px;">
+              <label class="wow-checkbox-label" style="font-size: 0.75rem;" title="P95 is the DPS exceeded in only 5% of simulated fights. Increase Screening Sims for more stable rankings.">
+                <input type="checkbox" id="ga-optimize-p95"> Optimize for 95th-percentile DPS
+              </label>
               <label class="wow-checkbox-label" style="font-size: 0.75rem;">
                 <input type="checkbox" id="ga-seed-presets" checked> Seed with standard presets
               </label>
@@ -889,7 +895,7 @@
                   <th style="min-width: 170px;">Spec Name & Archetype</th>
                   <th style="width: 42px; text-align: center;">Race</th>
                   <th style="width: 65px; text-align: center;">Pet / Sac</th>
-                  <th style="width: 80px; text-align: right;">Mean DPS</th>
+                  <th data-search-metric style="width: 80px; text-align: right;">Mean DPS</th>
                   <th style="width: 55px; text-align: center;">Action</th>
                 </tr>
               </thead>
@@ -984,6 +990,9 @@
             <div style="display: flex; flex-direction: column; gap: 4px; margin-top: 10px;">
               <label class="wow-checkbox-label" style="font-size: 0.75rem;" title="Keeps all selected actions locked to their handcrafted optimal conditions while optimizing priority order and permutations">
                 <input type="checkbox" id="apl-ga-lock-conditions" checked> Lock Handcrafted Conditions (Priority Only)
+              </label>
+              <label class="wow-checkbox-label" style="font-size: 0.75rem;" title="P95 is the DPS exceeded in only 5% of simulated fights. Increase Screening Sims for more stable rankings.">
+                <input type="checkbox" id="apl-ga-optimize-p95"> Optimize for 95th-percentile DPS
               </label>
               <label class="wow-checkbox-label" style="font-size: 0.75rem;">
                 <input type="checkbox" id="apl-ga-seed-presets" checked> Seed with standard canonical APL
@@ -1082,7 +1091,7 @@
                   <th style="min-width: 170px;">Synthesized APL Name</th>
                   <th style="width: 55px; text-align: center;">Active</th>
                   <th style="width: 110px;">Damage Split</th>
-                  <th style="width: 80px; text-align: right;">Mean DPS</th>
+                  <th data-search-metric style="width: 80px; text-align: right;">Mean DPS</th>
                   <th style="width: 55px; text-align: center;">Action</th>
                 </tr>
               </thead>

@@ -17,6 +17,11 @@ export function buildFightConfig({ base = {}, talent = {}, pet = 'none', sac = '
   config.sacImp = sac === 'imp' && talent.sacRank > 0;
   config.hit += talent.suppressionHit || 0;
   Object.assign(config, {
+    demonicPact: Boolean(talent.demonicPact),
+    demonicSacrifice: (talent.sacRank || 0) > 0,
+    felDomination: Boolean(talent.felDomination),
+    masterSummoner: talent.masterSummoner || 0,
+    soulLink: Boolean(talent.soulLink),
     improvedTap: talent.improvedTap,
     tapBonus: talent.tapBonus,
     instantCorruption: talent.instantCorruption,
@@ -39,6 +44,7 @@ export function buildFightConfig({ base = {}, talent = {}, pet = 'none', sac = '
     demonicBrand: talent.demonicBrand,
     demonicBrandRank: talent.demonicBrandRank,
     demonicEnergies: talent.demonicEnergies,
+    demonicKnowledge: talent.demonicKnowledge || 0,
     masterDemo: pet === 'none' ? 0 : talent.masterDemo,
     afBonus: talent.afBonus,
     aftermathBonus: talent.aftermathBonus || 0,
@@ -57,12 +63,12 @@ export function buildFightConfig({ base = {}, talent = {}, pet = 'none', sac = '
   });
   if (pet !== 'none') config.spellPower += (talent.demonicKnowledge || 0) * 20;
   const hasPet = pet !== 'none';
-  config.shadowMultiplier = (talent.shadowMultiplier || 1) * (config.sacImp ? 1.15 : 1) *
+  config.shadowMultiplier = (base.shadowMultiplier || 1) * (talent.shadowMultiplier || 1) * (config.sacImp ? 1.15 : 1) *
     (pet === 'succubus' ? 1 + talent.masterDemo * 0.02 : 1) * (hasPet && talent.soulLink ? 1.03 : 1);
-  config.fireMultiplier = (talent.fireMultiplier || 1) * (config.sacSucc ? 1.15 : 1) *
+  config.fireMultiplier = (base.fireMultiplier || 1) * (talent.fireMultiplier || 1) * (config.sacSucc ? 1.15 : 1) *
     (pet === 'imp' ? 1 + talent.masterDemo * 0.02 : 1) * (hasPet && talent.soulLink ? 1.03 : 1);
   config.corrMultiplier = config.shadowMultiplier *
-    (1 + (talent.shadowMasteryBonus || 0) + talent.maledictionBonus + talent.improvedCorruptionBonus);
+    (1 + (talent.shadowMasteryBonus || 0)) * (1 + (talent.maledictionBonus || 0)) * (1 + (talent.improvedCorruptionBonus || 0));
   if (actionIds) {
     const actions = new Set(actionIds);
     config.corruption = actions.has('corr');

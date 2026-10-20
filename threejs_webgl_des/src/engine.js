@@ -2,7 +2,7 @@ import { summarizeDetails } from './detailed_results.js';
 import { REGRET_FRAGMENT, REGRET_ACTIONS, decodeRegretResults, scanDecisionRegrets } from './regret.js';
 import { WebGLRenderer, WebGLRenderTarget, RawShaderMaterial, BufferGeometry, BufferAttribute,
   Mesh, Scene, Camera, GLSL3, RGBAIntegerFormat, UnsignedIntType, NearestFilter, NoBlending, DataTexture } from 'three';
-import { COMPACT_STRIPES, UPTIME_EFFECTS, DETAIL_WORD_OFFSET, validate, packConfig, decodeStates, STATE_WORDS, TRACE_CAPACITY, SPELLS, CONFIG, CONFIG_WORDS } from './model.js';
+import { COMPACT_STRIPES, UPTIME_EFFECTS, DETAIL_WORD_OFFSET, DETAIL_EXTRA_OUTPUT, validate, packConfig, decodeStates, STATE_WORDS, TRACE_CAPACITY, SPELLS, CONFIG, CONFIG_WORDS } from './model.js';
 import { VERTEX, FRAGMENT, FAST_FRAGMENT } from './kernel.js';
 
 const yieldUI=()=>new Promise(resolve=>setTimeout(resolve,0));
@@ -188,12 +188,35 @@ function decodeBatch2D(outputs,width,count,config,first,states){
    petMeleeDamage,petMeleeCasts,petMeleeHits,petMeleeCrits,petMeleeMisses,
    petSpellDamage,petSpellCasts,petSpellHits,petSpellCrits,petSpellMisses
   };
+  for(let i=13;i<SPELLS.length;i++){
+   const at=32+(i-6)*3;
+   const read=(word,float=false)=>{
+    const stripe=Math.floor(word/16),attachment=Math.floor(word%16/4);
+    const index=((simY*COMPACT_STRIPES+stripe)*width+simX)*4+word%4;
+    return float?[f0,f1,f2,f3][attachment][index]:outputs[attachment][index];
+   };
+   s[`damage${i}`]=read(at,true);s[`casts${i}`]=read(at+1)&65535;s[`hits${i}`]=read(at+1)>>>16;
+   s[`crits${i}`]=read(at+2)&65535;s[`misses${i}`]=read(at+2)>>>16;
+  }
   for(let i=0;i<UPTIME_EFFECTS.length;i++){
    const word=DETAIL_WORD_OFFSET+Math.floor(i/2),stripe=Math.floor(word/16),attachment=Math.floor(word%16/4);
    const packed=outputs[attachment][((simY*COMPACT_STRIPES+stripe)*width+simX)*4+word%4];
    s[`uptime_${UPTIME_EFFECTS[i][1]}`]=(i%2?packed>>>16:packed&65535)/65535;
   }
   s.spent=f3[p3+2];s.manaWasted=f3[p3+3];
+  const petWords=Array.from({length:4},(_,i)=>{
+   const word=DETAIL_WORD_OFFSET+8+i,stripe=Math.floor(word/16),attachment=Math.floor(word%16/4);
+   return outputs[attachment][((simY*COMPACT_STRIPES+stripe)*width+simX)*4+word%4];
+  });
+  s.impDamage=new Float32Array(new Uint32Array([petWords[0]]).buffer)[0];
+  s.impCasts=petWords[1]&65535;s.impHits=petWords[1]>>>16;
+  s.impCrits=petWords[2]&65535;s.impMisses=petWords[2]>>>16;s.petSwapUsed=petWords[3];
+  for(let i=0;i<DETAIL_EXTRA_OUTPUT.length;i++){
+   const [name,type]=DETAIL_EXTRA_OUTPUT[i],word=DETAIL_WORD_OFFSET+12+i;
+   const stripe=Math.floor(word/16),attachment=Math.floor(word%16/4);
+   const index=((simY*COMPACT_STRIPES+stripe)*width+simX)*4+word%4;
+   s[name]=type==='f32'?[f0,f1,f2,f3][attachment][index]:outputs[attachment][index];
+  }
   states.push(s);
  }
 }
@@ -252,6 +275,11 @@ function sumStates(states, detailed){
   totals.petSpellCrits+=s.petSpellCrits||0;
   totals.petSpellMisses+=s.petSpellMisses||0;
   if(detailed){
+   for(const [key] of DETAIL_EXTRA_OUTPUT)totals[key]=(totals[key]||0)+(s[key]||0);
+   for(let i=13;i<SPELLS.length;i++)for(const prefix of ['damage','casts','hits','crits','misses']){
+    const key=`${prefix}${i}`;totals[key]=(totals[key]||0)+(s[key]||0);
+   }
+   for(const key of ['impDamage','impCasts','impHits','impCrits','impMisses','petSwapUsed'])totals[key]=(totals[key]||0)+(s[key]||0);
    for(const [,key] of UPTIME_EFFECTS)totals[`uptime_${key}`]=(totals[`uptime_${key}`]||0)+(s[`uptime_${key}`]||0);
    for(const key of ['spent','manaWasted','procs','isbProcs','isbConsumed'])totals[key]=(totals[key]||0)+(s[key]||0);
    totals.damage0+=s.damage0||0;totals.casts0+=s.casts0||0;totals.hits0+=s.hits0||0;totals.crits0+=s.crits0||0;totals.misses0+=s.misses0||0;
@@ -290,6 +318,11 @@ export function summarize(states, duration) {
     hits: sum(`hits${i}`) / states.length,
     crits: sum(`crits${i}`) / states.length,
     misses: sum(`misses${i}`) / states.length,
+    ticks: sum(`ticks${i}`) / states.length,
+    tickCrits: sum(`tickCrits${i}`) / states.length,
+    periodicDamage: sum(`tickDamage${i}`) / states.length,
+    directDamage: (sum(`damage${i}`)-sum(`tickDamage${i}`)) / states.length,
+    criticalDamage: sum(`critDamage${i}`) / states.length,
     ...(name === 'Hellfire' ? { selfDamage: sum(`hits${i}`) / states.length * 210 } : {}),
     school: ['Immolate', 'Incinerate', 'Searing Pain', 'Soul Fire', 'Conflagrate', 'Hellfire'].includes(name) ? 'fire' : 'shadow'
   })) : [];
@@ -323,20 +356,22 @@ export function summarize(states, duration) {
     });
   }
 
-  // Pet spell damage (Imp Firebolt or Succubus Lash of Pain)
-  if (detailed && (petSpellDamage > 0 || petSpellCasts > 0)) {
-    const isSuccubus = (petMeleeDamage > 0 || petMeleeCasts > 0);
-    const petSpellName = isSuccubus ? 'Succubus Lash of Pain' : 'Imp Firebolt';
-    const petSchool = isSuccubus ? 'shadow' : 'fire';
-    spells.push({
-      name: petSpellName,
-      damage: petSpellDamage,
-      casts: petSpellCasts,
-      hits: petSpellHits,
-      crits: petSpellCrits,
-      misses: petSpellMisses,
-      school: petSchool
-    });
+  const impDamage=sum('impDamage')/states.length;
+  const impCasts=sum('impCasts')/states.length;
+  if(detailed){
+    const imp={name:'Imp Firebolt',school:'fire'};
+    const lash={name:'Succubus Lash of Pain',school:'shadow'};
+    for(const key of ['Damage','Casts','Hits','Crits','Misses']){
+      const field=key.toLowerCase();
+      imp[field]=sum(`imp${key}`)/states.length;
+      lash[field]=Math.max(0,sum(`petSpell${key}`)/states.length-imp[field]);
+    }
+    // Legacy decoded states may predate the explicit Imp counters.
+    if(!impCasts&&!petMeleeCasts){
+      for(const key of ['Damage','Casts','Hits','Crits','Misses'])imp[key.toLowerCase()]=sum(`petSpell${key}`)/states.length;
+      lash.damage=0;lash.casts=0;
+    }
+    for(const spell of [imp,lash])if(spell.damage>0||spell.casts>0)spells.push(spell);
   }
 
   // Demonic Brand proc damage
@@ -344,16 +379,16 @@ export function summarize(states, duration) {
     spells.push({
       name: 'Demonic Brand',
       damage: petBrandDamage,
-      casts: 0,
-      hits: 0,
-      crits: 0,
-      misses: 0,
-      school: 'fire'
+      casts: sum('petBrandCasts') / states.length,
+      hits: sum('petBrandHits') / states.length,
+      crits: sum('petBrandCrits') / states.length,
+      misses: sum('petBrandMisses') / states.length,
+      school: petMeleeCasts > 0 ? 'shadow' : 'fire'
     });
   }
 
-  const shadowDmg = (spells[0]?.damage || 0) + (spells[1]?.damage || 0) + (spells[2]?.damage || 0) + (petMeleeDamage > 0 ? petSpellDamage : 0);
-  const fireDmg = (spells[3]?.damage || 0) + (spells[4]?.damage || 0) + (spells[5]?.damage || 0) + (petMeleeDamage === 0 ? petSpellDamage : 0) + petBrandDamage + (spells[13]?.damage || 0);
+  const shadowDmg = (spells[0]?.damage || 0) + (spells[1]?.damage || 0) + (spells[2]?.damage || 0) + (petMeleeCasts > 0 ? petSpellDamage-impDamage : 0);
+  const fireDmg = (spells[3]?.damage || 0) + (spells[4]?.damage || 0) + (spells[5]?.damage || 0) + (petMeleeCasts === 0 ? petSpellDamage : impDamage) + petBrandDamage + (spells[13]?.damage || 0);
   const physicalDmg = petMeleeDamage;
   const totalDamage = detailed ? shadowDmg + fireDmg + physicalDmg : sum('total') / states.length;
 
@@ -376,6 +411,7 @@ export function summarize(states, duration) {
     petDamage: totalPetDmg,
     petMeleeDamage,
     petSpellDamage,
+    petSwaps: sum('petSwapUsed') / states.length,
     petBrandDamage,
     maxHeap: states.reduce((n,s)=>Math.max(n,s.highWater || 0),0),
     spells,

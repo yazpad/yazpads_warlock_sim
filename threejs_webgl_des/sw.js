@@ -1,4 +1,4 @@
-const CACHE_NAME = 'warlock-sim-v70';
+const CACHE_NAME = 'warlock-sim-v84';
 const ASSETS = [
   './src/detailed_results.js',
   "./assets/icons/Achievement_Character_Human_Male.png",
@@ -130,6 +130,7 @@ const ASSETS = [
   './src/classes/warlock_search_presets.js',
   './src/classes/warlock_search_results.js',
   './src/classes/warlock_import.js',
+  './src/classes/warlock_base_stats.js',
   './src/classes/warlock_equipment.js',
   './src/classes/warlock_import_buffs.js',
   './src/config_builder.js',
@@ -154,7 +155,7 @@ const ASSETS = [
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(ASSETS).catch((err) => console.warn('Cache prefetch error:', err));
+      return cache.addAll(ASSETS.map((url) => new Request(url, { cache: 'reload' }))).catch((err) => console.warn('Cache prefetch error:', err));
     })
   );
   self.skipWaiting();
@@ -173,18 +174,26 @@ self.addEventListener('activate', (event) => {
   self.clients.claim();
 });
 
+// Shader source and its JS schemas must come from the current deployment.
+// Serving stale modules while refreshing each independently can mix layouts.
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
-  event.respondWith(
-    caches.match(event.request).then((cached) => {
-      const networked = fetch(event.request).then((response) => {
-        if (response.status === 200) {
-          const cacheCopy = response.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, cacheCopy));
-        }
-        return response;
-      }).catch(() => cached);
-      return cached || networked;
-    })
-  );
+  const url = new URL(event.request.url);
+  const executable = /\.(?:js|mjs|json|html)$/.test(url.pathname) || event.request.mode === 'navigate';
+  event.respondWith((async () => {
+    const cache = await caches.open(CACHE_NAME);
+    const cached = await cache.match(event.request);
+    const networked = async () => {
+      const response = await fetch(event.request, executable ? { cache: 'no-cache' } : undefined);
+      if (response.status === 200) await cache.put(event.request, response.clone());
+      return response;
+    };
+    if (!executable && cached) return cached;
+    try {
+      return await networked();
+    } catch (error) {
+      if (cached) return cached;
+      throw error;
+    }
+  })());
 });

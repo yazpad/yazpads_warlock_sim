@@ -89,6 +89,7 @@ function extractTopUniqueCandidates(population, mapElitesGrid, maxCount = 15) {
 
 // Main Genetic Algorithm APL Synthesis Loop with WebGL Multi-Config Simulation & Double Buffering
 async function runAPLGeneticSynthesis(baseStatsConfig, gaConfig, { signal, onProgress = () => {}, onGeneration = () => {} } = {}) {
+  const objective = gaConfig.objective ?? 'mean-dps';
   const rng = new FastRNG(gaConfig.seed || 0x41504C53);
   const popSize = gaConfig.populationSize || 500;
   const generations = gaConfig.generations || 15;
@@ -135,7 +136,7 @@ async function runAPLGeneticSynthesis(baseStatsConfig, gaConfig, { signal, onPro
   // Launch Generation 0 simulation on GPU
   const gen0Configs = population.map(ind => individualToConfig(ind, baseStatsConfig));
   let currentSimPromise = evaluateBatch(gen0Configs, { signal, iterations: screeningSims, detailedResults: false }, {
-    requestId: 'apl-generation-0', candidateIds: population.map((_, i) => `apl-generation-0-${i}`),
+    objective, requestId: 'apl-generation-0', candidateIds: population.map((_, i) => `apl-generation-0-${i}`),
   });
   let currentPool = population;
 
@@ -155,6 +156,7 @@ async function runAPLGeneticSynthesis(baseStatsConfig, gaConfig, { signal, onPro
     const res = simRes0.results[i];
     currentPool[i].fitness = simRes0.fitnessResults[i].objective.value;
     currentPool[i].batch = res;
+    currentPool[i].objective = objective;
     const key = getAPLMapElitesKey(currentPool[i]);
     if (!mapElitesGrid.has(key) || currentPool[i].fitness > mapElitesGrid.get(key).fitness) {
       mapElitesGrid.set(key, { ...currentPool[i] });
@@ -191,7 +193,7 @@ async function runAPLGeneticSynthesis(baseStatsConfig, gaConfig, { signal, onPro
 
     // Launch GPU simulation for activeBatch
     currentSimPromise = evaluateBatch(activeBatch.configs, { signal, iterations: screeningSims, detailedResults: false }, {
-      requestId: `apl-generation-${gen}`, candidateIds: activeBatch.pool.map((_, i) => `apl-generation-${gen}-${i}`),
+      objective, requestId: `apl-generation-${gen}`, candidateIds: activeBatch.pool.map((_, i) => `apl-generation-${gen}-${i}`),
     });
 
     // Concurrently prepare next generation batch on CPU
@@ -208,6 +210,7 @@ async function runAPLGeneticSynthesis(baseStatsConfig, gaConfig, { signal, onPro
       const res = offSimRes.results[i];
       activeBatch.pool[i].fitness = offSimRes.fitnessResults[i].objective.value;
       activeBatch.pool[i].batch = res;
+      activeBatch.pool[i].objective = objective;
       const key = getAPLMapElitesKey(activeBatch.pool[i]);
       if (!mapElitesGrid.has(key) || activeBatch.pool[i].fitness > mapElitesGrid.get(key).fitness) {
         mapElitesGrid.set(key, { ...activeBatch.pool[i] });
@@ -263,17 +266,18 @@ async function runAPLGeneticSynthesis(baseStatsConfig, gaConfig, { signal, onPro
   if (finalCandidates.length > 0) {
     const finalConfigs = finalCandidates.map(c => individualToConfig(c, baseStatsConfig));
     const finalSimRes = await evaluateBatch(finalConfigs, { signal, iterations: finalSims, detailedResults: false }, {
-      requestId: 'apl-finalists', candidateIds: finalCandidates.map((_, i) => `apl-finalist-${i}`),
+      objective, requestId: 'apl-finalists', candidateIds: finalCandidates.map((_, i) => `apl-finalist-${i}`),
     });
 
     for (let i = 0; i < finalCandidates.length; i++) {
       finalCandidates[i].batch = finalSimRes.results[i];
-      finalCandidates[i].meanDps = finalSimRes.fitnessResults[i].objective.value;
+      finalCandidates[i].score = finalSimRes.fitnessResults[i].objective.value;
+      finalCandidates[i].meanDps = finalSimRes.results[i].summary.mean;
       finalCandidates[i].summary = finalSimRes.results[i].summary;
     }
   }
 
-  finalCandidates.sort((a, b) => b.meanDps - a.meanDps);
+  finalCandidates.sort((a, b) => b.score - a.score);
   finalCandidates.forEach((c, i) => { c.rank = i + 1; });
   const totalSimulations = totalSimsCount + (finalCandidates.length * finalSims);
 

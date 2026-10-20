@@ -9,7 +9,7 @@ export async function prepareUIBuildImport(payload, options) {
   }
   const c = resolved.candidate;
   const rules = c.apl.kind === 'text' ? parseAPLText(c.apl.text) : c.apl.rules;
-  return { kind: 'editable', config: resolved.config, rules, logicalBuild: {
+  return { kind: 'editable', importDiagnostics: c.importDiagnostics || [], config: resolved.config, rules, logicalBuild: {
     schemaVersion: 1, classId: resolved.classId, kind: 'logical-build',
     candidate: c, evaluationDefaults: resolved.evaluationDefaults,
   }, payload: {

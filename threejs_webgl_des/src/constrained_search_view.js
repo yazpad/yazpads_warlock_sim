@@ -205,6 +205,7 @@ export function readGAConfig() {
   const minExplore = Number(document.getElementById('ga-min-explore')?.value || 0.15);
 
   return {
+    objective: document.getElementById('ga-optimize-p95')?.checked ? 'p95-dps' : 'mean-dps',
     generations: Math.max(1, gens),
     populationSize: Math.max(2, pop),
     screeningSims: Math.max(10, screening),
@@ -262,7 +263,7 @@ export function setGAExecutionResults({ candidates, evolutionHistory, bestCandid
     renderSelectedCandidateDetails(selectedCandidate);
   }
 
-  const bestDps = currentCandidates.length > 0 ? currentCandidates[0].mean_dps : (currentEvolutionHistory.length > 0 ? currentEvolutionHistory[currentEvolutionHistory.length - 1].bestDps : 0);
+  const bestDps = currentCandidates.length > 0 ? (currentCandidates[0].score ?? currentCandidates[0].mean_dps) : (currentEvolutionHistory.length > 0 ? currentEvolutionHistory[currentEvolutionHistory.length - 1].bestDps : 0);
   const maxGen = currentEvolutionHistory.length > 0 ? currentEvolutionHistory[currentEvolutionHistory.length - 1].gen : 15;
 
   updateGAStatsCards({
@@ -496,6 +497,13 @@ export function renderGAGraph(history = []) {
 }
 
 export function renderGALeaderboard() {
+  const metric = currentCandidates[0]?.objective === 'p95-dps' ? 'P95 DPS' : 'Mean DPS';
+  const pane = document.getElementById('tab-constrained-search');
+  const metricHeader = pane?.querySelector('thead th[data-search-metric]');
+  if (metricHeader) metricHeader.textContent = metric;
+  const chartTitle = pane?.querySelector('.ga-chart-title');
+  if (chartTitle) chartTitle.textContent = `Convergence: ${metric} vs Generation`;
+
   const tbody = document.getElementById('ga-leaderboard-body');
   if (!tbody) return;
 
@@ -506,7 +514,7 @@ export function renderGALeaderboard() {
 
   const showPct = document.getElementById('ga-chk-pct-leader')?.checked;
   const showSd = document.getElementById('ga-chk-show-sd')?.checked;
-  const leaderDps = currentCandidates[0]?.mean_dps || 1;
+  const leaderDps = (currentCandidates[0]?.score ?? currentCandidates[0]?.mean_dps) || 1;
 
   tbody.innerHTML = '';
 
@@ -527,6 +535,7 @@ export function renderGALeaderboard() {
     // 2. Spec Name (X/Y/Z) & APL Chain Icons Preview (Inline)
     let chainIconsHtml = '';
     if (cand.apl && Array.isArray(cand.apl.rules)) {
+      const escapeAttr = str => String(str).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
       const activeRules = getRaceVisibleAPLRules(cand.apl.rules, cand.race || cand.individual?.race).filter(r => r.enabled);
       if (activeRules.length > 0) {
         chainIconsHtml = `
@@ -535,7 +544,7 @@ export function renderGALeaderboard() {
               const spellName = r.spell || getSpellNameForAPL(r.action);
               const iconKey = getIconForSpell(spellName);
               const iconSrc = ['EUREKA', 'BLOOD_FURY', 'BERSERKING'].includes(iconKey) ? SPELL_ICONS[iconKey] : r.icon || SPELL_ICONS[iconKey] || 'Spell_Shadow_ShadowBolt.png';
-              return `<img src="./assets/icons/${iconSrc}" width="16" height="16" alt="${spellName}" title="${spellName}: ${r.condition || 'Always'}" style="border-radius:2px; border:1px solid #382c44; display:block;" onerror="this.src='./assets/icons/Spell_Shadow_ShadowBolt.png'">`;
+              return `<img src="./assets/icons/${escapeAttr(iconSrc)}" width="16" height="16" alt="${escapeAttr(spellName)}" title="${escapeAttr(spellName)}: ${escapeAttr(r.condition || 'Always')}" style="border-radius:2px; border:1px solid #382c44; display:block;" onerror="this.src='./assets/icons/Spell_Shadow_ShadowBolt.png'">`;
             }).join('')}
           </div>
         `;
@@ -581,15 +590,16 @@ export function renderGALeaderboard() {
     tdDps.style.textAlign = 'right';
     tdDps.style.fontWeight = 'bold';
     if (showPct) {
-      const diff = ((cand.mean_dps - leaderDps) / leaderDps) * 100;
+      const diff = (((cand.score ?? cand.mean_dps) - leaderDps) / leaderDps) * 100;
       if (cand.rank === 1) {
         tdDps.innerHTML = '<span style="color: #ffd100; font-family: var(--font-mono);">= Leader</span>';
       } else {
         tdDps.innerHTML = `<span style="color: #f87171; font-family: var(--font-mono);">${diff.toFixed(2)}%</span>`;
       }
     } else {
-      tdDps.innerHTML = `<span style="color: #4ade80; font-family: var(--font-mono);">${cand.mean_dps.toFixed(1)}</span>`;
+      tdDps.innerHTML = `<span style="color: #4ade80; font-family: var(--font-mono);">${(cand.score ?? cand.mean_dps).toFixed(1)}</span>`;
     }
+    if (cand.objective === 'p95-dps') tdDps.innerHTML += `<br><small>P95 · Mean ${cand.mean_dps.toFixed(1)}</small>`;
     if (showSd && cand.std_dev) {
       tdDps.innerHTML += `<br><small style="color: #94a3b8; font-weight: normal; font-family: var(--font-mono);">±${cand.std_dev.toFixed(1)}</small>`;
     }
@@ -636,20 +646,22 @@ export function renderSelectedCandidateDetails(cand) {
   const sd = cand.std_dev || 0;
 
   const gen0Mean = currentEvolutionHistory.length > 0 ? currentEvolutionHistory[0].avgDps : meanDps;
-  const netGain = meanDps - gen0Mean;
+  const score = cand.score ?? meanDps;
+  const netGain = score - gen0Mean;
   const netGainPct = (netGain / Math.max(1, gen0Mean)) * 100;
 
   let detailChainIconsHtml = '';
   if (cand.apl && Array.isArray(cand.apl.rules)) {
     const activeRules = getRaceVisibleAPLRules(cand.apl.rules, cand.race || cand.individual?.race).filter(r => r.enabled);
     if (activeRules.length > 0) {
+      const escapeAttr = str => String(str).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
       detailChainIconsHtml = `
         <div class="priority-chain-preview" style="display: inline-flex; align-items: center; gap: 3px; vertical-align: middle;">
           ${activeRules.map(r => {
             const spellName = r.spell || getSpellNameForAPL(r.action);
             const iconKey = getIconForSpell(spellName);
             const iconSrc = ['EUREKA', 'BLOOD_FURY', 'BERSERKING'].includes(iconKey) ? SPELL_ICONS[iconKey] : r.icon || SPELL_ICONS[iconKey] || 'Spell_Shadow_ShadowBolt.png';
-            return `<img src="./assets/icons/${iconSrc}" width="18" height="18" alt="${spellName}" title="${spellName}: ${r.condition || 'Always'}" style="border-radius:2px; border:1px solid #382c44; display:block;" onerror="this.src='./assets/icons/Spell_Shadow_ShadowBolt.png'">`;
+            return `<img src="./assets/icons/${escapeAttr(iconSrc)}" width="18" height="18" alt="${escapeAttr(spellName)}" title="${escapeAttr(spellName)}: ${escapeAttr(r.condition || 'Always')}" style="border-radius:2px; border:1px solid #382c44; display:block;" onerror="this.src='./assets/icons/Spell_Shadow_ShadowBolt.png'">`;
           }).join('')}
         </div>
       `;
@@ -684,8 +696,8 @@ export function renderSelectedCandidateDetails(cand) {
 
       <div class="metric-card major" style="text-align: left; padding: 0.6rem 0.8rem; border-color: #10b981;">
         <span style="font-size: 0.72rem; color: #6ee7b7; text-transform: uppercase;">2. Evolved Candidate Fitness</span>
-        <strong style="font-size: 1.25rem; color: #4ade80; margin: 0.2rem 0;">${meanDps.toFixed(1)} DPS</strong>
-        <small style="color: #6ee7b7;">±${sd.toFixed(1)} SD · [${minDps.toFixed(0)} - ${maxDps.toFixed(0)}]</small>
+        <strong style="font-size: 1.25rem; color: #4ade80; margin: 0.2rem 0;">${score.toFixed(1)} ${cand.objective === 'p95-dps' ? 'P95 DPS' : 'Mean DPS'}</strong>
+        <small style="color: #6ee7b7;">Mean ${meanDps.toFixed(1)} · ±${sd.toFixed(1)} SD · [${minDps.toFixed(0)} - ${maxDps.toFixed(0)}]</small>
       </div>
 
       <div class="metric-card" style="text-align: left; padding: 0.6rem 0.8rem;">

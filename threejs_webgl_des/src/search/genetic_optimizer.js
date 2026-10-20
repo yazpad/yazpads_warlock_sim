@@ -115,6 +115,7 @@ function prepareOffspringBatch(parents, popSize, rng, gaConfig, baseStatsConfig,
 
 // Main Constrained Genetic Algorithm Execution Engine running with WebGL2 Kernel & Double Buffering
 async function runConstrainedGeneticSearch(baseStatsConfig, gaConfig, { signal, onProgress = () => {}, onGeneration = () => {} } = {}) {
+  const objective = gaConfig.objective ?? 'mean-dps';
   const rng = new FastRNG(gaConfig.seed || 0x13374242);
   const popSize = gaConfig.populationSize || 1000;
   const generations = gaConfig.generations || 15;
@@ -152,7 +153,7 @@ async function runConstrainedGeneticSearch(baseStatsConfig, gaConfig, { signal, 
   // Launch Generation 0 simulation on GPU (Buffer A)
   const gen0Configs = population.map(ind => individualToConfig(ind, baseStatsConfig));
   let currentSimPromise = evaluateBatch(gen0Configs, { signal, iterations: screeningSims, detailedResults: false }, {
-    requestId: 'build-generation-0', candidateIds: population.map((_, i) => `build-generation-0-${i}`),
+    objective, requestId: 'build-generation-0', candidateIds: population.map((_, i) => `build-generation-0-${i}`),
   });
   let currentPool = population;
 
@@ -172,6 +173,7 @@ async function runConstrainedGeneticSearch(baseStatsConfig, gaConfig, { signal, 
     const res = simRes0.results[i];
     currentPool[i].fitness = simRes0.fitnessResults[i].objective.value;
     currentPool[i].batch = res;
+    currentPool[i].objective = objective;
     const key = getMapElitesKey(currentPool[i]);
     if (!mapElitesGrid.has(key) || currentPool[i].fitness > mapElitesGrid.get(key).fitness) {
       mapElitesGrid.set(key, {
@@ -213,7 +215,7 @@ async function runConstrainedGeneticSearch(baseStatsConfig, gaConfig, { signal, 
 
     // 1. Immediately launch GPU simulation on activeBatch
     currentSimPromise = evaluateBatch(activeBatch.configs, { signal, iterations: screeningSims, detailedResults: false }, {
-      requestId: `build-generation-${gen}`, candidateIds: activeBatch.pool.map((_, i) => `build-generation-${gen}-${i}`),
+      objective, requestId: `build-generation-${gen}`, candidateIds: activeBatch.pool.map((_, i) => `build-generation-${gen}-${i}`),
     });
 
     // 2. Concurrently on CPU: prepare next generation's batch (Gen + 1) while GPU runs activeBatch
@@ -233,6 +235,7 @@ async function runConstrainedGeneticSearch(baseStatsConfig, gaConfig, { signal, 
       const res = offSimRes.results[i];
       activeBatch.pool[i].fitness = offSimRes.fitnessResults[i].objective.value;
       activeBatch.pool[i].batch = res;
+      activeBatch.pool[i].objective = objective;
       const key = getMapElitesKey(activeBatch.pool[i]);
       if (!mapElitesGrid.has(key) || activeBatch.pool[i].fitness > mapElitesGrid.get(key).fitness) {
         mapElitesGrid.set(key, {
@@ -295,7 +298,7 @@ async function runConstrainedGeneticSearch(baseStatsConfig, gaConfig, { signal, 
   if (finalCandidates.length > 0) {
     const finalConfigs = finalCandidates.map(ind => individualToConfig(ind, baseStatsConfig));
     const finalSimRes = await evaluateBatch(finalConfigs, { signal, iterations: finalSims, detailedResults: false }, {
-      requestId: 'build-finalists', candidateIds: finalCandidates.map((_, i) => `build-finalist-${i}`),
+      objective, requestId: 'build-finalists', candidateIds: finalCandidates.map((_, i) => `build-finalist-${i}`),
     });
 
     for (let i = 0; i < finalCandidates.length; i++) {

@@ -35,7 +35,7 @@ const { getClassModule } = await import('../src/classes/registry.js');
 const { getTalentFlagsFromRanks } = await import('../src/talents.js');
 test('actual APL search all-stage adapter preserves native batch inputs and final search output',async()=>{
  const source=readFileSync(new URL('../src/search/apl_genetic_optimizer.js',import.meta.url),'utf8');
- const baseline=source.replace(/await evaluateBatch\(finalConfigs, \{ signal, iterations: finalSims, detailedResults: false \}, \{\s*requestId: 'apl-finalists', candidateIds: finalCandidates\.map\(\(_, i\) => `apl-finalist-\$\{i\}`\),\s*\}\)/,
+ const baseline=source.replace(/await evaluateBatch\(finalConfigs, \{ signal, iterations: finalSims, detailedResults: false \}, \{\s*(?:objective, )?requestId: 'apl-finalists', candidateIds: finalCandidates\.map\(\(_, i\) => `apl-finalist-\$\{i\}`\),\s*\}\)/,
   'await runMultiSimulation(finalConfigs, { signal, iterations: finalSims, detailedResults: false })')
   .replace(/evaluateBatch\(gen0Configs, \{ signal, iterations: screeningSims, detailedResults: false \}, \{[\s\S]*?\n  \}\)/, 'runMultiSimulation(gen0Configs, { signal, iterations: screeningSims, detailedResults: false })')
   .replace(/evaluateBatch\(activeBatch.configs, \{ signal, iterations: screeningSims, detailedResults: false \}, \{[\s\S]*?\n    \}\)/, 'runMultiSimulation(activeBatch.configs, { signal, iterations: screeningSims, detailedResults: false })')
@@ -74,7 +74,7 @@ test('actual APL search all-stage adapter preserves native batch inputs and fina
 
 test('actual build search all-stage adapter preserves batches, rankings, and final output',async()=>{
  const source=readFileSync(new URL('../src/search/genetic_optimizer.js',import.meta.url),'utf8');
- const baseline=source.replace(/await evaluateBatch\(finalConfigs, \{ signal, iterations: finalSims, detailedResults: false \}, \{\s*requestId: 'build-finalists', candidateIds: finalCandidates\.map\(\(_, i\) => `build-finalist-\$\{i\}`\),\s*\}\)/,
+ const baseline=source.replace(/await evaluateBatch\(finalConfigs, \{ signal, iterations: finalSims, detailedResults: false \}, \{\s*(?:objective, )?requestId: 'build-finalists', candidateIds: finalCandidates\.map\(\(_, i\) => `build-finalist-\$\{i\}`\),\s*\}\)/,
   'await runMultiSimulation(finalConfigs, { signal, iterations: finalSims, detailedResults: false })')
   .replace(/evaluateBatch\(gen0Configs, \{ signal, iterations: screeningSims, detailedResults: false \}, \{[\s\S]*?\n  \}\)/, 'runMultiSimulation(gen0Configs, { signal, iterations: screeningSims, detailedResults: false })')
   .replace(/evaluateBatch\(activeBatch.configs, \{ signal, iterations: screeningSims, detailedResults: false \}, \{[\s\S]*?\n    \}\)/, 'runMultiSimulation(activeBatch.configs, { signal, iterations: screeningSims, detailedResults: false })')

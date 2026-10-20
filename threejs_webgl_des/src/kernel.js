@@ -1,4 +1,4 @@
-import { SPELLS, UPTIME_EFFECTS, DETAIL_WORD_OFFSET, COMPACT_STRIPES, CONFIG, STATE, FAST_STATE, HEAP_CAPACITY, APL_HEADER0_OFFSET, APL_PARAM0_OFFSET, APL_HEADER1_OFFSET, APL_PARAM1_OFFSET, MAX_APL_RULES } from './model.js';
+import { SPELLS, UPTIME_EFFECTS, DETAIL_WORD_OFFSET, DETAIL_EXTRA_OUTPUT, COMPACT_STRIPES, CONFIG, STATE, FAST_STATE, HEAP_CAPACITY, APL_HEADER0_OFFSET, APL_PARAM0_OFFSET, APL_HEADER1_OFFSET, APL_PARAM1_OFFSET, MAX_APL_RULES } from './model.js';
 const type=t=>t==='u32'?'uint':'float';
 const structure=(name,schema)=>`struct ${name} { ${Object.entries(schema).map(([k,t])=>`${type(t)} ${k};`).join('\n')} };`;
 const word=(name,t)=>t==='f32'?`floatBitsToUint(s.${name})`:`s.${name}`;
@@ -11,7 +11,7 @@ export function buildFragment(detailed = true) {
 const stateSchema = detailed ? STATE : FAST_STATE;
 const counterSwitch = detailed ? `switch(spell){${Array.from({length:SPELLS.length},(_,i)=>`case ${i}u:s.casts${i}++;break;`).join('')}}` : '';
 const missSwitch = detailed ? `switch(spell){${Array.from({length:SPELLS.length},(_,i)=>`case ${i}u:s.misses${i}++;break;`).join('')}}` : '';
-const damageSwitch = detailed ? `switch(spell){${Array.from({length:SPELLS.length},(_,i)=>`case ${i}u:s.damage${i}+=amount;s.hits${i}++;s.crits${i}+=uint(crit);break;`).join('')}}` : '';
+const damageSwitch = detailed ? `switch(spell){${Array.from({length:SPELLS.length},(_,i)=>`case ${i}u:s.damage${i}+=amount;s.hits${i}++;s.crits${i}+=uint(crit);if(crit)s.critDamage${i}+=amount;break;`).join('')}}` : '';
 const detailedCompactWord = detailed ? `uint compactWord(uint index){switch(index){
  case 0u:return floatBitsToUint(s.total);case 1u:return s.done|(s.highWater<<16u);case 2u:return s.events;case 3u:return s.taps|(s.procs<<16u);
  case 4u:return s.isbProcs|(s.isbConsumed<<16u);case 5u:return floatBitsToUint(s.petBrandDamage);case 6u:return floatBitsToUint(s.petDamage);case 7u:return s.petCasts|(s.rngCalls<<16u);
@@ -22,6 +22,11 @@ const detailedCompactWord = detailed ? `uint compactWord(uint index){switch(inde
  ${UPTIME_EFFECTS.filter((_,i)=>i%2===0).map(([,key],i)=>`case ${DETAIL_WORD_OFFSET+i}u:return uint(round(float(s.uptime_${key})/float(c.end)*65535.0))|(uint(round(float(s.uptime_${UPTIME_EFFECTS[i*2+1][1]})/float(c.end)*65535.0))<<16u);`).join('')}
  case ${DETAIL_WORD_OFFSET+6}u:return floatBitsToUint(s.spent);
  case ${DETAIL_WORD_OFFSET+7}u:return floatBitsToUint(s.manaWasted);
+ case ${DETAIL_WORD_OFFSET+8}u:return floatBitsToUint(s.impDamage);
+ case ${DETAIL_WORD_OFFSET+9}u:return s.impCasts|(s.impHits<<16u);
+ case ${DETAIL_WORD_OFFSET+10}u:return s.impCrits|(s.impMisses<<16u);
+ case ${DETAIL_WORD_OFFSET+11}u:return s.petSwapUsed;
+ ${DETAIL_EXTRA_OUTPUT.map(([name,type,source],i)=>`case ${DETAIL_WORD_OFFSET+12+i}u:return ${type==='f32'?`floatBitsToUint(s.${source||name})`:`s.${source||name}`};`).join('\n')}
  default:return 0u;}}` : '';
 const stripeCount = detailed ? `${COMPACT_STRIPES}u` : '1u';
 const stateOverflow = detailed ? Array.from({length:SPELLS.length},(_,i)=>`if(max(max(s.casts${i},s.hits${i}),max(s.crits${i},s.misses${i}))>65535u)s.done=7u;`).join('\n') : '';
@@ -133,7 +138,13 @@ void damage(uint spell,float amount,bool crit){
  s.total+=amount;eventDamage+=amount;if(crit)eventFlags|=1u;
  ${damageSwitch}
 }
-float isbMultiplier(){
+${detailed ? `void periodicDamage(uint spell,float amount,bool crit){
+ float applied=amount;
+ if(c.race==2u&&c.targetIsBeast!=0u&&spell!=12u)applied*=1.05;
+ damage(spell,amount,crit);
+ switch(spell){${SPELLS.map((_,i)=>`case ${i}u:s.ticks${i}++;s.tickCrits${i}+=uint(crit);s.tickDamage${i}+=applied;if(crit)s.tickCritDamage${i}+=applied;break;`).join('')}}
+}
+` : ''}float isbMultiplier(){
  if(s.now>=s.isbEnd)return 1.0;
  s.isbConsumed++;return 1.0+c.isb;
 }
@@ -152,7 +163,7 @@ float baseCost(uint spell){switch(spell){
  case 0u:return c.boltCost;case 1u:return c.corrCost;case 2u:return 215.0;
  case 3u:return c.immCost;case 4u:return 355.0*c.cataclysmCostMult;case 13u:return 335.0*c.cataclysmCostMult;
  case 23u:return 1300.0*c.cataclysmCostMult;case 6u:return 300.0;case 8u:return 265.0*c.cataclysmCostMult;
- case 9u:return 365.0*c.cataclysmCostMult;case 10u:return 365.0;case 11u:return 240.0;
+ case 9u:return 365.0*c.cataclysmCostMult;case 10u:return 365.0;case 11u:return 200.0;
  default:return 168.0*c.cataclysmCostMult;}}
 float cost(uint spell){return baseCost(spell)*manaMultiplier();}
 void spend(uint spell){
@@ -165,9 +176,9 @@ bool racialInAPL(uint action){
  return false;
 }
 bool eurekaInAPL(){return racialInAPL(20u);}
-void activateBerserking(){s.racialReady=s.now+180000000u;s.racialEnd=s.now+10000000u;}
-void activateBloodFury(){s.racialReady=s.now+180000000u;s.racialEnd=s.now+15000000u;}
-void activateEureka(){s.racialReady=s.now+120000000u;s.eurekaEnd=s.now+8000000u;}
+void activateBerserking(){${detailed ? 's.racialCasts++;' : ''}s.racialReady=s.now+180000000u;s.racialEnd=s.now+10000000u;}
+void activateBloodFury(){${detailed ? 's.racialCasts++;' : ''}s.racialReady=s.now+180000000u;s.racialEnd=s.now+15000000u;}
+void activateEureka(){${detailed ? 's.racialCasts++;' : ''}s.racialReady=s.now+120000000u;s.eurekaEnd=s.now+8000000u;}
 void checkRacial(){
  if((c.race==3u&&eurekaInAPL())||(c.race==1u&&racialInAPL(21u))||(c.race==2u&&racialInAPL(22u)))return;
  if(s.now<s.racialReady)return;
@@ -177,28 +188,28 @@ void checkRacial(){
  if(c.race==1u||c.race==3u){
   uint window=c.race==1u?14000000u:6000000u;
   if(s.doomActive!=0u){if(s.doomEnd>c.end||s.doomEnd-s.now>window)return;trigger=true;}
-  else if(c.curseOfDoom!=0u&&c.end-s.now>=60000000u)return;
-  if(!trigger)return;
+  else if(c.race==1u&&c.curseOfDoom!=0u&&c.end-s.now>=60000000u)return;
+  if(!trigger)return;${detailed ? 's.racialCasts++;' : ''}
   s.racialReady=s.now+cooldown;
   if(c.race==1u)s.racialEnd=s.now+15000000u;else s.eurekaEnd=s.now+8000000u;
- }else if(c.race==2u&&trigger){s.racialReady=s.now+180000000u;s.racialEnd=s.now+10000000u;}
+ }else if(c.race==2u&&trigger){${detailed ? 's.racialCasts++;' : ''}s.racialReady=s.now+180000000u;s.racialEnd=s.now+10000000u;}
 }
 void applyDot(uint spell){
  if(random01()>=c.hit){countMiss(spell);return;}
  if(spell==1u){s.corrBonus=s.castBonus;s.corrTicks=6u;s.corrGen++;s.corrEnd=s.now+18000000u;enqueue(s.now+3000000u,3u,spell,s.corrGen);}
- if(spell==2u){s.agonyBonus=s.castBonus;uint isAmp=(c.amplifyCurse!=0u&&s.now>=s.amplifyReady)?1u:0u;if(isAmp!=0u)s.amplifyReady=s.now+180000000u;s.agonyAmplified=isAmp;s.agonyTicks=12u;s.agonyGen++;s.agonyEnd=s.now+24000000u;enqueue(s.now+2000000u,3u,spell,s.agonyGen);}
+ if(spell==2u){s.agonySpellPowerShare=currentPower()*1.596/12.0;s.agonyBonus=s.castBonus;uint isAmp=(s.now<s.amplifyEnd)?1u:0u;s.agonyAmplified=isAmp;s.agonyTicks=12u;s.agonyGen++;s.agonyEnd=s.now+24000000u;enqueue(s.now+2000000u,3u,spell,s.agonyGen);}
 }
 void immolateImpact(){
  if(random01()>=c.hit){countMiss(3u);return;}
  bool crit=random01()<c.fireCrit;
- float amount=(c.immDirect+0.20*currentPower())*(crit?c.directCrit:1.0)*currentFireMult()*(1.0+c.afBonus+c.aftermathBonus);
+ float amount=(c.immDirect+0.20*currentPower())*(crit?c.directCrit:1.0)*currentFireMult()*(1.0+c.afBonus)*(1.0+c.aftermathBonus);
  amount*=resistanceMultiplier();damage(3u,amount*s.castBonus,crit);
  s.immBonus=s.castBonus;s.immTicks=5u;s.immGen++;s.immEnd=s.now+15000000u;enqueue(s.now+3000000u,3u,3u,s.immGen);
 }
 void soulFireImpact(){
  if(random01()>=c.hit){countMiss(7u);return;}
  float roll=random01(),p=currentPower();
- float amount=(383.0+roll*96.0+1.0*p)*currentFireMult()*(1.0+c.afBonus);
+ float amount=(340.0+roll*197.15+1.0*p)*currentFireMult()*(1.0+c.afBonus);
  bool crit=random01()<c.fireCrit;
  if(crit)amount*=c.directCrit;
  amount*=resistanceMultiplier();damage(7u,amount*s.castBonus,crit);
@@ -209,7 +220,7 @@ void directImpact(uint spell){
  float roll=random01(),amount,p=currentPower();
  bool crit=false;
  if(spell==0u){
-  amount=(c.boltMin+roll*(c.boltMax-c.boltMin)+(3.0/3.5)*p)*currentShadowMult()*(1.0+c.shadowMasteryBonus+c.afBonus);
+  amount=(c.boltMin+roll*(c.boltMax-c.boltMin)+(3.0/3.5)*p)*currentShadowMult()*(1.0+c.shadowMasteryBonus)*(1.0+c.afBonus);
   float fightProg=float(s.now)/max(1.0,float(c.end));
   if((1.0-fightProg)<=0.35&&c.decimation!=0u)amount*=(1.0+0.03*float(c.decimationRank));
   amount*=isbMultiplier();
@@ -244,7 +255,7 @@ void tick(Event e){
   s.corrTicks--;remaining=s.corrTicks;
   amount=(c.corrBase+p*1.2/6.0)*c.corrMultiplier*(s.now<s.snfShadowEnd?(1.0+c.snfBonus):1.0)*(s.now<s.drainHopeEnd?1.10:1.0);
   bool crit=random01()<c.shadowCrit;if(crit)amount*=c.dotCrit;
-  amount*=isbMultiplier();damage(1u,amount*s.corrBonus,crit);
+  amount*=isbMultiplier();${detailed ? 'periodicDamage' : 'damage'}(1u,amount*s.corrBonus,crit);
   if(c.nightfall>0.0){if(random01()<c.nightfall){s.trance=1u;s.tranceEnd=s.now+10000000u;s.procs++;enqueue(s.tranceEnd,8u,0u,0u);}}
   if(remaining>0u)enqueue(s.now+3000000u,3u,1u,gen);
   return;
@@ -252,54 +263,57 @@ void tick(Event e){
   if(gen!=s.agonyGen||s.agonyTicks==0u)return;
   s.agonyTicks--;remaining=s.agonyTicks;interval=2000000u;
   uint index=12u-remaining;float ramp=index<=4u?0.5:(index<=8u?1.0:1.5);
-  float baseTick=s.agonyAmplified!=0u?69.0:46.0;
-  amount=(baseTick+p*1.596/12.0)*ramp*currentShadowMult()*(1.0+c.shadowMasteryBonus+c.maledictionBonus+c.improvedAgonyBonus)*(s.now<s.drainHopeEnd?1.10:1.0);
+  float baseTick=46.0;
+  float ampMult=s.agonyAmplified!=0u?1.5:1.0;
+  // Spell power is fixed on application; damage multipliers remain dynamic.
+  amount=(baseTick*ramp+s.agonySpellPowerShare)*ampMult*currentShadowMult()*(1.0+c.shadowMasteryBonus)*(1.0+c.maledictionBonus)*(1.0+c.improvedAgonyBonus)*(s.now<s.drainHopeEnd?1.10:1.0);
   bool crit=random01()<c.shadowCrit;if(crit)amount*=c.dotCrit;
-  amount*=isbMultiplier();damage(2u,amount*s.agonyBonus,crit);
+  amount*=isbMultiplier();${detailed ? 'periodicDamage' : 'damage'}(2u,amount*s.agonyBonus,crit);
   if(remaining>0u)enqueue(s.now+interval,3u,2u,gen);
   return;
  }else if(sp==3u){
   if(gen!=s.immGen||s.immTicks==0u)return;
-  s.immTicks--;remaining=s.immTicks;amount=(c.immTick+0.13*p)*currentFireMult()*(1.0+c.afBonus+c.maledictionBonus);
+  s.immTicks--;remaining=s.immTicks;amount=(c.immTick+0.13*p)*currentFireMult()*(1.0+c.afBonus)*(1.0+c.maledictionBonus);
   bool crit=random01()<c.fireCrit;if(crit)amount*=c.directCrit;
-  damage(3u,amount*s.immBonus,crit);
+  ${detailed ? 'periodicDamage' : 'damage'}(3u,amount*s.immBonus,crit);
   if(remaining>0u)enqueue(s.now+3000000u,3u,3u,gen);
   return;
  }else if(sp==15u){
   if(gen!=s.siphonGen||s.siphonTicks==0u)return;
   s.siphonTicks--;remaining=s.siphonTicks;
-  amount=(41.0+0.05*p)*currentShadowMult()*(1.0+c.shadowMasteryBonus+c.maledictionBonus)*(s.now<s.drainHopeEnd?1.10:1.0);
-  bool crit=random01()<c.shadowCrit;if(crit)amount*=c.dotCrit;
-  amount*=isbMultiplier();damage(10u,amount*s.siphonBonus,crit);
+  amount=(41.0+0.05*p)*currentShadowMult()*(1.0+c.shadowMasteryBonus)*(1.0+c.maledictionBonus);
+  bool crit=random01()<c.shadowCrit;if(crit)amount*=c.dotCrit; // Current rank-4 data permits periodic crits
+  amount*=isbMultiplier();${detailed ? 'periodicDamage' : 'damage'}(10u,amount*s.siphonBonus,crit);
   if(remaining>0u)enqueue(s.now+3000000u,3u,15u,gen);
   return;
  }else if(sp==16u){
-  uint affCount=(s.corrTicks>0u?1u:0u)+(s.agonyTicks>0u?1u:0u)+(s.siphonTicks>0u?1u:0u);
-  float affBonus=c.shadowMasteryBonus+c.maledictionBonus+c.improvedDrainsBonus+c.soulSiphonBonus*float(min(3u,affCount));
-  amount=(36.0+0.143*p)*currentShadowMult()*(1.0+affBonus);
+  uint affCount=(s.corrTicks>0u?1u:0u)+(s.agonyTicks>0u?1u:0u)+(s.siphonTicks>0u?1u:0u)+1u;
+  float soulSiphonMult=1.0+c.soulSiphonBonus*float(min(3u,affCount));
+  float affBonus=(1.0+c.shadowMasteryBonus)*(1.0+c.maledictionBonus)*(1.0+c.improvedDrainsBonus);
+  amount=(36.0+0.143*p)*currentShadowMult()*affBonus*soulSiphonMult;
   bool crit=random01()<c.shadowCrit;if(crit)amount*=c.dotCrit;
   amount*=isbMultiplier();amount*=resistanceMultiplier();
-  damage(11u,amount,crit);
+  ${detailed ? 'periodicDamage' : 'damage'}(11u,amount,crit);
   if(c.nightfall>0.0){if(random01()<c.nightfall){s.trance=1u;s.tranceEnd=s.now+10000000u;s.procs++;enqueue(s.tranceEnd,8u,0u,0u);}}
   return;
  }else if(sp==23u){
   // One nearby target; self damage is reported separately from enemy damage.
-  amount=(210.0+0.022*(p+c.hellfirePowerOffset))*currentFireMult()*(1.0+c.afBonus+c.maledictionBonus);
-  damage(13u,amount*resistanceMultiplier(),false);
+  amount=(210.0+0.022*(p+c.hellfirePowerOffset))*currentFireMult()*(1.0+c.afBonus)*(1.0+c.maledictionBonus);
+  ${detailed ? 'periodicDamage' : 'damage'}(13u,amount*resistanceMultiplier(),false);
   if(gen<15u)enqueue(s.now+1000000u,3u,23u,gen+1u);
   return;
  }else if(sp==20u){
   if(gen!=s.agonyGen||s.doomActive==0u)return;
-  s.doomActive=0u;amount=(1742.0+4.0*p)*currentShadowMult()*(1.0+c.shadowMasteryBonus+c.maledictionBonus)*(s.now<s.drainHopeEnd?1.10:1.0);
+  s.doomActive=0u;amount=(1742.0+4.0*p)*currentShadowMult()*(1.0+c.shadowMasteryBonus)*(1.0+c.maledictionBonus)*(s.now<s.drainHopeEnd?1.10:1.0);
   bool crit=random01()<c.shadowCrit;if(crit)amount*=c.dotCrit;
   amount*=isbMultiplier();amount*=resistanceMultiplier();
-  damage(6u,amount*(s.now<s.eurekaEnd?1.10:1.0),crit);return;
+  ${detailed ? 'periodicDamage' : 'damage'}(6u,amount*(s.now<s.eurekaEnd?1.10:1.0),crit);return;
  }else{return;}
 }
 void gcd(){s.ready=s.now+uint(max(1000000.0,1500000.0/hasteMultiplier()));enqueue(s.ready,5u,0u,0u);}
 void tap(){${detailed ? 's.manaWasted+=max(0.0,s.mana+c.tapGain-c.maxMana);' : ''}s.mana=min(c.maxMana,s.mana+c.tapGain);s.gained+=c.tapGain;s.taps++;if(c.petChoice!=0u&&c.demonicEnergies>0.0){float petMax=(c.petChoice==1u?1150.0:1450.0)*(1.0+c.felVitalityBonus);s.petMana=min(petMax,s.petMana+c.tapGain*0.5*c.demonicEnergies);}gcd();}
 void beginCast(uint spell){
- if(spell==2u||(spell==1u&&c.corrCast==0u)){spend(spell);applyDot(spell);gcd();return;}
+ if(spell==2u||(spell==1u&&c.corrCast==0u)){spend(spell);applyDot(spell);if(spell==2u)s.amplifyEnd=0u;gcd();return;}
  uint duration=2500000u;
  if(spell==1u)duration=c.corrCast;
  else if(spell==3u)duration=uint(max(1.0,2.0-0.1*float(c.baneRank))*1000000.0);
@@ -325,7 +339,8 @@ void castConflagrate(){
  s.conflagReady=s.now+10000000u;spend(8u);
  if(random01()<c.hit){
   float roll=random01(),p=currentPower();
-  float amount=(306.0+roll*68.0+(1.5/3.5)*p)*currentFireMult()*(1.0+c.afBonus);
+  float baseAmount=282.0+0.429*p;
+  float amount=baseAmount*(1.0+(roll-0.5)*0.2191235125)*currentFireMult()*(1.0+c.afBonus);
   bool crit=random01()<(c.fireCrit+c.fnbCrit);
   if(crit)amount*=c.directCrit;
   amount*=resistanceMultiplier();
@@ -339,7 +354,7 @@ void castShadowburn(){
  s.shadowburnReady=s.now+15000000u;spend(9u);
  if(random01()<c.hit){
   float roll=random01(),p=currentPower();
-  float amount=(259.0+roll*30.0+(1.5/3.5)*p)*currentShadowMult()*(1.0+c.shadowMasteryBonus+c.afBonus);
+  float amount=(266.0+roll*29.05+0.429*p)*currentShadowMult()*(1.0+c.shadowMasteryBonus)*(1.0+c.afBonus);
   amount*=isbMultiplier();
   bool crit=random01()<c.shadowCrit;
   if(crit)amount*=c.directCrit;
@@ -350,13 +365,22 @@ void castShadowburn(){
  gcd();
 }
 void castDoom(){
- spend(6u);
+ s.doomReady=s.now+60000000u;spend(6u);
  if(random01()<c.hit){
   s.doomEnd=s.now+60000000u;s.doomActive=1u;s.agonyGen++;enqueue(s.now+60000000u,3u,20u,s.agonyGen);
  }else{countMiss(6u);}
  gcd();
 }
 bool evalCond(uint cond, float param, uint targetSpell, float playerManaPct, float targetHpPct){
+ if(cond==33u)return s.decimationEnd>s.now;
+ if(cond==34u)return s.decimationEnd<=s.now;
+ if(cond>=35u&&cond<=38u){
+  float remaining=float(c.end)-float(s.now);
+  float threshold=float(c.end)*float(targetSpell)/100.0+param*1000000.0;
+  return cond==35u?remaining<=threshold:cond==36u?remaining>=threshold:cond==37u?remaining<threshold:remaining>threshold;
+ }
+ if(cond==31u)return s.now<s.amplifyEnd;
+ if(cond==32u)return s.now>=s.amplifyEnd;
  if(cond==0u){ // ALWAYS
   return true;
  }else if(cond==1u){ // MANA_LE
@@ -367,14 +391,14 @@ bool evalCond(uint cond, float param, uint targetSpell, float playerManaPct, flo
   return (targetHpPct<=param);
  }else if(cond==4u){ // TARGET_HP_GE
   return (targetHpPct>=param);
- }else if(cond==5u||cond==23u){ // DOT_REM_LE / DOT_REM_LT
+ }else if(cond==5u||cond==23u||cond==29u||cond==30u){ // DOT_REM_LE / DOT_REM_LT / DOT_REM_GE / DOT_REM_GT
   float remSec=0.0;
   if(targetSpell==1u)remSec=(s.corrTicks>0u&&s.corrEnd>s.now)?float(s.corrEnd-s.now)*0.000001:0.0;
   else if(targetSpell==2u)remSec=(s.agonyTicks>0u&&s.agonyEnd>s.now)?float(s.agonyEnd-s.now)*0.000001:0.0;
   else if(targetSpell==22u)remSec=(s.doomActive!=0u&&s.doomEnd>s.now?float(s.doomEnd-s.now)*0.000001:0.0);
   else if(targetSpell==3u)remSec=(s.immTicks>0u&&s.immEnd>s.now)?float(s.immEnd-s.now)*0.000001:0.0;
   else if(targetSpell==15u)remSec=(s.siphonTicks>0u&&s.siphonEnd>s.now)?float(s.siphonEnd-s.now)*0.000001:0.0;
-  return (cond==23u?remSec<param:remSec<=param);
+  return (cond==23u?remSec<param:(cond==29u?remSec>=param:(cond==30u?remSec>param:remSec<=param)));
  }else if(cond==6u){ // FIGHT_TIME_GE
   return (c.end>s.now)&&(float(c.end-s.now)>param*1000000.0);
  }else if(cond==7u){ // FIGHT_TIME_LE
@@ -405,6 +429,11 @@ bool evalCond(uint cond, float param, uint targetSpell, float playerManaPct, flo
  }else if(cond==20u){return (targetHpPct>param);
  }else if(cond==21u){return (c.end>s.now&&float(c.end-s.now)>param*1000000.0);
  }else if(cond==22u){return (c.end>=s.now&&float(c.end-s.now)<param*1000000.0);
+ }else if(cond==24u){return (s.petMana<param);
+ }else if(cond==25u){return (s.petMana<=param);
+ }else if(cond==26u){return (s.petMana>param);
+ }else if(cond==27u){return (s.petMana>=param);
+ }else if(cond==28u){return (s.now>=s.isbEnd);
  }else{
   return true;
  }
@@ -437,7 +466,11 @@ void decide(){
   if(!evalCond(cond2,param2,targetSpell2,playerManaPct,targetHpPct))continue;
 
   // Execute Action
-  if(action==20u){ // Eureka is off-GCD; continue evaluating spells in this decision.
+  if(action==24u){ // Explicit off-GCD Amplify Curse; never inferred from an Agony cast.
+   if(c.amplifyCurse!=0u&&s.now>=s.amplifyReady&&s.now>=s.amplifyEnd){
+    s.amplifyReady=s.now+180000000u;s.amplifyEnd=s.now+30000000u;${detailed ? 's.amplifyCasts++;' : ''}
+   }
+  }else if(action==20u){ // Eureka is off-GCD; continue evaluating spells in this decision.
    if(c.race==3u&&s.now>=s.racialReady&&s.now>=s.eurekaEnd)activateEureka();
   }else if(action==21u){ // Blood Fury is off-GCD and follows this APL row.
    if(c.race==1u&&s.now>=s.racialReady)activateBloodFury();
@@ -460,7 +493,7 @@ void decide(){
     if(s.mana>=cost(1u)){beginCast(1u);return;}
    }
   }else if(action==7u){ // CURSE_OF_DOOM
-   if(c.curseOfDoom!=0u&&s.doomActive==0u&&s.agonyTicks==0u){
+   if(c.curseOfDoom!=0u&&s.now>=s.doomReady&&s.doomActive==0u&&s.agonyTicks==0u){
     if(s.mana>=cost(6u)){castDoom();return;}
    }
   }else if(action==8u){ // CURSE_OF_AGONY
@@ -494,7 +527,7 @@ void decide(){
      spend(11u);
      s.drainHopeEnd=s.now+6000000u;s.drainHopeReady=s.now+6000000u;
      for(uint i=1u;i<=6u;i++)enqueue(s.now+i*1000000u,3u,16u,0u);
-     s.ready=s.now+6000000u;enqueue(s.ready,5u,0u,0u);return;
+     s.ready=s.drainHopeEnd+c.channelClipDelay;enqueue(s.ready,5u,0u,0u);return;
     }
    }
   }else if(action==11u){ // SHADOWBURN
@@ -502,9 +535,9 @@ void decide(){
     if(s.mana>=cost(9u)){castShadowburn();return;}
    }
   }else if(action==12u){ // INCINERATE_FILLER
-   if(c.incinerate!=0u){if(s.mana>=cost(4u)){beginCast(4u);return;}else{tap();return;}}
+   if(c.incinerate!=0u&&s.mana>=cost(4u)){beginCast(4u);return;}
   }else if(action==16u||action==14u||action==15u){ // SHADOW_BOLT_FILLER
-   if(s.mana>=cost(0u)){beginCast(0u);return;}else{tap();return;}
+   if(s.mana>=cost(0u)){beginCast(0u);return;}
   }
  }
 
@@ -543,20 +576,24 @@ ${detailed ? UPTIME_EFFECTS.map(([,key])=>{
    uint delay=2000000u;
    if(s.petMana>=115.0){
     s.petCasts++;
-    s.petSpellCasts++;
+    s.petSpellCasts++;${detailed ? 's.impCasts++;' : ''}
     s.petMana-=115.0;
     if(random01()<c.hit){
-     s.petSpellHits++;
-     float dmg=(44.0+(2.0/3.5)*c.petSP)*c.petFireboltMult;
-     bool crit=random01()<c.fireCrit;if(crit){dmg*=1.5;s.petSpellCrits++;}dmg*=resistanceMultiplier();
+     s.petSpellHits++;${detailed ? 's.impHits++;' : ''}
+     float dmg=(45.2+(2.0/3.5)*c.petSP)*c.petFireboltMult;
+     bool crit=random01()<c.fireCrit;if(crit){dmg*=1.5;s.petSpellCrits++;${detailed ? 's.impCrits++;' : ''}}dmg*=resistanceMultiplier();
      if(c.demonicBrand!=0u&&s.brandCharges>0u&&s.now<s.brandEnd){
       s.brandCharges--;
       float brandDmg=(65.0+random01()*3.0+0.078*currentPower())*c.brandMult;
-      brandDmg*=resistanceMultiplier();s.total+=brandDmg;eventDamage+=brandDmg;s.petDamage+=brandDmg;s.petBrandDamage+=brandDmg;
+      ${detailed ? 's.petBrandCasts++;' : ''}
+      if(random01()<c.hit){
+       bool brandCrit=random01()<c.crit;if(brandCrit){brandDmg*=1.5;${detailed ? 's.petBrandCrits++;' : ''}}
+       brandDmg*=resistanceMultiplier();s.total+=brandDmg;eventDamage+=brandDmg;s.petDamage+=brandDmg;s.petBrandDamage+=brandDmg;${detailed ? 's.petBrandHits++;' : ''}
+      }else{${detailed ? 's.petBrandMisses++;' : ''}}
      }
-     s.total+=dmg;eventDamage+=dmg;s.petDamage+=dmg;s.petSpellDamage+=dmg;if(crit)eventFlags|=1u;
+     s.total+=dmg;eventDamage+=dmg;s.petDamage+=dmg;s.petSpellDamage+=dmg;${detailed ? 's.impDamage+=dmg;' : ''}if(crit)eventFlags|=1u;
     }else{
-     s.petSpellMisses++;
+     s.petSpellMisses++;${detailed ? 's.impMisses++;' : ''}
     }
    }else{
     delay=1000000u;
@@ -566,17 +603,23 @@ ${detailed ? UPTIME_EFFECTS.map(([,key])=>{
    s.petCasts++;
    s.petMeleeCasts++;
    float roll=random01()*100.0;
-   if(roll>=14.5){
+   // Physical miss (8% boss base) inherits hit; dodge remains 6.5%.
+   float avoid=max(0.0,8.0-max(0.0,(c.hit-0.83)*100.0))+6.5;
+   if(roll>=avoid){
     s.petMeleeHits++;
     float dmg=(101.0+(c.petAP/14.0)*2.0)*c.petMeleeMult;
-    bool glance=(roll<54.5);
-    bool crit=(!glance&&roll<(54.5+max(0.0,c.crit*100.0+2.72)));
-    if(glance)dmg*=0.65;
+    bool glance=(roll<avoid+40.0);
+    bool crit=(!glance&&roll<(avoid+40.0+max(0.0,c.crit*100.0)));
+    if(glance)dmg*=0.65;${detailed ? 'if(glance)s.petMeleeGlances++;' : ''}
     if(crit){dmg*=2.0;s.petMeleeCrits++;}
     if(c.demonicBrand!=0u&&s.brandCharges>0u&&s.now<s.brandEnd){
      s.brandCharges--;
       float brandDmg=(65.0+random01()*3.0+0.078*currentPower())*c.brandMult;
-      brandDmg*=resistanceMultiplier();s.total+=brandDmg;eventDamage+=brandDmg;s.petDamage+=brandDmg;s.petBrandDamage+=brandDmg;
+      ${detailed ? 's.petBrandCasts++;' : ''}
+      if(random01()<c.hit){
+       bool brandCrit=random01()<c.crit;if(brandCrit){brandDmg*=1.5;${detailed ? 's.petBrandCrits++;' : ''}}
+       brandDmg*=resistanceMultiplier();s.total+=brandDmg;eventDamage+=brandDmg;s.petDamage+=brandDmg;s.petBrandDamage+=brandDmg;${detailed ? 's.petBrandHits++;' : ''}
+      }else{${detailed ? 's.petBrandMisses++;' : ''}}
     }
     s.total+=dmg;eventDamage+=dmg;s.petDamage+=dmg;s.petMeleeDamage+=dmg;if(crit)eventFlags|=1u;
    }else{
@@ -596,7 +639,11 @@ ${detailed ? UPTIME_EFFECTS.map(([,key])=>{
      if(c.demonicBrand!=0u&&s.brandCharges>0u&&s.now<s.brandEnd){
       s.brandCharges--;
       float brandDmg=(65.0+random01()*3.0+0.078*currentPower())*c.brandMult;
-      brandDmg*=resistanceMultiplier();s.total+=brandDmg;eventDamage+=brandDmg;s.petDamage+=brandDmg;s.petBrandDamage+=brandDmg;
+      ${detailed ? 's.petBrandCasts++;' : ''}
+      if(random01()<c.hit){
+       bool brandCrit=random01()<c.crit;if(brandCrit){brandDmg*=1.5;${detailed ? 's.petBrandCrits++;' : ''}}
+       brandDmg*=resistanceMultiplier();s.total+=brandDmg;eventDamage+=brandDmg;s.petDamage+=brandDmg;s.petBrandDamage+=brandDmg;${detailed ? 's.petBrandHits++;' : ''}
+      }else{${detailed ? 's.petBrandMisses++;' : ''}}
      }
      s.total+=dmg;eventDamage+=dmg;s.petDamage+=dmg;s.petSpellDamage+=dmg;if(crit)eventFlags|=1u;
     }else{
@@ -609,7 +656,7 @@ ${detailed ? UPTIME_EFFECTS.map(([,key])=>{
   }
   break;
  case 8u:if(s.now>=s.tranceEnd)s.trance=0u;break;
- case 10u:${detailed ? 's.manaWasted+=max(0.0,s.mana+c.mp5-c.maxMana);' : ''}s.mana=min(c.maxMana,s.mana+c.mp5);s.gained+=c.mp5;if(c.petChoice!=0u){float petMax=(c.petChoice==1u?1150.0:1450.0)*(1.0+c.felVitalityBonus);s.petMana=min(petMax,s.petMana+45.0);}enqueue(s.now+5000000u,10u,0u,0u);break;
+ case 10u:${detailed ? 's.manaWasted+=max(0.0,s.mana+c.mp5-c.maxMana);' : ''}s.mana=min(c.maxMana,s.mana+c.mp5);s.gained+=c.mp5;if(c.petChoice!=0u){float petMax=(c.petChoice==1u?1150.0:1450.0)*(1.0+c.felVitalityBonus);s.petMana=min(petMax,s.petMana+c.petMP5);}enqueue(s.now+5000000u,10u,0u,0u);break;
  case 11u:break;
  case 12u:s.trinketEnd=s.now+c.trinketDuration;enqueue(s.trinketEnd,11u,0u,0u);if(s.now+c.trinketCD<=c.end)enqueue(s.now+c.trinketCD,12u,0u,0u);break;
  default:s.done=5u;break;

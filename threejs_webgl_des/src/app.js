@@ -1,6 +1,8 @@
+import { describePetSwapOutcome } from './apl_rules.js';
 import { renderDetailedResults } from './detailed_results.js';
 import { initPriestPreview } from './priest_preview.js';
 import { WARLOCK_IMPORT_BUFF_KEYS } from './classes/warlock_import.js';
+import { addWarlockBaseStats, warlockBaseResources } from './classes/warlock_base_stats.js';
 import { prepareUIBuildImport } from './contracts/ui_build.js';
 import { exportLogicalBuild, exportResolvedBuild } from './contracts/build_io.js';
 import { CLASS_PRESENTATION } from './classes/active_class.js';
@@ -44,7 +46,7 @@ let importedLogicalBuild = null;
 // Service Worker Registration for PWA / Offline support
 if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js').catch((err) => console.log('SW registration skipped:', err));
+    navigator.serviceWorker.register('./sw.js', { updateViaCache: 'none' }).catch((err) => console.log('SW registration skipped:', err));
   });
 }
 
@@ -341,9 +343,11 @@ function getEffectiveBuffsAndStats() {
   const hit = Number($('in-hit')?.value || 12);
   const crit = Number($('in-crit')?.value || 15);
   const haste = Number($('in-haste')?.value || 0);
-  const baseInt = Number($('in-intellect')?.value || 200);
-  const baseStam = Number($('in-stamina')?.value || 220);
-  const baseSpirit = Number($('in-spirit')?.value || 100);
+  const attributes = addWarlockBaseStats({ intellect: Number($('in-intellect')?.value ?? 200),
+    stamina: Number($('in-stamina')?.value ?? 220), spirit: Number($('in-spirit')?.value ?? 100) }, activeRace);
+  const baseInt = attributes.intellect;
+  const baseStam = attributes.stamina;
+  const baseSpirit = attributes.spirit;
   const baseMp5 = Number($('in-mp5')?.value || 20);
   const baseResistance = Number($('in-resistance')?.value || 0);
   const bossArmor = Number($('in-boss-armor')?.value || 3731);
@@ -400,9 +404,9 @@ function getEffectiveBuffsAndStats() {
   // Racial modifiers
   if (activeRace === 'HUMAN') finalSpirit *= 1.05;
 
-  finalInt = Math.round(finalInt);
-  finalStam = Math.round(finalStam);
-  finalSpirit = Math.round(finalSpirit);
+  finalInt = Math.floor(finalInt);
+  finalStam = Math.floor(finalStam);
+  finalSpirit = Math.floor(finalSpirit);
 
   let addedCrit = 0;
   if (isWizardOil) addedCrit += 1.0;
@@ -422,8 +426,9 @@ function getEffectiveBuffsAndStats() {
   const finalShadowSP = shadowSpBonus + addedShadowSP;
   const finalFireSP = fireSpBonus + addedFireSP;
 
-  const maxMana = Math.round(1400 + (finalInt * 15));
-  const maxHealth = Math.round(1500 + (finalStam * 10) + (isWarchiefsBlessing ? 300 : 0));
+  const resources = warlockBaseResources(finalInt, finalStam);
+  const maxMana = resources.maxMana * (activeRace === 'GNOME' ? 1.05 : 1);
+  const maxHealth = resources.maxHealth + (isWarchiefsBlessing ? 300 : 0);
 
   // Multipliers
   let allDamageMult = 1.0;
@@ -456,6 +461,7 @@ function getEffectiveBuffsAndStats() {
     mp5: finalMP5,
     maxMana,
     maxHealth,
+    targetSpellMultiplier: isCurseOfElements ? 1.10 : 1.0,
     shadowMultiplier: shadowMult,
     fireMultiplier: fireMult,
     resistance: finalResistance,
@@ -557,9 +563,9 @@ function getLegacyExportPayload() {
     pet: activePet,
     ds: activeDS,
     rotation: activeRotation,
-    gearMode: getGearMode(),
+    gearMode: 'direct',
     stats: directStats,
-    gear: getEquippedGear(),
+    gear: {},
     talents: getTalentsObject(),
     buffs,
     target: {
@@ -683,7 +689,10 @@ export async function applyImportedBuild(input) {
   importedLogicalBuild = prepared.logicalBuild;
   currentResult = null;
   updateCombatStatsSummary();
-  setStatus('Build configuration imported successfully!');
+  const diagnostics = prepared.importDiagnostics || [];
+  setStatus(diagnostics.length
+    ? `Build imported with ${diagnostics.length} unsupported grouped actions: ${diagnostics.map(d => `${d.groupPath.join(' / ')}: ${d.reason}`).join('; ')}`
+    : 'Build configuration imported successfully!');
 }
 
 function setupBuildExportImportModal() {
@@ -847,10 +856,12 @@ function readForm() {
   base.mp5 = eff.mp5;
   base.resistance = eff.resistance;
   base.bossArmor = eff.bossArmor;
+  base.targetSpellMultiplier = eff.targetSpellMultiplier;
   base.shadowMultiplier = eff.shadowMultiplier;
   base.fireMultiplier = eff.fireMultiplier;
 
   base.race = activeRace;
+  base.statsIncludeBase = true;
   base.maxHealth = eff.maxHealth;
   base.rotation = activeRotation;
   const talent = getSimTalentFlags();
@@ -1051,12 +1062,28 @@ function render(result) {
     if (activeSpells.length === 0) {
       tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; color: var(--text-dim); padding: 0.75rem;">No damage dealt in simulation. Check your APL rules and mana stats.</td></tr>';
     }
+    const petSwapOutcome = describePetSwapOutcome(c, s);
+    if (petSwapOutcome) {
+      const row = document.createElement('tr');
+      const cell = document.createElement('td');
+      cell.colSpan = 6;
+      cell.textContent = petSwapOutcome;
+      row.appendChild(cell);
+      tbody.appendChild(row);
+    }
   }
 }
 
 // Full Preset Loader Function
 export function loadFullPreset(preset) {
   if (!preset) return;
+  setGearMode('direct');
+  if (preset.stats) {
+    for (const [key, value] of Object.entries(preset.stats)) {
+      const input = $(`in-${key}`);
+      if (input) input.value = value;
+    }
+  }
 
   // 1. Load 51-point talents
   if (preset.talents) {
@@ -1108,6 +1135,7 @@ function getActiveStatsConfig() {
   const penetration = Number(form.elements.namedItem('penetration')?.value || 0);
   const tapThreshold = Number(form.elements.namedItem('tapThreshold')?.value || 25);
   return {
+    statsIncludeBase: true,
     racialPolicy: form.elements.namedItem('racialPolicy')?.value || 'execute',
     targetIsBeast: !!form.elements.namedItem('targetIsBeast')?.checked,
     race: activeRace,
@@ -1125,6 +1153,7 @@ function getActiveStatsConfig() {
     mp5: eff.mp5,
     resistance: eff.resistance,
     bossArmor: eff.bossArmor,
+    targetSpellMultiplier: eff.targetSpellMultiplier,
     shadowMultiplier: eff.shadowMultiplier,
     fireMultiplier: eff.fireMultiplier,
     duration,

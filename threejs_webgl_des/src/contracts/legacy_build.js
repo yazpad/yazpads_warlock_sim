@@ -1,4 +1,5 @@
 import { validateSavedBuildEnvelope } from './saved_build.js';
+import { convertForeverBuildToCandidate } from '../classes/forever_bridge.js';
 
 function record(value, field) {
   if (!value || typeof value !== 'object' || Array.isArray(value)) throw new Error(`${field} must be an object.`);
@@ -16,6 +17,9 @@ export function classifyLegacyBuild(payload) {
   }
   if (payload.duration && payload.iterations && payload.spellPower !== undefined && !payload.talents && !payload.stats) {
     return { ...identity, format: 'raw-resolved', resolvedConfig: payload };
+  }
+  if (payload.player && (payload.player.class || payload.player.talentsString || payload.apiVersion)) {
+    return { ...identity, format: 'forever-build' };
   }
   const uiFields = ['race', 'pet', 'ds', 'rotation', 'gearMode', 'stats', 'gear', 'talents', 'buffs', 'target', 'sim', 'aplText'];
   if (!uiFields.some(key => Object.hasOwn(payload, key))) throw new Error('Unrecognized legacy build format.');
@@ -36,6 +40,16 @@ export function migrateLegacyBuild(payload, { candidateId = 'imported-build' } =
   const classified = classifyLegacyBuild(payload);
   if (typeof candidateId !== 'string' || !candidateId.trim()) throw new Error('candidateId must be a nonempty string.');
   const source = structuredClone(payload);
+  if (classified.format === 'forever-build') {
+    const candidate = convertForeverBuildToCandidate(source, { candidateId });
+    return {
+      classId: classified.classId,
+      kind: 'logical-build',
+      sourceFormat: 'forever-build',
+      candidate,
+      evaluationDefaults: { iterations: 4096, mode: 'detailed' }
+    };
+  }
   if (classified.format !== 'ui-build') {
     return { classId: classified.classId, kind: 'resolved-config', sourceFormat: classified.format,
       resolvedConfig: structuredClone(classified.resolvedConfig) };
@@ -51,7 +65,9 @@ export function migrateLegacyBuild(payload, { candidateId = 'imported-build' } =
     if (typeof sim.detailedResults !== 'boolean') throw new Error('sim.detailedResults must be a boolean.');
     evaluationDefaults.mode = sim.detailedResults ? 'detailed' : 'fast';
   }
-  const equipment = { items: source.gear || {} };
+  // Older direct-stat UI exports also saved the dormant paperdoll. Those
+  // items never supplied their stats and are not part of the active setup.
+  const equipment = { items: source.gearMode === 'direct' ? {} : source.gear || {} };
   if (Object.hasOwn(source, 'gearMode')) equipment.mode = source.gearMode;
   const classOptions = {};
   for (const [oldKey, newKey] of [['race', 'race'], ['pet', 'pet'], ['ds', 'sacrifice'], ['rotation', 'rotation']]) {

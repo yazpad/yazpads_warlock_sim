@@ -2,6 +2,22 @@
 
 A new, standalone browser app using **Three.js `WebGLRenderer` and GLSL ES 3.00 fragment shaders**. No WebGPU API, WGSL, WASM, ImGui, server-side simulation, or runtime CDN dependency. The existing simulator implementations are references; the production app imports none of their code.
 
+## Active configurations: gear-free
+
+Active presets use direct bonus stats above racial/class base attributes, with empty equipment. The equipment selector and BiS preload are deferred; logical imports containing gear are rejected explicitly. The shared import adds base attributes once before buffs, and shader packing consumes the resulting totals.
+
+All five active Forever fixtures use `fixtures/forever_gear_free_scenario.json` (`gear-free-v1`): no equipment, external buffs or consumables, with each preset's race, talents, pet and source rotation. UI buffs remain independently selectable. These scenarios have new reference results; historical geared DPS targets do not apply.
+
+Regenerate the five fixtures from a Forever checkout with generated protobufs and Go available:
+
+```sh
+node scripts/generate_forever_gear_free_fixtures.mjs /path/to/forever
+```
+
+The generator archives previous geared snapshots, captures normal imports and updates the input status report. It does not certify combat parity while APL/stat/pet blockers remain. Gear integration will return as a separate phase.
+
+For spell-level comparison, run `node scripts/benchmark_forever_gear_free.mjs /path/to/forever go 1000 101` from the repository root. It uses detailed/slow mode and writes the Markdown/JSON `FOREVER_GEAR_FREE_BENCHMARK` artifacts: casts, landed events, crits, ticks, misses, direct/periodic damage, pet actions and mana accounting. The default is 1,000 trials per engine. Detailed app results also expose tick counts and periodic DPS. Fast mode retains its existing shader and output path.
+
 This is a correctness-oriented **single-target core foundation**, not a complete port of every warlock mechanic.
 
 ## Forever Beta mechanics update
@@ -40,7 +56,7 @@ Pets, gear/buff procs, raid buffs, race selection, arbitrary talents, haste, dyn
 
 ## Standard Specs Comparison Dashboard
 
-- **Simulation-Only Results**: The comparison table is strictly a live simulation output view. Presets are pure input specifications defined by `talents × stats/gear × APL × race`.
+- **Simulation-Only Results**: The comparison table is strictly a live simulation output view. Presets are pure input specifications defined by `talents × explicit bonus stats × APL × race`.
 - **No Pre-Baked Data**: Preset files (`data/presets.json`) and JavaScript runtime never store or prefill static DPS values or stat weights into the table. All output columns (`Mean DPS`, `DPS/SP`, `DPS/Hit`, `DPS/Crit`, `DPS/Haste`, `DPS/Int`, `DPS/Spirit`) start blank (`--` / `-`) and are strictly computed on-demand when the user executes **"Simulate Specs"** on the WebGL2 GPU engine.
 
 ## GPU execution
@@ -121,7 +137,7 @@ DPS differences divide final damage differences by the full configured fight dur
 
 ## Gnome racial inputs
 
-Expansive Mind increases maximum mana by 5%; it does not increase intellect or crit. Sword equipped defaults on and grants a bonus only to Humans.
+Expansive Mind increases maximum mana by 5%; it does not increase intellect or crit. Human/Orc crit passives are unconditional; equipment is empty in active setups.
 
 Eureka is an off-GCD APL action (`eureka`, also accepts `Eureka!`). Default/preset APLs expose it near the top. An explicit Eureka row controls activation through its conditions and the 120-second cooldown; a disabled row prevents automatic activation. Non-Gnomes skip it. Older/custom APLs without an Eureka row retain automatic racial timing.
 
@@ -134,3 +150,24 @@ This app intentionally retains Eureka damage boosts for the next three empowered
 ## Troll Berserking APL
 
 `berserking` is an off-GCD Troll action giving 10% casting speed for 10 seconds, with a 180-second cooldown. Default/preset APLs use it on cooldown. Reorder the row, add conditions, or disable it to control activation. An explicit row overrides automatic racial timing, including when disabled. Older APLs without this row retain automatic activation. Search and standard spec tables display Berserking only for Trolls. Existing haste/cast-time behavior is unchanged.
+
+The genetic APL searches can discover `sacrifice_succubus_summon_imp`, a combined Demonic Sacrifice → Fel Domination → Summon Imp action. It requires Demonic Pact, Demonic Sacrifice, Fel Domination, and an active Succubus, and executes at most once per fight even when the fight exceeds Fel Domination’s cooldown. It replaces the old sacrifice buff with the simulator’s +15% Fire sacrifice buff and starts a fresh Imp mana pool. Master Summoner reduces the summon cast from 4.5 seconds to 2.5/0.5 seconds; the summon uses the normal GCD and costs 64% of base mana before the additive talent reductions. The combined action treats sacrifice and Fel Domination as off-GCD. Existing presets and default APLs do not include it. With locked conditions, search tries the swap at or below 35% target health; unlocked conditions can evolve its timing. Results separate Imp Firebolt from Succubus Lash of Pain.
+
+### Eureka and imported racial APL conditions
+
+Eureka is an explicit off-GCD APL action. Put an unconditional row before filler to use it at pull and again when its 120-second cooldown is ready:
+
+```text
+Eureka!
+Shadow Bolt
+```
+
+Forever Split Boosts imports now preserve their racial conditions, including Decimation aura presence and duration-aware time-to-execute arithmetic. The corresponding execute branch appears as:
+
+```text
+Eureka! if buff.decimation && time_to_execute(35) <= 0
+```
+
+`time_to_execute(35)` means remaining fight time minus 35% of total duration, in seconds. It supports `<`, `<=`, `>` and `>=`; the execute percentage must be an integer from 0 to 100. `buff.decimation` and `!buff.decimation` inspect the aura directly, without adding an execute health requirement. Existing `decimation.active` spell-eligibility syntax remains available.
+
+Imported racial predicates are retained for top-level actions and group references. OR alternatives become adjacent action rows; redundant same-subject bounds are simplified and contradictory branches omitted. Unsupported expressions remain import diagnostics. An explicit Eureka row makes the APL authoritative over the automatic racial fallback. Imported APLs retain the source strategy; an unconditional row is an editable alternative, not an automatic rewrite of that strategy.

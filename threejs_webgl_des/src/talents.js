@@ -224,6 +224,8 @@ export function getTalentFlagsFromRanks(talentTreeRanks = {}) {
     demonicEnergies: demo('demonic energies'),
     demonicKnowledge: demo('demonic knowledge'),
     demonicPact,
+    felDomination: demo('fel domination') > 0,
+    masterSummoner: demo('master summoner'),
     masterDemo,
     soulLink,
     sacRank,
@@ -245,9 +247,11 @@ export function getTalentFlagsFromRanks(talentTreeRanks = {}) {
     shadowMultiplier: 1,
     fireMultiplier: 1,
     corrMultiplier: 0,
-    petFireboltMult: (1 + unholyPower * 0.02 + improvedImp * 0.10) * (1 + masterDemo * 0.02) * (soulLink ? 1.03 : 1),
+    // These are separate source damage multipliers, so Improved Imp stacks
+    // multiplicatively with Unholy Power rather than additively.
+    petFireboltMult: (1 + unholyPower * 0.02) * (1 + improvedImp * 0.10) * (1 + masterDemo * 0.02) * (soulLink ? 1.03 : 1),
     petMeleeMult: (1 + unholyPower * 0.02) * (soulLink ? 1.03 : 1),
-    petLashMult: (1 + unholyPower * 0.02 + improvedSayaad * 0.10) * (1 + masterDemo * 0.02) * (soulLink ? 1.03 : 1),
+    petLashMult: (1 + unholyPower * 0.02) * (1 + improvedSayaad * 0.10) * (1 + masterDemo * 0.02) * (soulLink ? 1.03 : 1),
     brandMult: (1 + unholyPower * 0.02) * (1 + masterDemo * 0.02) * (soulLink ? 1.03 : 1),
   };
 }

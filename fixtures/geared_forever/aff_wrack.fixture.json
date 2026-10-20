@@ -1,0 +1,1116 @@
+{
+  "schemaVersion": 1,
+  "presetId": "aff_wrack",
+  "classId": "warlock",
+  "buildSource": "/home/aaron-ma/forever/ui/specs/warlock/dps/builds/aff_wrack.build.json",
+  "candidate": {
+    "schemaVersion": 1,
+    "classId": "warlock",
+    "candidateId": "aff_wrack",
+    "encounter": {
+      "duration": 180,
+      "target": {
+        "level": 63,
+        "bossArmor": 3731,
+        "resistance": 0
+      }
+    },
+    "stats": {},
+    "equipment": {
+      "mode": "direct",
+      "items": {}
+    },
+    "buffs": {
+      "arcaneIntellect": true,
+      "markOfTheWild": true,
+      "blessingOfKings": true,
+      "blessingOfWisdom": true,
+      "manaSpringTotem": true,
+      "flaskSupremePower": true,
+      "wizardOil": true,
+      "nightfinSoup": true,
+      "greaterArcaneElixir": true
+    },
+    "talents": {
+      "affliction": {
+        "improved_life_tap": 2,
+        "suppression": 5,
+        "improved_corruption": 3,
+        "improved_bane_of_agony": 2,
+        "amplify_curse": 1,
+        "pandemic": 3,
+        "malevolence": 5,
+        "nightfall": 2,
+        "siphon_life": 1,
+        "soul_siphon": 3,
+        "shadow_mastery": 5,
+        "wrack": 1
+      },
+      "demonology": {},
+      "destruction": {
+        "improved_shadow_bolt": 5,
+        "bane": 5,
+        "ruin": 5,
+        "agonizing_flames": 3
+      }
+    },
+    "apl": {
+      "kind": "text",
+      "text": "Bane of Agony if target.debuff_remains(\"Bane of Agony\") <= 0\nBane of Agony if target.debuff_remains(\"Bane of Agony\") <= 0\nCorruption if target.debuff_remains(\"Corruption\") <= 0\nSiphon Life if target.debuff_remains(\"Siphon Life\") <= 0\nImmolate if target.debuff_remains(\"Immolate\") <= 0\nberserking\nbolt if debuff.isb_missing\nNightfall: Shadow Bolt if buff.shadow_trance\nwrack if target.debuff_remains(\"Corruption\") > 4 && target.debuff_remains(\"Bane of Agony\") > 4\nbolt\nLife Tap"
+    },
+    "classOptions": {
+      "race": "ORC",
+      "pet": "succubus",
+      "sacrifice": "none",
+      "rotation": "shadow"
+    }
+  },
+  "resolvedConfig": {
+    "race": "ORC",
+    "swordEquipped": true,
+    "racialPolicy": "execute",
+    "targetIsBeast": false,
+    "maxHealth": 4050,
+    "duration": 180,
+    "iterations": 4096,
+    "seed": 42,
+    "rotation": "shadow",
+    "spellPower": 535,
+    "shadowPower": 0,
+    "firePower": 0,
+    "intellect": 336,
+    "stamina": 376,
+    "spirit": 282,
+    "hit": 12,
+    "crit": 14.744,
+    "mp5": 93,
+    "distance": 0,
+    "resistance": 0,
+    "penetration": 0,
+    "tapThreshold": 25,
+    "bossArmor": 3731,
+    "book": true,
+    "charges": false,
+    "partialResists": true,
+    "piercing": true,
+    "corruption": true,
+    "agony": true,
+    "immolate": true,
+    "instantCorruption": false,
+    "nightfall": true,
+    "isb": true,
+    "ruin": true,
+    "improvedTap": true,
+    "amplifyCurse": true,
+    "demonicPact": false,
+    "demonicSacrifice": false,
+    "felDomination": false,
+    "masterSummoner": 0,
+    "soulLink": false,
+    "sacImp": false,
+    "sacSucc": false,
+    "masterDemo": 0,
+    "petChoice": "succubus",
+    "trinketSP": 47,
+    "trinketDuration": 30,
+    "trinketCD": 120,
+    "shadowMultiplier": 1,
+    "fireMultiplier": 1,
+    "tapBonus": 0.2,
+    "nightfallChance": 0.04,
+    "isbBonus": 0.2,
+    "ruinRank": 5,
+    "shadowMasteryBonus": 0.1,
+    "improvedCorruptionBonus": 0.06,
+    "conflagrate": false,
+    "shadowburn": false,
+    "curseOfDoom": false,
+    "incinerate": false,
+    "decimation": false,
+    "decimationSearing": false,
+    "demonicBrand": false,
+    "demonicBrandRank": 0,
+    "baneRank": 5,
+    "decimationRank": 0,
+    "siphonLife": true,
+    "drainHope": true,
+    "malevolence": 5,
+    "afBonus": 0.1,
+    "aftermathBonus": 0,
+    "cataclysmCostMult": 1,
+    "improvedAgonyBonus": 0.1,
+    "felVitalityBonus": 0,
+    "maledictionBonus": 0,
+    "improvedDrainsBonus": 0,
+    "soulSiphonBonus": 0.12,
+    "demonicEnergies": 0,
+    "demonicKnowledge": 0,
+    "snfChance": 0,
+    "snfBonus": 0,
+    "dotCrit": 2,
+    "fnbCrit": 0,
+    "petMult": 1,
+    "petFireboltMult": 1,
+    "petMeleeMult": 1,
+    "petLashMult": 1,
+    "brandMult": 1,
+    "corrMultiplier": 1.1600000000000001,
+    "aplRules": [
+      {
+        "action": 8,
+        "cond": 5,
+        "param": 0,
+        "targetSpell": 2,
+        "cond1": 5,
+        "param1": 0,
+        "targetSpell1": 2,
+        "cond2": 0,
+        "param2": 0,
+        "targetSpell2": 0,
+        "enabled": 1
+      },
+      {
+        "action": 8,
+        "cond": 5,
+        "param": 0,
+        "targetSpell": 2,
+        "cond1": 5,
+        "param1": 0,
+        "targetSpell1": 2,
+        "cond2": 0,
+        "param2": 0,
+        "targetSpell2": 0,
+        "enabled": 1
+      },
+      {
+        "action": 6,
+        "cond": 5,
+        "param": 0,
+        "targetSpell": 1,
+        "cond1": 5,
+        "param1": 0,
+        "targetSpell1": 1,
+        "cond2": 0,
+        "param2": 0,
+        "targetSpell2": 0,
+        "enabled": 1
+      },
+      {
+        "action": 17,
+        "cond": 5,
+        "param": 0,
+        "targetSpell": 15,
+        "cond1": 5,
+        "param1": 0,
+        "targetSpell1": 15,
+        "cond2": 0,
+        "param2": 0,
+        "targetSpell2": 0,
+        "enabled": 1
+      },
+      {
+        "action": 9,
+        "cond": 5,
+        "param": 0,
+        "targetSpell": 3,
+        "cond1": 5,
+        "param1": 0,
+        "targetSpell1": 3,
+        "cond2": 0,
+        "param2": 0,
+        "targetSpell2": 0,
+        "enabled": 1
+      },
+      {
+        "action": 21,
+        "cond": 0,
+        "param": 0,
+        "targetSpell": 0,
+        "cond1": 0,
+        "param1": 0,
+        "targetSpell1": 0,
+        "cond2": 0,
+        "param2": 0,
+        "targetSpell2": 0,
+        "enabled": 1
+      },
+      {
+        "action": 16,
+        "cond": 28,
+        "param": 0,
+        "targetSpell": 0,
+        "cond1": 28,
+        "param1": 0,
+        "targetSpell1": 0,
+        "cond2": 0,
+        "param2": 0,
+        "targetSpell2": 0,
+        "enabled": 1
+      },
+      {
+        "action": 2,
+        "cond": 8,
+        "param": 0,
+        "targetSpell": 0,
+        "cond1": 8,
+        "param1": 0,
+        "targetSpell1": 0,
+        "cond2": 0,
+        "param2": 0,
+        "targetSpell2": 0,
+        "enabled": 1
+      },
+      {
+        "action": 18,
+        "cond": 30,
+        "param": 4,
+        "targetSpell": 1,
+        "cond1": 30,
+        "param1": 4,
+        "targetSpell1": 1,
+        "cond2": 30,
+        "param2": 4,
+        "targetSpell2": 2,
+        "enabled": 1
+      },
+      {
+        "action": 16,
+        "cond": 0,
+        "param": 0,
+        "targetSpell": 0,
+        "cond1": 0,
+        "param1": 0,
+        "targetSpell1": 0,
+        "cond2": 0,
+        "param2": 0,
+        "targetSpell2": 0,
+        "enabled": 1
+      },
+      {
+        "action": 1,
+        "cond": 0,
+        "param": 0,
+        "targetSpell": 0,
+        "cond1": 0,
+        "param1": 0,
+        "targetSpell1": 0,
+        "cond2": 0,
+        "param2": 0,
+        "targetSpell2": 0,
+        "enabled": 1
+      }
+    ]
+  },
+  "foreverResults": {
+    "TestAfflictionWrack-AllItems-AdaptiveCombatAssistant-272437": {
+      "dps": 562.69302,
+      "tps": 318.86902,
+      "dtps": 8.49184,
+      "hps": 6.4214
+    },
+    "TestAfflictionWrack-AllItems-Admiral'sHat-10030": {
+      "dps": 564.08099,
+      "tps": 321.11318,
+      "dtps": 8.42877,
+      "hps": 6.25464
+    },
+    "TestAfflictionWrack-AllItems-AnkhofLife-1713": {
+      "dps": 565.0726,
+      "tps": 320.68008,
+      "dtps": 8.46909,
+      "hps": 6.34023
+    },
+    "TestAfflictionWrack-AllItems-ArcaniteChampion-12790": {
+      "dps": 570.291,
+      "tps": 323.10301,
+      "dtps": 8.49807,
+      "hps": 6.46421
+    },
+    "TestAfflictionWrack-AllItems-ArenaGrandMaster-19024": {
+      "dps": 562.69302,
+      "tps": 318.86902,
+      "dtps": 8.49184,
+      "hps": 6.4214
+    },
+    "TestAfflictionWrack-AllItems-BadgeoftheSwarmguard-21670": {
+      "dps": 562.69302,
+      "tps": 318.86902,
+      "dtps": 8.49184,
+      "hps": 6.4214
+    },
+    "TestAfflictionWrack-AllItems-BladeofHanna-2801": {
+      "dps": 570.291,
+      "tps": 323.10301,
+      "dtps": 8.49807,
+      "hps": 6.46421
+    },
+    "TestAfflictionWrack-AllItems-BlazefuryMedallion-17111": {
+      "dps": 572.1288,
+      "tps": 325.41423,
+      "dtps": 8.21378,
+      "hps": 6.3844
+    },
+    "TestAfflictionWrack-AllItems-BlazingEmblem-2802": {
+      "dps": 562.69302,
+      "tps": 318.86902,
+      "dtps": 8.49184,
+      "hps": 6.4214
+    },
+    "TestAfflictionWrack-AllItems-BlazingRapier-12777": {
+      "dps": 570.291,
+      "tps": 323.10301,
+      "dtps": 8.49807,
+      "hps": 6.46421
+    },
+    "TestAfflictionWrack-AllItems-BristleconeCloak-275833": {
+      "dps": 557.05197,
+      "tps": 316.25007,
+      "dtps": 8.74006,
+      "hps": 6.51427
+    },
+    "TestAfflictionWrack-AllItems-Champion'sDreadgear": {
+      "dps": 602.39622,
+      "tps": 340.88848,
+      "dtps": 8.80254,
+      "hps": 0
+    },
+    "TestAfflictionWrack-AllItems-Champion'sThreads": {
+      "dps": 556.26557,
+      "tps": 316.74247,
+      "dtps": 8.67108,
+      "hps": 0
+    },
+    "TestAfflictionWrack-AllItems-CloakofFire-14134": {
+      "dps": 563.43478,
+      "tps": 320.96026,
+      "dtps": 8.24845,
+      "hps": 6.43365
+    },
+    "TestAfflictionWrack-AllItems-CloakofFlames-3475": {
+      "dps": 562.35413,
+      "tps": 318.08486,
+      "dtps": 8.31509,
+      "hps": 6.42795
+    },
+    "TestAfflictionWrack-AllItems-ColdBasiliskEye-5079": {
+      "dps": 562.69302,
+      "tps": 318.86902,
+      "dtps": 8.49184,
+      "hps": 6.4214
+    },
+    "TestAfflictionWrack-AllItems-DarkmoonCard:BlueDragon-19288": {
+      "dps": 564.81781,
+      "tps": 320.58425,
+      "dtps": 8.6479,
+      "hps": 6.4214
+    },
+    "TestAfflictionWrack-AllItems-DarkmoonCard:Heroism-19287": {
+      "dps": 562.69302,
+      "tps": 318.86902,
+      "dtps": 8.49184,
+      "hps": 6.4214
+    },
+    "TestAfflictionWrack-AllItems-DarkmoonCard:Maelstrom-19289": {
+      "dps": 562.69302,
+      "tps": 318.86902,
+      "dtps": 8.49184,
+      "hps": 6.4214
+    },
+    "TestAfflictionWrack-AllItems-DeathmistRaiment": {
+      "dps": 593.38968,
+      "tps": 334.65988,
+      "dtps": 8.24324,
+      "hps": 0
+    },
+    "TestAfflictionWrack-AllItems-Defender'sGripStabilizer-272440": {
+      "dps": 562.69302,
+      "tps": 318.86902,
+      "dtps": 8.49184,
+      "hps": 6.4214
+    },
+    "TestAfflictionWrack-AllItems-Defiler'sTalisman-20072": {
+      "dps": 562.69302,
+      "tps": 318.86902,
+      "dtps": 8.49184,
+      "hps": 6.4214
+    },
+    "TestAfflictionWrack-AllItems-Defiler'sTalisman-21115": {
+      "dps": 562.69302,
+      "tps": 318.86902,
+      "dtps": 8.49184,
+      "hps": 6.4214
+    },
+    "TestAfflictionWrack-AllItems-Defiler'sTalisman-21116": {
+      "dps": 562.69302,
+      "tps": 318.86902,
+      "dtps": 8.49184,
+      "hps": 6.4214
+    },
+    "TestAfflictionWrack-AllItems-DemonheartRaiment": {
+      "dps": 545.34992,
+      "tps": 312.66055,
+      "dtps": 8.33347,
+      "hps": 0
+    },
+    "TestAfflictionWrack-AllItems-Demoniac'sThreads": {
+      "dps": 572.74286,
+      "tps": 326.34137,
+      "dtps": 8.45569,
+      "hps": 6.43256
+    },
+    "TestAfflictionWrack-AllItems-Doombringer-13053": {
+      "dps": 570.291,
+      "tps": 323.10301,
+      "dtps": 8.49807,
+      "hps": 6.46421
+    },
+    "TestAfflictionWrack-AllItems-Doomcaller'sAttire": {
+      "dps": 678.10237,
+      "tps": 378.60317,
+      "dtps": 8.77708,
+      "hps": 0
+    },
+    "TestAfflictionWrack-AllItems-DormantHeartoftheMountain-249473": {
+      "dps": 562.69302,
+      "tps": 318.86902,
+      "dtps": 8.47377,
+      "hps": 6.4214
+    },
+    "TestAfflictionWrack-AllItems-DreadmistRaiment": {
+      "dps": 550.96635,
+      "tps": 312.37914,
+      "dtps": 8.27018,
+      "hps": 6.3026
+    },
+    "TestAfflictionWrack-AllItems-EarthenSigil-20525": {
+      "dps": 567.16527,
+      "tps": 321.60256,
+      "dtps": 8.45143,
+      "hps": 6.34096
+    },
+    "TestAfflictionWrack-AllItems-Earthstrike-21180": {
+      "dps": 562.69302,
+      "tps": 318.86902,
+      "dtps": 8.49184,
+      "hps": 6.4214
+    },
+    "TestAfflictionWrack-AllItems-ElectrifiedDagger-19100": {
+      "dps": 570.291,
+      "tps": 323.10301,
+      "dtps": 8.49807,
+      "hps": 6.46421
+    },
+    "TestAfflictionWrack-AllItems-Enchant2HWeapon-GrandArcanist-7941": {
+      "dps": 600.28765,
+      "tps": 339.51635,
+      "dtps": 8.49807,
+      "hps": 6.46421
+    },
+    "TestAfflictionWrack-AllItems-Enchant:FieryBlaze-36": {
+      "dps": 570.291,
+      "tps": 323.10301,
+      "dtps": 8.49807,
+      "hps": 6.46421
+    },
+    "TestAfflictionWrack-AllItems-EnchantChest-Absorption-8220": {
+      "dps": 570.291,
+      "tps": 323.10301,
+      "dtps": 8.49807,
+      "hps": 6.46421
+    },
+    "TestAfflictionWrack-AllItems-EnchantChest-LesserAbsorption-63": {
+      "dps": 570.291,
+      "tps": 323.10301,
+      "dtps": 8.49807,
+      "hps": 6.46421
+    },
+    "TestAfflictionWrack-AllItems-EnchantChest-MinorAbsorption-44": {
+      "dps": 570.291,
+      "tps": 323.10301,
+      "dtps": 8.49807,
+      "hps": 6.46421
+    },
+    "TestAfflictionWrack-AllItems-EnchantCloak-Subtlety-2621": {
+      "dps": 570.291,
+      "tps": 317.36243,
+      "dtps": 8.49807,
+      "hps": 6.46421
+    },
+    "TestAfflictionWrack-AllItems-EnchantGloves-Threat-2613": {
+      "dps": 570.291,
+      "tps": 328.84359,
+      "dtps": 8.49807,
+      "hps": 6.46421
+    },
+    "TestAfflictionWrack-AllItems-EnchantWeapon-Crusader-1900": {
+      "dps": 570.291,
+      "tps": 323.10301,
+      "dtps": 8.49807,
+      "hps": 6.46421
+    },
+    "TestAfflictionWrack-AllItems-EnchantWeapon-GrandSorcerer-7942": {
+      "dps": 582.88444,
+      "tps": 329.99739,
+      "dtps": 8.49807,
+      "hps": 6.46421
+    },
+    "TestAfflictionWrack-AllItems-EnchantWeapon-Insight-8216": {
+      "dps": 580.68933,
+      "tps": 331.02263,
+      "dtps": 8.18474,
+      "hps": 6.46421
+    },
+    "TestAfflictionWrack-AllItems-EnchantWeapon-Recovery-8721": {
+      "dps": 570.291,
+      "tps": 323.10301,
+      "dtps": 8.49807,
+      "hps": 6.46421
+    },
+    "TestAfflictionWrack-AllItems-EnchantWeapon-Revelation-8217": {
+      "dps": 590.79192,
+      "tps": 333.89401,
+      "dtps": 8.10821,
+      "hps": 6.47537
+    },
+    "TestAfflictionWrack-AllItems-EssenceofthePureFlame-18815": {
+      "dps": 562.69302,
+      "tps": 318.86902,
+      "dtps": 8.49184,
+      "hps": 6.4214
+    },
+    "TestAfflictionWrack-AllItems-EverlookDeliveryBot-274760": {
+      "dps": 566.80562,
+      "tps": 320.62927,
+      "dtps": 8.58555,
+      "hps": 6.25979
+    },
+    "TestAfflictionWrack-AllItems-EverlookPathcarver-274759": {
+      "dps": 568.25613,
+      "tps": 321.05605,
+      "dtps": 8.57253,
+      "hps": 6.13196
+    },
+    "TestAfflictionWrack-AllItems-EyeofDiminution-23001": {
+      "dps": 578.68586,
+      "tps": 327.50455,
+      "dtps": 8.61471,
+      "hps": 6.54141
+    },
+    "TestAfflictionWrack-AllItems-EyeofMoam-21473": {
+      "dps": 576.25491,
+      "tps": 326.40275,
+      "dtps": 8.49184,
+      "hps": 6.4214
+    },
+    "TestAfflictionWrack-AllItems-EyeoftheDead-23047": {
+      "dps": 562.69302,
+      "tps": 318.86902,
+      "dtps": 8.49184,
+      "hps": 6.4214
+    },
+    "TestAfflictionWrack-AllItems-FetishofChitinousSpikes-21488": {
+      "dps": 562.69302,
+      "tps": 318.86902,
+      "dtps": 8.49184,
+      "hps": 6.4214
+    },
+    "TestAfflictionWrack-AllItems-FetishoftheSandReaver-21647": {
+      "dps": 562.69302,
+      "tps": 318.86902,
+      "dtps": 8.49184,
+      "hps": 6.4214
+    },
+    "TestAfflictionWrack-AllItems-FieldMarshal'sThreads": {
+      "dps": 582.2987,
+      "tps": 329.52746,
+      "dtps": 8.3469,
+      "hps": 0
+    },
+    "TestAfflictionWrack-AllItems-FlameSearedSignet-282080": {
+      "dps": 564.83862,
+      "tps": 320.34019,
+      "dtps": 8.35888,
+      "hps": 6.39421
+    },
+    "TestAfflictionWrack-AllItems-Frostguard-12797": {
+      "dps": 570.291,
+      "tps": 323.10301,
+      "dtps": 8.49807,
+      "hps": 6.46421
+    },
+    "TestAfflictionWrack-AllItems-FrozenHeartoftheMountain-249469": {
+      "dps": 570.65787,
+      "tps": 324.42473,
+      "dtps": 8.49283,
+      "hps": 6.34096
+    },
+    "TestAfflictionWrack-AllItems-GlacialBlade-19099": {
+      "dps": 570.291,
+      "tps": 323.10301,
+      "dtps": 8.49807,
+      "hps": 6.46421
+    },
+    "TestAfflictionWrack-AllItems-GlyphofDeflection-23040": {
+      "dps": 562.69302,
+      "tps": 318.86902,
+      "dtps": 8.49184,
+      "hps": 6.4214
+    },
+    "TestAfflictionWrack-AllItems-GoblinConstructionHelmet-10543": {
+      "dps": 564.08099,
+      "tps": 321.11318,
+      "dtps": 8.42877,
+      "hps": 6.25464
+    },
+    "TestAfflictionWrack-AllItems-GoldenBanana-270226": {
+      "dps": 562.73105,
+      "tps": 318.89653,
+      "dtps": 8.47062,
+      "hps": 6.34023
+    },
+    "TestAfflictionWrack-AllItems-GutRipper-2164": {
+      "dps": 570.291,
+      "tps": 323.10301,
+      "dtps": 8.49807,
+      "hps": 6.46421
+    },
+    "TestAfflictionWrack-AllItems-Hameya'sSlayer-15814": {
+      "dps": 570.291,
+      "tps": 323.10301,
+      "dtps": 8.49807,
+      "hps": 6.46421
+    },
+    "TestAfflictionWrack-AllItems-HanzoSword-8190": {
+      "dps": 570.291,
+      "tps": 323.10301,
+      "dtps": 8.49807,
+      "hps": 6.46421
+    },
+    "TestAfflictionWrack-AllItems-Hazza'rah'sCharmofDestruction-19957": {
+      "dps": 568.30786,
+      "tps": 321.38634,
+      "dtps": 8.77074,
+      "hps": 6.30175
+    },
+    "TestAfflictionWrack-AllItems-HeartoftheScale-13164": {
+      "dps": 562.69302,
+      "tps": 318.86902,
+      "dtps": 8.49184,
+      "hps": 6.4214
+    },
+    "TestAfflictionWrack-AllItems-HibernationCrystal-20636": {
+      "dps": 562.69302,
+      "tps": 318.86902,
+      "dtps": 8.49184,
+      "hps": 6.4214
+    },
+    "TestAfflictionWrack-AllItems-ImplementsofUnspokenNames": {
+      "dps": 582.9291,
+      "tps": 329.05754,
+      "dtps": 8.49705,
+      "hps": 6.31286
+    },
+    "TestAfflictionWrack-AllItems-JomGabbar-23570": {
+      "dps": 562.69302,
+      "tps": 318.86902,
+      "dtps": 8.49184,
+      "hps": 6.4214
+    },
+    "TestAfflictionWrack-AllItems-Julie'sDagger-6660": {
+      "dps": 570.291,
+      "tps": 323.10301,
+      "dtps": 8.49807,
+      "hps": 6.46421
+    },
+    "TestAfflictionWrack-AllItems-KissoftheSpider-22954": {
+      "dps": 577.49914,
+      "tps": 327.82643,
+      "dtps": 8.31322,
+      "hps": 6.38377
+    },
+    "TestAfflictionWrack-AllItems-LieutenantCommander'sDreadgear": {
+      "dps": 602.39622,
+      "tps": 340.88848,
+      "dtps": 8.80254,
+      "hps": 0
+    },
+    "TestAfflictionWrack-AllItems-LieutenantCommander'sThreads": {
+      "dps": 556.26557,
+      "tps": 316.74247,
+      "dtps": 8.67108,
+      "hps": 0
+    },
+    "TestAfflictionWrack-AllItems-Linken'sBoomerang-11905": {
+      "dps": 562.69302,
+      "tps": 318.86902,
+      "dtps": 8.49184,
+      "hps": 6.4214
+    },
+    "TestAfflictionWrack-AllItems-Linken'sSwordofMastery-11902": {
+      "dps": 531.07703,
+      "tps": 301.94771,
+      "dtps": 8.41615,
+      "hps": 6.30397
+    },
+    "TestAfflictionWrack-AllItems-Loatheb'sReflection-23042": {
+      "dps": 562.69302,
+      "tps": 318.86902,
+      "dtps": 8.44677,
+      "hps": 6.4214
+    },
+    "TestAfflictionWrack-AllItems-Magister'sRegalia": {
+      "dps": 562.80093,
+      "tps": 317.28166,
+      "dtps": 8.63192,
+      "hps": 0
+    },
+    "TestAfflictionWrack-AllItems-MajorRecombobulator-18637": {
+      "dps": 562.69302,
+      "tps": 318.86902,
+      "dtps": 8.49184,
+      "hps": 6.4214
+    },
+    "TestAfflictionWrack-AllItems-MarkofResolution-17759": {
+      "dps": 562.69302,
+      "tps": 318.86902,
+      "dtps": 8.49184,
+      "hps": 6.4214
+    },
+    "TestAfflictionWrack-AllItems-MarkoftheChampion-23206": {
+      "dps": 562.69302,
+      "tps": 318.86902,
+      "dtps": 8.49184,
+      "hps": 6.4214
+    },
+    "TestAfflictionWrack-AllItems-MarkoftheChampion-23207": {
+      "dps": 562.69302,
+      "tps": 318.86902,
+      "dtps": 8.49184,
+      "hps": 6.4214
+    },
+    "TestAfflictionWrack-AllItems-MarkoftheRedFlight-282778": {
+      "dps": 562.69302,
+      "tps": 318.86902,
+      "dtps": 8.49184,
+      "hps": 6.4214
+    },
+    "TestAfflictionWrack-AllItems-MoltenHeartoftheMountain-249470": {
+      "dps": 562.69302,
+      "tps": 318.86902,
+      "dtps": 8.47377,
+      "hps": 6.4214
+    },
+    "TestAfflictionWrack-AllItems-Nightblade-1982": {
+      "dps": 570.291,
+      "tps": 323.10301,
+      "dtps": 8.49807,
+      "hps": 6.46421
+    },
+    "TestAfflictionWrack-AllItems-OrbofFire-12805": {
+      "dps": 562.69302,
+      "tps": 318.86902,
+      "dtps": 8.49184,
+      "hps": 6.4214
+    },
+    "TestAfflictionWrack-AllItems-PetrifiedScarab-21685": {
+      "dps": 562.69302,
+      "tps": 318.86902,
+      "dtps": 8.49184,
+      "hps": 6.4214
+    },
+    "TestAfflictionWrack-AllItems-PhantomBlade-7961": {
+      "dps": 570.291,
+      "tps": 323.10301,
+      "dtps": 8.49807,
+      "hps": 6.46421
+    },
+    "TestAfflictionWrack-AllItems-PlagueheartRaiment": {
+      "dps": 739.37527,
+      "tps": 359.38103,
+      "dtps": 8.87409,
+      "hps": 0
+    },
+    "TestAfflictionWrack-AllItems-RingofSaviors-1447": {
+      "dps": 561.41785,
+      "tps": 318.46961,
+      "dtps": 8.35888,
+      "hps": 6.39421
+    },
+    "TestAfflictionWrack-AllItems-SerenityField-272439": {
+      "dps": 575.12465,
+      "tps": 325.90663,
+      "dtps": 8.48484,
+      "hps": 6.25979
+    },
+    "TestAfflictionWrack-AllItems-SerpentSlicer-13035": {
+      "dps": 570.291,
+      "tps": 323.10301,
+      "dtps": 8.49807,
+      "hps": 6.46421
+    },
+    "TestAfflictionWrack-AllItems-ShardoftheFallenStar-21891": {
+      "dps": 569.7695,
+      "tps": 323.01419,
+      "dtps": 8.12531,
+      "hps": 6.34322
+    },
+    "TestAfflictionWrack-AllItems-ShortswordofVengeance-754": {
+      "dps": 570.291,
+      "tps": 323.10301,
+      "dtps": 8.49807,
+      "hps": 6.46421
+    },
+    "TestAfflictionWrack-AllItems-Slayer'sCrest-23041": {
+      "dps": 562.69302,
+      "tps": 318.86902,
+      "dtps": 8.49184,
+      "hps": 6.4214
+    },
+    "TestAfflictionWrack-AllItems-SmokingHeartoftheMountain-11811": {
+      "dps": 562.69302,
+      "tps": 318.86902,
+      "dtps": 8.47377,
+      "hps": 6.4214
+    },
+    "TestAfflictionWrack-AllItems-Sorcerer'sRegalia": {
+      "dps": 594.60101,
+      "tps": 335.68207,
+      "dtps": 8.81263,
+      "hps": 0
+    },
+    "TestAfflictionWrack-AllItems-SwordofZeal-6622": {
+      "dps": 531.07703,
+      "tps": 301.94771,
+      "dtps": 8.41615,
+      "hps": 6.30397
+    },
+    "TestAfflictionWrack-AllItems-TalismanofArathor-20071": {
+      "dps": 562.69302,
+      "tps": 318.86902,
+      "dtps": 8.49184,
+      "hps": 6.4214
+    },
+    "TestAfflictionWrack-AllItems-TalismanofArathor-21117": {
+      "dps": 562.69302,
+      "tps": 318.86902,
+      "dtps": 8.49184,
+      "hps": 6.4214
+    },
+    "TestAfflictionWrack-AllItems-TalismanofArathor-21118": {
+      "dps": 562.69302,
+      "tps": 318.86902,
+      "dtps": 8.49184,
+      "hps": 6.4214
+    },
+    "TestAfflictionWrack-AllItems-TalismanofAscendance-22678": {
+      "dps": 589.83455,
+      "tps": 333.67065,
+      "dtps": 8.49184,
+      "hps": 6.4214
+    },
+    "TestAfflictionWrack-AllItems-TalismanofEphemeralPower-18820": {
+      "dps": 580.35229,
+      "tps": 328.53222,
+      "dtps": 8.49184,
+      "hps": 6.4214
+    },
+    "TestAfflictionWrack-AllItems-Teebu'sBlazingLongsword-1728": {
+      "dps": 531.07703,
+      "tps": 301.94771,
+      "dtps": 8.41615,
+      "hps": 6.30397
+    },
+    "TestAfflictionWrack-AllItems-TheBlackBook-19337": {
+      "dps": 571.53961,
+      "tps": 318.86902,
+      "dtps": 8.49184,
+      "hps": 6.4214
+    },
+    "TestAfflictionWrack-AllItems-TheBurrower'sShell-23558": {
+      "dps": 562.69302,
+      "tps": 318.86902,
+      "dtps": 8.49184,
+      "hps": 6.4214
+    },
+    "TestAfflictionWrack-AllItems-TheLobotomizer-19324": {
+      "dps": 570.291,
+      "tps": 323.10301,
+      "dtps": 8.49807,
+      "hps": 6.46421
+    },
+    "TestAfflictionWrack-AllItems-TheRestrainedEssenceofSapphiron-23046": {
+      "dps": 603.09835,
+      "tps": 340.99323,
+      "dtps": 8.49184,
+      "hps": 6.4214
+    },
+    "TestAfflictionWrack-AllItems-ThrashBlade-17705": {
+      "dps": 570.291,
+      "tps": 323.10301,
+      "dtps": 8.49807,
+      "hps": 6.46421
+    },
+    "TestAfflictionWrack-AllItems-Thunderbrew'sBootFlask-744": {
+      "dps": 570.80218,
+      "tps": 323.45728,
+      "dtps": 8.54109,
+      "hps": 6.43256
+    },
+    "TestAfflictionWrack-AllItems-Thunderfury,BlessedBladeoftheWindseeker-19019": {
+      "dps": 570.291,
+      "tps": 323.10301,
+      "dtps": 8.49807,
+      "hps": 6.46421
+    },
+    "TestAfflictionWrack-AllItems-ToySoldier-274386": {
+      "dps": 562.69302,
+      "tps": 318.86902,
+      "dtps": 8.49184,
+      "hps": 6.4214
+    },
+    "TestAfflictionWrack-AllItems-Uther'sStrength-11302": {
+      "dps": 566.10517,
+      "tps": 320.73506,
+      "dtps": 8.49184,
+      "hps": 6.4214
+    },
+    "TestAfflictionWrack-AllItems-VestmentsoftheDevout": {
+      "dps": 542.64778,
+      "tps": 309.73344,
+      "dtps": 8.18199,
+      "hps": 0
+    },
+    "TestAfflictionWrack-AllItems-VestmentsoftheVirtuous": {
+      "dps": 573.22845,
+      "tps": 324.04951,
+      "dtps": 8.29586,
+      "hps": 0
+    },
+    "TestAfflictionWrack-AllItems-Warlord'sThreads": {
+      "dps": 582.2987,
+      "tps": 329.52746,
+      "dtps": 8.3469,
+      "hps": 0
+    },
+    "TestAfflictionWrack-AllItems-WarmthofForgiveness-23027": {
+      "dps": 568.55824,
+      "tps": 321.20803,
+      "dtps": 8.86347,
+      "hps": 6.47498
+    },
+    "TestAfflictionWrack-AllItems-Witchfury-13051": {
+      "dps": 570.291,
+      "tps": 323.10301,
+      "dtps": 8.49807,
+      "hps": 6.46421
+    },
+    "TestAfflictionWrack-AllItems-WrathofCenarius-21190": {
+      "dps": 573.91624,
+      "tps": 325.28788,
+      "dtps": 8.35888,
+      "hps": 6.39421
+    },
+    "TestAfflictionWrack-AllItems-ZandalarianHeroBadge-19948": {
+      "dps": 562.69302,
+      "tps": 318.86902,
+      "dtps": 8.49184,
+      "hps": 6.4214
+    },
+    "TestAfflictionWrack-AllItems-ZandalarianHeroCharm-19950": {
+      "dps": 581.96776,
+      "tps": 329.4519,
+      "dtps": 8.49184,
+      "hps": 6.4214
+    },
+    "TestAfflictionWrack-AllItems-ZandalarianHeroMedallion-19949": {
+      "dps": 562.69302,
+      "tps": 318.86902,
+      "dtps": 8.49184,
+      "hps": 6.4214
+    },
+    "TestAfflictionWrack-Average-Default": {
+      "dps": 582.06594,
+      "tps": 329.506,
+      "dtps": 8.31595,
+      "hps": 6.26115
+    },
+    "TestAfflictionWrack-Settings-Human-preraid-Wrack-aff_wrack-FullBuffs-0.0yards-LongMultiTarget": {
+      "dps": 657.14584,
+      "tps": 1066.2786,
+      "dtps": 8.5296,
+      "hps": 6.55184
+    },
+    "TestAfflictionWrack-Settings-Human-preraid-Wrack-aff_wrack-FullBuffs-0.0yards-LongSingleTarget": {
+      "dps": 577.55987,
+      "tps": 327.29176,
+      "dtps": 8.5338,
+      "hps": 6.54141
+    },
+    "TestAfflictionWrack-Settings-Human-preraid-Wrack-aff_wrack-FullBuffs-0.0yards-ShortSingleTarget": {
+      "dps": 653.4618,
+      "tps": 348.40629,
+      "dtps": 12.92455,
+      "hps": 6.58697
+    },
+    "TestAfflictionWrack-Settings-Human-preraid-Wrack-aff_wrack-NoBuffs-0.0yards-LongMultiTarget": {
+      "dps": 350.12282,
+      "tps": 1141.87087,
+      "dtps": 0,
+      "hps": 5.42734
+    },
+    "TestAfflictionWrack-Settings-Human-preraid-Wrack-aff_wrack-NoBuffs-0.0yards-LongSingleTarget": {
+      "dps": 350.12282,
+      "tps": 296.64637,
+      "dtps": 0,
+      "hps": 5.42734
+    },
+    "TestAfflictionWrack-Settings-Human-preraid-Wrack-aff_wrack-NoBuffs-0.0yards-ShortSingleTarget": {
+      "dps": 378.19885,
+      "tps": 299.53069,
+      "dtps": 0,
+      "hps": 5.19539
+    },
+    "TestAfflictionWrack-Settings-Orc-preraid-Wrack-aff_wrack-FullBuffs-0.0yards-LongMultiTarget": {
+      "dps": 653.74724,
+      "tps": 1048.69013,
+      "dtps": 8.20479,
+      "hps": 6.39421
+    },
+    "TestAfflictionWrack-Settings-Orc-preraid-Wrack-aff_wrack-FullBuffs-0.0yards-LongSingleTarget": {
+      "dps": 570.291,
+      "tps": 323.10301,
+      "dtps": 8.49807,
+      "hps": 6.46421
+    },
+    "TestAfflictionWrack-Settings-Orc-preraid-Wrack-aff_wrack-FullBuffs-0.0yards-ShortSingleTarget": {
+      "dps": 652.78146,
+      "tps": 348.53394,
+      "dtps": 12.92455,
+      "hps": 6.81265
+    },
+    "TestAfflictionWrack-Settings-Orc-preraid-Wrack-aff_wrack-NoBuffs-0.0yards-LongMultiTarget": {
+      "dps": 348.44544,
+      "tps": 1142.86709,
+      "dtps": 0,
+      "hps": 5.29683
+    },
+    "TestAfflictionWrack-Settings-Orc-preraid-Wrack-aff_wrack-NoBuffs-0.0yards-LongSingleTarget": {
+      "dps": 348.44544,
+      "tps": 295.78376,
+      "dtps": 0,
+      "hps": 5.29683
+    },
+    "TestAfflictionWrack-Settings-Orc-preraid-Wrack-aff_wrack-NoBuffs-0.0yards-ShortSingleTarget": {
+      "dps": 382.56725,
+      "tps": 304.68574,
+      "dtps": 0,
+      "hps": 5.07277
+    },
+    "TestAfflictionWrack-SwitchInFrontOfTarget-Default": {
+      "dps": 561.70296,
+      "tps": 323.10301,
+      "dtps": 8.49807,
+      "hps": 6.46421
+    }
+  }
+}

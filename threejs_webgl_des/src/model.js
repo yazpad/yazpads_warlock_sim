@@ -28,6 +28,8 @@ export const APL_ACTION = Object.freeze({
   EUREKA: 20,
   BLOOD_FURY: 21,
   BERSERKING: 22,
+  SACRIFICE_SUCCUBUS_SUMMON_IMP: 23,
+  AMPLIFY_CURSE: 24,
 });
 
 export const APL_COND = Object.freeze({
@@ -55,17 +57,33 @@ export const APL_COND = Object.freeze({
   FIGHT_TIME_GT: 21,
   FIGHT_TIME_LT: 22,
   DOT_REM_LT: 23,
+  PET_MANA_LT: 24,
+  PET_MANA_LE: 25,
+  PET_MANA_GT: 26,
+  PET_MANA_GE: 27,
+  ISB_INACTIVE: 28,
+  DOT_REM_GE: 29,
+  DOT_REM_GT: 30,
+  AMPLIFY_ACTIVE: 31,
+  AMPLIFY_INACTIVE: 32,
+  DECIMATION_AURA_ACTIVE: 33,
+  DECIMATION_AURA_INACTIVE: 34,
+  TIME_TO_EXECUTE_LE: 35, // remaining time - total duration * targetSpell / 100 <= param seconds
+  TIME_TO_EXECUTE_GE: 36,
+  TIME_TO_EXECUTE_LT: 37,
+  TIME_TO_EXECUTE_GT: 38,
 });
 
 export const MAX_APL_RULES = 32;
 
 export const DEFAULTS = Object.freeze({
-  race: 'HUMAN', swordEquipped: true, racialPolicy: 'execute', targetIsBeast: false, maxHealth: 0, duration: 180, iterations: 4096, seed: 42, rotation: 'shadow',
+  race: 'HUMAN', swordEquipped: true, racialPolicy: 'execute', targetIsBeast: false, maxHealth: 0, statsIncludeBase: false, duration: 180, iterations: 4096, seed: 42, rotation: 'shadow',
   spellPower: 500, shadowPower: 0, firePower: 0, intellect: 200, stamina: 220, spirit: 100, hit: 12, crit: 15, mp5: 20,
-  distance: 30, resistance: 0, penetration: 0, tapThreshold: 25, bossArmor: 3731,
+  channelClipDelayMs: 0, distance: 30, resistance: 0, penetration: 0, tapThreshold: 25, bossArmor: 3731,
   book: false, charges: false, partialResists: true, piercing: true,
   corruption: true, agony: true, immolate: false, instantCorruption: true,
   nightfall: true, isb: true, ruin: true, improvedTap: true, amplifyCurse: false,
+  demonicPact: false, demonicSacrifice: false, felDomination: false, masterSummoner: 0, soulLink: false,
   sacImp: false, sacSucc: false, masterDemo: 0, petChoice: 'none',
   trinketSP: 0, trinketDuration: 20, trinketCD: 120,
   shadowMultiplier: 1.0, fireMultiplier: 1.0,
@@ -76,7 +94,7 @@ export const DEFAULTS = Object.freeze({
   baneRank: 0, decimationRank: 0,
   siphonLife: false, drainHope: false,
   malevolence: 0.0, afBonus: 0.0, aftermathBonus: 0.0, cataclysmCostMult: 1.0, improvedAgonyBonus: 0.0, felVitalityBonus: 0.0, maledictionBonus: 0.0, improvedDrainsBonus: 0.0, soulSiphonBonus: 0.0,
-  demonicEnergies: 0.0, demonicKnowledge: 0,
+  demonicEnergies: 0.0, demonicKnowledge: 0, targetSpellMultiplier: 1.0,
   snfChance: 0.0, snfBonus: 0.0, dotCrit: 1.5, fnbCrit: 0.0, petMult: 1.0, petFireboltMult: 1.0, petMeleeMult: 1.0, petLashMult: 1.0, brandMult: 1.0, corrMultiplier: 0.0,
   aplRules: null,
 });
@@ -84,11 +102,11 @@ export const DEFAULTS = Object.freeze({
 export function validate(input) {
   const c = { ...DEFAULTS, ...input };
   if (c.maledictionBonus !== 0) throw new Error('Malediction damage was removed. Respec and resolve this build using Grim Reach.');
-  const bounds = { maxHealth: [0, 100000], duration: [1, 1800], iterations: [1, 1048576], seed: [0, 4294967295],
+  const bounds = { channelClipDelayMs: [0, 10000], maxHealth: [0, 100000], duration: [1, 1800], iterations: [1, 1048576], seed: [0, 4294967295],
     spellPower: [0, 10000], shadowPower: [0, 10000], firePower: [0, 10000],
     intellect: [0, 5000], stamina: [0, 5000], spirit: [0, 5000], hit: [0, 100],
     crit: [0, 100], mp5: [0, 10000], resistance: [0, 1000], penetration: [0, 1000], tapThreshold: [0, 100], bossArmor: [0, 100000],
-    masterDemo: [0, 5], demonicBrandRank: [0, 3], trinketSP: [0, 10000], trinketDuration: [0, 600], trinketCD: [0, 1200],
+    masterSummoner: [0, 2], masterDemo: [0, 5], demonicBrandRank: [0, 3], trinketSP: [0, 10000], trinketDuration: [0, 600], trinketCD: [0, 1200],
     shadowMultiplier: [0, 10], fireMultiplier: [0, 10],
     malevolence: [0, 10], afBonus: [0, 1], aftermathBonus: [0, 1], cataclysmCostMult: [0, 2], improvedAgonyBonus: [0, 1], felVitalityBonus: [0, 1], maledictionBonus: [0, 1], improvedDrainsBonus: [0, 1], soulSiphonBonus: [0, 1],
     tapBonus: [0, 0.2], nightfallChance: [0, 0.04], isbBonus: [0, 0.2], ruinRank: [0, 5],
@@ -99,7 +117,7 @@ export function validate(input) {
     if (typeof c[key] !== 'number' || !Number.isFinite(c[key]) || c[key] < lo || c[key] > hi)
       throw new Error(`${key} must be a number between ${lo} and ${hi}.`);
   }
-  for (const key of ['iterations', 'seed', 'duration', 'masterDemo', 'demonicBrandRank', 'demonicKnowledge', 'ruinRank', 'baneRank', 'decimationRank']) if (!Number.isInteger(c[key])) throw new Error(`${key} must be an integer.`);
+  for (const key of ['channelClipDelayMs', 'iterations', 'seed', 'duration', 'masterSummoner', 'masterDemo', 'demonicBrandRank', 'demonicKnowledge', 'ruinRank', 'baneRank', 'decimationRank']) if (!Number.isInteger(c[key])) throw new Error(`${key} must be an integer.`);
   if (![0, 30, 60, 120].includes(c.distance)) throw new Error('Supported distances: 0, 30, 60, 120 yards.');
   if (!['execute', 'cooldown', 'align-execute', 'align-doom'].includes(c.racialPolicy)) throw new Error('Unsupported racial policy.');
   if (!['HUMAN', 'GNOME', 'ORC', 'TROLL', 'UNDEAD'].includes(c.race)) throw new Error('Unsupported race.');
@@ -119,6 +137,9 @@ export function buildDefaultAPLRules(c) {
 
   const add = (action, cond = APL_COND.ALWAYS, param = 0.0, targetSpell = 0, enabled = 1) => {
     if (rules.length < MAX_APL_RULES) {
+      if (action === APL_ACTION.CURSE_OF_AGONY && c.amplifyCurse && rules.length < MAX_APL_RULES - 1) {
+        rules.push({ action: APL_ACTION.AMPLIFY_CURSE, cond, param, targetSpell, enabled });
+      }
       rules.push({ action, cond, param, targetSpell, enabled });
     }
   };
@@ -232,13 +253,14 @@ export function encodeAPLRule(rule) {
 // Explicit word schemas keep JS and GLSL offsets in one place. All scalar
 // members have four-byte alignment. Never encode counters/timestamps as floats.
 export const CONFIG = {
-  race: 'u32', racialPolicy: 'u32', targetIsBeast: 'u32', basePower: 'f32', maxHealth: 'f32', end: 'u32', travel: 'u32', corrCast: 'u32', filler: 'u32', corr: 'u32', agony: 'u32', immolate: 'u32',
+  channelClipDelay: 'u32', race: 'u32', racialPolicy: 'u32', targetIsBeast: 'u32', basePower: 'f32', maxHealth: 'f32', end: 'u32', travel: 'u32', corrCast: 'u32', filler: 'u32', corr: 'u32', agony: 'u32', immolate: 'u32',
   baneRank: 'u32', decimationRank: 'u32',
   charges: 'u32', partial: 'u32', piercing: 'u32',
+  demonicPact: 'u32', demonicSacrifice: 'u32', felDomination: 'u32', masterSummoner: 'u32', soulLink: 'u32', sacImp: 'u32', sacSucc: 'u32', masterDemo: 'u32',
   petChoice: 'u32', trinketDuration: 'u32', trinketCD: 'u32',
   conflagrate: 'u32', shadowburn: 'u32', curseOfDoom: 'u32', incinerate: 'u32',
   decimation: 'u32', demonicBrand: 'u32', demonicBrandRank: 'u32', siphonLife: 'u32', drainHope: 'u32',
-  hellfirePowerOffset: 'f32', power: 'f32', maxMana: 'f32', tapGain: 'f32', tapThreshold: 'f32', mp5: 'f32',
+  hellfirePowerOffset: 'f32', power: 'f32', maxMana: 'f32', tapGain: 'f32', tapThreshold: 'f32', mp5: 'f32', petMP5: 'f32',
   hit: 'f32', crit: 'f32', fireCrit: 'f32', shadowCrit: 'f32', directCrit: 'f32', nightfall: 'f32', isb: 'f32',
   resistance: 'f32', penetration: 'f32', boltCost: 'f32', boltMin: 'f32', boltMax: 'f32',
   corrCost: 'f32', corrBase: 'f32', corrMultiplier: 'f32', immCost: 'f32', immDirect: 'f32', immTick: 'f32',
@@ -258,8 +280,16 @@ export const UPTIME_EFFECTS = [
   ['Nightfall', 'trance'], ['Trinket', 'trinket'], ['Racial buff', 'racial'],
   ['Decimation', 'decimation'], ['Shadow and Flame (shadow)', 'snfShadow'], ['Shadow and Flame (fire)', 'snfFire'],
 ];
+export const DETAIL_COUNTERS = Object.fromEntries([
+  ...SPELLS.flatMap((_, i) => [[`ticks${i}`, 'u32'], [`tickCrits${i}`, 'u32'],
+    [`tickDamage${i}`, 'f32'], [`critDamage${i}`, 'f32'], [`tickCritDamage${i}`, 'f32']]),
+  ['petBrandHits', 'u32'], ['petBrandCasts', 'u32'], ['petBrandCrits', 'u32'], ['petBrandMisses', 'u32'], ['petMeleeGlances', 'u32'], ['amplifyCasts', 'u32'], ['racialCasts', 'u32'],
+]);
+export const DETAIL_EXTRA_OUTPUT = [...Object.entries(DETAIL_COUNTERS),
+  ['mana', 'f32'], ['gained', 'f32']];
 export const DETAIL_STATE = Object.fromEntries([
   ...UPTIME_EFFECTS.map(([,key]) => [`uptime_${key}`, 'u32']), ['manaWasted', 'f32'],
+  ...Object.entries(DETAIL_COUNTERS),
 ]);
 export const STATE = {
   racialReady:'u32', racialEnd:'u32', eurekaEnd:'u32', graveReady:'u32', doomEnd:'u32', castBonus:'f32', corrBonus:'f32', agonyBonus:'f32', immBonus:'f32', siphonBonus:'f32', initialized:'u32', done:'u32', now:'u32', size:'u32', events:'u32', highWater:'u32',
@@ -268,6 +298,7 @@ export const STATE = {
   immTicks:'u32', immGen:'u32', immEnd:'u32',
   siphonTicks:'u32', siphonGen:'u32', siphonEnd:'u32', drainHopeEnd:'u32', drainHopeReady:'u32',
   taps:'u32', procs:'u32', isbProcs:'u32', isbConsumed:'u32', traceCount:'u32', rngCalls:'u32',
+  petSwapUsed:'u32', petGeneration:'u32', activePet:'u32', petShadowScale:'f32', petFireScale:'f32',
   petCasts:'u32',
   trinketEnd:'u32', trinketReady:'u32', petReady:'u32',
   conflagReady:'u32', shadowburnReady:'u32', soulFireReady:'u32', doomActive:'u32',
@@ -277,12 +308,17 @@ export const STATE = {
   mana:'f32', spent:'f32', gained:'f32', total:'f32', petMana:'f32', petDamage:'f32',
   petBrandDamage:'f32',
   petMeleeDamage:'f32', petMeleeCasts:'u32', petMeleeHits:'u32', petMeleeCrits:'u32', petMeleeMisses:'u32',
+  impDamage:'f32', impCasts:'u32', impHits:'u32', impCrits:'u32', impMisses:'u32',
   petSpellDamage:'f32', petSpellCasts:'u32', petSpellHits:'u32', petSpellCrits:'u32', petSpellMisses:'u32',
   ...Object.fromEntries(Array.from({length:8}, (_, i) => [`rng${i}`, 'u32'])),
   ...Object.fromEntries(SPELLS.flatMap((_, i) => [[`damage${i}`, 'f32'], [`casts${i}`, 'u32'], [`hits${i}`, 'u32'], [`crits${i}`, 'u32'], [`misses${i}`, 'u32']])),
 };
 
 Object.assign(STATE, DETAIL_STATE);
+// Append combat state to preserve existing detailed readback offsets.
+STATE.agonySpellPowerShare = 'f32';
+STATE.amplifyEnd = 'u32';
+STATE.doomReady = 'u32';
 
 export const STATE_WORDS = Object.keys(STATE).length;
 export const FAST_STATE = Object.fromEntries(Object.entries(STATE).filter(([key]) => !/^(damage|casts|hits|crits|misses)\d+$/.test(key) && !(key in DETAIL_STATE)));
@@ -298,7 +334,9 @@ export const APL_PARAM1_OFFSET = Object.keys(CONFIG).indexOf('aplParam1_0');
 
 export function packConfig(input) {
   const c = validate(input);
-  const int = 136 + c.intellect;
+  // Equipped imports resolve racial base attributes before buffs. Older direct
+  // stat inputs retain their existing additional-intellect convention.
+  const int = c.statsIncludeBase ? c.intellect : 136 + c.intellect;
   let sMult = c.shadowMultiplier;
   let fMult = c.fireMultiplier;
 
@@ -319,8 +357,9 @@ export function packConfig(input) {
   const rawRules = Array.isArray(c.aplRules) && c.aplRules.length > 0 ? c.aplRules : buildDefaultAPLRules(c);
 
   const racialCrit = c.race === 'HUMAN' ? 2 : c.race === 'ORC' ? 1 : 0;
-  const baseCrit = (1.7 + int / 60.6 + c.crit + racialCrit) / 100;
-  const shadowCrit = (1.7 + int / 60.6 + c.crit + racialCrit + (c.malevolence || 0)) / 100;
+  const intellectCrit = c.statsIncludeBase ? int * 0.0165 : int / 60.6;
+  const baseCrit = (1.7 + intellectCrit + c.crit + racialCrit) / 100;
+  const shadowCrit = (1.7 + intellectCrit + c.crit + racialCrit + (c.malevolence || 0)) / 100;
 
   const impCorrRanks = c.improvedCorruptionBonus > 0 ? Math.round(c.improvedCorruptionBonus / 0.02) : (c.instantCorruption ? 5 : 0);
   const corrCastTime = Math.max(0, 2.0 - 0.4 * impCorrRanks);
@@ -337,6 +376,8 @@ export function packConfig(input) {
     corr: +(c.corruption && c.rotation !== 'bolt'), agony: +(c.agony && c.rotation !== 'bolt'),
     immolate: +(c.immolate && c.rotation !== 'bolt'), charges: +c.charges, partial: +c.partialResists, piercing: +c.piercing,
     petChoice: petChoiceMap[c.petChoice] || 0,
+    demonicPact: +c.demonicPact, demonicSacrifice: +c.demonicSacrifice, felDomination: +c.felDomination, masterSummoner: c.masterSummoner,
+    soulLink: +c.soulLink, sacImp: +c.sacImp, sacSucc: +c.sacSucc, masterDemo: c.masterDemo,
     trinketDuration: c.trinketDuration * 1e6,
     trinketCD: c.trinketCD * 1e6,
     conflagrate: +(c.conflagrate && c.rotation !== 'bolt'),
@@ -350,10 +391,11 @@ export function packConfig(input) {
     drainHope: +c.drainHope,
     hellfirePowerOffset: c.firePower - (c.rotation === 'fire' || c.rotation === 'searing' ? c.firePower : c.shadowPower),
     power: c.spellPower + (c.rotation === 'fire' || c.rotation === 'searing' ? c.firePower : c.shadowPower),
-    maxMana: (1393 + int * 15) * (c.race === 'GNOME' ? 1.05 : 1) * (1.0 + felVitalityBonus),
-    tapGain: (430 + 147 + c.spirit) * (1 + (c.tapBonus > 0 ? c.tapBonus : c.improvedTap ? 0.2 : 0)),
+    maxMana: ((c.statsIncludeBase ? 1373 - 280 : 1393) + int * 15) * (c.race === 'GNOME' ? 1.05 : 1) * (1.0 + felVitalityBonus),
+    tapGain: (424 + c.spirit) * (1 + (c.tapBonus > 0 ? c.tapBonus : c.improvedTap ? 0.2 : 0)),
     tapThreshold: c.tapThreshold,
     mp5: c.mp5,
+    petMP5: c.petMP5 !== undefined ? c.petMP5 : (c.petChoice === 'imp' || c.petChoice === 1 ? int * 0.30 : (c.petChoice === 'succubus' || c.petChoice === 2 ? int * 0.10 : 45.0)),
     hit: Math.min(1, .83 + c.hit / 100),
     crit: baseCrit,
     fireCrit: baseCrit,
@@ -369,12 +411,13 @@ export function packConfig(input) {
     corrCost: c.book ? 340 : 290,
     corrBase: c.book ? 73 : 57,
     corrMultiplier: (c.corrMultiplier > 0 ? c.corrMultiplier :
-      (1 + (c.shadowMasteryBonus || 0) + (c.maledictionBonus || 0) + (c.improvedCorruptionBonus > 0 ? c.improvedCorruptionBonus : c.instantCorruption ? 0.1 : 0.0)) * sMult),
+      (1 + (c.shadowMasteryBonus || 0)) * (1 + (c.maledictionBonus || 0)) * (1 + (c.improvedCorruptionBonus > 0 ? c.improvedCorruptionBonus : c.instantCorruption ? 0.1 : 0.0)) * sMult),
     immCost: (c.book ? 380 : 370) * (c.cataclysmCostMult !== undefined ? c.cataclysmCostMult : (c.cataclysmRank === 3 || c.cataclysm === 3 ? 0.90 : c.cataclysmRank === 2 || c.cataclysm === 2 ? 0.94 : c.cataclysmRank === 1 || c.cataclysm === 1 ? 0.97 : 1.0)),
     immDirect: c.book ? 158 : 157.5,
     immTick: c.book ? 55 : 52,
     shadowMult: sMult,
     fireMult: fMult,
+    channelClipDelay: c.channelClipDelayMs * 1000,
     shadowMasteryBonus: c.shadowMasteryBonus || 0.0,
     afBonus: c.afBonus || 0.0,
     aftermathBonus: c.aftermathBonus !== undefined ? c.aftermathBonus : (c.aftermathRank ? c.aftermathRank * 0.10 : c.aftermath ? c.aftermath * 0.10 : 0.0),
@@ -384,17 +427,17 @@ export function packConfig(input) {
     soulSiphonBonus: c.soulSiphonBonus || 0.0,
     demonicEnergies: c.demonicEnergies !== undefined ? c.demonicEnergies : 1.0,
     trinketSP: c.trinketSP,
-    petSP: c.spellPower * 0.10 + (c.demonicKnowledge ? c.demonicKnowledge * 20.0 : 0.0),
+    petSP: (c.spellPower - (c.petChoice !== 'none' ? c.demonicKnowledge * 20 : 0) + Math.max(c.shadowPower, c.firePower)) * 0.10 + c.demonicKnowledge * 20,
     petAP: c.spellPower * (1.0 / 6.0),
     snfChance: c.snfChance,
     snfBonus: c.snfBonus !== undefined ? c.snfBonus : (c.snfChance > 0.0 ? c.snfChance * 0.10 : 0.0),
     dotCrit: c.dotCrit !== undefined ? c.dotCrit : 1.5,
     fnbCrit: c.fnbCrit / 100,
     petMult: c.petMult || 1.0,
-    petFireboltMult: (c.petFireboltMult || c.petMult || 1.0) * (c.race === 'ORC' ? 1.05 : 1),
+    petFireboltMult: (c.petFireboltMult || c.petMult || 1.0) * c.targetSpellMultiplier * (c.race === 'ORC' ? 1.05 : 1),
     petMeleeMult: (c.petMeleeMult || c.petMult || 1.0) * (c.race === 'ORC' ? 1.05 : 1) * (1.0 - Math.max(0, c.bossArmor !== undefined ? c.bossArmor : 3731.0) / (Math.max(0, c.bossArmor !== undefined ? c.bossArmor : 3731.0) + 400.0 + 85.0 * 60.0)),
-    petLashMult: (c.petLashMult || c.petMult || 1.0) * (c.race === 'ORC' ? 1.05 : 1),
-    brandMult: c.brandMult || 1.0,
+    petLashMult: (c.petLashMult || c.petMult || 1.0) * c.targetSpellMultiplier * (c.race === 'ORC' ? 1.05 : 1),
+    brandMult: (c.brandMult || 1.0) * c.targetSpellMultiplier,
     cataclysmCostMult: c.cataclysmCostMult !== undefined ? c.cataclysmCostMult : (c.cataclysmRank === 3 || c.cataclysm === 3 ? 0.90 : c.cataclysmRank === 2 || c.cataclysm === 2 ? 0.94 : c.cataclysmRank === 1 || c.cataclysm === 1 ? 0.97 : 1.0),
     improvedAgonyBonus: c.improvedAgonyBonus !== undefined ? c.improvedAgonyBonus : (c.improvedAgonyRank ? c.improvedAgonyRank * 0.05 : c.improvedAgony ? (typeof c.improvedAgony === 'number' ? c.improvedAgony * 0.05 : 0.10) : 0.0),
     felVitalityBonus,
@@ -438,5 +481,5 @@ export function decodeStates(buffer, count) {
 }
 
 export const DETAIL_WORD_OFFSET = 32 + (SPELLS.length - 6) * 3;
-export const COMPACT_WORDS = DETAIL_WORD_OFFSET + 8;
+export const COMPACT_WORDS = DETAIL_WORD_OFFSET + 12 + DETAIL_EXTRA_OUTPUT.length;
 export const COMPACT_STRIPES = Math.ceil(COMPACT_WORDS / 16);

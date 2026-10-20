@@ -1,0 +1,1 @@
+{"description": "Targeted low-hit Shadow Brand investigation: three races and bonus hit 0/5/12, source APL preserved.", "presets": ["demo_shadow_brand"], "races": ["GNOME", "ORC", "HUMAN"], "profiles": [{"id": "baseline", "stats": {}}, {"id": "hit_0", "stats": {"hit": 0}}, {"id": "hit_5", "stats": {"hit": 5}}]}

@@ -1,7 +1,7 @@
 // Dedicated diagnostic variant. The production detailed and fast shaders are unchanged.
 // Use the lean kernel as a template: rollouts need total damage, not spell counters.
 import { FAST_FRAGMENT as FRAGMENT } from './kernel.js';
-export const ACTION_NAMES = {1:'Life Tap',2:'Nightfall Shadow Bolt',3:'Searing Pain',4:'Soul Fire',6:'Corruption',7:'Curse of Doom',8:'Curse of Agony',9:'Immolate',10:'Conflagrate',11:'Shadowburn',12:'Incinerate',16:'Shadow Bolt',17:'Siphon Life',18:'Drain Hope',19:'Hellfire'};
+export const ACTION_NAMES = {1:'Life Tap',2:'Nightfall Shadow Bolt',3:'Searing Pain',4:'Soul Fire',6:'Corruption',7:'Curse of Doom',8:'Curse of Agony',9:'Immolate',10:'Conflagrate',11:'Shadowburn',12:'Incinerate',16:'Shadow Bolt',17:'Siphon Life',18:'Drain Hope',19:'Hellfire',23:'Sacrifice Succubus + Summon Imp'};
 export const REGRET_ACTIONS = [0,...Object.keys(ACTION_NAMES).map(Number)];
 const start = FRAGMENT.indexOf('  // Execute Action');
 const end = FRAGMENT.indexOf('\n }\n\n // Fallback', start);
@@ -16,7 +16,7 @@ execution = execution.replace('if(c.incinerate!=0u)', 'if(c.incinerate!=0u||(str
 // are leaf operations. This keeps the probe in sync with production checks.
 const availability = execution
  .replace(/(?:s\.trance=0u;)?spend\([\s\S]*?return true;/g, 'return true;')
- .replace(/(?:chosenAction=1u;)?(?:tap|beginCast|castDoom|castConflagrate|castShadowburn)\([^)]*\);return true;/g, 'return true;')
+ .replace(/(?:chosenAction=1u;)?(?:tap|beginPetSwap|beginCast|castDoom|castConflagrate|castShadowburn)\([^)]*\);return true;/g, 'return true;')
  .replace('activateEureka();', ';')
  .replace('activateBloodFury();', ';')
  .replace('activateBerserking();', ';');

@@ -61,7 +61,7 @@ export const TALENT_DEFINITIONS = [
   { id: 'molten_skin', name: 'Molten Skin', tree: 2, treeName: 'Destruction', row: 2, col: 1, max: 5, req: null },
   { id: 'cataclysm', name: 'Cataclysm', tree: 2, treeName: 'Destruction', row: 2, col: 2, max: 3, req: null },
   { id: 'aftermath', name: 'Aftermath', tree: 2, treeName: 'Destruction', row: 2, col: 3, max: 5, req: null },
-  { id: 'ruin', name: 'Ruin', tree: 2, treeName: 'Destruction', row: 3, col: 2, max: 5, req: 37 }, // req Improved Shadow Bolt
+  { id: 'ruin', name: 'Ruin', tree: 2, treeName: 'Destruction', row: 3, col: 2, max: 5, req: null },
   { id: 'shadowburn', name: 'Shadowburn', tree: 2, treeName: 'Destruction', row: 3, col: 3, max: 1, req: null },
   { id: 'intensity', name: 'Intensity', tree: 2, treeName: 'Destruction', row: 4, col: 1, max: 3, req: null },
   { id: 'agonizing_flames', name: 'Agonizing Flames', tree: 2, treeName: 'Destruction', row: 4, col: 2, max: 3, req: null },

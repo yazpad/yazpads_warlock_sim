@@ -4,6 +4,9 @@ import { fallbackRow } from './apl_fallback_view.js';
 import { APL_ACTION, APL_COND } from './model.js';
 
 export const ACTION_INFO = {
+  amplify: { id: 'amplify', spell: 'Amplify Curse', icon: 'Spell_Shadow_Contagion.png', action: APL_ACTION.AMPLIFY_CURSE, defaultCond: '!buff.amplify_curse' },
+  petSwap: { id: 'petSwap', spell: 'Sacrifice Succubus + Fel Domination: Summon Imp', icon: 'Spell_Shadow_SummonImp.png', action: APL_ACTION.SACRIFICE_SUCCUBUS_SUMMON_IMP, defaultCond: 'true' },
+
   berserking: { id: 'berserking', spell: 'Berserking', icon: 'Racial_Troll_Berserk.png', action: APL_ACTION.BERSERKING, defaultCond: 'true' },
   bloodFury: { id: 'bloodFury', spell: 'Blood Fury', icon: 'Racial_Orc_BerserkerStrength.png', action: APL_ACTION.BLOOD_FURY, defaultCond: 'true' },
   eureka: { id: 'eureka', spell: 'Eureka!', icon: 'Spell_Nature_WispSplode.png', action: APL_ACTION.EUREKA, defaultCond: 'true' },
@@ -28,6 +31,8 @@ export const ACTION_INFO = {
 };
 
 export const CANONICAL_ACTION_NAMES = {
+  amplify: 'amplify_curse',
+  petSwap: 'sacrifice_succubus_summon_imp',
   berserking: 'berserking',
   bloodFury: 'blood_fury',
   eureka: 'eureka',
@@ -52,6 +57,8 @@ export const CANONICAL_ACTION_NAMES = {
 };
 
 export const ACTION_ALIASES = {
+  amplify_curse: 'amplify', 'amplify curse': 'amplify', amplifycurse: 'amplify', amplify: 'amplify',
+  sacrifice_succubus_summon_imp: 'petSwap', petswap: 'petSwap',
   berserking: 'berserking', beserking: 'berserking',
   blood_fury: 'bloodFury', bloodfury: 'bloodFury', 'blood fury': 'bloodFury',
   eureka: 'eureka', 'eureka!': 'eureka',
@@ -103,6 +110,7 @@ export const DEFAULT_APL = [
   { id: 'decimateSearing', spell: 'Decimation: Searing Pain', icon: 'Spell_Fire_SoulBurn.png', condition: 'Target HP < 35%, buff inactive', rawCond: 'decimation.inactive', enabled: false },
   { id: 'decimateSoulFire', spell: 'Decimation: Soul Fire', icon: 'Spell_Fire_Fireball.png', condition: 'Target HP < 35%, buff active', rawCond: 'decimation.active', enabled: false },
   { id: 'curse', spell: 'Bane of Doom', icon: 'Spell_Shadow_AuraOfDarkness.png', condition: 'Target TTDie >= 60s', rawCond: 'target_ttd >= 60 && !target.has_debuff("Bane of Doom")', enabled: true },
+  { ...ACTION_INFO.amplify, condition: 'Before Agony', rawCond: 'target_ttd >= 20 && !target.has_debuff("Bane of Doom") && !target.has_debuff("Bane of Agony")', enabled: true },
   { id: 'agony', spell: 'Bane of Agony', icon: 'Spell_Shadow_CurseOfSargeras.png', condition: 'Target TTDie >= 20s & No Doom', rawCond: 'target_ttd >= 20 && !target.has_debuff("Bane of Doom") && !target.has_debuff("Bane of Agony")', enabled: true },
   { id: 'corr', spell: 'Corruption', icon: 'Spell_Shadow_AbominationExplosion.png', condition: 'Target TTDie >= 12s & !Active', rawCond: 'target_ttd >= 12 && !target.has_debuff("Corruption")', enabled: true },
   { id: 'immo', spell: 'Immolate', icon: 'Spell_Fire_Immolation.png', condition: 'Target TTDie >= 15s & !Active', rawCond: 'target_ttd >= 15 && !target.has_debuff("Immolate")', enabled: false },
@@ -183,6 +191,13 @@ export function normalizeConditionForAction(rawInput, actionId) {
     return `mana_pct ${op} ${m[2]}`;
   }
 
+  // Pet mana conditions: pet_mana < 115, pet_mana <= 160
+  m = raw.match(/^(?:pet_mana|petmana)\s*(<=|<|>=|>|==)\s*(\d+(?:\.\d+)?)$/i);
+  if (m) {
+    const op = m[1] === '==' ? '<=' : m[1];
+    return `pet_mana ${op} ${m[2]}`;
+  }
+
   // Target HP conditions: target_hp < 35%, target_hp_pct <= 35, hp < 35%
   m = raw.match(/^(?:target_hp|target_hp_pct|target_health|target_health_pct|hp)\s*(<=|<|>=|>|==)\s*(\d+(?:\.\d+)?)\s*%?$/i);
   if (m) {
@@ -204,12 +219,15 @@ export function normalizeConditionForAction(rawInput, actionId) {
   if (/^(?:buff\.)?isb(?:\s*active)?$/i.test(raw)) {
     return 'buff.isb';
   }
+  if (/^!?(?:buff\.|debuff\.)?isb_missing$/i.test(raw) || /^!(?:buff\.|debuff\.)?isb$/i.test(raw) || /^isb\s+missing$/i.test(raw)) {
+    return 'buff.isb_missing';
+  }
 
   // Decimation conditions
-  if (/^decimation\.inactive$/i.test(raw) || /^decimation\s+inactive$/i.test(raw) || /^!buff\.decimation$/i.test(raw)) {
+  if (/^decimation\.inactive$/i.test(raw) || /^decimation\s+inactive$/i.test(raw)) {
     return 'decimation.inactive';
   }
-  if (/^decimation\.active$/i.test(raw) || /^decimation\s+active$/i.test(raw) || /^buff\.decimation$/i.test(raw)) {
+  if (/^decimation\.active$/i.test(raw) || /^decimation\s+active$/i.test(raw)) {
     return 'decimation.active';
   }
 
@@ -273,7 +291,7 @@ export function parseAPLLine(line, lineNum = 1) {
   const mappedId = ACTION_ALIASES[normActionKey] || ACTION_ALIASES[cleanKey] || ACTION_ALIASES[actionStr.toLowerCase()];
 
   if (!mappedId || !ACTION_INFO[mappedId]) {
-    throw new Error(`Line ${lineNum}: Unknown action '${actionStr}'. Supported actions: berserking, blood_fury, eureka, bolt, tap, nightfall, corr, immo, conflag, shadowburn, incinerate, searing, drain, siphon, wrack, hellfire, curse, agony, brand, decimateSearing, decimateSoulFire`);
+    throw new Error(`Line ${lineNum}: Unknown action '${actionStr}'. Supported actions: sacrifice_succubus_summon_imp, berserking, blood_fury, eureka, bolt, tap, nightfall, corr, immo, conflag, shadowburn, incinerate, searing, drain, siphon, wrack, hellfire, curse, agony, brand, decimateSearing, decimateSoulFire`);
   }
 
   const info = ACTION_INFO[mappedId];
@@ -344,6 +362,8 @@ export function formatAPLToText(aplList = currentAPL) {
 
 export function compileAPLToBytecode(aplList = currentAPL) {
   const mapAction = {
+    amplify: APL_ACTION.AMPLIFY_CURSE,
+    petSwap: APL_ACTION.SACRIFICE_SUCCUBUS_SUMMON_IMP,
     berserking: APL_ACTION.BERSERKING,
     bloodFury: APL_ACTION.BLOOD_FURY,
     eureka: APL_ACTION.EUREKA,
@@ -387,7 +407,21 @@ export function compileAPLToBytecode(aplList = currentAPL) {
       return { cond: APL_COND.DECIMATION_INACTIVE, param: 35, targetSpell: 5 };
     if (entry.id === 'decimateSoulFire' && raw === 'decimation.active')
       return { cond: APL_COND.DECIMATION_ACTIVE, param: 35, targetSpell: 13 };
+    if (raw === 'buff.decimation') return { cond: APL_COND.DECIMATION_AURA_ACTIVE, param: 0, targetSpell: 0 };
+    if (raw === '!buff.decimation') return { cond: APL_COND.DECIMATION_AURA_INACTIVE, param: 0, targetSpell: 0 };
+    const executeTime = raw.match(/^time_to_execute\((\d+)\)\s*(<=|<|>=|>)\s*(-?\d+(?:\.\d+)?)$/);
+    if (executeTime) {
+      const percent = Number(executeTime[1]);
+      if (percent > 100) throw new Error('Execute percentage must be between 0 and 100');
+      return { cond: ({ '<=': APL_COND.TIME_TO_EXECUTE_LE, '>=': APL_COND.TIME_TO_EXECUTE_GE,
+        '<': APL_COND.TIME_TO_EXECUTE_LT, '>': APL_COND.TIME_TO_EXECUTE_GT })[executeTime[2]],
+        param: Number(executeTime[3]), targetSpell: percent };
+    }
+    if (raw === 'buff.amplify_curse') return { cond: APL_COND.AMPLIFY_ACTIVE, param: 0, targetSpell: 0 };
+    if (raw === '!buff.amplify_curse') return { cond: APL_COND.AMPLIFY_INACTIVE, param: 0, targetSpell: 0 };
     if (raw === 'buff.isb') return { cond: APL_COND.ISB_ACTIVE, param: 0, targetSpell: 0 };
+    if (raw === 'buff.isb_missing' || raw === '!buff.isb' || raw === 'debuff.isb_missing')
+      return { cond: APL_COND.ISB_INACTIVE, param: 0, targetSpell: 0 };
     if (!raw || raw === 'true') return { cond: APL_COND.ALWAYS, param: 0, targetSpell: 0 };
 
     let m = match(/^mana_pct\s*(<=|<|>=|>)\s*(\d+(?:\.\d+)?)$/);
@@ -396,6 +430,10 @@ export function compileAPLToBytecode(aplList = currentAPL) {
       param: Number(m[2]), targetSpell: 0 };
     if (raw.match(/^mana_pct\s*<=\s*(\d+)$/))
       return { cond: APL_COND.MANA_LE, param: Number(raw.match(/^mana_pct\s*<=\s*(\d+)$/)[1]), targetSpell: 0 };
+    m = match(/^pet_mana\s*(<=|<|>=|>)\s*(\d+(?:\.\d+)?)$/);
+    if (m) return { cond: ({'<': APL_COND.PET_MANA_LT, '<=': APL_COND.PET_MANA_LE,
+      '>': APL_COND.PET_MANA_GT, '>=': APL_COND.PET_MANA_GE})[m[1]],
+      param: Number(m[2]), targetSpell: 0 };
     m = match(/^target_hp_pct\s*(<=|<|>=|>)\s*(\d+(?:\.\d+)?)$/);
     if (m) return { cond: ({'<': APL_COND.TARGET_HP_LT, '<=': APL_COND.TARGET_HP_LE,
       '>': APL_COND.TARGET_HP_GT, '>=': APL_COND.TARGET_HP_GE})[m[1]],
@@ -405,11 +443,12 @@ export function compileAPLToBytecode(aplList = currentAPL) {
     m = match(/^target_ttd\s*(<=|<)\s*(\d+(?:\.\d+)?)$/);
     if (m) return { cond: m[1] === '<' ? APL_COND.FIGHT_TIME_LT : APL_COND.FIGHT_TIME_LE, param: Number(m[2]), targetSpell: 0 };
 
-    m = match(/^target\.debuff_remains\(\s*["']([^"']+)["']\s*\)\s*(<=|<)\s*(\d+(?:\.\d+)?)$/);
+    m = match(/^target\.debuff_remains\(\s*["']([^"']+)["']\s*\)\s*(<=|<|>=|>)\s*(\d+(?:\.\d+)?)$/);
     if (m) {
       const targetSpell = spellFromText(m[1]);
       if (!targetSpell) throw new Error(`APL condition refers to unsupported debuff: ${m[1]}`);
-      return { cond: m[2] === '<' ? APL_COND.DOT_REM_LT : APL_COND.DOT_REM_LE, param: Number(m[3]), targetSpell };
+      const cond = m[2] === '<' ? APL_COND.DOT_REM_LT : (m[2] === '<=' ? APL_COND.DOT_REM_LE : (m[2] === '>' ? APL_COND.DOT_REM_GT : APL_COND.DOT_REM_GE));
+      return { cond, param: Number(m[3]), targetSpell };
     }
 
     const hasNightfall = /talent\.nightfall/.test(raw);
@@ -454,6 +493,12 @@ export function compileAPLToBytecode(aplList = currentAPL) {
       second = { cond: entry.cond2 ?? APL_COND.ALWAYS, param: Number(entry.param2 ?? 0),
         targetSpell: Number(entry.targetSpell2 ?? 0) };
     } else if (enabled) {
+      // Amplify's readiness guard already enforces aura inactivity. Remove only
+      // that redundant conjunct so two remaining source predicates fit bytecode.
+      if (action === APL_ACTION.AMPLIFY_CURSE) {
+        const parts = String(entry.rawCond || 'true').split(/\s*&&\s*/);
+        entry = { ...entry, rawCond: parts.filter(part => part.trim() !== '!buff.amplify_curse').join(' && ') || 'true' };
+      }
       try {
         first = parseCondition(entry);
       } catch (error) {
@@ -592,7 +637,10 @@ function generateSpellAPLForPreset(presetName = '', talentsObj = null, rotationC
 }
 
 export function generateAPLForPreset(...args) {
-  return [{ ...ACTION_INFO.berserking, condition: 'On cooldown (Troll only)', rawCond: 'true', enabled: true }, { ...ACTION_INFO.bloodFury, condition: 'On cooldown (Orc only)', rawCond: 'true', enabled: true }, { ...ACTION_INFO.eureka, condition: 'On cooldown (Gnome only)', rawCond: 'true', enabled: true }, ...generateSpellAPLForPreset(...args)];
+  return [{ ...ACTION_INFO.berserking, condition: 'On cooldown (Troll only)', rawCond: 'true', enabled: true }, { ...ACTION_INFO.bloodFury, condition: 'On cooldown (Orc only)', rawCond: 'true', enabled: true }, { ...ACTION_INFO.eureka, condition: 'On cooldown (Gnome only)', rawCond: 'true', enabled: true }, ...generateSpellAPLForPreset(...args).flatMap(row => {
+    const hasAmplify = Object.entries(args[1]?.affliction || {}).some(([name, rank]) => name.toLowerCase().replace(/[ _-]/g, '') === 'amplifycurse' && rank > 0);
+    return row.id === 'agony' && hasAmplify ? [{ ...ACTION_INFO.amplify, rawCond: row.rawCond, condition: 'Before Agony', enabled: row.enabled }, row] : [row];
+  })];
 }
 
 export function setAPLPreset(presetName, talentsObj = null, rotationChoice = null, isSacSuccubus = false) {

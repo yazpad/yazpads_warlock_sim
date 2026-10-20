@@ -53,9 +53,9 @@ export function resolveWarlockBuffEffects(stats, buffs, race, target) {
   // Racial modifiers
   if (activeRace === 'HUMAN') finalSpirit *= 1.05;
 
-  finalInt = Math.round(finalInt);
-  finalStam = Math.round(finalStam);
-  finalSpirit = Math.round(finalSpirit);
+  finalInt = Math.floor(finalInt);
+  finalStam = Math.floor(finalStam);
+  finalSpirit = Math.floor(finalSpirit);
 
   let addedCrit = 0;
   if (isWizardOil) addedCrit += 1.0;
@@ -87,7 +87,10 @@ export function resolveWarlockBuffEffects(stats, buffs, race, target) {
   let fireMult = allDamageMult;
 
   if (isCurseOfShadow) shadowMult *= 1.10;
-  if (isCurseOfElements) fireMult *= 1.10;
+  if (isCurseOfElements) {
+    shadowMult *= 1.10;
+    fireMult *= 1.10;
+  }
   if (isShadowWeaving) shadowMult *= 1.15;
   if (isImprovedScorch) fireMult *= 1.15;
 
@@ -107,6 +110,7 @@ export function resolveWarlockBuffEffects(stats, buffs, race, target) {
     mp5: finalMP5,
     maxMana,
     maxHealth,
+    targetSpellMultiplier: isCurseOfElements ? 1.10 : 1.0,
     shadowMultiplier: shadowMult,
     fireMultiplier: fireMult,
     resistance: finalResistance,
