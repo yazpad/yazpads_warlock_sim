@@ -1,0 +1,38 @@
+{
+  "description": "Balanced higher-sample Shadowburn check: Destruction, five races, four profiles, unchanged source requests/gear-free scenario.",
+  "presets": [
+    "destro"
+  ],
+  "races": [
+    "HUMAN",
+    "ORC",
+    "UNDEAD",
+    "TROLL",
+    "GNOME"
+  ],
+  "profiles": [
+    {
+      "id": "baseline",
+      "stats": {}
+    },
+    {
+      "id": "sp_1000",
+      "stats": {
+        "spellPower": 1000
+      }
+    },
+    {
+      "id": "int_400",
+      "stats": {
+        "intellect": 400
+      }
+    },
+    {
+      "id": "regen_high",
+      "stats": {
+        "spirit": 200,
+        "mp5": 100
+      }
+    }
+  ]
+}

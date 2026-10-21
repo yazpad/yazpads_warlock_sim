@@ -1,5 +1,7 @@
 # Shadow Brand spell allocation and hit timing
 
+Subsequent follow-up: [Troll cooldown policy and millisecond cast clock](FOREVER_TROLL_FINDINGS_2026-10-20.md) is implemented. Current full-matrix MAE is **1.122 DPS / MAPE 0.168%**; the measurements below describe the Brand stage.
+
 The main cause was **Demonic Brand activating on missed Searing Pain casts**. Our old shader granted a fresh set of charges on every completed Searing Pain. Forever only grants them after a landed hit. That let our rotation switch back to Shadow Bolt too soon, especially below hit cap.
 
 Production now gates Brand and Decimation on landed hits. Searing Pain resolves immediately before the next action decision; Shadow Bolt's application hit is rolled at cast completion and retained through travel. Both instant Nightfall paths use the same hit/Decimation handling.

@@ -206,6 +206,7 @@ void checkRacial(){
  if((c.race==3u&&eurekaInAPL())||(c.race==1u&&racialInAPL(21u))||(c.race==2u&&racialInAPL(22u)))return;
  if(s.now<s.racialReady)return;
  if(c.race==3u&&c.autoCooldowns!=0u){activateEureka();return;}
+ if(c.race==2u&&c.autoCooldowns!=0u){activateBerserking();return;}
  bool execute=float(s.now)>=float(c.end)*0.65;
  uint cooldown=c.race==3u?120000000u:180000000u;
  bool trigger=c.racialPolicy==1u||execute||(c.racialPolicy==2u&&s.now<1000000u&&float(c.end)*0.65>=float(cooldown));
@@ -340,13 +341,14 @@ void tick(Event e){
   return;
  }else if(sp==20u){
   if(gen!=s.agonyGen||s.doomActive==0u)return;
-  s.doomActive=0u;amount=(1742.0+4.0*p)*currentShadowMult()*(1.0+c.shadowMasteryBonus)*(1.0+c.maledictionBonus)*(s.now<s.drainHopeEnd?1.10:1.0);
+  // Wrack amplifies Corruption and Agony; Doom's class flags are excluded.
+  s.doomActive=0u;amount=(1742.0+4.0*p)*currentShadowMult()*(1.0+c.shadowMasteryBonus)*(1.0+c.maledictionBonus);
   bool crit=random01()<c.shadowCrit;if(crit)amount*=c.dotCrit;
   amount*=isbMultiplier();amount*=resistanceMultiplier();
   ${detailed ? 'periodicDamage' : 'damage'}(6u,amount,crit);return;
  }else{return;}
 }
-void gcd(){s.ready=s.now+uint(max(1000000.0,1500000.0/hasteMultiplier()));enqueue(s.ready,5u,0u,0u);}
+void gcd(){s.ready=s.now+uint(floor(max(1000000.0,1500000.0/hasteMultiplier())/1000.0+0.5))*1000u;enqueue(s.ready,5u,0u,0u);}
 void tap(){${detailed ? 's.manaWasted+=max(0.0,s.mana+c.tapGain-c.maxMana);' : ''}s.mana=min(c.maxMana,s.mana+c.tapGain);s.gained+=c.tapGain;s.taps++;if(c.petChoice!=0u&&c.demonicEnergies>0.0){float petMax=c.petMaxMana;s.petMana=min(petMax,s.petMana+c.tapGain*0.5*c.demonicEnergies);}gcd();}
 void beginCast(uint spell){
  if(spell==0u&&s.trance!=0u){s.trance=0u;spend(0u);launchBolt();gcd();return;}
@@ -362,7 +364,8 @@ void beginCast(uint spell){
   duration=uint(max(0.5,castTime)*1000000.0);
  }
  else if(spell==0u)duration=uint(max(1.0,3.0-0.1*float(c.baneRank))*1000000.0);
- duration=uint(float(duration)/hasteMultiplier());
+ // Forever rounds hasted cast times and GCDs to the nearest millisecond.
+ duration=uint(floor(float(duration)/hasteMultiplier()/1000.0+0.5))*1000u;
  s.casting=1u;enqueue(s.now+duration,1u,spell,0u);gcd();
 }
 void checkTrinket(){
@@ -391,7 +394,8 @@ void castShadowburn(){
  s.shadowburnReady=s.now+15000000u;spend(9u);
  if(random01()<c.hit){
   float roll=random01(),p=currentPower();
-  float amount=(266.0+roll*29.05+0.429*p)*currentShadowMult()*(1.0+c.shadowMasteryBonus)*(1.0+c.afBonus);
+  // Generated rank-6 row: direct variance applies to base damage plus spell power.
+  float amount=(273.20001220703125+0.42899999022483826*p)*(1.0+(roll-0.5)*0.10924369841814041)*currentShadowMult()*(1.0+c.shadowMasteryBonus)*(1.0+c.afBonus);
   amount*=isbMultiplier();
   bool crit=random01()<c.shadowCrit;
   if(crit)amount*=c.directCrit;

@@ -67,3 +67,9 @@ Orc Command removed per user instruction: full **300-case × 1,000-fight** compa
 Wrack follow-up: current 300-case × 1,000-fight production result is **1.806 DPS MAE / 0.268% MAPE**. Wrack-preset MAE falls from 1.834 to 0.895 DPS after source-backed hit/application and Soul Siphon corrections. See [Wrack findings](FOREVER_WRACK_FINDINGS_2026-10-20.md).
 
 Brand/Decimation follow-up: current full production **MAE 1.366 DPS / MAPE 0.205%**, 300 cases × 1,000 fights per engine. Brand-on-miss was the main remaining Shadow Brand action-allocation cause. [Investigation](FOREVER_BRAND_FINDINGS_2026-10-20.md).
+
+Troll cooldown/clock follow-up: current production **MAE 1.122 DPS / MAPE 0.168%**, 300 cases × 1,000 fights per engine. Matched four-case 10,000-fight Troll follow-up improves **6.770 → 0.836 DPS MAE**. [Findings](FOREVER_TROLL_FINDINGS_2026-10-20.md).
+
+Shadowburn follow-up: current full matrix **MAE 1.177 DPS / MAPE 0.176%**, a small regression from 1.122 DPS at 1,000 fights. The balanced 20-case × 10,000-fight comparison improves **0.788 → 0.442 DPS MAE** after correcting the source mean/variance. [Findings](FOREVER_SHADOWBURN_FINDINGS_2026-10-20.md).
+
+Doom audit: standard production remains **1.177 DPS MAE / 0.176% MAPE**. Ordinary tick values match source after accounting for crit outcomes. Removed an incorrect 10% Wrack bonus for custom Doom/Wrack overlap, which is absent from the standard matrix. [Findings](FOREVER_DOOM_FINDINGS_2026-10-20.md).

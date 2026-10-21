@@ -48,6 +48,8 @@ test('actual GLSL Berserking respects race, APL conditions, cooldown and expiry 
   ['human',config('Berserking\nShadow Bolt',{race:'HUMAN',swordEquipped:false})],
   ['cooldown',config('Berserking\nShadow Bolt',{duration:185})],
   ['legacy',config('Shadow Bolt',{racialPolicy:'cooldown'})],
+  ['auto',config('Shadow Bolt',{autoCooldowns:true,racialPolicy:'execute'})],
+  ['auto-explicit-never',config('Berserking if false\nShadow Bolt',{autoCooldowns:true})],
   ['expiry',config('Berserking\nShadow Bolt',{duration:16})]
  ];
  const cases=inputs.map(([,c])=>({mode:'detailed',width:1,height:Math.ceil(STATE_WORDS/16),configWords:Array.from(packConfig(c)),uniforms}));
@@ -71,20 +73,22 @@ test('actual GLSL Berserking respects race, APL conditions, cooldown and expiry 
  assert.ok(result.cooldown.racialReady>=360000000&&result.cooldown.racialReady<363000000);
  assert.equal(result.cooldown.racialEnd,result.cooldown.racialReady-170000000);
  assert.equal(result.legacy.total,result.on.total);
+ assert.equal(result.auto.total,result.on.total,'imported automatic cooldowns activate at pull');
+ assert.equal(result['auto-explicit-never'].racialReady,0,'explicit APL retains control over automatic policy');
  assert.equal(result.on.spent,result.off.spent);
  assert.equal(result.expiry.racialEnd,10000000);
  const fast=outputs[inputs.length];
  assert.equal(fast[0][1]&65535,1);
  assert.equal(new Float32Array(new Uint32Array([fast[0][0]]).buffer)[0],result.on.total);
  const [onTrace,offTrace,expiryTrace]=outputs.slice(inputs.length+1);
- assert.equal(onTrace[0][0],1363636); // First GCD, without a racial GCD.
+ assert.equal(onTrace[0][0],1364000); // Source rounds hasted GCD to nearest millisecond.
  assert.equal(offTrace[0][0],1500000);
- assert.equal(onTrace[0][4],2727272); // First Shadow Bolt completes 10% faster.
+ assert.equal(onTrace[0][4],2727000); // Source rounds hasted casts to nearest millisecond.
  assert.equal(offTrace[0][4],3000000);
  const completions=[];
  for(let lane=0;lane<18;lane++){const p=lane*4;if(expiryTrace[0][p+1]===1)completions.push(expiryTrace[0][p]);}
  assert.ok(completions.length>=5);
- assert.equal(completions[1]-completions[0],2727272);
+ assert.equal(completions[1]-completions[0],2727000);
  assert.equal(completions[4]-completions[3],3000000); // New casts lose haste after ten seconds.
 });
 
