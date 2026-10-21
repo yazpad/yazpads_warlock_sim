@@ -237,9 +237,19 @@ void soulFireImpact(){
  if(crit)amount*=c.directCrit;
  amount*=resistanceMultiplier();damage(7u,amount*s.castBonus,crit);
 }
-void directImpact(uint spell){
+// Shadow Bolt and Searing Pain resolve hit at cast completion, before deciding
+// the next action. Bits: 0 = Eureka, 1 = miss, 2 = hit outcome already rolled.
+uint castHitOutcome(uint spell){
+ bool landed=random01()<c.hit;
+ if(landed&&c.decimation!=0u&&(spell==0u||spell==5u)){
+  float fightProg=float(s.now)/max(1.0,float(c.end));
+  if((1.0-fightProg)<=0.35)s.decimationEnd=s.now+10000000u;
+ }
+ return uint(s.castBonus>1.0)|4u|(landed?0u:2u);
+}
+void directImpact(uint spell,uint outcome){
  if(spell==13u){soulFireImpact();return;}
- if(random01()>=c.hit){countMiss(spell);return;}
+ if((outcome&4u)!=0u?((outcome&2u)!=0u):(random01()>=c.hit)){countMiss(spell);return;}
  float roll=random01(),amount,p=currentPower();
  bool crit=false;
  if(spell==0u){
@@ -269,7 +279,9 @@ void directImpact(uint spell){
  }
  else{amount=0.0;}
  amount*=resistanceMultiplier();damage(spell,amount*s.castBonus,crit);
+ if(spell==5u&&c.demonicBrand!=0u){s.brandCharges=c.demonicBrandRank*2u;s.brandEnd=s.now+10000000u;}
 }
+void launchBolt(){enqueue(s.now+c.travel,2u,0u,castHitOutcome(0u));}
 void tick(Event e){
  float amount,p=currentPower();uint remaining=0u,interval=3000000u;
  uint sp=EV_SPELL(e),gen=EV_GEN(e);
@@ -337,7 +349,7 @@ void tick(Event e){
 void gcd(){s.ready=s.now+uint(max(1000000.0,1500000.0/hasteMultiplier()));enqueue(s.ready,5u,0u,0u);}
 void tap(){${detailed ? 's.manaWasted+=max(0.0,s.mana+c.tapGain-c.maxMana);' : ''}s.mana=min(c.maxMana,s.mana+c.tapGain);s.gained+=c.tapGain;s.taps++;if(c.petChoice!=0u&&c.demonicEnergies>0.0){float petMax=c.petMaxMana;s.petMana=min(petMax,s.petMana+c.tapGain*0.5*c.demonicEnergies);}gcd();}
 void beginCast(uint spell){
- if(spell==0u&&s.trance!=0u){s.trance=0u;spend(0u);enqueue(s.now+c.travel,2u,0u,uint(s.castBonus>1.0));gcd();return;}
+ if(spell==0u&&s.trance!=0u){s.trance=0u;spend(0u);launchBolt();gcd();return;}
  if(spell==2u||(spell==1u&&c.corrCast==0u)){spend(spell);applyDot(spell);if(spell==2u)s.amplifyEnd=0u;gcd();return;}
  uint duration=2500000u;
  if(spell==1u)duration=c.corrCast;
@@ -506,7 +518,7 @@ void decide(){
   }else if(action==2u){ // NIGHTFALL_SHADOW_BOLT
    if(s.trance!=0u){
     if(s.mana>=cost(0u)){
-     s.trance=0u;spend(0u);enqueue(s.now+c.travel,2u,0u,uint(s.castBonus>1.0));gcd();return;
+     s.trance=0u;spend(0u);launchBolt();gcd();return;
     }
    }
   }else if(action==3u||action==5u||action==13u){ // SEARING_PAIN (Decimation / Brand / Filler)
@@ -599,14 +611,11 @@ ${detailed ? UPTIME_EFFECTS.map(([,key])=>{
   if(espell==1u)applyDot(1u);
   else if(espell==3u)immolateImpact();
   else if(espell==13u){s.soulFireReady=s.now+60000000u-27000000u*c.decimationRank;enqueue(s.now+c.travel,2u,13u,uint(s.castBonus>1.0));}
+  else if(espell==5u)directImpact(5u,castHitOutcome(5u));
+  else if(espell==0u)launchBolt();
   else enqueue(s.now+c.travel,2u,espell,uint(s.castBonus>1.0));
-  if(c.decimation!=0u&&(espell==0u||espell==5u)){
-   float fightProg=float(s.now)/max(1.0,float(c.end));
-   if((1.0-fightProg)<=0.35)s.decimationEnd=s.now+10000000u;
-  }
-  if(espell==5u&&c.demonicBrand!=0u){s.brandCharges=c.demonicBrandRank*2u;s.brandEnd=s.now+10000000u;}
   decide();break;
- case 2u:s.castBonus=EV_GEN(e)!=0u?1.10:1.0;directImpact(espell);break;
+ case 2u:s.castBonus=(EV_GEN(e)&1u)!=0u?1.10:1.0;directImpact(espell,EV_GEN(e));break;
  case 3u:tick(e);break;
  case 5u:decide();break;
  case 6u:

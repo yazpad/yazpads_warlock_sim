@@ -1,6 +1,6 @@
 # Forever / ThreeJS WebGL parity TODO
 
-Current result after Wrack fixes: **MAE 1.806 DPS / MAPE 0.268%**, 300 cases × 1,000 fights per engine. Wrack preset MAE improves **1.834 → 0.895 DPS**; Wrack spell mean excess improves **+2.325 → +0.174 DPS**. [Findings](docs/FOREVER_WRACK_FINDINGS_2026-10-20.md), [comparison](FOREVER_WRACK_FIX_COMPARISON.json).
+Current result after Brand/Decimation hit-gating and timing fixes: **MAE 1.366 DPS / MAPE 0.205%**, 300 cases × 1,000 fights per engine. Shadow Brand preset MAE improves **2.902 → 1.179 DPS**; Fire Brand improves **1.875 → 1.399 DPS**. [Findings](docs/FOREVER_BRAND_FINDINGS_2026-10-20.md), [comparison](FOREVER_BRAND_FIX_COMPARISON.json).
 
 Historical pet follow-up (2026-10-20): pet-only MAE improves **1.568 → 0.028 DPS** in 80 non-Orc cases (120 total isolated cases). The full 300-case, 1,000-fight rotation MAE changes **1.945 → 2.553 DPS** (MAPE 0.386%): correcting pet deficits exposes player overestimates and the preserved 5% Orc Command/source gap. [Pet fixes, validation and next causes](docs/FOREVER_PET_FINDINGS_2026-10-20.md). Earlier "current" measurements below describe their historical stage.
 
@@ -13,8 +13,9 @@ Historical pet follow-up (2026-10-20): pet-only MAE improves **1.568 → 0.028 D
 - [x] Validate both shader modes and rerun all 300 rotations at 1,000 fights per engine; keep component accuracy separate from total MAE cancellation.
 - [x] Remove the unsupported 5% Orc Command pet multiplier per user instruction; retain Savage and Blood Fury. Add regression coverage and refresh the full comparison.
 - [x] Confirm and fix Wrack application misses (mana + GCD, no channel/aura) and Soul Siphon counting (other active Affliction effects including Doom, cap three). Source traces confirm 0/1/2/3-effect multipliers. Separate GPU ablations and the full 300-case rerun quantify the improvement.
-- [ ] Investigate the remaining Shadow Brand player action mix and timing; Wrack now has only +0.174 DPS mean spell bias in this matrix. Retain the remaining Wrack case spread as a diagnostic, rather than tuning coefficients to noisy case means.
-- [ ] Continue Shadow Brand player APL/action timing and nonzero-distance pet travel/movement; isolated pet agreement does not establish those features.
+- [x] Investigate Shadow Brand spell allocation: Brand now requires a landed Searing Pain; Decimation requires a landed cast result, including Nightfall bolts; Searing Pain resolves before the next decision and ignores projectile travel. Isolated gate ablations identify Brand-on-miss as the main cause.
+- [ ] Examine remaining Troll/Destruction residuals (largest current case: SP 1000, +8.93 DPS), using source cast traces and a higher-sample follow-up. Shadow Brand still has +0.94 DPS mean Shadow Bolt and -0.75 DPS Soul Fire differences; do not infer their causes from the total alone.
+- [ ] Continue nonzero-distance damage snapshots, pet travel/movement and broader APL parity. Cast-result hit timing is tested here, while full projectile snapshot and movement parity remain open.
 
 Current production result (2026-10-20): **MAE 1.945 DPS / MAPE 0.289%**, 300/300 cases at 1,000 fights per engine. The same 60 higher-sample cases improve from **3.554 to 1.792 DPS MAE** (49.59%). All selected player/packed input fields now match. [Production changes, validation and remaining limits](docs/FOREVER_PRODUCTION_FIXES_2026-10-20.md). Historical investigation/probe measurements below are retained; implemented tasks are marked accordingly.
 

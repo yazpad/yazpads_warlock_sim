@@ -1,5 +1,7 @@
 # Wrack application and Soul Siphon investigation
 
+Subsequent follow-up: [Shadow Brand hit gating and timing](FOREVER_BRAND_FINDINGS_2026-10-20.md) is implemented. Current overall MAE is **1.366 DPS**; the Wrack-stage metrics below are historical.
+
 Production now matches the inspected Forever revision's Wrack application and supported Soul Siphon effects. No source-engine modifications or coefficient fitting were used.
 
 ## Measured production result

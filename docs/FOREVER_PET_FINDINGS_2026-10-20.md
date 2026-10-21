@@ -1,5 +1,7 @@
 # Pet parity investigation and fixes — 2026-10-20
 
+Subsequent player-mechanics fixes: [Wrack](FOREVER_WRACK_FINDINGS_2026-10-20.md) and [Shadow Brand](FOREVER_BRAND_FINDINGS_2026-10-20.md) are implemented. Current full-matrix MAE is **1.366 DPS / MAPE 0.205%**; earlier full-rotation results below describe the pet stage.
+
 The pet fixes are applied to the production detailed and fast shaders. Isolated pet agreement improves substantially; **overall rotation MAE increases**, exposing compensating player errors and a deliberate Orc/source difference. This is not a total-MAE improvement claim.
 
 ## Results
