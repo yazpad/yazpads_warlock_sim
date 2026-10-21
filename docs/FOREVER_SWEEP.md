@@ -57,3 +57,9 @@ The [cause follow-up](FOREVER_CAUSES_2026-10-20.md) records MAE/MAPE, reproducib
 ## Production result after applying the traced fixes
 
 The current `FOREVER_SWEEP.*` contains all 300 cases at **1,000 fights per engine**, MAE **1.945 DPS** / MAPE **0.289%**. The same 60 previously measured high-sample cases improve from 3.554 to 1.792 DPS MAE. See [production changes and validation](FOREVER_PRODUCTION_FIXES_2026-10-20.md). The earlier string-edit cause probes are historical and require their recorded pre-fix kernel; use the regression suite for current production.
+
+## Pet correction follow-up
+
+The latest 300-case production run is **2.553 DPS MAE / 0.386% MAPE** at 1,000 fights per engine. Isolated pet MAE drops sharply, while total rotation MAE rises as compensating errors disappear. See [the pet investigation](FOREVER_PET_FINDINGS_2026-10-20.md), including the preserved Orc Command/source discrepancy.
+
+Orc Command removed per user instruction: full **300-case × 1,000-fight** comparison improves MAE **2.553 → 1.994 DPS** (MAPE **0.303%**). Savage and Blood Fury remain. Nine pet/Orc/cache checks pass; compatibility hashes updated. Source requests, seed and matrix are unchanged. [Measured comparison](../FOREVER_COMMAND_REMOVAL_COMPARISON.json).

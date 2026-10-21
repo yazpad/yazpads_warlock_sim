@@ -1,5 +1,7 @@
 # Production Forever fixes — 2026-10-20
 
+Latest follow-up: [pet investigation](FOREVER_PET_FINDINGS_2026-10-20.md) corrects pet components and records full-rotation MAE 2.553 DPS / MAPE 0.386%, including the preserved Orc Command/source gap. Earlier measurements below are historical; the preceding full production report is archived under `fixtures/benchmark_history/race-stat-300-before-pet-fixes.*`.
+
 The traced corrections are applied to the Three.js/WebGL simulator in both detailed and fast modes. This supersedes the earlier diagnostic-only implementation status in the cause investigation.
 
 ## Measured result

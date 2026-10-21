@@ -1,0 +1,28 @@
+{
+  "change": "Remove unsupported Orc Command 5% pet damage multiplier",
+  "before": {
+    "cases": 300,
+    "maeDps": 2.55324548674874,
+    "mapePct": 0.3856460468067374
+  },
+  "after": {
+    "cases": 300,
+    "maeDps": 1.9936116424909558,
+    "mapePct": 0.30259676706690203
+  },
+  "orcBefore": {
+    "cases": 60,
+    "maeDps": 4.353568854006382,
+    "mapePct": 0.6459423905999582
+  },
+  "orcAfter": {
+    "cases": 60,
+    "maeDps": 1.5553996327174635,
+    "mapePct": 0.23069599190078094
+  },
+  "iterationsPerEnginePerCase": 1000,
+  "seed": 101,
+  "validation": "9/9 pet, Orc racial and service worker tests pass; compatibility hash check passes",
+  "beforeReport": "fixtures/benchmark_history/race-stat-300-before-command-removal.json.gz",
+  "afterReport": "FOREVER_SWEEP.json"
+}

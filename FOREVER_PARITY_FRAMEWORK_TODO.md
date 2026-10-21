@@ -1,5 +1,20 @@
 # Forever / ThreeJS WebGL parity TODO
 
+Current result after user-confirmed Command removal: **MAE 1.994 DPS / MAPE 0.303%**, 300 cases × 1,000 fights per engine. [Comparison](FOREVER_COMMAND_REMOVAL_COMPARISON.json).
+
+Historical pet follow-up (2026-10-20): pet-only MAE improves **1.568 → 0.028 DPS** in 80 non-Orc cases (120 total isolated cases). The full 300-case, 1,000-fight rotation MAE changes **1.945 → 2.553 DPS** (MAPE 0.386%): correcting pet deficits exposes player overestimates and the preserved 5% Orc Command/source gap. [Pet fixes, validation and next causes](docs/FOREVER_PET_FINDINGS_2026-10-20.md). Earlier "current" measurements below describe their historical stage.
+
+## Pet follow-up implementation status
+
+- [x] Capture 120 source-backed pet-only cases across pet type, Demonic Knowledge, race, SP, intellect, hit and crit; reuse exact source requests/results after changes.
+- [x] Implement initial/runtime inherited SP/AP with a randomized 5.25s phase, stronger-school inheritance, and queued Blood Fury/trinket gain/expiry updates.
+- [x] Correct Succubus weapon/base AP, 17% inheritance, level-based crit suppression, variance and initial swing timing; use global pet spell crit.
+- [x] Correct Firebolt affordability at cast start, 100ms pet-mana credits/readiness waits, source coefficient/variance, Lash's pull-time start and exact-endpoint pet damage.
+- [x] Validate both shader modes and rerun all 300 rotations at 1,000 fights per engine; keep component accuracy separate from total MAE cancellation.
+- [x] Remove the unsupported 5% Orc Command pet multiplier per user instruction; retain Savage and Blood Fury. Add regression coverage and refresh the full comparison.
+- [ ] Probe the newly exposed Wrack gaps: application hit/miss and Soul Siphon's unconditional extra counted effect in NoCurse scenarios. Measure per-action changes before claiming these explain the whole +2.33 DPS mean.
+- [ ] Continue Shadow Brand player APL/action timing and nonzero-distance pet travel/movement; isolated pet agreement does not establish those features.
+
 Current production result (2026-10-20): **MAE 1.945 DPS / MAPE 0.289%**, 300/300 cases at 1,000 fights per engine. The same 60 higher-sample cases improve from **3.554 to 1.792 DPS MAE** (49.59%). All selected player/packed input fields now match. [Production changes, validation and remaining limits](docs/FOREVER_PRODUCTION_FIXES_2026-10-20.md). Historical investigation/probe measurements below are retained; implemented tasks are marked accordingly.
 
 Updated: **2026-10-20**. Active configurations are **gear-free**. Gear, enchants, sets and item procs will return as a separate integration phase.
@@ -27,7 +42,7 @@ The earlier benchmark notes below are historical measurements, not the current i
 - [x] Split Boosts imports duration-aware time-to-execute and independent Decimation-aura gates into explicit racial rows. `eureka_apl.test.mjs` covers import and both shader modes; this supersedes the earlier omitted-group/fallback explanation.
 - [x] Focused current-code verification: sweep, groups, Wrack timing, talent stacking, Eureka APL, Doom cooldown and breakdown test files all passed on 2026-10-20.
 - [ ] Ordinary (non-group) APL translation remains lossy: long ANDs truncate, OR keeps one branch, unknown conditions become true and some actions override gates. Supported `min` strict/inclusive bounds are now preserved. Group support does not close this general task.
-- [ ] Pet runtime inheritance remains open: Firebolt still reads fixed `c.petSP` and uses `2 / 3.5` rather than the source coefficient; its initial timing is now corrected to 2s. Separating talent multipliers did not implement the 110-to-116 SP transition.
+- [x] Pet runtime inheritance, source coefficients and initial/completion timing are now implemented and verified in the focused pet investigation; the 110-to-116 SP transition follows a randomized heartbeat rather than a fixed additive adjustment. Remaining pet policy/travel/feature gaps stay open above.
 - [x] Re-run the full 300-case race/stat sweep after this audit: all 300 cases completed at 100 fights/engine, followed by 60 selected cases at 1,000 fights/engine (90,000 fights per engine total). Reports: `FOREVER_SWEEP.*` and `FOREVER_SWEEP_FOLLOWUP.*`; preceding report archived under `fixtures/benchmark_history/race-stat-300-pre-2026-10-20.*` (JSON compressed).
 - [x] Resolve measured Fire Brand initial inputs through Blood Pact: the historical 60 screen / 12 follow-up cases lacked 54 stamina / 540 health; current inputs match. Historical evidence: Source `registerBloodPact` applies the active Imp aura during the build phase; normal imports do not account for it. Other selected player fields match across the remaining 240 screen cases.
 - [ ] Investigate the persistent high-regeneration Gnome Destruction rotation difference: at 1,000 fights source has 3 Doom ticks and 39 Incinerates, ours 2 and 36; total delta -3.35% (−22.76 ± 2.07 DPS, approximate 95%). The shader's `FIGHT_TIME_GE` is strict `>`; three in-memory 1,000-fight probes (inclusive predicate, fight-end +1µs, both) leave this case unchanged. The subsequent traced cause analysis identifies interacting costs, Eureka masks/policy and MP5 affordability timing; see the implementation steps below.

@@ -1,5 +1,7 @@
 # Forever sweep investigation — 2026-10-20
 
+Latest follow-up: [pet investigation](FOREVER_PET_FINDINGS_2026-10-20.md) corrects pet components and records full-rotation MAE 2.553 DPS / MAPE 0.386%, including the preserved Orc Command/source gap. Earlier measurements below are historical; the preceding full production report is archived under `fixtures/benchmark_history/race-stat-300-before-pet-fixes.*`.
+
 Production follow-up: these corrections are now applied. The [fresh production comparison](FOREVER_PRODUCTION_FIXES_2026-10-20.md) reports 300 cases at 1,000 fights each, MAE 1.945 DPS / MAPE 0.289%. Earlier statements below that production is unchanged describe the diagnostic stage.
 
 Follow-up: [traced causes and refined implementation order](FOREVER_CAUSES_2026-10-20.md) identify resource timing/costs/Eureka behavior, shared Nightfall execution and a one-microsecond Soul Fire cooldown error. Combined diagnostic variants bring the three selected outliers within 0.12%; production remains unchanged. The earlier investigation below is retained as evidence.

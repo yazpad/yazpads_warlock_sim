@@ -266,7 +266,7 @@ export const CONFIG = {
   corrCost: 'f32', corrBase: 'f32', corrMultiplier: 'f32', immCost: 'f32', immDirect: 'f32', immTick: 'f32',
   shadowMult: 'f32', fireMult: 'f32', shadowMasteryBonus: 'f32', afBonus: 'f32', aftermathBonus: 'f32', maledictionBonus: 'f32', improvedCorruptionBonus: 'f32', improvedDrainsBonus: 'f32', soulSiphonBonus: 'f32',
   demonicEnergies: 'f32',
-  trinketSP: 'f32', petSP: 'f32', petAP: 'f32', snfChance: 'f32', snfBonus: 'f32', dotCrit: 'f32', fnbCrit: 'f32', petMult: 'f32', petFireboltMult: 'f32', petMeleeMult: 'f32', petLashMult: 'f32', brandMult: 'f32',
+  trinketSP: 'f32', petSP: 'f32', petAP: 'f32', petOwnPower: 'f32', petBaseAP: 'f32', petPowerOffset: 'f32', snfChance: 'f32', snfBonus: 'f32', dotCrit: 'f32', fnbCrit: 'f32', petMult: 'f32', petFireboltMult: 'f32', petMeleeMult: 'f32', petLashMult: 'f32', brandMult: 'f32',
   cataclysmCostMult: 'f32', improvedAgonyBonus: 'f32', felVitalityBonus: 'f32', amplifyCurse: 'u32',
   ...Object.fromEntries(Array.from({length: MAX_APL_RULES}, (_, i) => [`aplHeader0_${i}`, 'u32'])),
   ...Object.fromEntries(Array.from({length: MAX_APL_RULES}, (_, i) => [`aplParam0_${i}`, 'f32'])),
@@ -321,6 +321,11 @@ STATE.amplifyEnd = 'u32';
 STATE.doomReady = 'u32';
 STATE.spiritRegenAt = 'u32';
 STATE.paidChannelEnd = 'u32';
+STATE.petSP = 'f32';
+STATE.petAP = 'f32';
+STATE.petHeartbeatPhase = 'u32';
+STATE.petInheritAt = 'u32';
+STATE.petRegenAt = 'u32';
 
 export const STATE_WORDS = Object.keys(STATE).length;
 export const FAST_STATE = Object.fromEntries(Object.entries(STATE).filter(([key]) => !/^(damage|casts|hits|crits|misses)\d+$/.test(key) && !(key in DETAIL_STATE)));
@@ -433,15 +438,18 @@ export function packConfig(input) {
     demonicEnergies: c.demonicEnergies !== undefined ? c.demonicEnergies : 1.0,
     trinketSP: c.trinketSP,
     petSP: (c.spellPower - (c.petChoice !== 'none' ? c.demonicKnowledge * 20 : 0) + Math.max(c.shadowPower, c.firePower)) * 0.10 + c.demonicKnowledge * 20,
-    petAP: c.spellPower * (1.0 / 6.0),
+    petOwnPower: c.demonicKnowledge * 20,
+    petBaseAP: c.petChoice === 'imp' ? 122 * 2 : 186,
+    petPowerOffset: Math.max(c.shadowPower, c.firePower) - (c.rotation === 'fire' || c.rotation === 'searing' ? c.firePower : c.shadowPower),
+    petAP: (c.petChoice === 'imp' ? 122 * 2 : 186) + (c.spellPower - (c.petChoice !== 'none' ? c.demonicKnowledge * 20 : 0) + Math.max(c.shadowPower, c.firePower)) * 0.17,
     snfChance: c.snfChance,
     snfBonus: c.snfBonus !== undefined ? c.snfBonus : (c.snfChance > 0.0 ? c.snfChance * 0.10 : 0.0),
     dotCrit: c.dotCrit !== undefined ? c.dotCrit : 1.5,
     fnbCrit: c.fnbCrit / 100,
     petMult: c.petMult || 1.0,
-    petFireboltMult: (c.petFireboltMult || c.petMult || 1.0) * c.targetSpellMultiplier * (c.race === 'ORC' ? 1.05 : 1),
-    petMeleeMult: (c.petMeleeMult || c.petMult || 1.0) * (c.race === 'ORC' ? 1.05 : 1) * (1.0 - Math.max(0, c.bossArmor !== undefined ? c.bossArmor : 3731.0) / (Math.max(0, c.bossArmor !== undefined ? c.bossArmor : 3731.0) + 400.0 + 85.0 * 60.0)),
-    petLashMult: (c.petLashMult || c.petMult || 1.0) * c.targetSpellMultiplier * (c.race === 'ORC' ? 1.05 : 1),
+    petFireboltMult: (c.petFireboltMult || c.petMult || 1.0) * c.targetSpellMultiplier,
+    petMeleeMult: (c.petMeleeMult || c.petMult || 1.0) * (1.0 - Math.max(0, c.bossArmor !== undefined ? c.bossArmor : 3731.0) / (Math.max(0, c.bossArmor !== undefined ? c.bossArmor : 3731.0) + 400.0 + 85.0 * 60.0)),
+    petLashMult: (c.petLashMult || c.petMult || 1.0) * c.targetSpellMultiplier,
     brandMult: (c.brandMult || 1.0) * c.targetSpellMultiplier,
     cataclysmCostMult: c.cataclysmCostMult !== undefined ? c.cataclysmCostMult : (c.cataclysmRank === 3 || c.cataclysm === 3 ? 0.90 : c.cataclysmRank === 2 || c.cataclysm === 2 ? 0.94 : c.cataclysmRank === 1 || c.cataclysm === 1 ? 0.97 : 1.0),
     improvedAgonyBonus: c.improvedAgonyBonus !== undefined ? c.improvedAgonyBonus : (c.improvedAgonyRank ? c.improvedAgonyRank * 0.05 : c.improvedAgony ? (typeof c.improvedAgony === 'number' ? c.improvedAgony * 0.05 : 0.10) : 0.0),

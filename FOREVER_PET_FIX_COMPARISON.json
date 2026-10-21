@@ -1,0 +1,92 @@
+{
+  "status": "complete",
+  "acceptance": "diagnostic-only",
+  "iterations": 1000,
+  "seed": 101,
+  "commandDecision": "Existing 5% Orc Command preserved; current source revision does not apply it. User preference was requested asynchronously; no removal was assumed.",
+  "petOnly": {
+    "before": {
+      "cases": 120,
+      "maeDps": 1.2865630011871805,
+      "biasDps": -0.7619351473752763,
+      "mapePct": 2.801583739945453
+    },
+    "after": {
+      "cases": 120,
+      "maeDps": 0.7653458902911469,
+      "biasDps": 0.7524287066557538,
+      "mapePct": 1.7242223515170216
+    },
+    "nonOrcBefore": {
+      "cases": 80,
+      "maeDps": 1.5678271563434931,
+      "biasDps": -1.4598604704199996,
+      "mapePct": 3.1448726430162295
+    },
+    "nonOrcAfter": {
+      "cases": 80,
+      "maeDps": 0.02805150325492649,
+      "biasDps": 0.008675727801836874,
+      "mapePct": 0.06894470862436053
+    }
+  },
+  "fullMatrixBefore": {
+    "cases": 300,
+    "maeDps": 1.9446626885007663,
+    "biasDps": -0.24319416246241513,
+    "mapePct": 0.28896128060419374
+  },
+  "fullMatrixAfter": {
+    "cases": 300,
+    "maeDps": 2.55324548674874,
+    "biasDps": 2.230575960439847,
+    "mapePct": 0.3856460468067374
+  },
+  "checkedPlayerInputDifferenceCases": 0,
+  "perPreset": {
+    "sm_ruin": {
+      "cases": 60,
+      "maeDps": 2.079443918724586,
+      "biasDps": 1.4482774658419686,
+      "mapePct": 0.3176902578508651
+    },
+    "aff_wrack": {
+      "cases": 60,
+      "maeDps": 2.2662480296127474,
+      "biasDps": 2.2662480296127474,
+      "mapePct": 0.4091706216438529
+    },
+    "destro": {
+      "cases": 60,
+      "maeDps": 2.0092618468631867,
+      "biasDps": 1.127934085151467,
+      "mapePct": 0.312783938335309
+    },
+    "demo_shadow_brand": {
+      "cases": 60,
+      "maeDps": 3.478296472148037,
+      "biasDps": 3.377443055197911,
+      "mapePct": 0.49583371228030987
+    },
+    "demo_fire_brand": {
+      "cases": 60,
+      "maeDps": 2.932977166395142,
+      "biasDps": 2.932977166395142,
+      "mapePct": 0.39275170392335035
+    }
+  },
+  "reportHashes": {
+    "FOREVER_PET_BEFORE.json": "2f90e3fc54918b15135842ecbcaa20d851eda2bb47fdbf14298b4ed4b1283c5d",
+    "FOREVER_PET_AFTER.json": "73a8d3fb9502585cc863531f64ed3a75ca256d2ae7d892d575920fbfacc02010",
+    "FOREVER_SWEEP.json": "bed7b4b3e399a006ed3f9a7be6e50461b646d3c9401128c95a4d4694589f5535"
+  },
+  "validation": {
+    "focusedTestsPassed": 24,
+    "compatibilityHashCheck": "passed",
+    "fullSuite": {
+      "passed": 174,
+      "failed": 16,
+      "note": "The same failing assertions were present in the preceding full-suite run; the three new pet tests pass."
+    }
+  }
+}
