@@ -20,11 +20,11 @@ test('race and racial timing survive validation and GPU packing', () => {
   assert.equal(packed({ race: 'UNDEAD', maxHealth: 6000 }).maxHealth, 6000);
 });
 
-test('Command applies once to every pet attack and Gnome gains maximum mana', () => {
+test('Orc has no Command pet multiplier and Gnome gains maximum mana', () => {
   const base = { petFireboltMult: 1.2, petMeleeMult: 1.3, petLashMult: 1.4 };
   const human = packed(base), orc = packed({ ...base, race: 'ORC' });
   for (const key of ['petFireboltMult', 'petMeleeMult', 'petLashMult']) {
-    assert.ok(Math.abs(orc[key] / human[key] - 1.05) < 1e-6);
+    assert.equal(orc[key], human[key]);
   }
   assert.ok(Math.abs(packed({ race: 'GNOME' }).maxMana / human.maxMana - 1.05) < 1e-6);
 });

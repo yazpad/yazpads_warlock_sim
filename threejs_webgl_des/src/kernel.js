@@ -310,7 +310,8 @@ void tick(Event e){
   if(remaining>0u)enqueue(s.now+3000000u,3u,15u,gen);
   return;
  }else if(sp==16u){
-  uint affCount=(s.corrTicks>0u?1u:0u)+(s.agonyTicks>0u?1u:0u)+(s.siphonTicks>0u?1u:0u)+1u;
+  // Only the caster's other active Affliction effects count; Wrack is not tagged.
+  uint affCount=(s.corrTicks>0u?1u:0u)+(s.agonyTicks>0u?1u:0u)+(s.siphonTicks>0u?1u:0u)+(s.doomActive!=0u?1u:0u);
   float soulSiphonMult=1.0+c.soulSiphonBonus*float(min(3u,affCount));
   float affBonus=(1.0+c.shadowMasteryBonus)*(1.0+c.maledictionBonus)*(1.0+c.improvedDrainsBonus);
   amount=(36.0+0.143*p)*currentShadowMult()*affBonus*soulSiphonMult;
@@ -549,6 +550,8 @@ void decide(){
    if(c.drainHope!=0u&&s.now>=s.drainHopeReady){
     if(s.mana>=cost(11u)){
      spend(11u);
+     // A miss consumes mana and the GCD, but starts no channel or amplification aura.
+     if(random01()>=c.hit){countMiss(11u);gcd();return;}
      s.drainHopeEnd=s.now+6000000u;s.drainHopeReady=s.now+6000000u;s.paidChannelEnd=s.drainHopeEnd;
      for(uint i=1u;i<=6u;i++)enqueue(s.now+i*1000000u,3u,16u,0u);
      s.ready=s.drainHopeEnd+c.channelClipDelay;enqueue(s.ready,5u,0u,0u);return;

@@ -63,3 +63,5 @@ The current `FOREVER_SWEEP.*` contains all 300 cases at **1,000 fights per engin
 The latest 300-case production run is **2.553 DPS MAE / 0.386% MAPE** at 1,000 fights per engine. Isolated pet MAE drops sharply, while total rotation MAE rises as compensating errors disappear. See [the pet investigation](FOREVER_PET_FINDINGS_2026-10-20.md), including the preserved Orc Command/source discrepancy.
 
 Orc Command removed per user instruction: full **300-case × 1,000-fight** comparison improves MAE **2.553 → 1.994 DPS** (MAPE **0.303%**). Savage and Blood Fury remain. Nine pet/Orc/cache checks pass; compatibility hashes updated. Source requests, seed and matrix are unchanged. [Measured comparison](../FOREVER_COMMAND_REMOVAL_COMPARISON.json).
+
+Wrack follow-up: current 300-case × 1,000-fight production result is **1.806 DPS MAE / 0.268% MAPE**. Wrack-preset MAE falls from 1.834 to 0.895 DPS after source-backed hit/application and Soul Siphon corrections. See [Wrack findings](FOREVER_WRACK_FINDINGS_2026-10-20.md).

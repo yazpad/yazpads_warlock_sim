@@ -1,6 +1,6 @@
 # Forever / ThreeJS WebGL parity TODO
 
-Current result after user-confirmed Command removal: **MAE 1.994 DPS / MAPE 0.303%**, 300 cases × 1,000 fights per engine. [Comparison](FOREVER_COMMAND_REMOVAL_COMPARISON.json).
+Current result after Wrack fixes: **MAE 1.806 DPS / MAPE 0.268%**, 300 cases × 1,000 fights per engine. Wrack preset MAE improves **1.834 → 0.895 DPS**; Wrack spell mean excess improves **+2.325 → +0.174 DPS**. [Findings](docs/FOREVER_WRACK_FINDINGS_2026-10-20.md), [comparison](FOREVER_WRACK_FIX_COMPARISON.json).
 
 Historical pet follow-up (2026-10-20): pet-only MAE improves **1.568 → 0.028 DPS** in 80 non-Orc cases (120 total isolated cases). The full 300-case, 1,000-fight rotation MAE changes **1.945 → 2.553 DPS** (MAPE 0.386%): correcting pet deficits exposes player overestimates and the preserved 5% Orc Command/source gap. [Pet fixes, validation and next causes](docs/FOREVER_PET_FINDINGS_2026-10-20.md). Earlier "current" measurements below describe their historical stage.
 
@@ -12,7 +12,8 @@ Historical pet follow-up (2026-10-20): pet-only MAE improves **1.568 → 0.028 D
 - [x] Correct Firebolt affordability at cast start, 100ms pet-mana credits/readiness waits, source coefficient/variance, Lash's pull-time start and exact-endpoint pet damage.
 - [x] Validate both shader modes and rerun all 300 rotations at 1,000 fights per engine; keep component accuracy separate from total MAE cancellation.
 - [x] Remove the unsupported 5% Orc Command pet multiplier per user instruction; retain Savage and Blood Fury. Add regression coverage and refresh the full comparison.
-- [ ] Probe the newly exposed Wrack gaps: application hit/miss and Soul Siphon's unconditional extra counted effect in NoCurse scenarios. Measure per-action changes before claiming these explain the whole +2.33 DPS mean.
+- [x] Confirm and fix Wrack application misses (mana + GCD, no channel/aura) and Soul Siphon counting (other active Affliction effects including Doom, cap three). Source traces confirm 0/1/2/3-effect multipliers. Separate GPU ablations and the full 300-case rerun quantify the improvement.
+- [ ] Investigate the remaining Shadow Brand player action mix and timing; Wrack now has only +0.174 DPS mean spell bias in this matrix. Retain the remaining Wrack case spread as a diagnostic, rather than tuning coefficients to noisy case means.
 - [ ] Continue Shadow Brand player APL/action timing and nonzero-distance pet travel/movement; isolated pet agreement does not establish those features.
 
 Current production result (2026-10-20): **MAE 1.945 DPS / MAPE 0.289%**, 300/300 cases at 1,000 fights per engine. The same 60 higher-sample cases improve from **3.554 to 1.792 DPS MAE** (49.59%). All selected player/packed input fields now match. [Production changes, validation and remaining limits](docs/FOREVER_PRODUCTION_FIXES_2026-10-20.md). Historical investigation/probe measurements below are retained; implemented tasks are marked accordingly.

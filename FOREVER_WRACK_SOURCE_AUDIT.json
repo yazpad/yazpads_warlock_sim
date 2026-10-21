@@ -1,0 +1,2175 @@
+{
+  "sourceRevision": "86d0920cae8445eaa90de9c17c3583cf171c19c5",
+  "scriptHash": "70b4aa128ac9ee0142588b4cf786dbb6c052e3f9cb0c31704675e96b4f9ac40e",
+  "sourceHashes": {
+    "sim/warlock/wrack.go": "8961b71382a667e324dd4dbcae5237db3be118ed7f3db264031b2b34b57140a1",
+    "sim/warlock/talents_affliction.go": "6d2ebfb9cadd0c7dd8b6248effe1d8d85204decafea01eac4fc34bf89db3c392",
+    "sim/warlock/warlock.go": "c636b9646364838c1bbdf221a048eba20a922bd5ff3cd28b597a73abfc2b7e3e",
+    "sim/core/cast.go": "096bde0dc1a4071bd5f04425c731d50af43b544819f265dccd129c51b6e6b334",
+    "sim/core/dot.go": "7bead5abfc7f3c01293b1bb66acba78d2271a19cc553ae7e02612fddd15e83e0"
+  },
+  "scenarios": [
+    {
+      "name": "alone",
+      "request": {
+        "requestId": "",
+        "raid": {
+          "parties": [
+            {
+              "players": [
+                {
+                  "apiVersion": 0,
+                  "name": "",
+                  "race": "RaceHuman",
+                  "class": "ClassWarlock",
+                  "equipment": {
+                    "items": []
+                  },
+                  "consumables": null,
+                  "bonusStats": {
+                    "apiVersion": 0,
+                    "stats": [
+                      0,
+                      0,
+                      220,
+                      200,
+                      0,
+                      500,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      100,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      20,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0
+                    ],
+                    "pseudoStats": [
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      15,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0
+                    ]
+                  },
+                  "enableItemSwap": true,
+                  "itemSwap": null,
+                  "buffs": {
+                    "greaterBlessingOfKings": false,
+                    "greaterBlessingOfMight": false,
+                    "greaterBlessingOfWisdom": false,
+                    "greaterBlessingOfSalvation": false,
+                    "greaterBlessingOfLight": false,
+                    "innervates": 0,
+                    "powerInfusions": 0,
+                    "thorns": false
+                  },
+                  "warlock": {
+                    "options": {
+                      "classOptions": {
+                        "summon": "NoSummon",
+                        "armor": "NoArmor",
+                        "curseOptions": "NoCurse",
+                        "sacrificedDemon": "NoSummon",
+                        "soulShards": 32
+                      }
+                    }
+                  },
+                  "talentsString": "25300020135201351--0550005003",
+                  "profession1": "Engineering",
+                  "profession2": "ProfessionUnknown",
+                  "prof1Rank": 0,
+                  "prof2Rank": 0,
+                  "cooldowns": null,
+                  "rotation": {
+                    "type": "TypeAPL",
+                    "priorityList": [
+                      {
+                        "action": {
+                          "channelSpell": {
+                            "spellId": {
+                              "spellId": 1316697
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "reactionTimeMs": 100,
+                  "channelClipDelayMs": 50,
+                  "inFrontOfTarget": false,
+                  "distanceFromTarget": 0,
+                  "darkIntentUptime": 0,
+                  "challengeMode": false,
+                  "weaponSkills": [],
+                  "healingModel": null,
+                  "database": null
+                }
+              ],
+              "buffs": {
+                "bloodPact": false,
+                "devotionAura": false,
+                "manaSpringTotem": "TristateEffectMissing",
+                "manaTideTotems": 0,
+                "retributionAura": false,
+                "retributionAuraSpellPower": 0,
+                "concentrationAura": false,
+                "atieshMage": 0,
+                "atieshWarlock": 0,
+                "atieshDruid": 0,
+                "atieshPriest": 0,
+                "stoneskinTotem": "TristateEffectMissing",
+                "darkspear": false,
+                "admiralsHat": false,
+                "darkInspiration": 0
+              }
+            }
+          ],
+          "numActiveParties": 0,
+          "buffs": {
+            "arcaneBrilliance": false,
+            "prayerOfSpirit": false,
+            "giftOfTheWild": false,
+            "prayerOfFortitude": false,
+            "prayerOfShadowProtection": false,
+            "fireResistanceAura": false,
+            "frostResistanceAura": false,
+            "shadowResistanceAura": false,
+            "fireResistanceTotem": false,
+            "frostResistanceTotem": false,
+            "natureResistanceTotem": false,
+            "strengthOfEarthTotem": false,
+            "graceOfAirTotem": false,
+            "windfuryTotem": false,
+            "flametongueTotem": false,
+            "battleShout": "TristateEffectMissing",
+            "trueshotAura": false,
+            "furiousHowl": false,
+            "aspectOfTheWild": false,
+            "leaderOfThePack": false,
+            "moonkinAura": false
+          },
+          "debuffs": {
+            "huntersMark": false,
+            "judgementOfTheCrusader": false,
+            "judgementOfLight": false,
+            "judgementOfWisdom": false,
+            "curseOfElements": true,
+            "curseOfRecklessness": false,
+            "faerieFire": false,
+            "exposeArmor": false,
+            "sunderArmor": false,
+            "giftOfArthas": false,
+            "demoralizingRoar": false,
+            "demoralizingShout": false,
+            "thunderClap": false,
+            "insectSwarm": false,
+            "scorpidSting": false,
+            "hexOfWeakness": false,
+            "demoralizingScreech": false,
+            "curseOfWeakness": false,
+            "dustCloud": false,
+            "armorShatter": false,
+            "vindication": false,
+            "thunderfury": false
+          },
+          "tanks": [],
+          "staggerStormstrikes": false,
+          "targetDummies": 0
+        },
+        "encounter": {
+          "apiVersion": 0,
+          "duration": 30,
+          "durationVariation": 0,
+          "executeProportion20": 0.2,
+          "executeProportion25": 0.25,
+          "executeProportion35": 0.35,
+          "executeProportion45": 0.45,
+          "executeProportion90": 0.9,
+          "useHealth": false,
+          "targets": [
+            {
+              "id": 0,
+              "name": "",
+              "level": 63,
+              "mobType": "MobTypeMechanical",
+              "creatureFamily": "CreatureFamilyUnknown",
+              "stats": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                320,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                3731,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "minBaseDamage": 2601,
+              "damageSpread": 0.5,
+              "swingSpeed": 2,
+              "dualWield": false,
+              "dualWieldPenalty": false,
+              "parryHaste": true,
+              "suppressDodge": false,
+              "canCrush": true,
+              "spellSchool": "SpellSchoolPhysical",
+              "tankIndex": 0,
+              "secondTankIndex": 0,
+              "disabledAtStart": false,
+              "targetInputs": []
+            }
+          ],
+          "areaTypes": [],
+          "zoneId": 0
+        },
+        "simOptions": {
+          "iterations": 1000,
+          "randomSeed": "101",
+          "debug": false,
+          "debugFirstIteration": false,
+          "isTest": true,
+          "saveAllValues": false,
+          "interactive": false,
+          "useLabeledRands": false
+        },
+        "type": "SimTypeUnknown"
+      },
+      "requestHash": "1ab5cb4c82ba25af0019de1198c6207ce36f587cba520be7f4567a84408b7127",
+      "logsHash": "d92c1e07218915691716effcd34644f3e9e7f1a523bfe2b5e95ce03ff9c33aa5",
+      "wrackLogs": [
+        "[0.00] [ (#1)] Casting {SpellID: 1316697} (Cost = 200.000, Cast Time = 0s, GCD = 1.5s, Effective Time = 1.5s)",
+        "[0.00] [ (#1)] Completed cast {SpellID: 1316697}",
+        "[0.00] [ (#1)] Spent 200.000 mana from {SpellID: 1316697} (5743.000 --> 5543.000) of 5743 total.",
+        "[0.00] [Target 1] Aura gained: {SpellID: 1316697}",
+        "[0.00] [ (#1)] [Target 1] {SpellID: 1316697} Hit for 0.000 damage (SpellSchool: 32). (Threat: 0.000)",
+        "[1.00] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[1.00] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 130.075 damage (SpellSchool: 32). (Threat: 104.060)",
+        "[2.00] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[2.00] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 130.075 damage (SpellSchool: 32). (Threat: 104.060)",
+        "[3.00] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[3.00] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 130.075 damage (SpellSchool: 32). (Threat: 104.060)",
+        "[4.00] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:260.2, AfterPostOutcome:260.2",
+        "[4.00] [ (#1)] [Target 1] {SpellID: 1316697} tick Crit for 260.150 damage (SpellSchool: 32). (Threat: 208.120)",
+        "[5.00] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:260.2, AfterPostOutcome:260.2",
+        "[5.00] [ (#1)] [Target 1] {SpellID: 1316697} tick Crit for 260.150 damage (SpellSchool: 32). (Threat: 208.120)",
+        "[6.00] [Target 1] Aura faded: {SpellID: 1316697}",
+        "[6.00] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[6.00] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 130.075 damage (SpellSchool: 32). (Threat: 104.060)",
+        "[6.05] [ (#1)] Casting {SpellID: 1316697} (Cost = 200.000, Cast Time = 0s, GCD = 1.5s, Effective Time = 1.5s)",
+        "[6.05] [ (#1)] Completed cast {SpellID: 1316697}",
+        "[6.05] [ (#1)] Spent 200.000 mana from {SpellID: 1316697} (5568.919 --> 5368.919) of 5743 total.",
+        "[6.05] [ (#1)] [Target 1] {SpellID: 1316697} Miss (SpellSchool: 32). (Threat: 0.000)",
+        "[7.55] [ (#1)] Casting {SpellID: 1316697} (Cost = 200.000, Cast Time = 0s, GCD = 1.5s, Effective Time = 1.5s)",
+        "[7.55] [ (#1)] Completed cast {SpellID: 1316697}",
+        "[7.55] [ (#1)] Spent 200.000 mana from {SpellID: 1316697} (5374.719 --> 5174.719) of 5743 total.",
+        "[7.55] [Target 1] Aura gained: {SpellID: 1316697}",
+        "[7.55] [ (#1)] [Target 1] {SpellID: 1316697} Hit for 0.000 damage (SpellSchool: 32). (Threat: 0.000)",
+        "[8.55] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[8.55] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 130.075 damage (SpellSchool: 32). (Threat: 104.060)",
+        "[9.55] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[9.55] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 130.075 damage (SpellSchool: 32). (Threat: 104.060)",
+        "[10.55] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[10.55] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 130.075 damage (SpellSchool: 32). (Threat: 104.060)",
+        "[11.55] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[11.55] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 130.075 damage (SpellSchool: 32). (Threat: 104.060)",
+        "[12.55] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[12.55] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 130.075 damage (SpellSchool: 32). (Threat: 104.060)",
+        "[13.55] [Target 1] Aura faded: {SpellID: 1316697}",
+        "[13.55] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[13.55] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 130.075 damage (SpellSchool: 32). (Threat: 104.060)",
+        "[13.60] [ (#1)] Casting {SpellID: 1316697} (Cost = 200.000, Cast Time = 0s, GCD = 1.5s, Effective Time = 1.5s)",
+        "[13.60] [ (#1)] Completed cast {SpellID: 1316697}",
+        "[13.60] [ (#1)] Spent 200.000 mana from {SpellID: 1316697} (5200.837 --> 5000.837) of 5743 total.",
+        "[13.60] [Target 1] Aura gained: {SpellID: 1316697}",
+        "[13.60] [ (#1)] [Target 1] {SpellID: 1316697} Hit for 0.000 damage (SpellSchool: 32). (Threat: 0.000)",
+        "[14.60] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[14.60] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 130.075 damage (SpellSchool: 32). (Threat: 104.060)",
+        "[15.60] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:260.2, AfterPostOutcome:260.2",
+        "[15.60] [ (#1)] [Target 1] {SpellID: 1316697} tick Crit for 260.150 damage (SpellSchool: 32). (Threat: 208.120)",
+        "[16.60] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:260.2, AfterPostOutcome:260.2",
+        "[16.60] [ (#1)] [Target 1] {SpellID: 1316697} tick Crit for 260.150 damage (SpellSchool: 32). (Threat: 208.120)",
+        "[17.60] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[17.60] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 130.075 damage (SpellSchool: 32). (Threat: 104.060)",
+        "[18.60] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[18.60] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 130.075 damage (SpellSchool: 32). (Threat: 104.060)",
+        "[19.60] [Target 1] Aura faded: {SpellID: 1316697}",
+        "[19.60] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:260.2, AfterPostOutcome:260.2",
+        "[19.60] [ (#1)] [Target 1] {SpellID: 1316697} tick Crit for 260.150 damage (SpellSchool: 32). (Threat: 208.120)",
+        "[19.65] [ (#1)] Casting {SpellID: 1316697} (Cost = 200.000, Cast Time = 0s, GCD = 1.5s, Effective Time = 1.5s)",
+        "[19.65] [ (#1)] Completed cast {SpellID: 1316697}",
+        "[19.65] [ (#1)] Spent 200.000 mana from {SpellID: 1316697} (5026.756 --> 4826.756) of 5743 total.",
+        "[19.65] [ (#1)] [Target 1] {SpellID: 1316697} Miss (SpellSchool: 32). (Threat: 0.000)",
+        "[21.15] [ (#1)] Casting {SpellID: 1316697} (Cost = 200.000, Cast Time = 0s, GCD = 1.5s, Effective Time = 1.5s)",
+        "[21.15] [ (#1)] Completed cast {SpellID: 1316697}",
+        "[21.15] [ (#1)] Spent 200.000 mana from {SpellID: 1316697} (4832.556 --> 4632.556) of 5743 total.",
+        "[21.15] [ (#1)] [Target 1] {SpellID: 1316697} Miss (SpellSchool: 32). (Threat: 0.000)",
+        "[22.65] [ (#1)] Casting {SpellID: 1316697} (Cost = 200.000, Cast Time = 0s, GCD = 1.5s, Effective Time = 1.5s)",
+        "[22.65] [ (#1)] Completed cast {SpellID: 1316697}",
+        "[22.65] [ (#1)] Spent 200.000 mana from {SpellID: 1316697} (4638.556 --> 4438.556) of 5743 total.",
+        "[22.65] [Target 1] Aura gained: {SpellID: 1316697}",
+        "[22.65] [ (#1)] [Target 1] {SpellID: 1316697} Hit for 0.000 damage (SpellSchool: 32). (Threat: 0.000)",
+        "[23.65] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[23.65] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 130.075 damage (SpellSchool: 32). (Threat: 104.060)",
+        "[24.65] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[24.65] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 130.075 damage (SpellSchool: 32). (Threat: 104.060)",
+        "[25.65] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[25.65] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 130.075 damage (SpellSchool: 32). (Threat: 104.060)",
+        "[26.65] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[26.65] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 130.075 damage (SpellSchool: 32). (Threat: 104.060)",
+        "[27.65] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:260.2, AfterPostOutcome:260.2",
+        "[27.65] [ (#1)] [Target 1] {SpellID: 1316697} tick Crit for 260.150 damage (SpellSchool: 32). (Threat: 208.120)",
+        "[28.65] [Target 1] Aura faded: {SpellID: 1316697}",
+        "[28.65] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[28.65] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 130.075 damage (SpellSchool: 32). (Threat: 104.060)",
+        "[28.70] [ (#1)] Casting {SpellID: 1316697} (Cost = 200.000, Cast Time = 0s, GCD = 1.5s, Effective Time = 1.5s)",
+        "[28.70] [ (#1)] Completed cast {SpellID: 1316697}",
+        "[28.70] [ (#1)] Spent 200.000 mana from {SpellID: 1316697} (4464.675 --> 4264.675) of 5743 total.",
+        "[28.70] [Target 1] Aura gained: {SpellID: 1316697}",
+        "[28.70] [ (#1)] [Target 1] {SpellID: 1316697} Hit for 0.000 damage (SpellSchool: 32). (Threat: 0.000)",
+        "[29.70] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:260.2, AfterPostOutcome:260.2",
+        "[29.70] [ (#1)] [Target 1] {SpellID: 1316697} tick Crit for 260.150 damage (SpellSchool: 32). (Threat: 208.120)",
+        "[30.00] [Target 1] Aura faded: {SpellID: 1316697}"
+      ],
+      "firstNoncriticalTick": 130.075,
+      "observedFactor": 1
+    },
+    {
+      "name": "corruption",
+      "request": {
+        "requestId": "",
+        "raid": {
+          "parties": [
+            {
+              "players": [
+                {
+                  "apiVersion": 0,
+                  "name": "",
+                  "race": "RaceHuman",
+                  "class": "ClassWarlock",
+                  "equipment": {
+                    "items": []
+                  },
+                  "consumables": null,
+                  "bonusStats": {
+                    "apiVersion": 0,
+                    "stats": [
+                      0,
+                      0,
+                      220,
+                      200,
+                      0,
+                      500,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      100,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      20,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0
+                    ],
+                    "pseudoStats": [
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      15,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0
+                    ]
+                  },
+                  "enableItemSwap": true,
+                  "itemSwap": null,
+                  "buffs": {
+                    "greaterBlessingOfKings": false,
+                    "greaterBlessingOfMight": false,
+                    "greaterBlessingOfWisdom": false,
+                    "greaterBlessingOfSalvation": false,
+                    "greaterBlessingOfLight": false,
+                    "innervates": 0,
+                    "powerInfusions": 0,
+                    "thorns": false
+                  },
+                  "warlock": {
+                    "options": {
+                      "classOptions": {
+                        "summon": "NoSummon",
+                        "armor": "NoArmor",
+                        "curseOptions": "NoCurse",
+                        "sacrificedDemon": "NoSummon",
+                        "soulShards": 32
+                      }
+                    }
+                  },
+                  "talentsString": "25300020135201351--0550005003",
+                  "profession1": "Engineering",
+                  "profession2": "ProfessionUnknown",
+                  "prof1Rank": 0,
+                  "prof2Rank": 0,
+                  "cooldowns": null,
+                  "rotation": {
+                    "type": "TypeAPL",
+                    "priorityList": [
+                      {
+                        "action": {
+                          "condition": {
+                            "not": {
+                              "val": {
+                                "dotIsActive": {
+                                  "spellId": {
+                                    "spellId": 25311
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "castSpell": {
+                            "spellId": {
+                              "spellId": 25311
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "action": {
+                          "channelSpell": {
+                            "spellId": {
+                              "spellId": 1316697
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "reactionTimeMs": 100,
+                  "channelClipDelayMs": 50,
+                  "inFrontOfTarget": false,
+                  "distanceFromTarget": 0,
+                  "darkIntentUptime": 0,
+                  "challengeMode": false,
+                  "weaponSkills": [],
+                  "healingModel": null,
+                  "database": null
+                }
+              ],
+              "buffs": {
+                "bloodPact": false,
+                "devotionAura": false,
+                "manaSpringTotem": "TristateEffectMissing",
+                "manaTideTotems": 0,
+                "retributionAura": false,
+                "retributionAuraSpellPower": 0,
+                "concentrationAura": false,
+                "atieshMage": 0,
+                "atieshWarlock": 0,
+                "atieshDruid": 0,
+                "atieshPriest": 0,
+                "stoneskinTotem": "TristateEffectMissing",
+                "darkspear": false,
+                "admiralsHat": false,
+                "darkInspiration": 0
+              }
+            }
+          ],
+          "numActiveParties": 0,
+          "buffs": {
+            "arcaneBrilliance": false,
+            "prayerOfSpirit": false,
+            "giftOfTheWild": false,
+            "prayerOfFortitude": false,
+            "prayerOfShadowProtection": false,
+            "fireResistanceAura": false,
+            "frostResistanceAura": false,
+            "shadowResistanceAura": false,
+            "fireResistanceTotem": false,
+            "frostResistanceTotem": false,
+            "natureResistanceTotem": false,
+            "strengthOfEarthTotem": false,
+            "graceOfAirTotem": false,
+            "windfuryTotem": false,
+            "flametongueTotem": false,
+            "battleShout": "TristateEffectMissing",
+            "trueshotAura": false,
+            "furiousHowl": false,
+            "aspectOfTheWild": false,
+            "leaderOfThePack": false,
+            "moonkinAura": false
+          },
+          "debuffs": {
+            "huntersMark": false,
+            "judgementOfTheCrusader": false,
+            "judgementOfLight": false,
+            "judgementOfWisdom": false,
+            "curseOfElements": true,
+            "curseOfRecklessness": false,
+            "faerieFire": false,
+            "exposeArmor": false,
+            "sunderArmor": false,
+            "giftOfArthas": false,
+            "demoralizingRoar": false,
+            "demoralizingShout": false,
+            "thunderClap": false,
+            "insectSwarm": false,
+            "scorpidSting": false,
+            "hexOfWeakness": false,
+            "demoralizingScreech": false,
+            "curseOfWeakness": false,
+            "dustCloud": false,
+            "armorShatter": false,
+            "vindication": false,
+            "thunderfury": false
+          },
+          "tanks": [],
+          "staggerStormstrikes": false,
+          "targetDummies": 0
+        },
+        "encounter": {
+          "apiVersion": 0,
+          "duration": 30,
+          "durationVariation": 0,
+          "executeProportion20": 0.2,
+          "executeProportion25": 0.25,
+          "executeProportion35": 0.35,
+          "executeProportion45": 0.45,
+          "executeProportion90": 0.9,
+          "useHealth": false,
+          "targets": [
+            {
+              "id": 0,
+              "name": "",
+              "level": 63,
+              "mobType": "MobTypeMechanical",
+              "creatureFamily": "CreatureFamilyUnknown",
+              "stats": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                320,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                3731,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "minBaseDamage": 2601,
+              "damageSpread": 0.5,
+              "swingSpeed": 2,
+              "dualWield": false,
+              "dualWieldPenalty": false,
+              "parryHaste": true,
+              "suppressDodge": false,
+              "canCrush": true,
+              "spellSchool": "SpellSchoolPhysical",
+              "tankIndex": 0,
+              "secondTankIndex": 0,
+              "disabledAtStart": false,
+              "targetInputs": []
+            }
+          ],
+          "areaTypes": [],
+          "zoneId": 0
+        },
+        "simOptions": {
+          "iterations": 1000,
+          "randomSeed": "101",
+          "debug": false,
+          "debugFirstIteration": false,
+          "isTest": true,
+          "saveAllValues": false,
+          "interactive": false,
+          "useLabeledRands": false
+        },
+        "type": "SimTypeUnknown"
+      },
+      "requestHash": "a0319e9f39c9f522a84cc68f3b643c29e3a2713331ebf660f4fdc61bbaaa9228",
+      "logsHash": "c497d10943cbb0607547b9169b7143064ef09c9312991d7630d58a0fdeed3bfd",
+      "wrackLogs": [
+        "[1.50] [ (#1)] Casting {SpellID: 1316697} (Cost = 200.000, Cast Time = 0s, GCD = 1.5s, Effective Time = 1.5s)",
+        "[1.50] [ (#1)] Completed cast {SpellID: 1316697}",
+        "[1.50] [ (#1)] Spent 200.000 mana from {SpellID: 1316697} (5405.800 --> 5205.800) of 5743 total.",
+        "[1.50] [ (#1)] [Target 1] {SpellID: 1316697} Miss (SpellSchool: 32). (Threat: 0.000)",
+        "[3.00] [ (#1)] Casting {SpellID: 1316697} (Cost = 200.000, Cast Time = 0s, GCD = 1.5s, Effective Time = 1.5s)",
+        "[3.00] [ (#1)] Completed cast {SpellID: 1316697}",
+        "[3.00] [ (#1)] Spent 200.000 mana from {SpellID: 1316697} (5211.800 --> 5011.800) of 5743 total.",
+        "[3.00] [Target 1] Aura gained: {SpellID: 1316697}",
+        "[3.00] [ (#1)] [Target 1] {SpellID: 1316697} Hit for 0.000 damage (SpellSchool: 32). (Threat: 0.000)",
+        "[4.00] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[4.00] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 145.684 damage (SpellSchool: 32). (Threat: 116.547)",
+        "[5.00] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[5.00] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 145.684 damage (SpellSchool: 32). (Threat: 116.547)",
+        "[6.00] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:260.2, AfterPostOutcome:260.2",
+        "[6.00] [ (#1)] [Target 1] {SpellID: 1316697} tick Crit for 291.368 damage (SpellSchool: 32). (Threat: 233.094)",
+        "[7.00] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[7.00] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 145.684 damage (SpellSchool: 32). (Threat: 116.547)",
+        "[8.00] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[8.00] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 145.684 damage (SpellSchool: 32). (Threat: 116.547)",
+        "[9.00] [Target 1] Aura faded: {SpellID: 1316697}",
+        "[9.00] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[9.00] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 145.684 damage (SpellSchool: 32). (Threat: 116.547)",
+        "[9.05] [ (#1)] Casting {SpellID: 1316697} (Cost = 200.000, Cast Time = 0s, GCD = 1.5s, Effective Time = 1.5s)",
+        "[9.05] [ (#1)] Completed cast {SpellID: 1316697}",
+        "[9.05] [ (#1)] Spent 200.000 mana from {SpellID: 1316697} (5037.719 --> 4837.719) of 5743 total.",
+        "[9.05] [Target 1] Aura gained: {SpellID: 1316697}",
+        "[9.05] [ (#1)] [Target 1] {SpellID: 1316697} Hit for 0.000 damage (SpellSchool: 32). (Threat: 0.000)",
+        "[10.05] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[10.05] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 145.684 damage (SpellSchool: 32). (Threat: 116.547)",
+        "[11.05] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[11.05] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 145.684 damage (SpellSchool: 32). (Threat: 116.547)",
+        "[12.05] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[12.05] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 145.684 damage (SpellSchool: 32). (Threat: 116.547)",
+        "[13.05] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:260.2, AfterPostOutcome:260.2",
+        "[13.05] [ (#1)] [Target 1] {SpellID: 1316697} tick Crit for 291.368 damage (SpellSchool: 32). (Threat: 233.094)",
+        "[14.05] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:260.2, AfterPostOutcome:260.2",
+        "[14.05] [ (#1)] [Target 1] {SpellID: 1316697} tick Crit for 291.368 damage (SpellSchool: 32). (Threat: 233.094)",
+        "[15.05] [Target 1] Aura faded: {SpellID: 1316697}",
+        "[15.05] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[15.05] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 145.684 damage (SpellSchool: 32). (Threat: 116.547)",
+        "[15.10] [ (#1)] Casting {SpellID: 1316697} (Cost = 200.000, Cast Time = 0s, GCD = 1.5s, Effective Time = 1.5s)",
+        "[15.10] [ (#1)] Completed cast {SpellID: 1316697}",
+        "[15.10] [ (#1)] Spent 200.000 mana from {SpellID: 1316697} (4863.637 --> 4663.637) of 5743 total.",
+        "[15.10] [ (#1)] [Target 1] {SpellID: 1316697} Miss (SpellSchool: 32). (Threat: 0.000)",
+        "[16.60] [ (#1)] Casting {SpellID: 1316697} (Cost = 200.000, Cast Time = 0s, GCD = 1.5s, Effective Time = 1.5s)",
+        "[16.60] [ (#1)] Completed cast {SpellID: 1316697}",
+        "[16.60] [ (#1)] Spent 200.000 mana from {SpellID: 1316697} (4669.637 --> 4469.637) of 5743 total.",
+        "[16.60] [ (#1)] [Target 1] {SpellID: 1316697} Miss (SpellSchool: 32). (Threat: 0.000)",
+        "[18.10] [ (#1)] Casting {SpellID: 1316697} (Cost = 200.000, Cast Time = 0s, GCD = 1.5s, Effective Time = 1.5s)",
+        "[18.10] [ (#1)] Completed cast {SpellID: 1316697}",
+        "[18.10] [ (#1)] Spent 200.000 mana from {SpellID: 1316697} (4475.637 --> 4275.637) of 5743 total.",
+        "[18.10] [Target 1] Aura gained: {SpellID: 1316697}",
+        "[18.10] [ (#1)] [Target 1] {SpellID: 1316697} Hit for 0.000 damage (SpellSchool: 32). (Threat: 0.000)",
+        "[19.10] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[19.10] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 130.075 damage (SpellSchool: 32). (Threat: 104.060)",
+        "[20.10] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[20.10] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 130.075 damage (SpellSchool: 32). (Threat: 104.060)",
+        "[21.10] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[21.10] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 130.075 damage (SpellSchool: 32). (Threat: 104.060)",
+        "[22.10] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[22.10] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 130.075 damage (SpellSchool: 32). (Threat: 104.060)",
+        "[23.10] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:260.2, AfterPostOutcome:260.2",
+        "[23.10] [ (#1)] [Target 1] {SpellID: 1316697} tick Crit for 260.150 damage (SpellSchool: 32). (Threat: 208.120)",
+        "[24.10] [Target 1] Aura faded: {SpellID: 1316697}",
+        "[24.10] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[24.10] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 130.075 damage (SpellSchool: 32). (Threat: 104.060)",
+        "[25.65] [ (#1)] Casting {SpellID: 1316697} (Cost = 200.000, Cast Time = 0s, GCD = 1.5s, Effective Time = 1.5s)",
+        "[25.65] [ (#1)] Completed cast {SpellID: 1316697}",
+        "[25.65] [ (#1)] Spent 200.000 mana from {SpellID: 1316697} (3994.856 --> 3794.856) of 5743 total.",
+        "[25.65] [Target 1] Aura gained: {SpellID: 1316697}",
+        "[25.65] [ (#1)] [Target 1] {SpellID: 1316697} Hit for 0.000 damage (SpellSchool: 32). (Threat: 0.000)",
+        "[26.65] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:260.2, AfterPostOutcome:260.2",
+        "[26.65] [ (#1)] [Target 1] {SpellID: 1316697} tick Crit for 291.368 damage (SpellSchool: 32). (Threat: 233.094)",
+        "[27.65] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[27.65] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 145.684 damage (SpellSchool: 32). (Threat: 116.547)",
+        "[28.65] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:260.2, AfterPostOutcome:260.2",
+        "[28.65] [ (#1)] [Target 1] {SpellID: 1316697} tick Crit for 291.368 damage (SpellSchool: 32). (Threat: 233.094)",
+        "[29.65] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[29.65] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 145.684 damage (SpellSchool: 32). (Threat: 116.547)",
+        "[30.00] [Target 1] Aura faded: {SpellID: 1316697}"
+      ],
+      "firstNoncriticalTick": 145.684,
+      "observedFactor": 1.12
+    },
+    {
+      "name": "doom",
+      "request": {
+        "requestId": "",
+        "raid": {
+          "parties": [
+            {
+              "players": [
+                {
+                  "apiVersion": 0,
+                  "name": "",
+                  "race": "RaceHuman",
+                  "class": "ClassWarlock",
+                  "equipment": {
+                    "items": []
+                  },
+                  "consumables": null,
+                  "bonusStats": {
+                    "apiVersion": 0,
+                    "stats": [
+                      0,
+                      0,
+                      220,
+                      200,
+                      0,
+                      500,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      100,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      20,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0
+                    ],
+                    "pseudoStats": [
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      15,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0
+                    ]
+                  },
+                  "enableItemSwap": true,
+                  "itemSwap": null,
+                  "buffs": {
+                    "greaterBlessingOfKings": false,
+                    "greaterBlessingOfMight": false,
+                    "greaterBlessingOfWisdom": false,
+                    "greaterBlessingOfSalvation": false,
+                    "greaterBlessingOfLight": false,
+                    "innervates": 0,
+                    "powerInfusions": 0,
+                    "thorns": false
+                  },
+                  "warlock": {
+                    "options": {
+                      "classOptions": {
+                        "summon": "NoSummon",
+                        "armor": "NoArmor",
+                        "curseOptions": "NoCurse",
+                        "sacrificedDemon": "NoSummon",
+                        "soulShards": 32
+                      }
+                    }
+                  },
+                  "talentsString": "25300020135201351--0550005003",
+                  "profession1": "Engineering",
+                  "profession2": "ProfessionUnknown",
+                  "prof1Rank": 0,
+                  "prof2Rank": 0,
+                  "cooldowns": null,
+                  "rotation": {
+                    "type": "TypeAPL",
+                    "priorityList": [
+                      {
+                        "action": {
+                          "condition": {
+                            "not": {
+                              "val": {
+                                "dotIsActive": {
+                                  "spellId": {
+                                    "spellId": 603
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "castSpell": {
+                            "spellId": {
+                              "spellId": 603
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "action": {
+                          "channelSpell": {
+                            "spellId": {
+                              "spellId": 1316697
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "reactionTimeMs": 100,
+                  "channelClipDelayMs": 50,
+                  "inFrontOfTarget": false,
+                  "distanceFromTarget": 0,
+                  "darkIntentUptime": 0,
+                  "challengeMode": false,
+                  "weaponSkills": [],
+                  "healingModel": null,
+                  "database": null
+                }
+              ],
+              "buffs": {
+                "bloodPact": false,
+                "devotionAura": false,
+                "manaSpringTotem": "TristateEffectMissing",
+                "manaTideTotems": 0,
+                "retributionAura": false,
+                "retributionAuraSpellPower": 0,
+                "concentrationAura": false,
+                "atieshMage": 0,
+                "atieshWarlock": 0,
+                "atieshDruid": 0,
+                "atieshPriest": 0,
+                "stoneskinTotem": "TristateEffectMissing",
+                "darkspear": false,
+                "admiralsHat": false,
+                "darkInspiration": 0
+              }
+            }
+          ],
+          "numActiveParties": 0,
+          "buffs": {
+            "arcaneBrilliance": false,
+            "prayerOfSpirit": false,
+            "giftOfTheWild": false,
+            "prayerOfFortitude": false,
+            "prayerOfShadowProtection": false,
+            "fireResistanceAura": false,
+            "frostResistanceAura": false,
+            "shadowResistanceAura": false,
+            "fireResistanceTotem": false,
+            "frostResistanceTotem": false,
+            "natureResistanceTotem": false,
+            "strengthOfEarthTotem": false,
+            "graceOfAirTotem": false,
+            "windfuryTotem": false,
+            "flametongueTotem": false,
+            "battleShout": "TristateEffectMissing",
+            "trueshotAura": false,
+            "furiousHowl": false,
+            "aspectOfTheWild": false,
+            "leaderOfThePack": false,
+            "moonkinAura": false
+          },
+          "debuffs": {
+            "huntersMark": false,
+            "judgementOfTheCrusader": false,
+            "judgementOfLight": false,
+            "judgementOfWisdom": false,
+            "curseOfElements": true,
+            "curseOfRecklessness": false,
+            "faerieFire": false,
+            "exposeArmor": false,
+            "sunderArmor": false,
+            "giftOfArthas": false,
+            "demoralizingRoar": false,
+            "demoralizingShout": false,
+            "thunderClap": false,
+            "insectSwarm": false,
+            "scorpidSting": false,
+            "hexOfWeakness": false,
+            "demoralizingScreech": false,
+            "curseOfWeakness": false,
+            "dustCloud": false,
+            "armorShatter": false,
+            "vindication": false,
+            "thunderfury": false
+          },
+          "tanks": [],
+          "staggerStormstrikes": false,
+          "targetDummies": 0
+        },
+        "encounter": {
+          "apiVersion": 0,
+          "duration": 30,
+          "durationVariation": 0,
+          "executeProportion20": 0.2,
+          "executeProportion25": 0.25,
+          "executeProportion35": 0.35,
+          "executeProportion45": 0.45,
+          "executeProportion90": 0.9,
+          "useHealth": false,
+          "targets": [
+            {
+              "id": 0,
+              "name": "",
+              "level": 63,
+              "mobType": "MobTypeMechanical",
+              "creatureFamily": "CreatureFamilyUnknown",
+              "stats": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                320,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                3731,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "minBaseDamage": 2601,
+              "damageSpread": 0.5,
+              "swingSpeed": 2,
+              "dualWield": false,
+              "dualWieldPenalty": false,
+              "parryHaste": true,
+              "suppressDodge": false,
+              "canCrush": true,
+              "spellSchool": "SpellSchoolPhysical",
+              "tankIndex": 0,
+              "secondTankIndex": 0,
+              "disabledAtStart": false,
+              "targetInputs": []
+            }
+          ],
+          "areaTypes": [],
+          "zoneId": 0
+        },
+        "simOptions": {
+          "iterations": 1000,
+          "randomSeed": "101",
+          "debug": false,
+          "debugFirstIteration": false,
+          "isTest": true,
+          "saveAllValues": false,
+          "interactive": false,
+          "useLabeledRands": false
+        },
+        "type": "SimTypeUnknown"
+      },
+      "requestHash": "5d7e3e1d61465fa097c70ca86b967c9674abb3f56cd81ed1b211f9a85f475fd9",
+      "logsHash": "e7c9f3ac0fefde67749ed10651822fdc6722549c62f011312f62d5a38df95e69",
+      "wrackLogs": [
+        "[1.50] [ (#1)] Casting {SpellID: 1316697} (Cost = 200.000, Cast Time = 0s, GCD = 1.5s, Effective Time = 1.5s)",
+        "[1.50] [ (#1)] Completed cast {SpellID: 1316697}",
+        "[1.50] [ (#1)] Spent 200.000 mana from {SpellID: 1316697} (5449.000 --> 5249.000) of 5743 total.",
+        "[1.50] [ (#1)] [Target 1] {SpellID: 1316697} Miss (SpellSchool: 32). (Threat: 0.000)",
+        "[3.00] [ (#1)] Casting {SpellID: 1316697} (Cost = 200.000, Cast Time = 0s, GCD = 1.5s, Effective Time = 1.5s)",
+        "[3.00] [ (#1)] Completed cast {SpellID: 1316697}",
+        "[3.00] [ (#1)] Spent 200.000 mana from {SpellID: 1316697} (5255.000 --> 5055.000) of 5743 total.",
+        "[3.00] [Target 1] Aura gained: {SpellID: 1316697}",
+        "[3.00] [ (#1)] [Target 1] {SpellID: 1316697} Hit for 0.000 damage (SpellSchool: 32). (Threat: 0.000)",
+        "[4.00] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[4.00] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 145.684 damage (SpellSchool: 32). (Threat: 116.547)",
+        "[5.00] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[5.00] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 145.684 damage (SpellSchool: 32). (Threat: 116.547)",
+        "[6.00] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[6.00] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 145.684 damage (SpellSchool: 32). (Threat: 116.547)",
+        "[7.00] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:260.2, AfterPostOutcome:260.2",
+        "[7.00] [ (#1)] [Target 1] {SpellID: 1316697} tick Crit for 291.368 damage (SpellSchool: 32). (Threat: 233.094)",
+        "[8.00] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:260.2, AfterPostOutcome:260.2",
+        "[8.00] [ (#1)] [Target 1] {SpellID: 1316697} tick Crit for 291.368 damage (SpellSchool: 32). (Threat: 233.094)",
+        "[9.00] [Target 1] Aura faded: {SpellID: 1316697}",
+        "[9.00] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[9.00] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 145.684 damage (SpellSchool: 32). (Threat: 116.547)",
+        "[9.05] [ (#1)] Casting {SpellID: 1316697} (Cost = 200.000, Cast Time = 0s, GCD = 1.5s, Effective Time = 1.5s)",
+        "[9.05] [ (#1)] Completed cast {SpellID: 1316697}",
+        "[9.05] [ (#1)] Spent 200.000 mana from {SpellID: 1316697} (5080.919 --> 4880.919) of 5743 total.",
+        "[9.05] [Target 1] Aura gained: {SpellID: 1316697}",
+        "[9.05] [ (#1)] [Target 1] {SpellID: 1316697} Hit for 0.000 damage (SpellSchool: 32). (Threat: 0.000)",
+        "[10.05] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[10.05] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 145.684 damage (SpellSchool: 32). (Threat: 116.547)",
+        "[11.05] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[11.05] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 145.684 damage (SpellSchool: 32). (Threat: 116.547)",
+        "[12.05] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[12.05] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 145.684 damage (SpellSchool: 32). (Threat: 116.547)",
+        "[13.05] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[13.05] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 145.684 damage (SpellSchool: 32). (Threat: 116.547)",
+        "[14.05] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[14.05] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 145.684 damage (SpellSchool: 32). (Threat: 116.547)",
+        "[15.05] [Target 1] Aura faded: {SpellID: 1316697}",
+        "[15.05] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[15.05] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 145.684 damage (SpellSchool: 32). (Threat: 116.547)",
+        "[15.10] [ (#1)] Casting {SpellID: 1316697} (Cost = 200.000, Cast Time = 0s, GCD = 1.5s, Effective Time = 1.5s)",
+        "[15.10] [ (#1)] Completed cast {SpellID: 1316697}",
+        "[15.10] [ (#1)] Spent 200.000 mana from {SpellID: 1316697} (4906.837 --> 4706.837) of 5743 total.",
+        "[15.10] [ (#1)] [Target 1] {SpellID: 1316697} Miss (SpellSchool: 32). (Threat: 0.000)",
+        "[16.60] [ (#1)] Casting {SpellID: 1316697} (Cost = 200.000, Cast Time = 0s, GCD = 1.5s, Effective Time = 1.5s)",
+        "[16.60] [ (#1)] Completed cast {SpellID: 1316697}",
+        "[16.60] [ (#1)] Spent 200.000 mana from {SpellID: 1316697} (4712.837 --> 4512.837) of 5743 total.",
+        "[16.60] [ (#1)] [Target 1] {SpellID: 1316697} Miss (SpellSchool: 32). (Threat: 0.000)",
+        "[18.10] [ (#1)] Casting {SpellID: 1316697} (Cost = 200.000, Cast Time = 0s, GCD = 1.5s, Effective Time = 1.5s)",
+        "[18.10] [ (#1)] Completed cast {SpellID: 1316697}",
+        "[18.10] [ (#1)] Spent 200.000 mana from {SpellID: 1316697} (4518.837 --> 4318.837) of 5743 total.",
+        "[18.10] [Target 1] Aura gained: {SpellID: 1316697}",
+        "[18.10] [ (#1)] [Target 1] {SpellID: 1316697} Hit for 0.000 damage (SpellSchool: 32). (Threat: 0.000)",
+        "[19.10] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[19.10] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 145.684 damage (SpellSchool: 32). (Threat: 116.547)",
+        "[20.10] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:260.2, AfterPostOutcome:260.2",
+        "[20.10] [ (#1)] [Target 1] {SpellID: 1316697} tick Crit for 291.368 damage (SpellSchool: 32). (Threat: 233.094)",
+        "[21.10] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:260.2, AfterPostOutcome:260.2",
+        "[21.10] [ (#1)] [Target 1] {SpellID: 1316697} tick Crit for 291.368 damage (SpellSchool: 32). (Threat: 233.094)",
+        "[22.10] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[22.10] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 145.684 damage (SpellSchool: 32). (Threat: 116.547)",
+        "[23.10] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[23.10] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 145.684 damage (SpellSchool: 32). (Threat: 116.547)",
+        "[24.10] [Target 1] Aura faded: {SpellID: 1316697}",
+        "[24.10] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:260.2, AfterPostOutcome:260.2",
+        "[24.10] [ (#1)] [Target 1] {SpellID: 1316697} tick Crit for 291.368 damage (SpellSchool: 32). (Threat: 233.094)",
+        "[24.15] [ (#1)] Casting {SpellID: 1316697} (Cost = 200.000, Cast Time = 0s, GCD = 1.5s, Effective Time = 1.5s)",
+        "[24.15] [ (#1)] Completed cast {SpellID: 1316697}",
+        "[24.15] [ (#1)] Spent 200.000 mana from {SpellID: 1316697} (4344.756 --> 4144.756) of 5743 total.",
+        "[24.15] [Target 1] Aura gained: {SpellID: 1316697}",
+        "[24.15] [ (#1)] [Target 1] {SpellID: 1316697} Hit for 0.000 damage (SpellSchool: 32). (Threat: 0.000)",
+        "[25.15] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[25.15] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 145.684 damage (SpellSchool: 32). (Threat: 116.547)",
+        "[26.15] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[26.15] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 145.684 damage (SpellSchool: 32). (Threat: 116.547)",
+        "[27.15] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[27.15] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 145.684 damage (SpellSchool: 32). (Threat: 116.547)",
+        "[28.15] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[28.15] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 145.684 damage (SpellSchool: 32). (Threat: 116.547)",
+        "[29.15] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:260.2, AfterPostOutcome:260.2",
+        "[29.15] [ (#1)] [Target 1] {SpellID: 1316697} tick Crit for 291.368 damage (SpellSchool: 32). (Threat: 233.094)",
+        "[30.00] [Target 1] Aura faded: {SpellID: 1316697}"
+      ],
+      "firstNoncriticalTick": 145.684,
+      "observedFactor": 1.12
+    },
+    {
+      "name": "two",
+      "request": {
+        "requestId": "",
+        "raid": {
+          "parties": [
+            {
+              "players": [
+                {
+                  "apiVersion": 0,
+                  "name": "",
+                  "race": "RaceHuman",
+                  "class": "ClassWarlock",
+                  "equipment": {
+                    "items": []
+                  },
+                  "consumables": null,
+                  "bonusStats": {
+                    "apiVersion": 0,
+                    "stats": [
+                      0,
+                      0,
+                      220,
+                      200,
+                      0,
+                      500,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      100,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      20,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0
+                    ],
+                    "pseudoStats": [
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      15,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0
+                    ]
+                  },
+                  "enableItemSwap": true,
+                  "itemSwap": null,
+                  "buffs": {
+                    "greaterBlessingOfKings": false,
+                    "greaterBlessingOfMight": false,
+                    "greaterBlessingOfWisdom": false,
+                    "greaterBlessingOfSalvation": false,
+                    "greaterBlessingOfLight": false,
+                    "innervates": 0,
+                    "powerInfusions": 0,
+                    "thorns": false
+                  },
+                  "warlock": {
+                    "options": {
+                      "classOptions": {
+                        "summon": "NoSummon",
+                        "armor": "NoArmor",
+                        "curseOptions": "NoCurse",
+                        "sacrificedDemon": "NoSummon",
+                        "soulShards": 32
+                      }
+                    }
+                  },
+                  "talentsString": "25300020135201351--0550005003",
+                  "profession1": "Engineering",
+                  "profession2": "ProfessionUnknown",
+                  "prof1Rank": 0,
+                  "prof2Rank": 0,
+                  "cooldowns": null,
+                  "rotation": {
+                    "type": "TypeAPL",
+                    "priorityList": [
+                      {
+                        "action": {
+                          "condition": {
+                            "not": {
+                              "val": {
+                                "dotIsActive": {
+                                  "spellId": {
+                                    "spellId": 25311
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "castSpell": {
+                            "spellId": {
+                              "spellId": 25311
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "action": {
+                          "condition": {
+                            "not": {
+                              "val": {
+                                "dotIsActive": {
+                                  "spellId": {
+                                    "spellId": 18881
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "castSpell": {
+                            "spellId": {
+                              "spellId": 18881
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "action": {
+                          "channelSpell": {
+                            "spellId": {
+                              "spellId": 1316697
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "reactionTimeMs": 100,
+                  "channelClipDelayMs": 50,
+                  "inFrontOfTarget": false,
+                  "distanceFromTarget": 0,
+                  "darkIntentUptime": 0,
+                  "challengeMode": false,
+                  "weaponSkills": [],
+                  "healingModel": null,
+                  "database": null
+                }
+              ],
+              "buffs": {
+                "bloodPact": false,
+                "devotionAura": false,
+                "manaSpringTotem": "TristateEffectMissing",
+                "manaTideTotems": 0,
+                "retributionAura": false,
+                "retributionAuraSpellPower": 0,
+                "concentrationAura": false,
+                "atieshMage": 0,
+                "atieshWarlock": 0,
+                "atieshDruid": 0,
+                "atieshPriest": 0,
+                "stoneskinTotem": "TristateEffectMissing",
+                "darkspear": false,
+                "admiralsHat": false,
+                "darkInspiration": 0
+              }
+            }
+          ],
+          "numActiveParties": 0,
+          "buffs": {
+            "arcaneBrilliance": false,
+            "prayerOfSpirit": false,
+            "giftOfTheWild": false,
+            "prayerOfFortitude": false,
+            "prayerOfShadowProtection": false,
+            "fireResistanceAura": false,
+            "frostResistanceAura": false,
+            "shadowResistanceAura": false,
+            "fireResistanceTotem": false,
+            "frostResistanceTotem": false,
+            "natureResistanceTotem": false,
+            "strengthOfEarthTotem": false,
+            "graceOfAirTotem": false,
+            "windfuryTotem": false,
+            "flametongueTotem": false,
+            "battleShout": "TristateEffectMissing",
+            "trueshotAura": false,
+            "furiousHowl": false,
+            "aspectOfTheWild": false,
+            "leaderOfThePack": false,
+            "moonkinAura": false
+          },
+          "debuffs": {
+            "huntersMark": false,
+            "judgementOfTheCrusader": false,
+            "judgementOfLight": false,
+            "judgementOfWisdom": false,
+            "curseOfElements": true,
+            "curseOfRecklessness": false,
+            "faerieFire": false,
+            "exposeArmor": false,
+            "sunderArmor": false,
+            "giftOfArthas": false,
+            "demoralizingRoar": false,
+            "demoralizingShout": false,
+            "thunderClap": false,
+            "insectSwarm": false,
+            "scorpidSting": false,
+            "hexOfWeakness": false,
+            "demoralizingScreech": false,
+            "curseOfWeakness": false,
+            "dustCloud": false,
+            "armorShatter": false,
+            "vindication": false,
+            "thunderfury": false
+          },
+          "tanks": [],
+          "staggerStormstrikes": false,
+          "targetDummies": 0
+        },
+        "encounter": {
+          "apiVersion": 0,
+          "duration": 30,
+          "durationVariation": 0,
+          "executeProportion20": 0.2,
+          "executeProportion25": 0.25,
+          "executeProportion35": 0.35,
+          "executeProportion45": 0.45,
+          "executeProportion90": 0.9,
+          "useHealth": false,
+          "targets": [
+            {
+              "id": 0,
+              "name": "",
+              "level": 63,
+              "mobType": "MobTypeMechanical",
+              "creatureFamily": "CreatureFamilyUnknown",
+              "stats": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                320,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                3731,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "minBaseDamage": 2601,
+              "damageSpread": 0.5,
+              "swingSpeed": 2,
+              "dualWield": false,
+              "dualWieldPenalty": false,
+              "parryHaste": true,
+              "suppressDodge": false,
+              "canCrush": true,
+              "spellSchool": "SpellSchoolPhysical",
+              "tankIndex": 0,
+              "secondTankIndex": 0,
+              "disabledAtStart": false,
+              "targetInputs": []
+            }
+          ],
+          "areaTypes": [],
+          "zoneId": 0
+        },
+        "simOptions": {
+          "iterations": 1000,
+          "randomSeed": "101",
+          "debug": false,
+          "debugFirstIteration": false,
+          "isTest": true,
+          "saveAllValues": false,
+          "interactive": false,
+          "useLabeledRands": false
+        },
+        "type": "SimTypeUnknown"
+      },
+      "requestHash": "25cd8693f81eb5fa0b17713b5af19bbb0c9bb5f8c2b345f0ce77fabddb643c72",
+      "logsHash": "b5b4fbb182ca19b20d9d4d39451f284dd484bd665940a99dcaac4d4589daabc0",
+      "wrackLogs": [
+        "[4.50] [ (#1)] Casting {SpellID: 1316697} (Cost = 200.000, Cast Time = 0s, GCD = 1.5s, Effective Time = 1.5s)",
+        "[4.50] [ (#1)] Completed cast {SpellID: 1316697}",
+        "[4.50] [ (#1)] Spent 200.000 mana from {SpellID: 1316697} (4687.800 --> 4487.800) of 5743 total.",
+        "[4.50] [Target 1] Aura gained: {SpellID: 1316697}",
+        "[4.50] [ (#1)] [Target 1] {SpellID: 1316697} Hit for 0.000 damage (SpellSchool: 32). (Threat: 0.000)",
+        "[5.50] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[5.50] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 161.293 damage (SpellSchool: 32). (Threat: 129.034)",
+        "[6.50] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:260.2, AfterPostOutcome:260.2",
+        "[6.50] [ (#1)] [Target 1] {SpellID: 1316697} tick Crit for 322.586 damage (SpellSchool: 32). (Threat: 258.069)",
+        "[7.50] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[7.50] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 161.293 damage (SpellSchool: 32). (Threat: 129.034)",
+        "[8.50] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[8.50] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 161.293 damage (SpellSchool: 32). (Threat: 129.034)",
+        "[9.50] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[9.50] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 161.293 damage (SpellSchool: 32). (Threat: 129.034)",
+        "[10.50] [Target 1] Aura faded: {SpellID: 1316697}",
+        "[10.50] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[10.50] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 161.293 damage (SpellSchool: 32). (Threat: 129.034)",
+        "[10.55] [ (#1)] Casting {SpellID: 1316697} (Cost = 200.000, Cast Time = 0s, GCD = 1.5s, Effective Time = 1.5s)",
+        "[10.55] [ (#1)] Completed cast {SpellID: 1316697}",
+        "[10.55] [ (#1)] Spent 200.000 mana from {SpellID: 1316697} (4513.719 --> 4313.719) of 5743 total.",
+        "[10.55] [ (#1)] [Target 1] {SpellID: 1316697} Miss (SpellSchool: 32). (Threat: 0.000)",
+        "[12.05] [ (#1)] Casting {SpellID: 1316697} (Cost = 200.000, Cast Time = 0s, GCD = 1.5s, Effective Time = 1.5s)",
+        "[12.05] [ (#1)] Completed cast {SpellID: 1316697}",
+        "[12.05] [ (#1)] Spent 200.000 mana from {SpellID: 1316697} (4319.519 --> 4119.519) of 5743 total.",
+        "[12.05] [ (#1)] [Target 1] {SpellID: 1316697} Miss (SpellSchool: 32). (Threat: 0.000)",
+        "[13.55] [ (#1)] Casting {SpellID: 1316697} (Cost = 200.000, Cast Time = 0s, GCD = 1.5s, Effective Time = 1.5s)",
+        "[13.55] [ (#1)] Completed cast {SpellID: 1316697}",
+        "[13.55] [ (#1)] Spent 200.000 mana from {SpellID: 1316697} (4125.519 --> 3925.519) of 5743 total.",
+        "[13.55] [Target 1] Aura gained: {SpellID: 1316697}",
+        "[13.55] [ (#1)] [Target 1] {SpellID: 1316697} Hit for 0.000 damage (SpellSchool: 32). (Threat: 0.000)",
+        "[14.55] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:260.2, AfterPostOutcome:260.2",
+        "[14.55] [ (#1)] [Target 1] {SpellID: 1316697} tick Crit for 322.586 damage (SpellSchool: 32). (Threat: 258.069)",
+        "[15.55] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[15.55] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 161.293 damage (SpellSchool: 32). (Threat: 129.034)",
+        "[16.55] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:260.2, AfterPostOutcome:260.2",
+        "[16.55] [ (#1)] [Target 1] {SpellID: 1316697} tick Crit for 322.586 damage (SpellSchool: 32). (Threat: 258.069)",
+        "[17.55] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[17.55] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 161.293 damage (SpellSchool: 32). (Threat: 129.034)",
+        "[18.55] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[18.55] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 161.293 damage (SpellSchool: 32). (Threat: 129.034)",
+        "[19.55] [Target 1] Aura faded: {SpellID: 1316697}",
+        "[19.55] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:260.2, AfterPostOutcome:260.2",
+        "[19.55] [ (#1)] [Target 1] {SpellID: 1316697} tick Crit for 291.368 damage (SpellSchool: 32). (Threat: 233.094)",
+        "[21.10] [ (#1)] Casting {SpellID: 1316697} (Cost = 200.000, Cast Time = 0s, GCD = 1.5s, Effective Time = 1.5s)",
+        "[21.10] [ (#1)] Completed cast {SpellID: 1316697}",
+        "[21.10] [ (#1)] Spent 200.000 mana from {SpellID: 1316697} (3645.137 --> 3445.137) of 5743 total.",
+        "[21.10] [Target 1] Aura gained: {SpellID: 1316697}",
+        "[21.10] [ (#1)] [Target 1] {SpellID: 1316697} Hit for 0.000 damage (SpellSchool: 32). (Threat: 0.000)",
+        "[22.10] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:260.2, AfterPostOutcome:260.2",
+        "[22.10] [ (#1)] [Target 1] {SpellID: 1316697} tick Crit for 322.586 damage (SpellSchool: 32). (Threat: 258.069)",
+        "[23.10] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[23.10] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 161.293 damage (SpellSchool: 32). (Threat: 129.034)",
+        "[24.10] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[24.10] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 161.293 damage (SpellSchool: 32). (Threat: 129.034)",
+        "[25.10] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[25.10] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 161.293 damage (SpellSchool: 32). (Threat: 129.034)",
+        "[26.10] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[26.10] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 161.293 damage (SpellSchool: 32). (Threat: 129.034)",
+        "[27.10] [Target 1] Aura faded: {SpellID: 1316697}",
+        "[27.10] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:260.2, AfterPostOutcome:260.2",
+        "[27.10] [ (#1)] [Target 1] {SpellID: 1316697} tick Crit for 322.586 damage (SpellSchool: 32). (Threat: 258.069)",
+        "[27.15] [ (#1)] Casting {SpellID: 1316697} (Cost = 200.000, Cast Time = 0s, GCD = 1.5s, Effective Time = 1.5s)",
+        "[27.15] [ (#1)] Completed cast {SpellID: 1316697}",
+        "[27.15] [ (#1)] Spent 200.000 mana from {SpellID: 1316697} (3471.056 --> 3271.056) of 5743 total.",
+        "[27.15] [Target 1] Aura gained: {SpellID: 1316697}",
+        "[27.15] [ (#1)] [Target 1] {SpellID: 1316697} Hit for 0.000 damage (SpellSchool: 32). (Threat: 0.000)",
+        "[28.15] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:260.2, AfterPostOutcome:260.2",
+        "[28.15] [ (#1)] [Target 1] {SpellID: 1316697} tick Crit for 322.586 damage (SpellSchool: 32). (Threat: 258.069)",
+        "[29.15] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:260.2, AfterPostOutcome:260.2",
+        "[29.15] [ (#1)] [Target 1] {SpellID: 1316697} tick Crit for 322.586 damage (SpellSchool: 32). (Threat: 258.069)",
+        "[30.00] [Target 1] Aura faded: {SpellID: 1316697}"
+      ],
+      "firstNoncriticalTick": 161.293,
+      "observedFactor": 1.2400000000000002
+    },
+    {
+      "name": "three",
+      "request": {
+        "requestId": "",
+        "raid": {
+          "parties": [
+            {
+              "players": [
+                {
+                  "apiVersion": 0,
+                  "name": "",
+                  "race": "RaceHuman",
+                  "class": "ClassWarlock",
+                  "equipment": {
+                    "items": []
+                  },
+                  "consumables": null,
+                  "bonusStats": {
+                    "apiVersion": 0,
+                    "stats": [
+                      0,
+                      0,
+                      220,
+                      200,
+                      0,
+                      500,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      100,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      20,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0
+                    ],
+                    "pseudoStats": [
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      15,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0
+                    ]
+                  },
+                  "enableItemSwap": true,
+                  "itemSwap": null,
+                  "buffs": {
+                    "greaterBlessingOfKings": false,
+                    "greaterBlessingOfMight": false,
+                    "greaterBlessingOfWisdom": false,
+                    "greaterBlessingOfSalvation": false,
+                    "greaterBlessingOfLight": false,
+                    "innervates": 0,
+                    "powerInfusions": 0,
+                    "thorns": false
+                  },
+                  "warlock": {
+                    "options": {
+                      "classOptions": {
+                        "summon": "NoSummon",
+                        "armor": "NoArmor",
+                        "curseOptions": "NoCurse",
+                        "sacrificedDemon": "NoSummon",
+                        "soulShards": 32
+                      }
+                    }
+                  },
+                  "talentsString": "25300020135201351--0550005003",
+                  "profession1": "Engineering",
+                  "profession2": "ProfessionUnknown",
+                  "prof1Rank": 0,
+                  "prof2Rank": 0,
+                  "cooldowns": null,
+                  "rotation": {
+                    "type": "TypeAPL",
+                    "priorityList": [
+                      {
+                        "action": {
+                          "condition": {
+                            "not": {
+                              "val": {
+                                "dotIsActive": {
+                                  "spellId": {
+                                    "spellId": 25311
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "castSpell": {
+                            "spellId": {
+                              "spellId": 25311
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "action": {
+                          "condition": {
+                            "not": {
+                              "val": {
+                                "dotIsActive": {
+                                  "spellId": {
+                                    "spellId": 18881
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "castSpell": {
+                            "spellId": {
+                              "spellId": 18881
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "action": {
+                          "condition": {
+                            "not": {
+                              "val": {
+                                "dotIsActive": {
+                                  "spellId": {
+                                    "spellId": 11713
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "castSpell": {
+                            "spellId": {
+                              "spellId": 11713
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "action": {
+                          "channelSpell": {
+                            "spellId": {
+                              "spellId": 1316697
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "reactionTimeMs": 100,
+                  "channelClipDelayMs": 50,
+                  "inFrontOfTarget": false,
+                  "distanceFromTarget": 0,
+                  "darkIntentUptime": 0,
+                  "challengeMode": false,
+                  "weaponSkills": [],
+                  "healingModel": null,
+                  "database": null
+                }
+              ],
+              "buffs": {
+                "bloodPact": false,
+                "devotionAura": false,
+                "manaSpringTotem": "TristateEffectMissing",
+                "manaTideTotems": 0,
+                "retributionAura": false,
+                "retributionAuraSpellPower": 0,
+                "concentrationAura": false,
+                "atieshMage": 0,
+                "atieshWarlock": 0,
+                "atieshDruid": 0,
+                "atieshPriest": 0,
+                "stoneskinTotem": "TristateEffectMissing",
+                "darkspear": false,
+                "admiralsHat": false,
+                "darkInspiration": 0
+              }
+            }
+          ],
+          "numActiveParties": 0,
+          "buffs": {
+            "arcaneBrilliance": false,
+            "prayerOfSpirit": false,
+            "giftOfTheWild": false,
+            "prayerOfFortitude": false,
+            "prayerOfShadowProtection": false,
+            "fireResistanceAura": false,
+            "frostResistanceAura": false,
+            "shadowResistanceAura": false,
+            "fireResistanceTotem": false,
+            "frostResistanceTotem": false,
+            "natureResistanceTotem": false,
+            "strengthOfEarthTotem": false,
+            "graceOfAirTotem": false,
+            "windfuryTotem": false,
+            "flametongueTotem": false,
+            "battleShout": "TristateEffectMissing",
+            "trueshotAura": false,
+            "furiousHowl": false,
+            "aspectOfTheWild": false,
+            "leaderOfThePack": false,
+            "moonkinAura": false
+          },
+          "debuffs": {
+            "huntersMark": false,
+            "judgementOfTheCrusader": false,
+            "judgementOfLight": false,
+            "judgementOfWisdom": false,
+            "curseOfElements": true,
+            "curseOfRecklessness": false,
+            "faerieFire": false,
+            "exposeArmor": false,
+            "sunderArmor": false,
+            "giftOfArthas": false,
+            "demoralizingRoar": false,
+            "demoralizingShout": false,
+            "thunderClap": false,
+            "insectSwarm": false,
+            "scorpidSting": false,
+            "hexOfWeakness": false,
+            "demoralizingScreech": false,
+            "curseOfWeakness": false,
+            "dustCloud": false,
+            "armorShatter": false,
+            "vindication": false,
+            "thunderfury": false
+          },
+          "tanks": [],
+          "staggerStormstrikes": false,
+          "targetDummies": 0
+        },
+        "encounter": {
+          "apiVersion": 0,
+          "duration": 30,
+          "durationVariation": 0,
+          "executeProportion20": 0.2,
+          "executeProportion25": 0.25,
+          "executeProportion35": 0.35,
+          "executeProportion45": 0.45,
+          "executeProportion90": 0.9,
+          "useHealth": false,
+          "targets": [
+            {
+              "id": 0,
+              "name": "",
+              "level": 63,
+              "mobType": "MobTypeMechanical",
+              "creatureFamily": "CreatureFamilyUnknown",
+              "stats": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                320,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                3731,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "minBaseDamage": 2601,
+              "damageSpread": 0.5,
+              "swingSpeed": 2,
+              "dualWield": false,
+              "dualWieldPenalty": false,
+              "parryHaste": true,
+              "suppressDodge": false,
+              "canCrush": true,
+              "spellSchool": "SpellSchoolPhysical",
+              "tankIndex": 0,
+              "secondTankIndex": 0,
+              "disabledAtStart": false,
+              "targetInputs": []
+            }
+          ],
+          "areaTypes": [],
+          "zoneId": 0
+        },
+        "simOptions": {
+          "iterations": 1000,
+          "randomSeed": "101",
+          "debug": false,
+          "debugFirstIteration": false,
+          "isTest": true,
+          "saveAllValues": false,
+          "interactive": false,
+          "useLabeledRands": false
+        },
+        "type": "SimTypeUnknown"
+      },
+      "requestHash": "e3a916889a6fd04c191d0737c09a781d160d7d8431d0e91885b1b0a9017f7d98",
+      "logsHash": "4c008be7f120478bd8f51efca8077697a0edea4f179db9e6742b40e3b5e3ff26",
+      "wrackLogs": [
+        "[6.00] [ (#1)] Casting {SpellID: 1316697} (Cost = 200.000, Cast Time = 0s, GCD = 1.5s, Effective Time = 1.5s)",
+        "[6.00] [ (#1)] Completed cast {SpellID: 1316697}",
+        "[6.00] [ (#1)] Spent 200.000 mana from {SpellID: 1316697} (4478.800 --> 4278.800) of 5743 total.",
+        "[6.00] [ (#1)] [Target 1] {SpellID: 1316697} Miss (SpellSchool: 32). (Threat: 0.000)",
+        "[7.50] [ (#1)] Casting {SpellID: 1316697} (Cost = 200.000, Cast Time = 0s, GCD = 1.5s, Effective Time = 1.5s)",
+        "[7.50] [ (#1)] Completed cast {SpellID: 1316697}",
+        "[7.50] [ (#1)] Spent 200.000 mana from {SpellID: 1316697} (4284.800 --> 4084.800) of 5743 total.",
+        "[7.50] [ (#1)] [Target 1] {SpellID: 1316697} Miss (SpellSchool: 32). (Threat: 0.000)",
+        "[9.00] [ (#1)] Casting {SpellID: 1316697} (Cost = 200.000, Cast Time = 0s, GCD = 1.5s, Effective Time = 1.5s)",
+        "[9.00] [ (#1)] Completed cast {SpellID: 1316697}",
+        "[9.00] [ (#1)] Spent 200.000 mana from {SpellID: 1316697} (4090.800 --> 3890.800) of 5743 total.",
+        "[9.00] [Target 1] Aura gained: {SpellID: 1316697}",
+        "[9.00] [ (#1)] [Target 1] {SpellID: 1316697} Hit for 0.000 damage (SpellSchool: 32). (Threat: 0.000)",
+        "[10.00] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[10.00] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 176.902 damage (SpellSchool: 32). (Threat: 141.522)",
+        "[11.00] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[11.00] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 176.902 damage (SpellSchool: 32). (Threat: 141.522)",
+        "[12.00] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[12.00] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 176.902 damage (SpellSchool: 32). (Threat: 141.522)",
+        "[13.00] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:260.2, AfterPostOutcome:260.2",
+        "[13.00] [ (#1)] [Target 1] {SpellID: 1316697} tick Crit for 353.804 damage (SpellSchool: 32). (Threat: 283.043)",
+        "[14.00] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[14.00] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 176.902 damage (SpellSchool: 32). (Threat: 141.522)",
+        "[15.00] [Target 1] Aura faded: {SpellID: 1316697}",
+        "[15.00] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:260.2, AfterPostOutcome:260.2",
+        "[15.00] [ (#1)] [Target 1] {SpellID: 1316697} tick Crit for 353.804 damage (SpellSchool: 32). (Threat: 283.043)",
+        "[15.05] [ (#1)] Casting {SpellID: 1316697} (Cost = 200.000, Cast Time = 0s, GCD = 1.5s, Effective Time = 1.5s)",
+        "[15.05] [ (#1)] Completed cast {SpellID: 1316697}",
+        "[15.05] [ (#1)] Spent 200.000 mana from {SpellID: 1316697} (3916.719 --> 3716.719) of 5743 total.",
+        "[15.05] [Target 1] Aura gained: {SpellID: 1316697}",
+        "[15.05] [ (#1)] [Target 1] {SpellID: 1316697} Hit for 0.000 damage (SpellSchool: 32). (Threat: 0.000)",
+        "[16.05] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[16.05] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 176.902 damage (SpellSchool: 32). (Threat: 141.522)",
+        "[17.05] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:260.2, AfterPostOutcome:260.2",
+        "[17.05] [ (#1)] [Target 1] {SpellID: 1316697} tick Crit for 353.804 damage (SpellSchool: 32). (Threat: 283.043)",
+        "[18.05] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:260.2, AfterPostOutcome:260.2",
+        "[18.05] [ (#1)] [Target 1] {SpellID: 1316697} tick Crit for 353.804 damage (SpellSchool: 32). (Threat: 283.043)",
+        "[19.05] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:260.2, AfterPostOutcome:260.2",
+        "[19.05] [ (#1)] [Target 1] {SpellID: 1316697} tick Crit for 322.586 damage (SpellSchool: 32). (Threat: 258.069)",
+        "[20.05] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[20.05] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 161.293 damage (SpellSchool: 32). (Threat: 129.034)",
+        "[21.05] [Target 1] Aura faded: {SpellID: 1316697}",
+        "[21.05] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[21.05] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 161.293 damage (SpellSchool: 32). (Threat: 129.034)",
+        "[22.60] [ (#1)] Casting {SpellID: 1316697} (Cost = 200.000, Cast Time = 0s, GCD = 1.5s, Effective Time = 1.5s)",
+        "[22.60] [ (#1)] Completed cast {SpellID: 1316697}",
+        "[22.60] [ (#1)] Spent 200.000 mana from {SpellID: 1316697} (3436.137 --> 3236.137) of 5743 total.",
+        "[22.60] [Target 1] Aura gained: {SpellID: 1316697}",
+        "[22.60] [ (#1)] [Target 1] {SpellID: 1316697} Hit for 0.000 damage (SpellSchool: 32). (Threat: 0.000)",
+        "[23.60] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:260.2, AfterPostOutcome:260.2",
+        "[23.60] [ (#1)] [Target 1] {SpellID: 1316697} tick Crit for 353.804 damage (SpellSchool: 32). (Threat: 283.043)",
+        "[24.60] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[24.60] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 176.902 damage (SpellSchool: 32). (Threat: 141.522)",
+        "[25.60] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:260.2, AfterPostOutcome:260.2",
+        "[25.60] [ (#1)] [Target 1] {SpellID: 1316697} tick Crit for 353.804 damage (SpellSchool: 32). (Threat: 283.043)",
+        "[26.60] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[26.60] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 176.902 damage (SpellSchool: 32). (Threat: 141.522)",
+        "[27.60] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[27.60] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 176.902 damage (SpellSchool: 32). (Threat: 141.522)",
+        "[28.60] [Target 1] Aura faded: {SpellID: 1316697}",
+        "[28.60] [ (#1)] [Target 1] {SpellID: 1316697} [DEBUG] MAP: 35.0, RAP: 0.0, SP: 500.0, BaseDamage:107.5, AfterAttackerMods:118.3, AfterResistances:118.3, AfterTargetMods:130.1, AfterOutcome:130.1, AfterPostOutcome:130.1",
+        "[28.60] [ (#1)] [Target 1] {SpellID: 1316697} tick Hit for 161.293 damage (SpellSchool: 32). (Threat: 129.034)"
+      ],
+      "firstNoncriticalTick": 176.902,
+      "observedFactor": 1.36
+    }
+  ],
+  "traceWrapperHash": "5d19bd986c9452fe6bcf86af006036f2895dab6682d8b70475d60d7fa749b896",
+  "effectCounts": [
+    0,
+    1,
+    1,
+    2,
+    3
+  ],
+  "validated": true
+}

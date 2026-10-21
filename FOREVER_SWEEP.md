@@ -11,7 +11,7 @@ Intervals are approximate 95% Monte Carlo intervals for independent-engine mean 
 | Preset | Cases | Mean absolute delta % | Worst absolute delta % |
 | --- | ---: | ---: | ---: |
 | sm_ruin | 60 | 0.26 | 0.90 |
-| aff_wrack | 60 | 0.33 | 0.86 |
+| aff_wrack | 60 | 0.16 | 0.51 |
 | destro | 60 | 0.25 | 1.09 |
 | demo_shadow_brand | 60 | 0.41 | 1.15 |
 | demo_fire_brand | 60 | 0.25 | 0.62 |
@@ -34,12 +34,12 @@ Intervals are approximate 95% Monte Carlo intervals for independent-engine mean 
 | destro | TROLL | hit_16 | 632.78 | 638.37 | 0.88 | 5.60 ± 1.88 |
 | demo_shadow_brand | TROLL | hit_0 | 614.15 | 619.46 | 0.86 | 5.31 ± 3.48 |
 | demo_shadow_brand | HUMAN | crit_30 | 801.33 | 808.25 | 0.86 | 6.92 ± 3.27 |
-| aff_wrack | GNOME | hit_0 | 510.38 | 514.75 | 0.86 | 4.37 ± 2.08 |
 | destro | TROLL | sp_250 | 470.21 | 474.14 | 0.84 | 3.93 ± 1.38 |
 | demo_shadow_brand | ORC | hit_0 | 621.96 | 627.09 | 0.82 | 5.13 ± 3.62 |
-| aff_wrack | TROLL | regen_low | 532.82 | 536.98 | 0.78 | 4.15 ± 1.68 |
-| aff_wrack | TROLL | hit_5 | 525.07 | 529.02 | 0.75 | 3.95 ± 1.97 |
-| aff_wrack | TROLL | hit_0 | 507.27 | 510.96 | 0.73 | 3.69 ± 2.05 |
+| demo_shadow_brand | TROLL | hit_5 | 654.18 | 658.73 | 0.69 | 4.54 ± 3.28 |
+| destro | TROLL | int_0 | 604.05 | 608.15 | 0.68 | 4.10 ± 1.83 |
+| sm_ruin | TROLL | regen_low | 616.48 | 620.64 | 0.67 | 4.16 ± 2.82 |
+| sm_ruin | TROLL | sp_1000 | 983.87 | 990.32 | 0.66 | 6.45 ± 4.60 |
 
 ## All combinations
 
@@ -105,66 +105,66 @@ Intervals are approximate 95% Monte Carlo intervals for independent-engine mean 
 | sm_ruin | GNOME | crit_30 | 737.27 | 738.83 | 0.21 | 1.56 ± 3.16 | 0 | 1 |
 | sm_ruin | GNOME | regen_low | 622.28 | 624.36 | 0.33 | 2.08 ± 2.89 | 0 | 1 |
 | sm_ruin | GNOME | regen_high | 662.79 | 666.98 | 0.63 | 4.19 ± 3.03 | 0 | 1 |
-| aff_wrack | HUMAN | baseline | 559.93 | 561.37 | 0.26 | 1.44 ± 1.75 | 0 | 2 |
-| aff_wrack | HUMAN | sp_250 | 406.98 | 407.90 | 0.23 | 0.92 ± 1.24 | 0 | 2 |
-| aff_wrack | HUMAN | sp_1000 | 865.83 | 868.30 | 0.29 | 2.48 ± 2.78 | 0 | 2 |
-| aff_wrack | HUMAN | int_0 | 532.37 | 533.26 | 0.17 | 0.89 ± 1.62 | 0 | 2 |
-| aff_wrack | HUMAN | int_400 | 591.26 | 592.83 | 0.27 | 1.57 ± 1.81 | 0 | 2 |
-| aff_wrack | HUMAN | hit_0 | 517.36 | 519.82 | 0.47 | 2.46 ± 2.11 | 0 | 2 |
-| aff_wrack | HUMAN | hit_5 | 536.30 | 537.73 | 0.27 | 1.44 ± 2.00 | 0 | 2 |
-| aff_wrack | HUMAN | hit_16 | 559.93 | 561.37 | 0.26 | 1.44 ± 1.75 | 0 | 2 |
-| aff_wrack | HUMAN | crit_0 | 489.76 | 491.20 | 0.29 | 1.44 ± 1.49 | 0 | 2 |
-| aff_wrack | HUMAN | crit_30 | 629.74 | 632.23 | 0.39 | 2.49 ± 1.89 | 0 | 2 |
-| aff_wrack | HUMAN | regen_low | 540.35 | 542.52 | 0.40 | 2.18 ± 1.85 | 0 | 2 |
-| aff_wrack | HUMAN | regen_high | 573.38 | 575.22 | 0.32 | 1.84 ± 1.94 | 0 | 2 |
-| aff_wrack | ORC | baseline | 558.98 | 559.05 | 0.01 | 0.06 ± 1.73 | 0 | 2 |
-| aff_wrack | ORC | sp_250 | 405.56 | 405.50 | -0.02 | -0.07 ± 1.22 | 0 | 2 |
-| aff_wrack | ORC | sp_1000 | 865.82 | 866.14 | 0.04 | 0.32 ± 2.75 | 0 | 2 |
-| aff_wrack | ORC | int_0 | 525.16 | 526.22 | 0.20 | 1.05 ± 1.63 | 0 | 2 |
-| aff_wrack | ORC | int_400 | 589.15 | 591.51 | 0.40 | 2.35 ± 1.79 | 0 | 2 |
-| aff_wrack | ORC | hit_0 | 514.58 | 517.01 | 0.47 | 2.43 ± 2.04 | 0 | 2 |
-| aff_wrack | ORC | hit_5 | 533.36 | 535.50 | 0.40 | 2.13 ± 1.97 | 0 | 2 |
-| aff_wrack | ORC | hit_16 | 558.98 | 559.05 | 0.01 | 0.06 ± 1.73 | 0 | 2 |
-| aff_wrack | ORC | crit_0 | 486.28 | 488.26 | 0.41 | 1.98 ± 1.48 | 0 | 2 |
-| aff_wrack | ORC | crit_30 | 627.58 | 629.52 | 0.31 | 1.94 ± 1.85 | 0 | 2 |
-| aff_wrack | ORC | regen_low | 539.40 | 541.84 | 0.45 | 2.44 ± 1.73 | 0 | 2 |
-| aff_wrack | ORC | regen_high | 570.08 | 572.01 | 0.34 | 1.92 ± 1.95 | 0 | 2 |
-| aff_wrack | UNDEAD | baseline | 559.44 | 560.35 | 0.16 | 0.90 ± 1.61 | 0 | 2 |
-| aff_wrack | UNDEAD | sp_250 | 408.43 | 409.00 | 0.14 | 0.57 ± 1.14 | 0 | 2 |
-| aff_wrack | UNDEAD | sp_1000 | 861.46 | 863.03 | 0.18 | 1.57 ± 2.56 | 0 | 2 |
-| aff_wrack | UNDEAD | int_0 | 522.29 | 524.72 | 0.47 | 2.43 ± 1.62 | 0 | 2 |
-| aff_wrack | UNDEAD | int_400 | 587.72 | 590.06 | 0.40 | 2.35 ± 1.74 | 0 | 2 |
-| aff_wrack | UNDEAD | hit_0 | 514.66 | 517.82 | 0.62 | 3.17 ± 2.08 | 0 | 2 |
-| aff_wrack | UNDEAD | hit_5 | 533.76 | 536.32 | 0.48 | 2.56 ± 1.91 | 0 | 2 |
-| aff_wrack | UNDEAD | hit_16 | 559.44 | 560.35 | 0.16 | 0.90 ± 1.61 | 0 | 2 |
-| aff_wrack | UNDEAD | crit_0 | 490.82 | 492.73 | 0.39 | 1.90 ± 1.26 | 0 | 2 |
-| aff_wrack | UNDEAD | crit_30 | 627.46 | 628.72 | 0.20 | 1.26 ± 1.85 | 0 | 2 |
-| aff_wrack | UNDEAD | regen_low | 537.06 | 538.91 | 0.35 | 1.86 ± 1.77 | 0 | 2 |
-| aff_wrack | UNDEAD | regen_high | 568.46 | 569.70 | 0.22 | 1.23 ± 1.90 | 0 | 2 |
-| aff_wrack | TROLL | baseline | 549.13 | 551.53 | 0.44 | 2.40 ± 1.68 | 0 | 2 |
-| aff_wrack | TROLL | sp_250 | 399.13 | 400.74 | 0.40 | 1.61 ± 1.19 | 0 | 2 |
-| aff_wrack | TROLL | sp_1000 | 849.14 | 853.11 | 0.47 | 3.98 ± 2.67 | 0 | 2 |
-| aff_wrack | TROLL | int_0 | 516.82 | 519.07 | 0.44 | 2.25 ± 1.58 | 0 | 2 |
-| aff_wrack | TROLL | int_400 | 581.75 | 584.66 | 0.50 | 2.91 ± 1.73 | 0 | 2 |
-| aff_wrack | TROLL | hit_0 | 507.27 | 510.96 | 0.73 | 3.69 ± 2.05 | 0 | 2 |
-| aff_wrack | TROLL | hit_5 | 525.07 | 529.02 | 0.75 | 3.95 ± 1.97 | 0 | 2 |
-| aff_wrack | TROLL | hit_16 | 549.13 | 551.53 | 0.44 | 2.40 ± 1.68 | 0 | 2 |
-| aff_wrack | TROLL | crit_0 | 478.55 | 481.94 | 0.71 | 3.39 ± 1.24 | 0 | 2 |
-| aff_wrack | TROLL | crit_30 | 618.46 | 621.59 | 0.51 | 3.13 ± 1.85 | 0 | 2 |
-| aff_wrack | TROLL | regen_low | 532.82 | 536.98 | 0.78 | 4.15 ± 1.68 | 0 | 2 |
-| aff_wrack | TROLL | regen_high | 564.47 | 567.15 | 0.48 | 2.69 ± 1.83 | 0 | 2 |
-| aff_wrack | GNOME | baseline | 553.44 | 554.14 | 0.13 | 0.70 ± 1.62 | 0 | 2 |
-| aff_wrack | GNOME | sp_250 | 402.20 | 402.62 | 0.10 | 0.42 ± 1.14 | 0 | 2 |
-| aff_wrack | GNOME | sp_1000 | 855.92 | 857.18 | 0.15 | 1.26 ± 2.57 | 0 | 2 |
-| aff_wrack | GNOME | int_0 | 515.29 | 516.24 | 0.18 | 0.95 ± 1.57 | 0 | 2 |
-| aff_wrack | GNOME | int_400 | 587.27 | 587.36 | 0.02 | 0.09 ± 1.74 | 0 | 2 |
-| aff_wrack | GNOME | hit_0 | 510.38 | 514.75 | 0.86 | 4.37 ± 2.08 | 0 | 2 |
-| aff_wrack | GNOME | hit_5 | 529.80 | 531.89 | 0.39 | 2.09 ± 1.93 | 0 | 2 |
-| aff_wrack | GNOME | hit_16 | 553.44 | 554.14 | 0.13 | 0.70 ± 1.62 | 0 | 2 |
-| aff_wrack | GNOME | crit_0 | 484.60 | 485.08 | 0.10 | 0.48 ± 1.27 | 0 | 2 |
-| aff_wrack | GNOME | crit_30 | 623.44 | 624.67 | 0.20 | 1.23 ± 1.85 | 0 | 2 |
-| aff_wrack | GNOME | regen_low | 538.70 | 540.17 | 0.27 | 1.47 ± 1.70 | 0 | 2 |
-| aff_wrack | GNOME | regen_high | 568.39 | 570.04 | 0.29 | 1.65 ± 1.87 | 0 | 2 |
+| aff_wrack | HUMAN | baseline | 559.93 | 559.76 | -0.03 | -0.17 ± 1.76 | 0 | 2 |
+| aff_wrack | HUMAN | sp_250 | 406.98 | 406.86 | -0.03 | -0.12 ± 1.24 | 0 | 2 |
+| aff_wrack | HUMAN | sp_1000 | 865.83 | 865.57 | -0.03 | -0.26 ± 2.80 | 0 | 2 |
+| aff_wrack | HUMAN | int_0 | 532.37 | 531.69 | -0.13 | -0.68 ± 1.63 | 0 | 2 |
+| aff_wrack | HUMAN | int_400 | 591.26 | 590.35 | -0.15 | -0.91 ± 1.81 | 0 | 2 |
+| aff_wrack | HUMAN | hit_0 | 517.36 | 518.07 | 0.14 | 0.71 ± 2.09 | 0 | 2 |
+| aff_wrack | HUMAN | hit_5 | 536.30 | 535.96 | -0.06 | -0.33 ± 1.99 | 0 | 2 |
+| aff_wrack | HUMAN | hit_16 | 559.93 | 559.76 | -0.03 | -0.17 ± 1.76 | 0 | 2 |
+| aff_wrack | HUMAN | crit_0 | 489.76 | 489.21 | -0.11 | -0.55 ± 1.48 | 0 | 2 |
+| aff_wrack | HUMAN | crit_30 | 629.74 | 631.13 | 0.22 | 1.39 ± 1.84 | 0 | 2 |
+| aff_wrack | HUMAN | regen_low | 540.35 | 541.49 | 0.21 | 1.15 ± 1.87 | 0 | 2 |
+| aff_wrack | HUMAN | regen_high | 573.38 | 573.01 | -0.06 | -0.37 ± 1.97 | 0 | 2 |
+| aff_wrack | ORC | baseline | 558.98 | 557.76 | -0.22 | -1.23 ± 1.70 | 0 | 2 |
+| aff_wrack | ORC | sp_250 | 405.56 | 404.70 | -0.21 | -0.87 ± 1.20 | 0 | 2 |
+| aff_wrack | ORC | sp_1000 | 865.82 | 863.88 | -0.22 | -1.94 ± 2.71 | 0 | 2 |
+| aff_wrack | ORC | int_0 | 525.16 | 524.43 | -0.14 | -0.73 ± 1.61 | 0 | 2 |
+| aff_wrack | ORC | int_400 | 589.15 | 588.37 | -0.13 | -0.78 ± 1.77 | 0 | 2 |
+| aff_wrack | ORC | hit_0 | 514.58 | 515.10 | 0.10 | 0.52 ± 2.01 | 0 | 2 |
+| aff_wrack | ORC | hit_5 | 533.36 | 533.46 | 0.02 | 0.10 ± 1.92 | 0 | 2 |
+| aff_wrack | ORC | hit_16 | 558.98 | 557.76 | -0.22 | -1.23 ± 1.70 | 0 | 2 |
+| aff_wrack | ORC | crit_0 | 486.28 | 486.84 | 0.11 | 0.55 ± 1.50 | 0 | 2 |
+| aff_wrack | ORC | crit_30 | 627.58 | 627.38 | -0.03 | -0.20 ± 1.86 | 0 | 2 |
+| aff_wrack | ORC | regen_low | 539.40 | 539.60 | 0.04 | 0.21 ± 1.75 | 0 | 2 |
+| aff_wrack | ORC | regen_high | 570.08 | 570.51 | 0.07 | 0.43 ± 1.94 | 0 | 2 |
+| aff_wrack | UNDEAD | baseline | 559.44 | 559.36 | -0.01 | -0.08 ± 1.61 | 0 | 2 |
+| aff_wrack | UNDEAD | sp_250 | 408.43 | 408.37 | -0.02 | -0.06 ± 1.14 | 0 | 2 |
+| aff_wrack | UNDEAD | sp_1000 | 861.46 | 861.34 | -0.01 | -0.11 ± 2.56 | 0 | 2 |
+| aff_wrack | UNDEAD | int_0 | 522.29 | 522.71 | 0.08 | 0.42 ± 1.62 | 0 | 2 |
+| aff_wrack | UNDEAD | int_400 | 587.72 | 588.93 | 0.21 | 1.22 ± 1.75 | 0 | 2 |
+| aff_wrack | UNDEAD | hit_0 | 514.66 | 515.47 | 0.16 | 0.82 ± 2.12 | 0 | 2 |
+| aff_wrack | UNDEAD | hit_5 | 533.76 | 535.68 | 0.36 | 1.92 ± 1.91 | 0 | 2 |
+| aff_wrack | UNDEAD | hit_16 | 559.44 | 559.36 | -0.01 | -0.08 ± 1.61 | 0 | 2 |
+| aff_wrack | UNDEAD | crit_0 | 490.82 | 491.48 | 0.13 | 0.66 ± 1.28 | 0 | 2 |
+| aff_wrack | UNDEAD | crit_30 | 627.46 | 627.98 | 0.08 | 0.52 ± 1.81 | 0 | 2 |
+| aff_wrack | UNDEAD | regen_low | 537.06 | 538.23 | 0.22 | 1.17 ± 1.76 | 0 | 2 |
+| aff_wrack | UNDEAD | regen_high | 568.46 | 569.15 | 0.12 | 0.69 ± 1.92 | 0 | 2 |
+| aff_wrack | TROLL | baseline | 549.13 | 550.73 | 0.29 | 1.60 ± 1.71 | 0 | 2 |
+| aff_wrack | TROLL | sp_250 | 399.13 | 400.26 | 0.28 | 1.13 ± 1.21 | 0 | 2 |
+| aff_wrack | TROLL | sp_1000 | 849.14 | 851.67 | 0.30 | 2.54 ± 2.73 | 0 | 2 |
+| aff_wrack | TROLL | int_0 | 516.82 | 517.31 | 0.10 | 0.49 ± 1.56 | 0 | 2 |
+| aff_wrack | TROLL | int_400 | 581.75 | 582.50 | 0.13 | 0.75 ± 1.73 | 0 | 2 |
+| aff_wrack | TROLL | hit_0 | 507.27 | 509.86 | 0.51 | 2.58 ± 2.03 | 0 | 2 |
+| aff_wrack | TROLL | hit_5 | 525.07 | 527.25 | 0.42 | 2.18 ± 1.96 | 0 | 2 |
+| aff_wrack | TROLL | hit_16 | 549.13 | 550.73 | 0.29 | 1.60 ± 1.71 | 0 | 2 |
+| aff_wrack | TROLL | crit_0 | 478.55 | 480.92 | 0.50 | 2.37 ± 1.26 | 0 | 2 |
+| aff_wrack | TROLL | crit_30 | 618.46 | 620.88 | 0.39 | 2.42 ± 1.84 | 0 | 2 |
+| aff_wrack | TROLL | regen_low | 532.82 | 535.04 | 0.42 | 2.21 ± 1.67 | 0 | 2 |
+| aff_wrack | TROLL | regen_high | 564.47 | 565.66 | 0.21 | 1.19 ± 1.85 | 0 | 2 |
+| aff_wrack | GNOME | baseline | 553.44 | 552.38 | -0.19 | -1.06 ± 1.67 | 0 | 2 |
+| aff_wrack | GNOME | sp_250 | 402.20 | 401.46 | -0.18 | -0.73 ± 1.18 | 0 | 2 |
+| aff_wrack | GNOME | sp_1000 | 855.92 | 854.21 | -0.20 | -1.71 ± 2.66 | 0 | 2 |
+| aff_wrack | GNOME | int_0 | 515.29 | 515.88 | 0.11 | 0.59 ± 1.61 | 0 | 2 |
+| aff_wrack | GNOME | int_400 | 587.27 | 585.77 | -0.26 | -1.50 ± 1.72 | 0 | 2 |
+| aff_wrack | GNOME | hit_0 | 510.38 | 511.52 | 0.22 | 1.14 ± 2.07 | 0 | 2 |
+| aff_wrack | GNOME | hit_5 | 529.80 | 529.57 | -0.04 | -0.23 ± 1.92 | 0 | 2 |
+| aff_wrack | GNOME | hit_16 | 553.44 | 552.38 | -0.19 | -1.06 ± 1.67 | 0 | 2 |
+| aff_wrack | GNOME | crit_0 | 484.60 | 484.24 | -0.07 | -0.36 ± 1.28 | 0 | 2 |
+| aff_wrack | GNOME | crit_30 | 623.44 | 622.99 | -0.07 | -0.45 ± 1.88 | 0 | 2 |
+| aff_wrack | GNOME | regen_low | 538.70 | 538.71 | 0.00 | 0.01 ± 1.68 | 0 | 2 |
+| aff_wrack | GNOME | regen_high | 568.39 | 567.91 | -0.08 | -0.48 ± 1.89 | 0 | 2 |
 | destro | HUMAN | baseline | 646.88 | 646.28 | -0.09 | -0.60 ± 2.06 | 0 | 1 |
 | destro | HUMAN | sp_250 | 479.91 | 479.59 | -0.07 | -0.32 ± 1.51 | 0 | 1 |
 | destro | HUMAN | sp_1000 | 980.83 | 979.66 | -0.12 | -1.18 ± 3.18 | 0 | 1 |

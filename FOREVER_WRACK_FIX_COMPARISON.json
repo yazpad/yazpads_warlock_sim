@@ -1,0 +1,68 @@
+{
+  "status": "complete",
+  "iterationsPerEnginePerCase": 1000,
+  "seed": 101,
+  "before": {
+    "cases": 300,
+    "maeDps": 1.9936116424909558,
+    "mapePct": 0.30259676706690203,
+    "biasDps": 1.635847115026075
+  },
+  "after": {
+    "cases": 300,
+    "maeDps": 1.805887045904794,
+    "mapePct": 0.2683995173675922,
+    "biasDps": 1.3256106008478434
+  },
+  "wrackPresetBefore": {
+    "cases": 60,
+    "maeDps": 1.8335244006345155,
+    "mapePct": 0.33119575139543633,
+    "biasDps": 1.831325582781208
+  },
+  "wrackPresetAfter": {
+    "cases": 60,
+    "maeDps": 0.8949014177037052,
+    "mapePct": 0.16020950289888744,
+    "biasDps": 0.28014301189005075
+  },
+  "wrackSpellMeanDeltaBefore": 2.3252204518778283,
+  "wrackSpellMeanDeltaAfter": 0.17351161051724376,
+  "sourceRevision": "86d0920cae8445eaa90de9c17c3583cf171c19c5",
+  "localHashes": {
+    "threejs_webgl_des/src/model.js": "a29bfad283ed8249f437d74ff192d065b7cae4a2b091f0d7577d9de40c3e5c98",
+    "threejs_webgl_des/src/kernel.js": "4bc83a34e4e5c34a5d7f690c34e2c42247e6f16886ed74581b34c3c81c0d9280",
+    "threejs_webgl_des/src/config_builder.js": "a0f67a8129b12497e694c3eaac8979494a4c582ab57363b5f953de21781e6b9a",
+    "threejs_webgl_des/src/talents.js": "824b51f05536089e2b86dbc03fa3962ce4a6bb88b3b02e9fc7f2391fb06cd82a",
+    "threejs_webgl_des/src/classes/warlock_search.js": "411fc147a186db1795840d25fa9e39885543b118fa4e27cc401628671ae499be",
+    "threejs_webgl_des/data/talents.json": "e77146b8cf7189eaa9f9df92f2e122a4f8aee13fb9b480f07d57922b1a8fc4ed",
+    "threejs_webgl_des/src/classes/warlock_base_stats.js": "4697119465112812672e27d0f61f2ea3c96b6d66a06a415e1161f81ff794303b",
+    "threejs_webgl_des/src/classes/warlock_import.js": "87f1d8fdf6510d2f43098f8cbe1a318304a536a8fe8e69a7cfae4ef1c0d9eb46",
+    "threejs_webgl_des/src/classes/warlock_import_buffs.js": "09971b0f9fc75515d946713c52d56b18ced67652710c3b6f3b251ede4442a5a6",
+    "threejs_webgl_des/src/classes/warlock_equipment.js": "eeea7b87324f474bbf3eb7399de90890745d867d77b972a38a18e224231dc74a",
+    "threejs_webgl_des/src/classes/forever_bridge.js": "c415a630620d9bfdc823dbb925b9a2c07438d678b6da090a205a0fb0ddd62e9f",
+    "threejs_webgl_des/src/contracts/legacy_build.js": "341462c565ef6fb91a3407ebf80327862b5b37f3ec263212eaa285e61f50752c",
+    "threejs_webgl_des/src/engine.js": "86cb64c9eabf330ad84fbd55c192e8bb42986aed559559e70750d3a4334acff4",
+    "threejs_webgl_des/src/detailed_results.js": "429873689c99e7a43008b2e392f9758470a8726286f1d7a61b6bb3f5010af16a",
+    "threejs_webgl_des/src/apl.js": "4058c260d1bd3357db119427835b4518064eed4e2110304185864636cb9fd52b",
+    "threejs_webgl_des/src/classes/warlock_apl_search.js": "8b4b58db15069e6222d541afa1048a760a4bdbcf79d87045b6d25fb6b6b76336",
+    "scripts/sweep_forever_parity.mjs": "c055684c7aa53b7f517684d5b8fc0b1a5998da6b214136cee456bdc646f07b56",
+    "scripts/forever_export/main.go": "2068f283ecc3ca76481ebb2731700624997d9a6b2df3ebfe8ac4eebbcc26ca85",
+    "scripts/forever_breakdown.mjs": "280c7e85434ed359d438a0912bc1b25716e101ab54115ab746f2799cd34e0282",
+    "fixtures/forever_gear_free_scenario.json": "f5aca6c64ec0257082b10b46a5214632f0c57079e67c4b2d339bcb30d4a3ad94",
+    "threejs_webgl_des/validation/headless_gles.py": "7401c069863d69df5187d51ee2fbbc7d2f7f5b7971f81679104c0e637fb10698"
+  },
+  "beforeReport": "fixtures/benchmark_history/race-stat-300-before-wrack-fixes.json.gz",
+  "afterReport": "FOREVER_SWEEP.json",
+  "unchangedOtherCases": true,
+  "requestsUnchanged": true,
+  "validation": {
+    "focusedPassed": 8,
+    "compatibilityHashCheck": "pass",
+    "fullTests": 192,
+    "fullPassed": 176,
+    "fullFailed": 16,
+    "newFailingTestsComparedWithPreexistingPetBaseline": [],
+    "diffCheck": "pass"
+  }
+}

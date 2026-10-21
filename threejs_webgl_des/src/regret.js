@@ -15,6 +15,9 @@ execution = execution.replace('if(c.incinerate!=0u)', 'if(c.incinerate!=0u||(str
 // Spend blocks include the complete action through its return; cast/tap helpers
 // are leaf operations. This keeps the probe in sync with production checks.
 const availability = execution
+ // Application misses do not make a paid action unavailable. Remove their nested
+ // return before stripping the complete spend block for this side-effect-free probe.
+ .replace('if(random01()>=c.hit){countMiss(11u);gcd();return true;}', '')
  .replace(/(?:s\.trance=0u;)?spend\([\s\S]*?return true;/g, 'return true;')
  .replace(/(?:chosenAction=1u;)?(?:tap|beginPetSwap|beginCast|castDoom|castConflagrate|castShadowburn)\([^)]*\);return true;/g, 'return true;')
  .replace('activateEureka();', ';')
