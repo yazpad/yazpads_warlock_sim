@@ -13,7 +13,7 @@ import {
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const FOREVER_BUILDS_DIR = '/home/aaron-ma/forever/ui/specs/warlock/dps/builds';
+const FOREVER_BUILDS_DIR = path.resolve(__dirname, '../../fixtures/forever_defaults');
 
 test('decodeForeverTalentsString correctly parses forever talent strings', () => {
   // Test with SM/Ruin string
@@ -56,7 +56,7 @@ test('convertForeverBuildToCandidate loads and converts sm_ruin.build.json', () 
   assert.equal(candidate.buffs.blessingOfKings, true);
   assert.equal(candidate.buffs.blessingOfWisdom, true);
   assert.equal(candidate.buffs.flaskSupremePower, true);
-  assert.equal(candidate.buffs.wizardOil, true);
+  assert.equal(candidate.buffs.wizardOil, undefined);
   assert.equal(candidate.buffs.nightfinSoup, true);
   assert.equal(candidate.book, true);
   assert.equal(candidate.trinketSP, 47);
@@ -90,3 +90,10 @@ test('convertForeverBuildToCandidate loads and converts all canonical forever wa
     assert.ok(typeof candidate.talents.destruction === 'object');
   }
 });
+
+ test('Forever weapon oil requires a nonempty main-hand slot', () => {
+  const build={player:{consumables:{mhImbueId:20749},equipment:{items:Array.from({length:17},()=>({}))}}};
+  assert.equal(mapForeverBuffs(build).wizardOil,undefined);
+  build.player.equipment.items[14]={id:19356};
+  assert.equal(mapForeverBuffs(build).wizardOil,true);
+ });

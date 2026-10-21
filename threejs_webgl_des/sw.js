@@ -1,4 +1,4 @@
-const CACHE_NAME = 'warlock-sim-v92';
+const CACHE_NAME = 'warlock-sim-v93';
 const ASSETS = [
   './src/detailed_results.js',
   "./assets/icons/Achievement_Character_Human_Male.png",

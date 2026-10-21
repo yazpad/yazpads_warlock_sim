@@ -7,7 +7,7 @@ import { parseAPLText, compileAPLToBytecode, ACTION_INFO } from '../apl.js';
 import { getTalentFlagsFromRanks } from '../talents.js';
 
 const statKeys = ['swordEquipped', 'spellPower', 'shadowPower', 'firePower', 'intellect', 'stamina', 'spirit', 'hit', 'crit', 'mp5', 'penetration'];
-export const WARLOCK_IMPORT_BUFF_KEYS = Object.freeze(['flaskSupremePower', 'greaterArcaneElixir', 'shadowPowerElixir', 'greaterFirepowerElixir', 'wizardOil', 'magebloodElixir', 'nightfinSoup', 'arcaneIntellect', 'markOfTheWild', 'blessingOfKings', 'blessingOfWisdom', 'manaSpringTotem', 'dragonslayer', 'songflower', 'warchiefsBlessing', 'spiritOfZandalar', 'saygesFortune', 'curseOfShadow', 'curseOfElements', 'shadowWeaving', 'improvedScorch', 'nightfallProcDebuff']);
+export const WARLOCK_IMPORT_BUFF_KEYS = Object.freeze(['giftOfTheWild', 'greaterBlessingOfWisdom', 'prayerOfFortitude', 'prayerOfSpirit', 'moonkinAura', 'judgementOfWisdom', 'sunderArmor', 'exposeArmor', 'faerieFire', 'giftOfArthas', 'flaskSupremePower', 'greaterArcaneElixir', 'shadowPowerElixir', 'greaterFirepowerElixir', 'wizardOil', 'magebloodElixir', 'nightfinSoup', 'arcaneIntellect', 'markOfTheWild', 'blessingOfKings', 'blessingOfWisdom', 'manaSpringTotem', 'dragonslayer', 'songflower', 'warchiefsBlessing', 'spiritOfZandalar', 'saygesFortune', 'curseOfShadow', 'curseOfElements', 'shadowWeaving', 'improvedScorch', 'nightfallProcDebuff']);
 const trees = ['affliction', 'demonology', 'destruction'];
 function record(value, name) {
   if (!value || typeof value !== 'object' || Array.isArray(value)) throw new Error(`${name} must be an object.`);
@@ -115,7 +115,7 @@ export function normalizeWarlockImport(staged, { itemDatabase } = {}) {
     const rules = parseAPLText(c.apl.text);
     if (rules.length > MAX_APL_RULES) throw new Error('APL exceeds rule limit.');
     const allowed = new Set(WARLOCK_SEARCH.apl.availableActions(flags).map(a => a.id));
-    allowed.add('drain');
+    for (const id of ['drain', 'elements', 'spellblasting']) allowed.add(id);
     for (const rule of rules) if (rule.enabled && !allowed.has(rule.id)) throw new Error(`Action requires an unavailable talent: ${rule.id}`);
     compileAPLToBytecode(rules);
   } else if (c.apl.kind === 'policy') {
@@ -123,7 +123,7 @@ export function normalizeWarlockImport(staged, { itemDatabase } = {}) {
   } else if (c.apl.kind === 'rules') {
     if (!Array.isArray(c.apl.rules) || !c.apl.rules.length || c.apl.rules.length > MAX_APL_RULES) throw new Error('Invalid APL rule count.');
     const allowed = new Set(WARLOCK_SEARCH.apl.availableActions(flags).map(a => a.id));
-    allowed.add('drain');
+    for (const id of ['drain', 'elements', 'spellblasting']) allowed.add(id);
     for (const rule of c.apl.rules) {
       record(rule, 'APL rule');
       if (!Object.hasOwn(ACTION_INFO, rule.id)) throw new Error(`Unsupported APL action: ${rule.id}`);
@@ -175,9 +175,9 @@ export function resolveWarlockImport(staged, options) {
   const config = buildFightConfig({
     base: { ...c.stats, ...effective, race: c.classOptions.race,
       statsIncludeBase: true,
-      ...Object.fromEntries(['autoCooldowns', 'channelClipDelayMs', 'book', 'trinketSP', 'trinketDuration', 'trinketCD']
+      ...Object.fromEntries(['soulShards', 'externalElements', 'assignedElements', 'demonicRune', 'ezThroDynamite', 'manualTrinket', 'autoCooldowns', 'channelClipDelayMs', 'book', 'trinketSP', 'trinketDuration', 'trinketCD']
         .filter(key => Object.hasOwn(c, key)).map(key => [key, c[key]])),
-      bossArmor: c.encounter.target.bossArmor, resistance: effective.resistance,
+      bossArmor: effective.bossArmor, resistance: effective.resistance,
       racialPolicy: c.encounter.target.racialPolicy, targetIsBeast: c.encounter.target.targetIsBeast,
       duration: c.encounter.duration, distance: c.encounter.distance,
       iterations: normalized.evaluationDefaults.iterations },

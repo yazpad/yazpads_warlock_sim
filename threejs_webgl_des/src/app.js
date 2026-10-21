@@ -384,6 +384,7 @@ function getEffectiveBuffsAndStats() {
   if (isFlaskSupreme) addedSP += 150;
   if (isGreaterArcane) addedSP += 35;
   if (isWizardOil) addedSP += 36;
+  if (isNightfin) addedSP += 22;
 
   let addedShadowSP = isShadowPowerElixir ? 40 : 0;
   let addedFireSP = isGreaterFirepowerElixir ? 40 : 0;
@@ -416,7 +417,6 @@ function getEffectiveBuffsAndStats() {
 
   let addedMP5 = 0;
   if (isMageblood) addedMP5 += 12;
-  if (isNightfin) addedMP5 += 8;
   if (isBlessingOfWisdom) addedMP5 += 30;
   if (isManaSpringTotem) addedMP5 += 25;
   if (isWarchiefsBlessing) addedMP5 += 10;

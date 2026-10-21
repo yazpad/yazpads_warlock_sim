@@ -7,7 +7,7 @@ export const BUFF_DEFINITIONS = [
   { id: 'elixir_greater_firepower', name: 'Elixir of Greater Firepower', type: 'elixir_battle', icon: 'inv_potion_60', stats: { spellPower: 40 } },
   { id: 'brilliant_wizard_oil', name: 'Brilliant Wizard Oil', type: 'oil', icon: 'inv_potion_105', stats: { spellPower: 36, crit: 1.0 } },
   { id: 'mageblood_elixir', name: 'Mageblood Potion', type: 'elixir_guardian', icon: 'inv_potion_45', stats: { mp5: 12 } },
-  { id: 'nightfin_soup', name: 'Nightfin Soup (Food)', type: 'food', icon: 'inv_misc_fish_03', stats: { mp5: 8 } },
+  { id: 'nightfin_soup', name: 'Nightfin Soup (Food)', type: 'food', icon: 'inv_misc_fish_03', stats: { spellPower: 22 } },
   { id: 'arcane_intellect', name: 'Arcane Intellect (Raid)', type: 'buff', icon: 'spell_holy_magicalsentry', stats: { intellect: 31 } },
   { id: 'mark_of_the_wild', name: 'Mark of the Wild (Raid)', type: 'buff', icon: 'spell_nature_regeneration', stats: { intellect: 12, spirit: 12 } },
   { id: 'blessing_of_kings', name: 'Blessing of Kings (Paladin)', type: 'buff', icon: 'spell_magic_magearmor', stats: { intellectPct: 10 } },

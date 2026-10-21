@@ -15,8 +15,8 @@ const source = () => JSON.parse(readFileSync(new URL('../../fixtures/canonical_f
 test('Split Boosts imports Eureka and Berserking with source arithmetic and aura gates', async () => {
   const build = source(); build.player.race = 'RaceGnome';
   const candidate = convertForeverBuildToCandidate(build);
-  assert.equal(candidate.importDiagnostics.length, 1);
-  assert.equal(candidate.importDiagnostics[0].action.itemId, 250937);
+  assert.deepEqual(candidate.importDiagnostics, []);
+  assert.ok(candidate.apl.text.includes('spellblasting'));
   assert.match(candidate.apl.text, /eureka if buff.decimation && time_to_execute\(35\) <= 0/);
   assert.match(candidate.apl.text, /eureka if target.debuff_remains\("Bane of Doom"\) > 0 && time_to_execute\(35\) >= 120/);
   const resolved = await resolveSavedBuild(build);

@@ -6,9 +6,12 @@ import { validate, packConfig, CONFIG } from '../src/model.js';
 
 test('rejects unsupported mechanics and values instead of silently approximating',()=>{
  for(const input of [{haste:10},{pet:'imp'},{duration:1800.5},{seed:-1},{seed:2**32},{iterations:0},
-  {spellPower:NaN},{duration:Infinity},{distance:31},{rotation:'unknown'},{nightfall:'false'}]){
+  {spellPower:NaN},{duration:Infinity},{distance:121},{rotation:'unknown'},{nightfall:'false'}]){
   assert.throws(()=>validate(input));
  }
+});
+test('supports continuous distances used by Forever exports',()=>{
+ for(const distance of [0,20,31,60.5,120]) assert.equal(validate({distance}).distance,distance);
 });
 test('inputs match CPU raw-stat conventions and preserve integer clock words',()=>{
  const words=packConfig({intellect:0,spirit:0,duration:1800,distance:120});

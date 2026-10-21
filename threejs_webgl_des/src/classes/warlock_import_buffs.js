@@ -33,13 +33,16 @@ export function resolveWarlockBuffEffects(stats, buffs, race, target, pet = 'non
   if (isFlaskSupreme) addedSP += 150;
   if (isGreaterArcane) addedSP += 35;
   if (isWizardOil) addedSP += 36;
+  if (isNightfin) addedSP += 22;
 
   let addedShadowSP = isShadowPowerElixir ? 40 : 0;
   let addedFireSP = isGreaterFirepowerElixir ? 40 : 0;
 
   let addedInt = 0, addedStam = pet === 'imp' ? 54 : 0, addedSpirit = 0;
   if (isArcaneIntellect) addedInt += 31;
-  if (isMarkOfTheWild) { addedInt += 12; addedStam += 12; addedSpirit += 12; }
+  if (isMarkOfTheWild || buffs.giftOfTheWild) { const amount = buffs.giftOfTheWild ? 16 : 12; addedInt += amount; addedStam += amount; addedSpirit += amount; }
+  if (buffs.prayerOfFortitude) addedStam += 70;
+  if (buffs.prayerOfSpirit) addedSpirit += 40;
   if (isSongflower) { addedInt += 15; addedStam += 15; addedSpirit += 15; }
 
   let statMultiplier = 1.0;
@@ -57,7 +60,7 @@ export function resolveWarlockBuffEffects(stats, buffs, race, target, pet = 'non
   finalStam = Math.floor(finalStam);
   finalSpirit = Math.floor(finalSpirit);
 
-  let addedCrit = 0;
+  let addedCrit = buffs.moonkinAura ? 3 : 0;
   if (isWizardOil) addedCrit += 1.0;
   if (isDragonslayer) addedCrit += 10.0;
   if (isSongflower) addedCrit += 5.0;
@@ -65,8 +68,7 @@ export function resolveWarlockBuffEffects(stats, buffs, race, target, pet = 'non
 
   let addedMP5 = 0;
   if (isMageblood) addedMP5 += 12;
-  if (isNightfin) addedMP5 += 8;
-  if (isBlessingOfWisdom) addedMP5 += 30;
+  if (isBlessingOfWisdom || buffs.greaterBlessingOfWisdom) addedMP5 += buffs.greaterBlessingOfWisdom ? 40 : 30;
   if (isManaSpringTotem) addedMP5 += 25;
   if (isWarchiefsBlessing) addedMP5 += 10;
   const finalMP5 = baseMp5 + addedMP5;
@@ -114,7 +116,9 @@ export function resolveWarlockBuffEffects(stats, buffs, race, target, pet = 'non
     shadowMultiplier: shadowMult,
     fireMultiplier: fireMult,
     resistance: finalResistance,
-    bossArmor
+    bossArmor: Math.max(0, bossArmor - (buffs.sunderArmor || buffs.exposeArmor ? 2250 : 0) - (buffs.faerieFire ? 505 : 0)),
+    judgementOfWisdom: buffs.judgementOfWisdom === true,
+    giftOfArthas: buffs.giftOfArthas === true
   };
 }
 

@@ -4,6 +4,8 @@ import { fallbackRow } from './apl_fallback_view.js';
 import { APL_ACTION, APL_COND } from './model.js';
 
 export const ACTION_INFO = {
+  elements: { id: 'elements', spell: 'Curse of the Elements', icon: 'Spell_Shadow_ChillTouch.png', action: APL_ACTION.CURSE_OF_ELEMENTS, defaultCond: '!debuff.assigned_curse' },
+  spellblasting: { id: 'spellblasting', spell: 'Major Spellblasting Potion', icon: 'INV_Potion_51.png', action: APL_ACTION.SPELLBLASTING, defaultCond: 'true' },
   amplify: { id: 'amplify', spell: 'Amplify Curse', icon: 'Spell_Shadow_Contagion.png', action: APL_ACTION.AMPLIFY_CURSE, defaultCond: '!buff.amplify_curse' },
   petSwap: { id: 'petSwap', spell: 'Sacrifice Succubus + Fel Domination: Summon Imp', icon: 'Spell_Shadow_SummonImp.png', action: APL_ACTION.SACRIFICE_SUCCUBUS_SUMMON_IMP, defaultCond: 'true' },
 
@@ -57,6 +59,7 @@ export const CANONICAL_ACTION_NAMES = {
 };
 
 export const ACTION_ALIASES = {
+  elements: 'elements', 'curse of the elements': 'elements', spellblasting: 'spellblasting', 'major spellblasting potion': 'spellblasting',
   amplify_curse: 'amplify', 'amplify curse': 'amplify', amplifycurse: 'amplify', amplify: 'amplify',
   sacrifice_succubus_summon_imp: 'petSwap', petswap: 'petSwap',
   berserking: 'berserking', beserking: 'berserking',
@@ -190,6 +193,9 @@ export function normalizeConditionForAction(rawInput, actionId) {
     const op = m[1] === '==' ? '<=' : m[1];
     return `mana_pct ${op} ${m[2]}`;
   }
+
+  if (/^(?:dots_active|dots_missing)\(([1-9]|[12][0-9]|3[01])\)$/.test(raw)) return raw;
+  if (['debuff.assigned_curse', '!debuff.assigned_curse'].includes(raw)) return raw;
 
   // Pet mana conditions: pet_mana < 115, pet_mana <= 160
   m = raw.match(/^(?:pet_mana|petmana)\s*(<=|<|>=|>|==)\s*(\d+(?:\.\d+)?)$/i);
@@ -362,6 +368,7 @@ export function formatAPLToText(aplList = currentAPL) {
 
 export function compileAPLToBytecode(aplList = currentAPL) {
   const mapAction = {
+    elements: APL_ACTION.CURSE_OF_ELEMENTS, spellblasting: APL_ACTION.SPELLBLASTING,
     amplify: APL_ACTION.AMPLIFY_CURSE,
     petSwap: APL_ACTION.SACRIFICE_SUCCUBUS_SUMMON_IMP,
     berserking: APL_ACTION.BERSERKING,
@@ -399,9 +406,9 @@ export function compileAPLToBytecode(aplList = currentAPL) {
   const parseCondition = (entry) => {
     const raw = String(entry.rawCond || 'true').trim().toLowerCase();
     const match = (pattern) => raw.match(pattern);
-    if (entry.id === 'nightfall' && raw === 'buff.shadow_trance')
+    if (raw === 'buff.shadow_trance')
       return { cond: APL_COND.SHADOW_TRANCE, param: 0, targetSpell: 0 };
-    if (entry.id === 'brand' && raw === 'debuff.demonic_brand_missing')
+    if (raw === 'debuff.demonic_brand_missing')
       return { cond: APL_COND.DEMONIC_BRAND_MISSING, param: 0, targetSpell: 0 };
     if (entry.id === 'decimateSearing' && raw === 'decimation.inactive')
       return { cond: APL_COND.DECIMATION_INACTIVE, param: 35, targetSpell: 5 };
@@ -409,6 +416,9 @@ export function compileAPLToBytecode(aplList = currentAPL) {
       return { cond: APL_COND.DECIMATION_ACTIVE, param: 35, targetSpell: 13 };
     if (raw === 'buff.decimation') return { cond: APL_COND.DECIMATION_AURA_ACTIVE, param: 0, targetSpell: 0 };
     if (raw === '!buff.decimation') return { cond: APL_COND.DECIMATION_AURA_INACTIVE, param: 0, targetSpell: 0 };
+    const dots = raw.match(/^(dots_active|dots_missing)\((\d+)\)$/);
+    if (dots) return { cond: dots[1] === 'dots_active' ? APL_COND.DOTS_ACTIVE : APL_COND.DOTS_MISSING, param: Number(dots[2]), targetSpell: 0 };
+    if (raw === 'debuff.assigned_curse' || raw === '!debuff.assigned_curse') return { cond: raw[0] === '!' ? APL_COND.ASSIGNED_CURSE_INACTIVE : APL_COND.ASSIGNED_CURSE_ACTIVE, param: 0, targetSpell: 0 };
     const executeTime = raw.match(/^time_to_execute\((\d+)\)\s*(<=|<|>=|>)\s*(-?\d+(?:\.\d+)?)$/);
     if (executeTime) {
       const percent = Number(executeTime[1]);

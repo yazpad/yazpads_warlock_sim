@@ -62,6 +62,7 @@ FightState s;
 Event queue[${HEAP_CAPACITY}];
 uvec2 rng[4];
 float eventDamage;
+bool dealingPeriodic = false;
 uint eventFlags;
 Event lastEvent;
 uint currentCfgIdx;
@@ -144,7 +145,13 @@ Event dequeue(){
 }
 void countCast(uint spell){${counterSwitch}}
 void countMiss(uint spell){eventFlags|=2u;${missSwitch}}
+void wisdomProc(bool pet){
+ if(c.judgementOfWisdom==0u||random01()>=0.50)return;
+ if(pet)s.petMana=min(c.petMaxMana,s.petMana+59.0);
+ else{float gain=min(59.0,c.maxMana-s.mana);s.mana+=gain;s.gained+=gain;}
+}
 void damage(uint spell,float amount,bool crit){
+ if(!dealingPeriodic&&(spell==0u||spell==3u||spell==4u||spell==5u||spell==7u||spell==8u||spell==9u))wisdomProc(false);
  if(c.race==2u&&c.targetIsBeast!=0u&&spell!=12u)amount*=1.05;
  s.total+=amount;eventDamage+=amount;if(crit)eventFlags|=1u;
  ${damageSwitch}
@@ -152,21 +159,21 @@ void damage(uint spell,float amount,bool crit){
 ${detailed ? `void periodicDamage(uint spell,float amount,bool crit){
  float applied=amount;
  if(c.race==2u&&c.targetIsBeast!=0u&&spell!=12u)applied*=1.05;
- damage(spell,amount,crit);
+ dealingPeriodic=true;damage(spell,amount,crit);dealingPeriodic=false;
  switch(spell){${SPELLS.map((_,i)=>`case ${i}u:s.ticks${i}++;s.tickCrits${i}+=uint(crit);s.tickDamage${i}+=applied;if(crit)s.tickCritDamage${i}+=applied;break;`).join('')}}
 }
-` : ''}float isbMultiplier(){
+` : 'void periodicDamage(uint spell,float amount,bool crit){dealingPeriodic=true;damage(spell,amount,crit);dealingPeriodic=false;}'}float isbMultiplier(){
  if(s.now>=s.isbEnd)return 1.0;
  s.isbConsumed++;return 1.0+c.isb;
 }
 float resistanceMultiplier(){
- float resistance=c.resistance-c.penetration;
+ float resistance=max(0.0,c.resistance-(s.now<s.elementsEnd&&c.externalElements==0u?75.0:0.0))-c.penetration;
  if(resistance<0.0&&c.piercing!=0u)return 1.0-resistance*0.00575;
  if(resistance<=0.0||c.partial==0u)return 1.0;
  float roll=random01();if(roll<0.76)return 1.0;if(roll<0.95)return 0.75;if(roll<0.99)return 0.5;return 0.25;
 }
-float currentShadowMult(){return c.shadowMult*(s.now<s.snfShadowEnd?(1.0+c.snfBonus):1.0);}
-float currentFireMult(){return c.fireMult*(s.now<s.snfFireEnd?(1.0+c.snfBonus):1.0);}
+float currentShadowMult(){return c.shadowMult*(s.now<s.elementsEnd&&c.externalElements==0u?1.10:1.0)*(s.now<s.snfShadowEnd?(1.0+c.snfBonus):1.0);}
+float currentFireMult(){return c.fireMult*(s.now<s.elementsEnd&&c.externalElements==0u?1.10:1.0)*(s.now<s.snfFireEnd?(1.0+c.snfBonus):1.0);}
 float currentPower(){return c.power+(c.race==1u&&s.now<s.racialEnd?c.basePower*0.10:0.0)+(s.now<s.trinketEnd?c.trinketSP:0.0);}
 float manaMultiplier(){return s.now<s.eurekaEnd?0.9:1.0;}
 float hasteMultiplier(){return c.race==2u&&s.now<s.racialEnd?1.10:1.0;}
@@ -223,6 +230,7 @@ void checkRacial(){
 }
 void applyDot(uint spell){
  if(random01()>=c.hit){countMiss(spell);return;}
+ wisdomProc(false);
  if(spell==1u){s.corrBonus=s.castBonus;s.corrTicks=6u;s.corrGen++;s.corrEnd=s.now+18000000u;enqueue(s.now+3000000u,3u,spell,s.corrGen);}
  if(spell==2u){s.agonySpellPowerShare=currentPower()*1.596/12.0;s.agonyBonus=s.castBonus;uint isAmp=(s.now<s.amplifyEnd)?1u:0u;s.agonyAmplified=isAmp;s.agonyTicks=12u;s.agonyGen++;s.agonyEnd=s.now+24000000u;enqueue(s.now+2000000u,3u,spell,s.agonyGen);}
 }
@@ -292,9 +300,9 @@ void tick(Event e){
  if(sp==1u){
   if(gen!=s.corrGen||s.corrTicks==0u)return;
   s.corrTicks--;remaining=s.corrTicks;
-  amount=(c.corrBase+p*1.2/6.0)*c.corrMultiplier*(s.now<s.snfShadowEnd?(1.0+c.snfBonus):1.0)*(s.now<s.drainHopeEnd?1.10:1.0);
+  amount=(c.corrBase+p*1.2/6.0)*c.corrMultiplier*(s.now<s.elementsEnd&&c.externalElements==0u?1.10:1.0)*(s.now<s.snfShadowEnd?(1.0+c.snfBonus):1.0)*(s.now<s.drainHopeEnd?1.10:1.0);
   bool crit=random01()<c.shadowCrit;if(crit)amount*=c.dotCrit;
-  amount*=isbMultiplier();${detailed ? 'periodicDamage' : 'damage'}(1u,amount*s.corrBonus,crit);
+  amount*=isbMultiplier();periodicDamage(1u,amount*s.corrBonus,crit);
   if(c.nightfall>0.0){if(random01()<c.nightfall){s.trance=1u;s.tranceEnd=s.now+10000000u;s.procs++;enqueue(s.tranceEnd,8u,0u,0u);}}
   if(remaining>0u)enqueue(s.now+3000000u,3u,1u,gen);
   return;
@@ -307,14 +315,14 @@ void tick(Event e){
   // Spell power is fixed on application; damage multipliers remain dynamic.
   amount=(baseTick*ramp+s.agonySpellPowerShare)*ampMult*currentShadowMult()*(1.0+c.shadowMasteryBonus)*(1.0+c.maledictionBonus)*(1.0+c.improvedAgonyBonus)*(s.now<s.drainHopeEnd?1.10:1.0);
   bool crit=random01()<c.shadowCrit;if(crit)amount*=c.dotCrit;
-  amount*=isbMultiplier();${detailed ? 'periodicDamage' : 'damage'}(2u,amount*s.agonyBonus,crit);
+  amount*=isbMultiplier();periodicDamage(2u,amount*s.agonyBonus,crit);
   if(remaining>0u)enqueue(s.now+interval,3u,2u,gen);
   return;
  }else if(sp==3u){
   if(gen!=s.immGen||s.immTicks==0u)return;
   s.immTicks--;remaining=s.immTicks;amount=(c.immTick+0.13*p)*currentFireMult()*(1.0+c.afBonus)*(1.0+c.maledictionBonus);
   bool crit=random01()<c.fireCrit;if(crit)amount*=c.directCrit;
-  ${detailed ? 'periodicDamage' : 'damage'}(3u,amount*s.immBonus,crit);
+  periodicDamage(3u,amount*s.immBonus,crit);
   if(remaining>0u)enqueue(s.now+3000000u,3u,3u,gen);
   return;
  }else if(sp==15u){
@@ -322,7 +330,7 @@ void tick(Event e){
   s.siphonTicks--;remaining=s.siphonTicks;
   amount=(41.0+0.05*p)*currentShadowMult()*(1.0+c.shadowMasteryBonus)*(1.0+c.maledictionBonus);
   bool crit=random01()<c.shadowCrit;if(crit)amount*=c.dotCrit; // Current rank-4 data permits periodic crits
-  amount*=isbMultiplier();${detailed ? 'periodicDamage' : 'damage'}(10u,amount*s.siphonBonus,crit);
+  amount*=isbMultiplier();periodicDamage(10u,amount*s.siphonBonus,crit);
   if(remaining>0u)enqueue(s.now+3000000u,3u,15u,gen);
   return;
  }else if(sp==16u){
@@ -333,13 +341,13 @@ void tick(Event e){
   amount=(36.0+0.143*p)*currentShadowMult()*affBonus*soulSiphonMult;
   bool crit=random01()<c.shadowCrit;if(crit)amount*=c.dotCrit;
   amount*=isbMultiplier();amount*=resistanceMultiplier();
-  ${detailed ? 'periodicDamage' : 'damage'}(11u,amount*(s.now<s.eurekaEnd?1.10:1.0),crit);
+  periodicDamage(11u,amount*(s.now<s.eurekaEnd?1.10:1.0),crit);
   if(c.nightfall>0.0){if(random01()<c.nightfall){s.trance=1u;s.tranceEnd=s.now+10000000u;s.procs++;enqueue(s.tranceEnd,8u,0u,0u);}}
   return;
  }else if(sp==23u){
   // One nearby target; self damage is reported separately from enemy damage.
   amount=(210.0+0.022*(p+c.hellfirePowerOffset))*currentFireMult()*(1.0+c.afBonus)*(1.0+c.maledictionBonus);
-  ${detailed ? 'periodicDamage' : 'damage'}(13u,amount*resistanceMultiplier(),false);
+  periodicDamage(13u,amount*resistanceMultiplier(),false);
   if(gen<15u)enqueue(s.now+1000000u,3u,23u,gen+1u);
   return;
  }else if(sp==20u){
@@ -348,10 +356,16 @@ void tick(Event e){
   s.doomActive=0u;amount=(1742.0+4.0*p)*currentShadowMult()*(1.0+c.shadowMasteryBonus)*(1.0+c.maledictionBonus);
   bool crit=random01()<c.shadowCrit;if(crit)amount*=c.dotCrit;
   amount*=isbMultiplier();amount*=resistanceMultiplier();
-  ${detailed ? 'periodicDamage' : 'damage'}(6u,amount,crit);return;
+  periodicDamage(6u,amount,crit);return;
  }else{return;}
 }
-void gcd(){s.ready=s.now+uint(floor(max(1000000.0,1500000.0/hasteMultiplier())/1000.0+0.5))*1000u;enqueue(s.ready,5u,0u,0u);}
+void gcd(){
+ s.ready=s.now+uint(floor(max(1000000.0,1500000.0/hasteMultiplier())/1000.0+0.5))*1000u;enqueue(s.ready,5u,0u,0u);
+ // Throw after an instant spell, while its GCD is already running.
+ if(c.autoCooldowns!=0u&&c.ezThroDynamite!=0u&&s.now>=s.explosiveReady&&s.casting==0u){
+  s.explosiveReady=s.now+60000000u;s.casting=1u;enqueue(s.now+1000000u,16u,0u,0u);
+ }
+}
 void tap(){${detailed ? 's.manaWasted+=max(0.0,s.mana+c.tapGain-c.maxMana);' : ''}s.mana=min(c.maxMana,s.mana+c.tapGain);s.gained+=c.tapGain;s.taps++;if(c.petChoice!=0u&&c.demonicEnergies>0.0){float petMax=c.petMaxMana;s.petMana=min(petMax,s.petMana+c.tapGain*0.5*c.demonicEnergies);}gcd();}
 void beginCast(uint spell){
  if(spell==0u&&s.trance!=0u){s.trance=0u;spend(0u);launchBolt();gcd();return;}
@@ -372,7 +386,7 @@ void beginCast(uint spell){
  s.casting=1u;enqueue(s.now+duration,1u,spell,0u);gcd();
 }
 void checkTrinket(){
- if(c.trinketSP>0.0&&s.now>=s.trinketReady){
+ if(c.manualTrinket==0u&&c.trinketSP>0.0&&s.now>=s.trinketReady){
   s.trinketEnd=s.now+c.trinketDuration;
   s.trinketReady=s.now+c.trinketCD;queuePetInheritance();
   enqueue(s.trinketEnd,11u,0u,0u);
@@ -394,7 +408,7 @@ void castConflagrate(){
  gcd();
 }
 void castShadowburn(){
- s.shadowburnReady=s.now+15000000u;spend(9u);
+ s.shadowburnReady=s.now+15000000u;s.soulShards--;spend(9u);
  if(random01()<c.hit){
   float roll=random01(),p=currentPower();
   // Generated rank-6 row: direct variance applies to base damage plus spell power.
@@ -404,6 +418,7 @@ void castShadowburn(){
   if(crit)amount*=c.directCrit;
   amount*=resistanceMultiplier();
   damage(9u,amount*s.castBonus,crit);
+  if(c.soulShards<1000000u&&c.snfChance>0.0&&random01()<c.snfChance)s.soulShards=min(c.soulShards,s.soulShards+1u);
   if(c.snfBonus>0.0||c.snfChance>0.0){s.snfFireEnd=s.now+20000000u;}
  }else{countMiss(9u);}
  gcd();
@@ -411,11 +426,16 @@ void castShadowburn(){
 void castDoom(){
  s.doomReady=s.now+60000000u;spend(6u);
  if(random01()<c.hit){
-  s.doomEnd=s.now+60000000u;s.doomActive=1u;s.agonyGen++;enqueue(s.now+60000000u,3u,20u,s.agonyGen);
+  wisdomProc(false);s.doomEnd=s.now+60000000u;s.doomActive=1u;s.agonyGen++;enqueue(s.now+60000000u,3u,20u,s.agonyGen);
  }else{countMiss(6u);}
  gcd();
 }
 bool evalCond(uint cond, float param, uint targetSpell, float playerManaPct, float targetHpPct){
+ if(cond==39u||cond==40u){
+  uint dotMask=(s.now<s.doomEnd?1u:0u)|(s.now<s.agonyEnd?2u:0u)|(s.now<s.corrEnd?4u:0u)|(s.now<s.immEnd?8u:0u)|(s.now<s.siphonEnd?16u:0u);
+  uint mask=uint(param);return cond==39u?(dotMask&mask)==mask:(dotMask&mask)==0u;
+ }
+ if(cond==41u||cond==42u){bool curseActive=c.assignedElements!=0u&&s.now<s.elementsEnd;return cond==41u?curseActive:!curseActive;}
  if(cond==33u)return s.decimationEnd>s.now;
  if(cond==34u)return s.decimationEnd<=s.now;
  if(cond>=35u&&cond<=38u){
@@ -485,6 +505,10 @@ bool evalCond(uint cond, float param, uint targetSpell, float playerManaPct, flo
 void decide(){
  if(s.casting!=0u||s.now<s.ready)return;
  checkTrinket();checkRacial();
+ if(c.autoCooldowns!=0u&&c.demonicRune!=0u&&s.now>=s.runeReady&&c.maxMana-s.mana>=1500.0){
+  float gain=900.0+random01()*600.0;s.mana+=gain;s.gained+=gain;s.runeReady=s.now+120000000u;
+ }
+
 
  float fightProgress=float(s.now)/max(1.0,float(c.end));
  float targetHpPct=max(0.0,(1.0-fightProgress)*100.0);
@@ -510,7 +534,15 @@ void decide(){
   if(!evalCond(cond2,param2,targetSpell2,playerManaPct,targetHpPct))continue;
 
   // Execute Action
-  if(action==24u){ // Explicit off-GCD Amplify Curse; never inferred from an Agony cast.
+  if(action==25u){
+   if(c.assignedElements!=0u&&s.now>=s.elementsEnd&&s.mana>=200.0){
+    s.mana-=200.0;s.spent+=200.0;s.spiritRegenAt=s.now+5000000u;countCast(15u);
+    if(random01()<c.hit)s.elementsEnd=s.now+300000000u;else countMiss(15u);
+    gcd();return;
+   }
+  }else if(action==26u){
+   if(c.trinketSP>0.0&&s.now>=s.trinketReady){s.trinketEnd=s.now+c.trinketDuration;s.trinketReady=s.now+c.trinketCD;queuePetInheritance();enqueue(s.trinketEnd,11u,0u,0u);}
+  }else if(action==24u){ // Explicit off-GCD Amplify Curse; never inferred from an Agony cast.
    if(c.amplifyCurse!=0u&&s.now>=s.amplifyReady&&s.now>=s.amplifyEnd){
     s.amplifyReady=s.now+180000000u;s.amplifyEnd=s.now+30000000u;${detailed ? 's.amplifyCasts++;' : ''}
    }
@@ -531,7 +563,7 @@ void decide(){
   }else if(action==3u||action==5u||action==13u){ // SEARING_PAIN (Decimation / Brand / Filler)
    if(s.mana>=cost(5u)){beginCast(5u);return;}
   }else if(action==4u){ // DECIMATION_SOUL_FIRE
-   if(s.now>=s.soulFireReady&&s.mana>=cost(13u)){beginCast(13u);return;}
+   if((s.soulShards>0u||s.now<s.decimationEnd)&&s.now>=s.soulFireReady&&s.mana>=cost(13u)){beginCast(13u);return;}
   }else if(action==6u){ // CORRUPTION
    if(c.corr!=0u){
     if(s.mana>=cost(1u)){beginCast(1u);return;}
@@ -556,7 +588,7 @@ void decide(){
    if(c.siphonLife!=0u){
     if(s.mana>=cost(9u)){
      spend(10u);s.siphonBonus=s.castBonus;
-     if(random01()<c.hit){s.siphonTicks=10u;s.siphonGen++;s.siphonEnd=s.now+30000000u;enqueue(s.now+3000000u,3u,15u,s.siphonGen);}else{countMiss(10u);}
+     if(random01()<c.hit){wisdomProc(false);s.siphonTicks=10u;s.siphonGen++;s.siphonEnd=s.now+30000000u;enqueue(s.now+3000000u,3u,15u,s.siphonGen);}else{countMiss(10u);}
      gcd();return;
     }
    }
@@ -571,13 +603,13 @@ void decide(){
      spend(11u);
      // A miss consumes mana and the GCD, but starts no channel or amplification aura.
      if(random01()>=c.hit){countMiss(11u);gcd();return;}
-     s.drainHopeEnd=s.now+6000000u;s.drainHopeReady=s.now+6000000u;s.paidChannelEnd=s.drainHopeEnd;
+     wisdomProc(false);s.drainHopeEnd=s.now+6000000u;s.drainHopeReady=s.now+6000000u;s.paidChannelEnd=s.drainHopeEnd;
      for(uint i=1u;i<=6u;i++)enqueue(s.now+i*1000000u,3u,16u,0u);
      s.ready=s.drainHopeEnd+c.channelClipDelay;enqueue(s.ready,5u,0u,0u);return;
     }
    }
   }else if(action==11u){ // SHADOWBURN
-   if(c.shadowburn!=0u&&s.now>=s.shadowburnReady){
+   if(c.shadowburn!=0u&&s.soulShards>0u&&s.now>=s.shadowburnReady){
     if(s.mana>=cost(9u)){castShadowburn();return;}
    }
   }else if(action==12u){ // INCINERATE_FILLER
@@ -616,7 +648,7 @@ ${detailed ? UPTIME_EFFECTS.map(([,key])=>{
  switch(ekind){
  case 13u:s.done=1u;break;
  case 1u:
-  s.casting=0u;spend(espell);
+  s.casting=0u;if(espell==13u&&s.now>=s.decimationEnd&&s.soulShards>0u)s.soulShards--;spend(espell);
   if(espell==1u)applyDot(1u);
   else if(espell==3u)immolateImpact();
   else if(espell==13u){s.soulFireReady=s.now+60000000u-27000000u*c.decimationRank;enqueue(s.now+c.travel,2u,13u,uint(s.castBonus>1.0));}
@@ -628,48 +660,51 @@ ${detailed ? UPTIME_EFFECTS.map(([,key])=>{
  case 3u:tick(e);break;
  case 5u:decide();break;
  case 6u:
-  if(espell==100u){ // Imp Firebolt
-   {
-    s.petCasts++;
-    s.petSpellCasts++;${detailed ? 's.impCasts++;' : ''}
-    s.petMana-=115.0;
-    if(random01()<c.hit){
-     s.petSpellHits++;${detailed ? 's.impHits++;' : ''}
-     float dmg=(45.20000076293945+0.5709999799728394*s.petSP)*(1.0+(random01()-0.5)*0.11363636702299118)*c.petFireboltMult;
-     bool crit=random01()<c.fireCrit;if(crit){dmg*=1.5;s.petSpellCrits++;${detailed ? 's.impCrits++;' : ''}}dmg*=resistanceMultiplier();
+  if(espell==100u){ // Snapshot Firebolt when its cast completes; the next cast may start immediately.
+   s.petCasts++;s.petSpellCasts++;${detailed ? 's.impCasts++;' : ''}s.petMana-=115.0;
+   s.impMissileLanded=uint(random01()<c.hit);s.impMissileCrit=0u;s.impMissileDamage=0.0;
+   if(s.impMissileLanded!=0u){
+    s.petSpellHits++;${detailed ? 's.impHits++;' : ''}
+    float dmg=(45.20000076293945+0.5709999799728394*s.petSP)*(1.0+(random01()-0.5)*0.11363636702299118)*c.petFireboltMult*(s.now<s.elementsEnd&&c.externalElements==0u?1.10:1.0);
+    bool crit=random01()<c.fireCrit;
+    if(crit){dmg*=1.5;s.petSpellCrits++;${detailed ? 's.impCrits++;' : ''}}
+    s.impMissileDamage=dmg*resistanceMultiplier();s.impMissileCrit=uint(crit);
+   }else{s.petSpellMisses++;${detailed ? 's.impMisses++;' : ''}}
+   // Within Firebolt's 30-yard range, travel takes less than its two-second cast.
+   enqueue(s.now+c.petTravel,6u,103u,0u);queueFirebolt();
+  }else if(espell==103u){ // Impact: damage and on-hit effects happen only on arrival.
+   if(s.impMissileLanded!=0u){
+    wisdomProc(true);
      if(c.demonicBrand!=0u&&s.brandCharges>0u&&s.now<s.brandEnd){
       s.brandCharges--;
-      float brandDmg=(65.0+random01()*3.0+0.078*currentPower())*c.brandMult;
+      float brandDmg=(65.0+random01()*3.0+0.078*currentPower())*c.brandMult*(s.now<s.elementsEnd&&c.externalElements==0u?1.10:1.0);
       ${detailed ? 's.petBrandCasts++;' : ''}
       if(random01()<c.hit){
        bool brandCrit=random01()<c.crit;if(brandCrit){brandDmg*=1.5;${detailed ? 's.petBrandCrits++;' : ''}}
        brandDmg*=resistanceMultiplier();s.total+=brandDmg;eventDamage+=brandDmg;s.petDamage+=brandDmg;s.petBrandDamage+=brandDmg;${detailed ? 's.petBrandHits++;' : ''}
       }else{${detailed ? 's.petBrandMisses++;' : ''}}
      }
-     s.total+=dmg;eventDamage+=dmg;s.petDamage+=dmg;s.petSpellDamage+=dmg;${detailed ? 's.impDamage+=dmg;' : ''}if(crit)eventFlags|=1u;
-    }else{
-     s.petSpellMisses++;${detailed ? 's.impMisses++;' : ''}
-    }
+    float dmg=s.impMissileDamage;
+    s.total+=dmg;eventDamage+=dmg;s.petDamage+=dmg;s.petSpellDamage+=dmg;${detailed ? 's.impDamage+=dmg;' : ''}if(s.impMissileCrit!=0u)eventFlags|=1u;
    }
-   queueFirebolt();
   }else if(espell==102u){queueFirebolt();
   }else if(espell==200u){ // Succubus Melee
    s.petCasts++;
-   s.petMeleeCasts++;
+   s.petMeleeCasts++;wisdomProc(true);
    float roll=random01()*100.0;
    // Physical miss (8% boss base) inherits hit; dodge remains 6.5%.
    float avoid=max(0.0,8.0-max(0.0,(c.hit-0.83)*100.0))+6.5;
    if(roll>=avoid){
     s.petMeleeHits++;
     float base=0.698*60.45291519165039*2.0*(0.785+0.43*random01());
-    float dmg=(base+(s.petAP/14.0)*2.0)*c.petMeleeMult;
+    float dmg=(base+(s.petAP/14.0)*2.0)*c.petMeleeMult+(c.giftOfArthas!=0u?8.0:0.0);
     bool glance=(roll<avoid+40.0);
     bool crit=(!glance&&roll<(avoid+40.0+max(0.0,(c.crit-0.03-min(c.crit,0.018))*100.0)));
     if(glance)dmg*=0.55+0.20*random01();${detailed ? 'if(glance)s.petMeleeGlances++;' : ''}
     if(crit){dmg*=2.0;s.petMeleeCrits++;}
     if(c.demonicBrand!=0u&&s.brandCharges>0u&&s.now<s.brandEnd){
      s.brandCharges--;
-      float brandDmg=(65.0+random01()*3.0+0.078*currentPower())*c.brandMult;
+      float brandDmg=(65.0+random01()*3.0+0.078*currentPower())*c.brandMult*(s.now<s.elementsEnd&&c.externalElements==0u?1.10:1.0);
       ${detailed ? 's.petBrandCasts++;' : ''}
       if(random01()<c.hit){
        bool brandCrit=random01()<c.crit;if(brandCrit){brandDmg*=1.5;${detailed ? 's.petBrandCrits++;' : ''}}
@@ -688,12 +723,12 @@ ${detailed ? UPTIME_EFFECTS.map(([,key])=>{
     s.petSpellCasts++;
     s.petMana-=160.0;
     if(random01()<c.hit){
-     s.petSpellHits++;
-     float dmg=(50.0+0.42899999022483826*s.petSP)*c.petLashMult;
+     s.petSpellHits++;wisdomProc(true);
+     float dmg=(50.0+0.42899999022483826*s.petSP)*c.petLashMult*(s.now<s.elementsEnd&&c.externalElements==0u?1.10:1.0);
      bool crit=random01()<c.crit;if(crit){dmg*=1.5;s.petSpellCrits++;}dmg*=resistanceMultiplier();
      if(c.demonicBrand!=0u&&s.brandCharges>0u&&s.now<s.brandEnd){
       s.brandCharges--;
-      float brandDmg=(65.0+random01()*3.0+0.078*currentPower())*c.brandMult;
+      float brandDmg=(65.0+random01()*3.0+0.078*currentPower())*c.brandMult*(s.now<s.elementsEnd&&c.externalElements==0u?1.10:1.0);
       ${detailed ? 's.petBrandCasts++;' : ''}
       if(random01()<c.hit){
        bool brandCrit=random01()<c.crit;if(brandCrit){brandDmg*=1.5;${detailed ? 's.petBrandCrits++;' : ''}}
@@ -712,6 +747,10 @@ ${detailed ? UPTIME_EFFECTS.map(([,key])=>{
   break;
  case 8u:if(s.now>=s.tranceEnd)s.trance=0u;break;
  case 10u:enqueue(s.now+5000000u,10u,0u,0u);break;
+ case 16u:
+  s.casting=0u;countCast(14u);enqueue(s.now+uint(float(c.travel)*24.0/14.0),17u,0u,0u);decide();break;
+ case 17u:
+  if(random01()<c.hit){float amount=(213.0+random01()*74.0)*currentFireMult();bool crit=random01()<c.fireCrit;if(crit)amount*=1.5;damage(14u,amount*resistanceMultiplier(),crit);}else countMiss(14u);break;
  case 11u:queuePetInheritance();break;
  case 14u:s.petSP=(currentPower()+c.petPowerOffset)*0.10+c.petOwnPower;s.petAP=c.petBaseAP+(currentPower()+c.petPowerOffset)*0.17;break;
  case 15u:queuePetInheritance();break;
@@ -766,13 +805,13 @@ void main(){
   numAplRules++;
  }
  ${initialState}
- s.initialized=1u;s.mana=c.maxMana;eventDamage=0.0;eventFlags=0u;lastEvent=MAKE_EVENT(0u,0u,0u,0u);
+ s.initialized=1u;s.soulShards=c.soulShards;s.mana=c.maxMana;eventDamage=0.0;eventFlags=0u;lastEvent=MAKE_EVENT(0u,0u,0u,0u);
  seedRandom(mode==2u?0u:(numConfigs>1u?fightInCfg:globalLane));
  enqueue(c.end,13u,0u,0u);enqueue(5000000u,10u,0u,0u);
- if(c.trinketSP>0.0){s.trinketEnd=c.trinketDuration;s.trinketReady=c.trinketCD;enqueue(s.trinketEnd,11u,0u,0u);}
+ if(c.manualTrinket==0u&&c.trinketSP>0.0){s.trinketEnd=c.trinketDuration;s.trinketReady=c.trinketCD;enqueue(s.trinketEnd,11u,0u,0u);}
  if(c.petChoice!=0u){s.petSP=c.petSP;s.petAP=c.petAP;s.petHeartbeatPhase=uint(random01()*5250000.0);if(c.petOwnPower>0.0||c.trinketSP>0.0)queuePetInheritance();}
- if(c.petChoice==1u){s.petMana=c.petMaxMana;queueFirebolt();}
- else if(c.petChoice==2u){s.petMana=c.petMaxMana;enqueue(uint(random01()*100.0)*1000u,6u,200u,0u);enqueue(0u,6u,201u,0u);}
+ if(c.petChoice==1u){s.petMana=c.petMaxMana;enqueue(c.petApproach,6u,102u,0u);}
+ else if(c.petChoice==2u){s.petMana=c.petMaxMana;enqueue(uint(random01()*100.0)*1000u,6u,200u,0u);enqueue(c.petApproach,6u,201u,0u);}
  decide();
  for(uint step=0u;step<eventBudget;step++){
   if(s.done!=0u)break;advance();if(mode==2u&&s.events==lane+1u)break;

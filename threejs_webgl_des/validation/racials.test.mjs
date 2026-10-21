@@ -35,7 +35,7 @@ test('damage sources have independent counters and fit the GPU result layout', (
     assert.ok(i >= 6);
     for (const key of ['damage', 'casts', 'hits', 'crits', 'misses']) assert.ok(`${key}${i}` in STATE);
   }
-  assert.equal(new Set(CPU_IDS).size, SPELLS.length);
+  assert.equal(new Set(CPU_IDS.filter(id => id !== null)).size, CPU_IDS.filter(id => id !== null).length);
   assert.ok(COMPACT_STRIPES * 16 >= COMPACT_WORDS);
 });
 

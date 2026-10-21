@@ -1,8 +1,8 @@
 // High-Fidelity Discrete Event Simulation (DES) Model & Configuration Contract
 // Fully aligned with Authoritative C++ Oracle (src/sim/warlock/warlock_sim.cpp)
 
-export const SPELLS = ['Shadow Bolt', 'Corruption', 'Bane of Agony', 'Immolate', 'Incinerate', 'Searing Pain', 'Bane of Doom', 'Soul Fire', 'Conflagrate', 'Shadowburn', 'Siphon Life', 'Wrack', 'Touch of the Grave', 'Hellfire'];
-export const CPU_IDS = [1, 2, 5, 8, 12, 9, 6, 13, 11, 10, 17, 14, 30, null]; // Hellfire currently has no CPU oracle implementation.
+export const SPELLS = ['Shadow Bolt', 'Corruption', 'Bane of Agony', 'Immolate', 'Incinerate', 'Searing Pain', 'Bane of Doom', 'Soul Fire', 'Conflagrate', 'Shadowburn', 'Siphon Life', 'Wrack', 'Touch of the Grave', 'Hellfire', 'Ez-Thro Dynamite II', 'Curse of the Elements'];
+export const CPU_IDS = [1, 2, 5, 8, 12, 9, 6, 13, 11, 10, 17, 14, 30, null, null, null]; // Hellfire currently has no CPU oracle implementation.
 
 export const APL_ACTION = Object.freeze({
   NONE: 0,
@@ -30,9 +30,12 @@ export const APL_ACTION = Object.freeze({
   BERSERKING: 22,
   SACRIFICE_SUCCUBUS_SUMMON_IMP: 23,
   AMPLIFY_CURSE: 24,
+  CURSE_OF_ELEMENTS: 25,
+  SPELLBLASTING: 26,
 });
 
 export const APL_COND = Object.freeze({
+  DOTS_ACTIVE: 39, DOTS_MISSING: 40, ASSIGNED_CURSE_ACTIVE: 41, ASSIGNED_CURSE_INACTIVE: 42,
   ALWAYS: 0,
   MANA_LE: 1,               // Mana% <= param (e.g. 25.0)
   MANA_GE: 2,               // Mana% >= param
@@ -85,6 +88,8 @@ export const DEFAULTS = Object.freeze({
   nightfall: true, isb: true, ruin: true, improvedTap: true, amplifyCurse: false,
   demonicPact: false, demonicSacrifice: false, felDomination: false, masterSummoner: 0, soulLink: false,
   sacImp: false, sacSucc: false, masterDemo: 0, petChoice: 'none',
+  soulShards: 1000000, externalElements: false,
+  assignedElements: false, demonicRune: false, ezThroDynamite: false, manualTrinket: false, judgementOfWisdom: false, giftOfArthas: false,
   trinketSP: 0, trinketDuration: 20, trinketCD: 120,
   shadowMultiplier: 1.0, fireMultiplier: 1.0,
   tapBonus: 0.0, nightfallChance: 0.0, isbBonus: 0.0, ruinRank: 0,
@@ -102,7 +107,7 @@ export const DEFAULTS = Object.freeze({
 export function validate(input) {
   const c = { ...DEFAULTS, ...input };
   if (c.maledictionBonus !== 0) throw new Error('Malediction damage was removed. Respec and resolve this build using Grim Reach.');
-  const bounds = { channelClipDelayMs: [0, 10000], maxHealth: [0, 100000], duration: [1, 1800], iterations: [1, 1048576], seed: [0, 4294967295],
+  const bounds = { soulShards: [0, 1000000], channelClipDelayMs: [0, 10000], maxHealth: [0, 100000], duration: [1, 1800], iterations: [1, 1048576], seed: [0, 4294967295],
     spellPower: [0, 10000], shadowPower: [0, 10000], firePower: [0, 10000],
     intellect: [0, 5000], stamina: [0, 5000], spirit: [0, 5000], hit: [0, 100],
     crit: [0, 100], mp5: [0, 10000], resistance: [0, 1000], penetration: [0, 1000], tapThreshold: [0, 100], bossArmor: [0, 100000],
@@ -117,8 +122,8 @@ export function validate(input) {
     if (typeof c[key] !== 'number' || !Number.isFinite(c[key]) || c[key] < lo || c[key] > hi)
       throw new Error(`${key} must be a number between ${lo} and ${hi}.`);
   }
-  for (const key of ['channelClipDelayMs', 'iterations', 'seed', 'duration', 'masterSummoner', 'masterDemo', 'demonicBrandRank', 'demonicKnowledge', 'ruinRank', 'baneRank', 'decimationRank']) if (!Number.isInteger(c[key])) throw new Error(`${key} must be an integer.`);
-  if (![0, 30, 60, 120].includes(c.distance)) throw new Error('Supported distances: 0, 30, 60, 120 yards.');
+  for (const key of ['soulShards', 'channelClipDelayMs', 'iterations', 'seed', 'duration', 'masterSummoner', 'masterDemo', 'demonicBrandRank', 'demonicKnowledge', 'ruinRank', 'baneRank', 'decimationRank']) if (!Number.isInteger(c[key])) throw new Error(`${key} must be an integer.`);
+  if (!Number.isFinite(c.distance) || c.distance < 0 || c.distance > 120) throw new Error('Distance must be between 0 and 120 yards.');
   if (!['execute', 'cooldown', 'align-execute', 'align-doom'].includes(c.racialPolicy)) throw new Error('Unsupported racial policy.');
   if (!['HUMAN', 'GNOME', 'ORC', 'TROLL', 'UNDEAD'].includes(c.race)) throw new Error('Unsupported race.');
   if (!['shadow', 'fire', 'searing', 'bolt'].includes(c.rotation)) throw new Error('Unsupported rotation.');
@@ -253,10 +258,13 @@ export function encodeAPLRule(rule) {
 // Explicit word schemas keep JS and GLSL offsets in one place. All scalar
 // members have four-byte alignment. Never encode counters/timestamps as floats.
 export const CONFIG = {
+  soulShards: 'u32', externalElements: 'u32',
+  assignedElements: 'u32', demonicRune: 'u32', ezThroDynamite: 'u32', manualTrinket: 'u32', judgementOfWisdom: 'u32', giftOfArthas: 'u32',
   autoCooldowns: 'u32', spiritRegen: 'f32', petMaxMana: 'f32', channelClipDelay: 'u32', race: 'u32', racialPolicy: 'u32', targetIsBeast: 'u32', basePower: 'f32', maxHealth: 'f32', end: 'u32', travel: 'u32', corrCast: 'u32', filler: 'u32', corr: 'u32', agony: 'u32', immolate: 'u32',
   baneRank: 'u32', decimationRank: 'u32',
   charges: 'u32', partial: 'u32', piercing: 'u32',
   demonicPact: 'u32', demonicSacrifice: 'u32', felDomination: 'u32', masterSummoner: 'u32', soulLink: 'u32', sacImp: 'u32', sacSucc: 'u32', masterDemo: 'u32',
+  petApproach: 'u32', petTravel: 'u32',
   petChoice: 'u32', trinketDuration: 'u32', trinketCD: 'u32',
   conflagrate: 'u32', shadowburn: 'u32', curseOfDoom: 'u32', incinerate: 'u32',
   decimation: 'u32', demonicBrand: 'u32', demonicBrandRank: 'u32', siphonLife: 'u32', drainHope: 'u32',
@@ -299,7 +307,9 @@ export const STATE = {
   siphonTicks:'u32', siphonGen:'u32', siphonEnd:'u32', drainHopeEnd:'u32', drainHopeReady:'u32',
   taps:'u32', procs:'u32', isbProcs:'u32', isbConsumed:'u32', traceCount:'u32', rngCalls:'u32',
   petSwapUsed:'u32', petGeneration:'u32', activePet:'u32', petShadowScale:'f32', petFireScale:'f32',
+  impMissileDamage:'f32', impMissileCrit:'u32', impMissileLanded:'u32',
   petCasts:'u32',
+  soulShards:'u32', elementsEnd:'u32', runeReady:'u32', explosiveReady:'u32',
   trinketEnd:'u32', trinketReady:'u32', petReady:'u32',
   conflagReady:'u32', shadowburnReady:'u32', soulFireReady:'u32', doomActive:'u32',
   amplifyReady:'u32', agonyAmplified:'u32',
@@ -399,8 +409,12 @@ export function packConfig(input) {
     hellfirePowerOffset: c.firePower - (c.rotation === 'fire' || c.rotation === 'searing' ? c.firePower : c.shadowPower),
     power: c.spellPower + (c.rotation === 'fire' || c.rotation === 'searing' ? c.firePower : c.shadowPower),
     maxMana: ((c.statsIncludeBase ? 1373 - 280 : 1393) + int * 15) * (c.race === 'GNOME' ? 1.05 : 1) * (1.0 + felVitalityBonus),
+    soulShards: c.soulShards,
+    ...Object.fromEntries(['externalElements', 'assignedElements', 'demonicRune', 'ezThroDynamite', 'manualTrinket', 'judgementOfWisdom', 'giftOfArthas'].map(key => [key, c[key] ? 1 : 0])),
     autoCooldowns: c.autoCooldowns ? 1 : 0,
     spiritRegen: 6.25 + c.spirit / 8,
+    petApproach: Math.round(Math.max(0, c.distance - (c.petChoice === 'imp' ? 30 : 5)) / 8 * 1000) * 1000,
+    petTravel: Math.round((c.distance > 30 ? 29 : c.distance) / 16 * 1e6),
     petMaxMana: (c.petChoice === 'imp' ? 576 + 264 * 5 : c.petChoice === 'succubus' ? 1066 + 70 * 11.5 : 0) * (1 + felVitalityBonus),
     tapGain: (424 + c.spirit) * (1 + (c.tapBonus > 0 ? c.tapBonus : c.improvedTap ? 0.2 : 0)),
     tapThreshold: c.tapThreshold,

@@ -87,6 +87,8 @@ export const SPELL_ID_TO_ACTION = {
   20554: 'berserking',   // Berserking (Troll)
   26297: 'berserking',   // Berserking
   1259821: 'eureka',     // Eureka! (Gnome)
+  250937: 'spellblasting',
+  1311680: 'elements',
   1293696: 'brand'       // Demonic Brand Trigger
 };
 
@@ -137,10 +139,14 @@ export function mapForeverBuffs(foreverBuild) {
 
   // Raid / Party
   if (raidBuffs.arcaneBrilliance) buffs.arcaneIntellect = true;
-  if (raidBuffs.giftOfTheWild) buffs.markOfTheWild = true;
+  if (raidBuffs.giftOfTheWild) { buffs.markOfTheWild = true; buffs.giftOfTheWild = true; }
   if (playerBuffs.greaterBlessingOfKings || playerBuffs.blessingOfKings) buffs.blessingOfKings = true;
   if (playerBuffs.greaterBlessingOfWisdom || playerBuffs.blessingOfWisdom) buffs.blessingOfWisdom = true;
+  if (playerBuffs.greaterBlessingOfWisdom) buffs.greaterBlessingOfWisdom = true;
   if (partyBuffs.manaSpringTotem && partyBuffs.manaSpringTotem !== 'TristateEffectMissing') buffs.manaSpringTotem = true;
+
+  for (const key of ['prayerOfFortitude', 'prayerOfSpirit', 'moonkinAura']) if (raidBuffs[key] === true) buffs[key] = true;
+  for (const key of ['judgementOfWisdom', 'sunderArmor', 'exposeArmor', 'faerieFire', 'giftOfArthas']) if (debuffs[key] === true) buffs[key] = true;
 
   // World Buffs
   if (playerBuffs.rallyingCryOfTheDragonslayer) buffs.dragonslayer = true;
@@ -160,7 +166,8 @@ export function mapForeverBuffs(foreverBuild) {
   if (consumes.offensivePotId === 9155) buffs.greaterArcaneElixir = true;
   if (consumes.shadowPowerElixir || consumes.offensivePotId === 9264) buffs.shadowPowerElixir = true;
   if (consumes.greaterFirepowerElixir || consumes.offensivePotId === 21546) buffs.greaterFirepowerElixir = true;
-  if (consumes.wizardOil || consumes.mhImbueId === 20749) buffs.wizardOil = true;
+  // Temporary enchants require an equipped weapon; default exports have none.
+  if ((consumes.wizardOil || consumes.mhImbueId === 20749) && player.equipment?.items?.[14]?.id) buffs.wizardOil = true;
   if (consumes.magebloodElixir) buffs.magebloodElixir = true;
   if (consumes.foodId === 13931) buffs.nightfinSoup = true;
 
@@ -337,13 +344,9 @@ export function expandForeverAPLGroups(priorityList, { groups = [], valueVariabl
   function walk(items, vars, gates = [], stack = []) {
     return items.flatMap(item => {
       if (item.hide) return [];
-      const action = item.action || {};
-      // Ordinary top-level rows keep the existing translator in this step.
-      if (!stack.length && !action.groupReference) {
-        const spell = action.castSpell?.spellId?.spellId;
-        if (![20572, 20554, 26297, 1259821].includes(spell)) return [item];
-        return [{ ...item, foreverGroupPath: ['priorityList'], action: resolve(action, vars) }];
-      }
+      let action = item.action || {};
+      if (action.autocastOtherCooldowns) return [];
+      if (action.castWarlockAssignedCurse) action = { ...action, castSpell: { spellId: { spellId: 1311680 } } };
       const condition = resolve(action.condition, vars);
       const combined = [...gates, condition].filter(Boolean);
       if (action.groupReference) {
@@ -354,7 +357,7 @@ export function expandForeverAPLGroups(priorityList, { groups = [], valueVariabl
         const overrides = Object.fromEntries((ref.variables || []).map(v => [v.name, resolve(v.value, vars)]));
         return walk(group.actions || [], { ...vars, ...bindings(group.variables || []), ...overrides }, combined, [...stack, name]);
       }
-      return [{ ...item, foreverGroupPath: stack, action: { ...resolve(action, vars),
+      return [{ ...item, foreverGroupPath: stack.length ? stack : ['priorityList'], action: { ...resolve(action, vars),
         condition: combined.length ? { and: { vals: combined } } : null } }];
     });
   }
@@ -394,7 +397,22 @@ function simplifyForeverBranches(branches) {
       if (lower) retained.add(lower.index);
       if (upper) retained.add(upper.index);
     }
-    return [atoms.filter((atom, i) => !/\s+(<=|>=|<|>)\s+-?\d+(?:\.\d+)?$/.test(atom) || retained.has(i))];
+    const reduced = atoms.filter((atom, i) => !/\s+(<=|>=|<|>)\s+-?\d+(?:\.\d+)?$/.test(atom) || retained.has(i));
+    // Fold multiple DoT presence checks into one exact mask predicate.
+    for (const [operator, name] of [['>', 'dots_active'], ['<=', 'dots_missing']]) {
+      const names = ['Bane of Doom', 'Bane of Agony', 'Corruption', 'Immolate', 'Siphon Life'];
+      let mask = 0;
+      const matches = reduced.filter(atom => {
+        const m = atom.match(/^target\.debuff_remains\("([^"]+)"\) (>|<=) 0$/);
+        if (!m || m[2] !== operator) return false;
+        mask |= 1 << names.indexOf(m[1]); return true;
+      });
+      if (matches.length > 1) {
+        for (const atom of matches) reduced.splice(reduced.indexOf(atom), 1);
+        reduced.push(`${name}(${mask})`);
+      }
+    }
+    return [reduced];
   });
 }
 
@@ -420,6 +438,12 @@ export function foreverGroupConditionBranches(node, negated = false) {
     if (!name) throw new Error(`Unsupported Forever group debuff: ${id}`);
     return name;
   };
+  if (node.warlockAssignedCurseIsActive) return [[negated ? '!debuff.assigned_curse' : 'debuff.assigned_curse']];
+  if (node.cmp?.lhs?.min) {
+    const { lhs, rhs, op } = node.cmp;
+    const vals = lhs.min.vals.map(val => ({ cmp: { lhs: val, rhs, op } }));
+    return foreverGroupConditionBranches({ [(['OpGe', 'OpGt'].includes(op) ? 'and' : 'or')]: { vals } }, negated);
+  }
   if (node.dotIsActive) {
     return [[`target.debuff_remains("${spellName(node.dotIsActive.spellId?.spellId)}") ${negated ? '<=' : '>'} 0`]];
   }
@@ -440,7 +464,9 @@ export function foreverGroupConditionBranches(node, negated = false) {
   }
   if (node.auraIsActive) {
     const id = node.auraIsActive.auraId?.spellId;
-    const expression = id === 18288 ? (negated ? '!buff.amplify_curse' : 'buff.amplify_curse')
+    const expression = id === 17941 ? (negated ? '!buff.shadow_trance' : 'buff.shadow_trance')
+      : id === 1293696 ? (negated ? 'debuff.demonic_brand_missing' : '!debuff.demonic_brand_missing')
+      : id === 18288 ? (negated ? '!buff.amplify_curse' : 'buff.amplify_curse')
       : id === 17794 ? (negated ? 'buff.isb_missing' : 'buff.isb')
       : id === 440873 ? (negated ? '!buff.decimation' : 'buff.decimation') : null;
     if (expression) return [[expression]];
@@ -455,91 +481,20 @@ export function foreverGroupConditionBranches(node, negated = false) {
 export function extractForeverAPL(priorityList, { valueVariables = [], groups = [], diagnostics = null } = {}) {
   if (!Array.isArray(priorityList)) return null;
 
-  // Build variable lookup map
-  const vars = {};
-  if (Array.isArray(valueVariables)) {
-    for (const v of valueVariables) {
-      if (v?.name && v?.value) vars[v.name] = v.value;
-    }
-  }
-
   const lines = [];
-
   for (const item of expandForeverAPLGroups(priorityList, { groups, valueVariables })) {
-    if (item.foreverGroupPath) {
-      const id = item.action?.castSpell?.spellId || item.action?.channelSpell?.spellId;
-      const alias = SPELL_ID_TO_ACTION[id?.spellId ?? id?.otherId];
-      try {
-        if (!alias) throw new Error(`Unsupported grouped action: ${JSON.stringify(id || item.action)}`);
-        const branches = simplifyForeverBranches(foreverGroupConditionBranches(item.action.condition));
-        const rows = branches.map(atoms => `${alias}${atoms.length ? ` if ${[...new Set(atoms)].join(' && ')}` : ''}`);
-        // Validate every branch before emitting any; never weaken a group gate.
-        if (rows.length) compileAPLToBytecode(parseAPLText(rows.join('\n')));
-        lines.push(...rows);
-      } catch (error) {
-        if (!diagnostics) throw error;
-        diagnostics.push({ groupPath: item.foreverGroupPath, action: id, condition: item.action.condition, reason: error.message });
-      }
-      continue;
-    }
-    const act = item.action || {};
-    let spellId = null;
-
-    if (act.castSpell?.spellId?.spellId) {
-      spellId = act.castSpell.spellId.spellId;
-    } else if (act.castSpell?.spellId?.otherId) {
-      spellId = act.castSpell.spellId.otherId;
-    } else if (act.channelSpell?.spellId?.spellId) {
-      spellId = act.channelSpell.spellId.spellId;
-    }
-
-    if (spellId && SPELL_ID_TO_ACTION[spellId]) {
-      const alias = SPELL_ID_TO_ACTION[spellId];
-      if (alias === 'tap' && lines.length > 0 && lines[lines.length - 1] === 'Life Tap') {
-        continue;
-      }
-
-      // Convert AST condition
-      let condStr = convertForeverCondition(act.condition, vars);
-
-      if (alias === 'brand' || (alias === 'searing' && condStr.includes('demonic_brand_missing'))) {
-        lines.push('Demonic Brand if debuff.demonic_brand_missing');
-      } else if (alias === 'decimateSoulFire' || (alias === 'soulfire' && condStr.includes('decimation.active'))) {
-        lines.push('Decimation: Soul Fire if decimation.active');
-      } else if (alias === 'decimateSearing' || (alias === 'searing' && condStr.includes('decimation.inactive'))) {
-        lines.push('Decimation: Searing Pain if decimation.inactive');
-      } else if (alias === 'nightfall' || (alias === 'bolt' && condStr.includes('buff.shadow_trance'))) {
-        lines.push('Nightfall: Shadow Bolt if buff.shadow_trance');
-      } else if (alias === 'berserking' || alias === 'bloodFury' || alias === 'eureka') {
-        lines.push(alias);
-      } else if (alias === 'curse') {
-        if (condStr === 'true') condStr = 'target_ttd >= 60';
-        lines.push(`Bane of Doom if ${condStr}`);
-      } else if (alias === 'amplify') {
-        lines.push(`Amplify Curse if ${condStr}`);
-      } else if (alias === 'agony') {
-        if (condStr === 'true') {
-          lines.push('Bane of Agony if target.debuff_remains("Bane of Agony") <= 0');
-        } else {
-          if (condStr.includes('target.debuff_remains("Bane of Doom") <= 0') && condStr.includes('target.debuff_remains("Bane of Agony") <= 0')) {
-            lines.push('Bane of Agony if !target.has_debuff("Bane of Doom") && target.debuff_remains("Bane of Agony") <= 0');
-          } else {
-            lines.push(`Bane of Agony if ${condStr}`);
-          }
-        }
-      } else if (alias === 'corr') {
-        lines.push(`Corruption if ${condStr === 'true' ? 'target.debuff_remains("Corruption") <= 0' : condStr}`);
-      } else if (alias === 'immo') {
-        lines.push(`Immolate if ${condStr === 'true' ? 'target.debuff_remains("Immolate") <= 0' : condStr}`);
-      } else if (alias === 'siphon') {
-        lines.push(`Siphon Life if ${condStr === 'true' ? 'target.debuff_remains("Siphon Life") <= 0' : condStr}`);
-      } else if (alias === 'conflag') {
-        lines.push(condStr === 'true' || condStr.includes('Immolate') ? 'conflag' : `conflag if ${condStr}`);
-      } else if (alias === 'tap') {
-        lines.push(condStr === 'true' ? 'Life Tap' : `Life Tap if ${condStr}`);
-      } else {
-        lines.push(condStr === 'true' ? alias : `${alias} if ${condStr}`);
-      }
+    const id = item.action?.castSpell?.spellId || item.action?.channelSpell?.spellId;
+    const alias = SPELL_ID_TO_ACTION[id?.spellId ?? id?.itemId ?? id?.otherId];
+    try {
+      if (!alias) throw new Error(`Unsupported grouped action: ${JSON.stringify(id || item.action)}`);
+      const branches = simplifyForeverBranches(foreverGroupConditionBranches(item.action.condition));
+      const rows = branches.map(atoms => `${alias}${atoms.length ? ` if ${[...new Set(atoms)].join(' && ')}` : ''}`);
+      // Validate all alternatives before emitting any; never weaken a source gate.
+      if (rows.length) compileAPLToBytecode(parseAPLText(rows.join('\n')));
+      lines.push(...rows);
+    } catch (error) {
+      if (!diagnostics) throw error;
+      diagnostics.push({ groupPath: item.foreverGroupPath, action: id, condition: item.action.condition, reason: error.message });
     }
   }
 
@@ -574,7 +529,9 @@ export function convertForeverBuildToCandidate(foreverBuild, { candidateId = 'fo
   const aplPriorityList = player.rotation?.priorityList;
   const valueVariables = player.rotation?.valueVariables || [];
   const importDiagnostics = [];
-  const aplText = extractForeverAPL(aplPriorityList, { valueVariables, groups: player.rotation?.groups || [], diagnostics: importDiagnostics });
+  let aplText = extractForeverAPL(aplPriorityList, { valueVariables, groups: player.rotation?.groups || [], diagnostics: importDiagnostics });
+
+  if (!warlockOpts.curseOptions || warlockOpts.curseOptions === 'NoCurse') aplText = aplText?.split('\n').filter(line => !line.startsWith('elements')).join('\n');
 
   // Equipment item mapping
   const equipmentItems = {};
@@ -601,11 +558,11 @@ export function convertForeverBuildToCandidate(foreverBuild, { candidateId = 'fo
     autoCooldowns: Boolean(player.rotation?.priorityList?.some(row => !row.hide && row.action?.autocastOtherCooldowns)),
     importDiagnostics,
     encounter: {
-      duration: 180,
+      duration: foreverBuild.encounter?.duration ?? 180,
       distance: distance ?? player.distanceFromTarget ?? 0,
       target: {
         level: 63,
-        bossArmor: 3731,
+        bossArmor: foreverBuild.encounter?.targets?.[0]?.stats?.[27] ?? 3731,
         resistance: 0
       }
     },
@@ -623,6 +580,13 @@ export function convertForeverBuildToCandidate(foreverBuild, { candidateId = 'fo
       sacrifice,
       rotation: 'shadow'
     },
+    sourceSettings: { armor: warlockOpts.armor || 'NoArmor', profession1: player.profession1, profession2: player.profession2 },
+    soulShards: warlockOpts.soulShards ?? 32,
+    externalElements: buffs.curseOfElements === true,
+    assignedElements: warlockOpts.curseOptions === 'Elements',
+    demonicRune: consumes.conjuredId === 12662,
+    ezThroDynamite: consumes.explosiveId === 18588,
+    manualTrinket: hasSpellblastingPot,
     channelClipDelayMs: Math.max(0, player.channelClipDelayMs ?? 0),
     book: true,
     trinketSP: hasSpellblastingPot ? 47 : 0,

@@ -50,13 +50,13 @@ test('missing groups, cycles and unresolved variables fail explicitly', () => {
 
 test('unsupported group predicates and items are diagnosed without broadening gates', () => {
   const diagnostics = [];
-  const groups = [{ name: 'Boost', actions: [cast(20572, { unknown: {} }), { action: { castSpell: { spellId: { itemId: 250937 } } } }, cast(11689)] }];
+  const groups = [{ name: 'Boost', actions: [cast(20572, { unknown: {} }), { action: { castSpell: { spellId: { itemId: 999999 } } } }, cast(11689)] }];
   assert.equal(extractForeverAPL([ref('Boost')], { groups, diagnostics }), 'tap');
   assert.equal(diagnostics.length, 2);
   assert.throws(() => extractForeverAPL([ref('Boost')], { groups }), /Unsupported Forever group condition/);
 });
 
-test('captured Boosts gates keep both Doom branches and unsupported actions remain visible', () => {
+test('captured Boosts gates keep both Doom branches and potion actions retain the same gates', () => {
   for (const id of ['sm_ruin', 'destro', 'aff_wrack', 'demo_shadow_brand', 'demo_fire_brand']) {
     const fixture = JSON.parse(readFileSync(new URL(`../../fixtures/canonical_forever/${id}.fixture.json`, import.meta.url)));
     const candidate = convertForeverBuildToCandidate(fixture.sourceBuild);
@@ -67,16 +67,18 @@ test('captured Boosts gates keep both Doom branches and unsupported actions rema
       assert.match(racialRows[1], /Bane of Doom.*<= 0.*&&.*target_ttd < 60/);
     }
     compileAPLToBytecode(parseAPLText(candidate.apl.text));
-    assert.ok(candidate.importDiagnostics.some(d => d.action?.itemId === 250937));
+    assert.ok(candidate.apl.text.includes('spellblasting'));
+    assert.deepEqual(candidate.importDiagnostics, []);
   }
 });
 
-test('normal UI import retains grouped rows and exposes omitted-action diagnostics', async () => {
+test('normal UI import retains grouped rows and retains supported potion actions', async () => {
   const { prepareUIBuildImport } = await import('../src/contracts/ui_build.js');
   const fixture = JSON.parse(readFileSync(new URL('../../fixtures/canonical_forever/aff_wrack.fixture.json', import.meta.url)));
   const prepared = await prepareUIBuildImport(fixture.sourceBuild);
   assert.equal(prepared.kind, 'editable');
   assert.ok(prepared.rules.some(row => row.id === 'bloodFury'));
-  assert.ok(prepared.importDiagnostics.some(d => d.action?.itemId === 250937));
+  assert.ok(prepared.rules.some(row => row.id === 'spellblasting'));
+  assert.deepEqual(prepared.importDiagnostics, []);
   assert.deepEqual(prepared.importDiagnostics, prepared.logicalBuild.candidate.importDiagnostics);
 });

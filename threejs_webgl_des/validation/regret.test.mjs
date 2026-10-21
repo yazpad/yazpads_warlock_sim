@@ -8,8 +8,8 @@ test('regret diagnostics do not change simulation shaders', () => {
  assert.ok(!FRAGMENT.includes('targetDecision'));
  assert.ok(!FAST_FRAGMENT.includes('targetDecision'));
  assert.ok(REGRET_FRAGMENT.includes('uniform highp usampler2D regretJobTex'));
- // Reviewed beta shader output includes timed Eureka instead of charges.
- assert.equal(createHash('sha256').update(FAST_FRAGMENT).digest('hex'), '8f9fbe8611153110a0bdca20292d8f37e88e5711c5797ee18f86dd29a25b972e');
+ // Reviewed production shader includes the Forever default parity fixes.
+ assert.equal(createHash('sha256').update(FAST_FRAGMENT).digest('hex'), '788461ec1cc4eddd51a91103e98ebad8a6feb2f26824b30cd5fbe2f9169ddf11');
 });
 
 test('paired differences use full fight duration and uncertainty of differences', () => {

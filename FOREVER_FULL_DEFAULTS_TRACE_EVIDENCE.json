@@ -1,0 +1,17 @@
+{
+  "sourceRevision": "86d0920cae8445eaa90de9c17c3583cf171c19c5",
+  "build": "demo_shadow_brand",
+  "iterations": 2,
+  "seed": 101,
+  "debugExporterHash": "be5503901d84798fdd7ccf18e984af44ab13462779dac0d2c0a2303cdc8c5c26",
+  "traceExcerpts": [
+    "[1.88] [Player (#1) - Succubus] Casting {SpellID: 11780} (Cost = 160.000, Cast Time = 0s, GCD = 1.5s, Effective Time = 1.5s)",
+    "[13.88] [Player (#1) - Succubus] Casting {SpellID: 11780} (Cost = 160.000, Cast Time = 0s, GCD = 1.5s, Effective Time = 1.5s)",
+    "[25.88] [Player (#1) - Succubus] Casting {SpellID: 11780} (Cost = 160.000, Cast Time = 0s, GCD = 1.5s, Effective Time = 1.5s)",
+    "[0.00] [Player (#1)] Casting {ItemID: 18588} (Cost = 0.000, Cast Time = 1s, GCD = 0s, Effective Time = 1s)",
+    "[61.80] [Player (#1)] Casting {ItemID: 18588} (Cost = 0.000, Cast Time = 1s, GCD = 0s, Effective Time = 1s)",
+    "[125.50] [Player (#1)] Casting {ItemID: 18588} (Cost = 0.000, Cast Time = 1s, GCD = 0s, Effective Time = 1s)",
+    "[0.00] [Player (#1)] Casting {SpellID: 603} (Cost = 300.000, Cast Time = 0s, GCD = 1.5s, Effective Time = 1.5s)",
+    "[61.80] [Player (#1)] Casting {SpellID: 603} (Cost = 300.000, Cast Time = 0s, GCD = 1.5s, Effective Time = 1.5s)"
+  ]
+}
