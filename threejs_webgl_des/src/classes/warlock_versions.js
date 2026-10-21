@@ -1,12 +1,12 @@
 // Compatibility IDs include current packing, mechanics and import behavior.
 export const WARLOCK_VERSIONS = Object.freeze({
   "packingVersion": "warlock-packing-sha256-a29bfad283ed8249f437d74ff192d065b7cae4a2b091f0d7577d9de40c3e5c98",
-  "simulationVersion": "warlock-simulation-sha256-72c453b3485aef740e60a1db55220a18a8f584716c44e235f935cf48d6f7dacf"
+  "simulationVersion": "warlock-simulation-sha256-4ea64a3487f76fcd84028f23c5abc5a19b00dc9205942299e2fe91be6377abef"
 });
 
 export const WARLOCK_VERSION_SOURCE_HASHES = Object.freeze({
   "src/model.js": "a29bfad283ed8249f437d74ff192d065b7cae4a2b091f0d7577d9de40c3e5c98",
-  "src/kernel.js": "6667f9ced063bab235beebec74ddf00e24f8335d40192f8c56ee0852deed6deb",
+  "src/kernel.js": "c039031a0ad0b1db4bfd6927aba399cfd89357c882bdf844e39a1e616f092c7e",
   "src/config_builder.js": "a0f67a8129b12497e694c3eaac8979494a4c582ab57363b5f953de21781e6b9a",
   "src/talents.js": "824b51f05536089e2b86dbc03fa3962ce4a6bb88b3b02e9fc7f2391fb06cd82a",
   "src/classes/warlock_search.js": "411fc147a186db1795840d25fa9e39885543b118fa4e27cc401628671ae499be",

@@ -114,11 +114,10 @@ float random01(){
 }
 // Periodic events expire/apply before actions at the same timestamp.
 bool eventBefore(Event a,Event b){
- if(a.at!=b.at)return a.at<b.at;
  uint ak=EV_KIND(a),bk=EV_KIND(b);
- if(ak==13u||bk==13u)return bk==13u&&ak!=13u;
- bool ap=ak==3u||ak==14u,bp=bk==3u||bk==14u;
- return ap&&!bp;
+ uint ap=ak==13u?2u:((ak==3u||ak==14u)?0u:1u);
+ uint bp=bk==13u?2u:((bk==3u||bk==14u)?0u:1u);
+ return a.at<b.at||(a.at==b.at&&ap<bp);
 }
 void enqueue(uint at,uint kind,uint spell,uint generation){
  if(s.size>=${HEAP_CAPACITY}u){s.done=2u;return;}
@@ -130,13 +129,17 @@ void enqueue(uint at,uint kind,uint spell,uint generation){
 }
 Event dequeue(){
  Event e=queue[0];s.size--;
- if(s.size>0u){queue[0]=queue[s.size];uint i=0u;
+ if(s.size>0u){Event tail=queue[s.size];uint i=0u;
   for(int guard=0;guard<6;guard++){
    uint left=2u*i+1u,right=left+1u,smallest=i;
-   if(left<s.size){if(eventBefore(queue[left],queue[smallest]))smallest=left;}
-   if(right<s.size){if(eventBefore(queue[right],queue[smallest]))smallest=right;}
-   if(smallest==i)break;Event swap=queue[i];queue[i]=queue[smallest];queue[smallest]=swap;i=smallest;
+   if(left<s.size){if(eventBefore(queue[left],tail))smallest=left;}
+   if(right<s.size){
+    bool before=smallest==i?eventBefore(queue[right],tail):eventBefore(queue[right],queue[left]);
+    if(before)smallest=right;
+   }
+   if(smallest==i)break;queue[i]=queue[smallest];i=smallest;
   }
+  queue[i]=tail;
  }return e;
 }
 void countCast(uint spell){${counterSwitch}}
@@ -589,6 +592,8 @@ void decide(){
  tap();
 }
 void creditManaRegen(uint at){
+ // Same-time events have already received both player and pet regeneration.
+ if(at==s.now)return;
  float elapsed=float(at-s.now)*0.000001;
  uint spiritFrom=max(s.now,max(s.spiritRegenAt,s.paidChannelEnd));
  float gain=c.mp5*elapsed/5.0+(at>spiritFrom?c.spiritRegen*float(at-spiritFrom)*0.000001:0.0);

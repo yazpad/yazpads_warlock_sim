@@ -53,7 +53,7 @@ test('Fast schema and generated shader exclude all detailed metrics',()=>{
  for(const key of Object.keys(model.DETAIL_STATE))assert.ok(!(key in model.FAST_STATE));
  assert.doesNotMatch(FAST_FRAGMENT,/uptime_|manaWasted/);
  assert.doesNotMatch(FAST_FRAGMENT,/tickCritDamage|periodicDamage|petBrandHits|amplifyCasts/);
- assert.equal(createHash('sha256').update(FAST_FRAGMENT).digest('hex'),'ad329b4e4e50ea7462b5612dcd44d75628df8dba7d4a039b3d08f22e0cee8404');
+ assert.equal(createHash('sha256').update(FAST_FRAGMENT).digest('hex'),'8f9fbe8611153110a0bdca20292d8f37e88e5711c5797ee18f86dd29a25b972e');
  assert.match(FRAGMENT,/min\(e.at,s.immEnd\)-s.now/);
  assert.match(FRAGMENT,/s.immTicks>0u&&s.immEnd>s.now/);
  const summary=globals.summarize([{total:100,detailed:false}],10);
