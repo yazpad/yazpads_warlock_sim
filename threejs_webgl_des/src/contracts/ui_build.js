@@ -16,7 +16,7 @@ export async function prepareUIBuildImport(payload, options) {
     race: c.classOptions.race, pet: c.classOptions.pet, ds: c.classOptions.sacrifice,
     rotation: c.classOptions.rotation, gearMode: c.equipment.mode, gear: c.equipment.items,
     stats: c.stats, talents: c.talents, buffs: c.buffs, target: c.encounter.target,
-    sim: { duration: c.encounter.duration, distance: c.encounter.distance,
+    sim: { duration: c.encounter.duration,
       iterations: resolved.evaluationDefaults.iterations, detailedResults: resolved.evaluationDefaults.mode === 'detailed' },
   } };
 }

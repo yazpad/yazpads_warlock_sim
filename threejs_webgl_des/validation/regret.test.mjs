@@ -9,7 +9,7 @@ test('regret diagnostics do not change simulation shaders', () => {
  assert.ok(!FAST_FRAGMENT.includes('targetDecision'));
  assert.ok(REGRET_FRAGMENT.includes('uniform highp usampler2D regretJobTex'));
  // Reviewed production shader includes the Forever default parity fixes.
- assert.equal(createHash('sha256').update(FAST_FRAGMENT).digest('hex'), '788461ec1cc4eddd51a91103e98ebad8a6feb2f26824b30cd5fbe2f9169ddf11');
+ assert.equal(createHash('sha256').update(FAST_FRAGMENT).digest('hex'), '2cc191d335f31ed4244bf50343c882923f26184b1d00cd8c9da6cb05f52fdab1');
 });
 
 test('paired differences use full fight duration and uncertainty of differences', () => {

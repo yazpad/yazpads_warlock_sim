@@ -1,6 +1,9 @@
 import { describePetSwapOutcome } from './apl_rules.js';
 import { renderDetailedResults } from './detailed_results.js';
 import { initPriestPreview } from './priest_preview.js';
+import { resolveWarlockBuffEffects } from './classes/warlock_import_buffs.js';
+import { FOREVER_DEFAULT_BUILD, FOREVER_DEFAULT_PRESET, FOREVER_PRESETS, WARLOCK_RUNTIME_KEYS } from './classes/warlock_defaults.js';
+import { migrateLegacyBuild } from './contracts/legacy_build.js';
 import { WARLOCK_IMPORT_BUFF_KEYS } from './classes/warlock_import.js';
 import { addWarlockBaseStats, warlockBaseResources } from './classes/warlock_base_stats.js';
 import { prepareUIBuildImport } from './contracts/ui_build.js';
@@ -8,7 +11,7 @@ import { exportLogicalBuild, exportResolvedBuild } from './contracts/build_io.js
 import { CLASS_PRESENTATION } from './classes/active_class.js';
 import { CLASS_SIMULATION } from './classes/active_simulation.js';
 import { renderRegretResults } from './regret_view.js';
-import { DEFAULTS, SPELLS } from './model.js';
+import { DEFAULTS, SPELLS, CONFIG, packConfig } from './model.js';
 import { compare } from '../validation/compare.js';
 import { initTalents, applyTalentsObject, applyTalentPreset, resetTalents, getSimTalentFlags, getTalentsObject } from './talents.js';
 import { initBuffs, getActiveBuffStats } from './buffs.js';
@@ -120,6 +123,7 @@ let activeRotation = 'shadow';
 
 export function setRotation(rot) {
   const norm = (rot || 'shadow').toLowerCase();
+  importedConfig = null;
   activeRotation = ['shadow', 'fire', 'searing', 'bolt'].includes(norm) ? norm : 'shadow';
   refreshAPLFallback();
 }
@@ -131,6 +135,7 @@ export function getRotation() {
 export function setRace(raceKey) {
   const norm = (raceKey || 'HUMAN').toUpperCase();
   if (RACE_ICONS_DATA[norm]) {
+    importedConfig = null;
     activeRace = norm;
     if ($('slot-race-icon')) $('slot-race-icon').src = RACE_ICONS_DATA[norm].icon;
     updateRacialsDisplay();
@@ -141,6 +146,7 @@ export function setRace(raceKey) {
 
 export function setPet(petKey) {
   const norm = (petKey || 'imp').toLowerCase();
+  importedConfig = null;
   activePet = PET_ICONS_DATA[norm] ? norm : 'none';
   const icon = $('slot-pet-icon');
   if (icon) {
@@ -152,6 +158,7 @@ export function setPet(petKey) {
 
 export function setDS(dsKey) {
   const norm = (dsKey || 'none').toLowerCase();
+  importedConfig = null;
   activeDS = DS_ICONS_DATA[norm] ? norm : 'none';
   const icon = $('slot-ds-icon');
   if (icon) {
@@ -337,141 +344,49 @@ function applyEquippedStatsToForm(stats) {
 }
 
 function getEffectiveBuffsAndStats() {
-  const sp = Number($('in-spellPower')?.value || 500);
-  const shadowSpBonus = Number($('in-shadowPower')?.value || 0);
-  const fireSpBonus = Number($('in-firePower')?.value || 0);
-  const hit = Number($('in-hit')?.value || 12);
-  const crit = Number($('in-crit')?.value || 15);
-  const haste = Number($('in-haste')?.value || 0);
-  const attributes = addWarlockBaseStats({ intellect: Number($('in-intellect')?.value ?? 200),
-    stamina: Number($('in-stamina')?.value ?? 220), spirit: Number($('in-spirit')?.value ?? 100) }, activeRace);
-  const baseInt = attributes.intellect;
-  const baseStam = attributes.stamina;
-  const baseSpirit = attributes.spirit;
-  const baseMp5 = Number($('in-mp5')?.value || 20);
-  const baseResistance = Number($('in-resistance')?.value || 0);
-  const bossArmor = Number($('in-boss-armor')?.value || 3731);
+  const stats = {};
+  for (const key of ['spellPower', 'shadowPower', 'firePower', 'hit', 'crit', 'intellect', 'stamina', 'spirit', 'mp5']) {
+    stats[key] = Number($(`in-${key}`)?.value ?? 0);
+  }
+  const buffs = Object.fromEntries(WARLOCK_IMPORT_BUFF_KEYS.map(key =>
+    [key, !!form.elements.namedItem(key)?.checked]));
+  const effective = resolveWarlockBuffEffects(addWarlockBaseStats(stats, activeRace), buffs, activeRace, {
+    resistance: Number($('in-resistance')?.value ?? 0),
+    bossArmor: Number($('in-boss-armor')?.value ?? 3731),
+  }, activePet);
+  Object.assign(effective, warlockBaseResources(effective.intellect, effective.stamina));
+  if (buffs.warchiefsBlessing) effective.maxHealth += 300;
+  return effective;
+}
 
-  // Read checkboxes from the form
-  const isFlaskSupreme = !!form.elements.namedItem('flaskSupremePower')?.checked;
-  const isGreaterArcane = !!form.elements.namedItem('greaterArcaneElixir')?.checked;
-  const isShadowPowerElixir = !!form.elements.namedItem('shadowPowerElixir')?.checked;
-  const isGreaterFirepowerElixir = !!form.elements.namedItem('greaterFirepowerElixir')?.checked;
-  const isWizardOil = !!form.elements.namedItem('wizardOil')?.checked;
-  const isMageblood = !!form.elements.namedItem('magebloodElixir')?.checked;
-  const isNightfin = !!form.elements.namedItem('nightfinSoup')?.checked;
+function readRuntimeSettings() {
+  return Object.fromEntries(WARLOCK_RUNTIME_KEYS.map(key => {
+    const input = form.elements.namedItem(key);
+    return [key, input ? (typeof DEFAULTS[key] === 'boolean'
+      ? (input.type === 'checkbox' ? input.checked : input.value === 'true')
+      : Number(input.value)) : DEFAULTS[key]];
+  }));
+}
 
-  const isArcaneIntellect = !!form.elements.namedItem('arcaneIntellect')?.checked;
-  const isMarkOfTheWild = !!form.elements.namedItem('markOfTheWild')?.checked;
-  const isBlessingOfKings = !!form.elements.namedItem('blessingOfKings')?.checked;
-  const isBlessingOfWisdom = !!form.elements.namedItem('blessingOfWisdom')?.checked;
-  const isManaSpringTotem = !!form.elements.namedItem('manaSpringTotem')?.checked;
-
-  const isDragonslayer = !!form.elements.namedItem('dragonslayer')?.checked;
-  const isSongflower = !!form.elements.namedItem('songflower')?.checked;
-  const isWarchiefsBlessing = !!form.elements.namedItem('warchiefsBlessing')?.checked;
-  const isSpiritOfZandalar = !!form.elements.namedItem('spiritOfZandalar')?.checked;
-  const isSaygesFortune = !!form.elements.namedItem('saygesFortune')?.checked;
-
-  const isCurseOfShadow = !!form.elements.namedItem('curseOfShadow')?.checked;
-  const isCurseOfElements = !!form.elements.namedItem('curseOfElements')?.checked;
-  const isShadowWeaving = !!form.elements.namedItem('shadowWeaving')?.checked;
-  const isImprovedScorch = !!form.elements.namedItem('improvedScorch')?.checked;
-  const isNightfallDebuff = !!form.elements.namedItem('nightfallProcDebuff')?.checked;
-
-  // Stat Additions
-  let addedSP = 0;
-  if (isFlaskSupreme) addedSP += 150;
-  if (isGreaterArcane) addedSP += 35;
-  if (isWizardOil) addedSP += 36;
-  if (isNightfin) addedSP += 22;
-
-  let addedShadowSP = isShadowPowerElixir ? 40 : 0;
-  let addedFireSP = isGreaterFirepowerElixir ? 40 : 0;
-
-  let addedInt = 0, addedStam = activePet === 'imp' ? 54 : 0, addedSpirit = 0;
-  if (isArcaneIntellect) addedInt += 31;
-  if (isMarkOfTheWild) { addedInt += 12; addedStam += 12; addedSpirit += 12; }
-  if (isSongflower) { addedInt += 15; addedStam += 15; addedSpirit += 15; }
-
-  let statMultiplier = 1.0;
-  if (isBlessingOfKings) statMultiplier *= 1.10;
-  if (isSpiritOfZandalar) statMultiplier *= 1.15;
-
-  let finalInt = (baseInt + addedInt) * statMultiplier;
-  let finalStam = (baseStam + addedStam) * statMultiplier;
-  let finalSpirit = (baseSpirit + addedSpirit) * statMultiplier;
-
-  // Racial modifiers
-  if (activeRace === 'HUMAN') finalSpirit *= 1.05;
-
-  finalInt = Math.floor(finalInt);
-  finalStam = Math.floor(finalStam);
-  finalSpirit = Math.floor(finalSpirit);
-
-  let addedCrit = 0;
-  if (isWizardOil) addedCrit += 1.0;
-  if (isDragonslayer) addedCrit += 10.0;
-  if (isSongflower) addedCrit += 5.0;
-  const finalCrit = crit + addedCrit;
-
-  let addedMP5 = 0;
-  if (isMageblood) addedMP5 += 12;
-  if (isBlessingOfWisdom) addedMP5 += 30;
-  if (isManaSpringTotem) addedMP5 += 25;
-  if (isWarchiefsBlessing) addedMP5 += 10;
-  const finalMP5 = baseMp5 + addedMP5;
-
-  const finalSP = sp + addedSP;
-  const finalShadowSP = shadowSpBonus + addedShadowSP;
-  const finalFireSP = fireSpBonus + addedFireSP;
-
-  const resources = warlockBaseResources(finalInt, finalStam);
-  const maxMana = resources.maxMana * (activeRace === 'GNOME' ? 1.05 : 1);
-  const maxHealth = resources.maxHealth + (isWarchiefsBlessing ? 300 : 0);
-
-  // Multipliers
-  let allDamageMult = 1.0;
-  if (isSaygesFortune) allDamageMult *= 1.10;
-  if (isNightfallDebuff) allDamageMult *= 1.15;
-
-  let shadowMult = allDamageMult;
-  let fireMult = allDamageMult;
-
-  if (isCurseOfShadow) shadowMult *= 1.10;
-  if (isCurseOfElements) fireMult *= 1.10;
-  if (isShadowWeaving) shadowMult *= 1.15;
-  if (isImprovedScorch) fireMult *= 1.15;
-
-  if (activeDS === 'imp') shadowMult *= 1.15;
-  if (activeDS === 'succubus') fireMult *= 1.15;
-
-  const finalResistance = Math.max(0, baseResistance - (isCurseOfShadow || isCurseOfElements ? 75 : 0));
-
-  return {
-    spellPower: finalSP,
-    shadowPower: finalShadowSP,
-    firePower: finalFireSP,
-    hit,
-    crit: finalCrit,
-    haste,
-    intellect: finalInt,
-    stamina: finalStam,
-    spirit: finalSpirit,
-    mp5: finalMP5,
-    maxMana,
-    maxHealth,
-    targetSpellMultiplier: isCurseOfElements ? 1.10 : 1.0,
-    shadowMultiplier: shadowMult,
-    fireMultiplier: fireMult,
-    resistance: finalResistance,
-    bossArmor
-  };
+// Preserve source-only metadata while rebuilding editable values from the form.
+function getEditableBuildPayload() {
+  const staged = migrateLegacyBuild(getLegacyExportPayload());
+  staged.candidate = { ...importedLogicalBuild?.candidate, ...staged.candidate,
+    ...readRuntimeSettings(),
+    externalElements: !!form.elements.namedItem('curseOfElements')?.checked };
+  return { schemaVersion: 1, ...staged };
 }
 
 function updateCombatStatsSummary() {
   refreshAPLFallback();
-  const eff = getEffectiveBuffsAndStats();
+  const baseStats = getEffectiveBuffsAndStats();
+  // Keep the last summary while a numeric field is temporarily incomplete.
+  let config;
+  try { config = readForm(); } catch { return; }
+  const packed = new Float32Array(packConfig(config).buffer);
+  const word = key => packed[Object.keys(CONFIG).indexOf(key)];
+  const eff = { ...baseStats, ...config, maxMana: word('maxMana'),
+    maxHealth: word('maxHealth'), crit: word('crit') * 100 };
   const effectiveShadow = eff.spellPower + eff.shadowPower;
   const effectiveFire = eff.spellPower + eff.firePower;
 
@@ -483,25 +398,26 @@ function updateCombatStatsSummary() {
   if ($('sum-spell-crit')) $('sum-spell-crit').textContent = `${eff.crit.toFixed(1)}%`;
   if ($('sum-intellect')) $('sum-intellect').textContent = eff.intellect;
   if ($('sum-stamina')) $('sum-stamina').textContent = eff.stamina;
+  if ($('sum-spirit')) $('sum-spirit').textContent = eff.spirit;
   if ($('sum-mp5')) $('sum-mp5').textContent = eff.mp5;
   if ($('sum-shadow-mult')) $('sum-shadow-mult').textContent = `${eff.shadowMultiplier.toFixed(2)}x`;
   if ($('sum-fire-mult')) $('sum-fire-mult').textContent = `${eff.fireMultiplier.toFixed(2)}x`;
 
   // Update Constrained Spec Search Subheader Base Stats
-  if ($('ga-base-shadow-sp')) $('ga-base-shadow-sp').textContent = effectiveShadow;
-  if ($('ga-base-fire-sp')) $('ga-base-fire-sp').textContent = effectiveFire;
-  if ($('ga-base-hit')) $('ga-base-hit').textContent = `${eff.hit.toFixed(1)}%`;
-  if ($('ga-base-crit')) $('ga-base-crit').textContent = `${eff.crit.toFixed(1)}%`;
+  if ($('ga-base-shadow-sp')) $('ga-base-shadow-sp').textContent = baseStats.spellPower + baseStats.shadowPower;
+  if ($('ga-base-fire-sp')) $('ga-base-fire-sp').textContent = baseStats.spellPower + baseStats.firePower;
+  if ($('ga-base-hit')) $('ga-base-hit').textContent = `${baseStats.hit.toFixed(1)}%`;
+  if ($('ga-base-crit')) $('ga-base-crit').textContent = `${baseStats.crit.toFixed(1)}%`;
   const dur = Number(form.elements.namedItem('duration')?.value || 180);
   if ($('ga-base-fight')) $('ga-base-fight').textContent = `${dur}s`;
 
-  // Same live base inputs passed to runBatchPresetSimulation; presets add their talents.
+  // Search/comparison evaluate their own talents using these untalented inputs.
   const comparisonStats = {
-    'compare-base-shadow-sp': effectiveShadow,
-    'compare-base-fire-sp': effectiveFire,
-    'compare-base-hit': `${eff.hit.toFixed(1)}%`,
-    'compare-base-crit': `${eff.crit.toFixed(1)}%`,
-    'compare-base-mp5': eff.mp5,
+    'compare-base-shadow-sp': baseStats.spellPower + baseStats.shadowPower,
+    'compare-base-fire-sp': baseStats.spellPower + baseStats.firePower,
+    'compare-base-hit': `${baseStats.hit.toFixed(1)}%`,
+    'compare-base-crit': `${baseStats.crit.toFixed(1)}%`,
+    'compare-base-mp5': baseStats.mp5,
     'compare-base-fight': `${dur}s`,
   };
   for (const [id, value] of Object.entries(comparisonStats)) {
@@ -509,10 +425,10 @@ function updateCombatStatsSummary() {
   }
 
   // Update APL Synthesis Subheader Base Stats & Target Spec Label
-  if ($('apl-ga-base-shadow-sp')) $('apl-ga-base-shadow-sp').textContent = effectiveShadow;
-  if ($('apl-ga-base-fire-sp')) $('apl-ga-base-fire-sp').textContent = effectiveFire;
-  if ($('apl-ga-base-hit')) $('apl-ga-base-hit').textContent = `${eff.hit.toFixed(1)}%`;
-  if ($('apl-ga-base-crit')) $('apl-ga-base-crit').textContent = `${eff.crit.toFixed(1)}%`;
+  if ($('apl-ga-base-shadow-sp')) $('apl-ga-base-shadow-sp').textContent = baseStats.spellPower + baseStats.shadowPower;
+  if ($('apl-ga-base-fire-sp')) $('apl-ga-base-fire-sp').textContent = baseStats.spellPower + baseStats.firePower;
+  if ($('apl-ga-base-hit')) $('apl-ga-base-hit').textContent = `${baseStats.hit.toFixed(1)}%`;
+  if ($('apl-ga-base-crit')) $('apl-ga-base-crit').textContent = `${baseStats.crit.toFixed(1)}%`;
   if ($('apl-ga-base-fight')) $('apl-ga-base-fight').textContent = `${dur}s`;
   if ($('apl-ga-active-spec-label')) {
     const tf = getSimTalentFlags();
@@ -531,25 +447,19 @@ function updateCombatStatsSummary() {
 function getLegacyExportPayload() {
   const directStats = {
     swordEquipped: !!$('in-swordEquipped')?.checked,
-    spellPower: Number($('in-spellPower')?.value || 500),
+    spellPower: Number($('in-spellPower')?.value ?? 0),
     shadowPower: Number($('in-shadowPower')?.value || 0),
     firePower: Number($('in-firePower')?.value || 0),
-    hit: Number($('in-hit')?.value || 12),
-    crit: Number($('in-crit')?.value || 15),
+    hit: Number($('in-hit')?.value ?? 0),
+    crit: Number($('in-crit')?.value ?? 0),
     haste: Number($('in-haste')?.value || 0),
-    intellect: Number($('in-intellect')?.value || 200),
-    stamina: Number($('in-stamina')?.value || 220),
-    spirit: Number($('in-spirit')?.value || 100),
-    mp5: Number($('in-mp5')?.value || 20),
+    intellect: Number($('in-intellect')?.value ?? 0),
+    stamina: Number($('in-stamina')?.value ?? 0),
+    spirit: Number($('in-spirit')?.value ?? 0),
+    mp5: Number($('in-mp5')?.value ?? 0),
   };
 
-  const buffFields = [
-    'flaskSupremePower', 'greaterArcaneElixir', 'shadowPowerElixir', 'greaterFirepowerElixir',
-    'wizardOil', 'magebloodElixir', 'nightfinSoup', 'arcaneIntellect', 'markOfTheWild',
-    'blessingOfKings', 'blessingOfWisdom', 'manaSpringTotem', 'dragonslayer', 'songflower',
-    'warchiefsBlessing', 'spiritOfZandalar', 'saygesFortune', 'curseOfShadow', 'curseOfElements',
-    'shadowWeaving', 'improvedScorch', 'nightfallProcDebuff'
-  ];
+  const buffFields = WARLOCK_IMPORT_BUFF_KEYS;
   const buffs = {};
   buffFields.forEach(f => {
     const el = form.elements.namedItem(f);
@@ -572,7 +482,7 @@ function getLegacyExportPayload() {
       level: Number($('target-level')?.value || 63),
       racialPolicy: $('racial-policy')?.value || 'execute',
       targetIsBeast: !!form.elements.namedItem('targetIsBeast')?.checked,
-      bossArmor: Number($('in-boss-armor')?.value || 3731),
+      bossArmor: Number($('in-boss-armor')?.value ?? 3731),
       resistance: Number($('in-resistance')?.value || 0),
       targetHP: Number(form.elements.namedItem('targetHP')?.value || 1000000),
       targetCount: Number(form.elements.namedItem('targetCount')?.value || 1),
@@ -580,7 +490,6 @@ function getLegacyExportPayload() {
     sim: {
       iterations: Number(form.elements.namedItem('iterations')?.value || 4096),
       duration: Number(form.elements.namedItem('duration')?.value || 180),
-      distance: Number(form.elements.namedItem('distance')?.value || 30),
       detailedResults: $('detailed-results') ? !!$('detailed-results').checked : true,
     },
     aplText: formatAPLToText(getActiveAPL())
@@ -591,7 +500,7 @@ export async function getExportPayload() {
   const options = { itemDatabase: getEquipmentDatabase() };
   if (importedConfig && importedLogicalBuild) return exportLogicalBuild(importedLogicalBuild, options);
   if (importedConfig) return exportResolvedBuild({ resolvedConfig: importedConfig }, options);
-  return exportLogicalBuild(getLegacyExportPayload(), options);
+  return exportLogicalBuild(getEditableBuildPayload(), options);
 }
 
 export function encodeBuildString(payload) {
@@ -679,8 +588,15 @@ export async function applyImportedBuild(input) {
   if (payload.sim) {
     if (form.elements.namedItem('iterations') && payload.sim.iterations !== undefined) form.elements.namedItem('iterations').value = payload.sim.iterations;
     if (form.elements.namedItem('duration') && payload.sim.duration !== undefined) form.elements.namedItem('duration').value = payload.sim.duration;
-    if (form.elements.namedItem('distance') && payload.sim.distance !== undefined) form.elements.namedItem('distance').value = payload.sim.distance;
     if ($('detailed-results') && payload.sim.detailedResults !== undefined) $('detailed-results').checked = !!payload.sim.detailedResults;
+  }
+
+  for (const key of WARLOCK_RUNTIME_KEYS) {
+    const input = form.elements.namedItem(key);
+    if (!input) continue;
+    const value = prepared.logicalBuild.candidate[key] ?? DEFAULTS[key];
+    if (input.type === 'checkbox') input.checked = !!value;
+    else input.value = value;
   }
 
   applySynthesizedAPL(prepared.rules);
@@ -860,6 +776,10 @@ function readForm() {
   base.shadowMultiplier = eff.shadowMultiplier;
   base.fireMultiplier = eff.fireMultiplier;
 
+  Object.assign(base, readRuntimeSettings(), {
+    externalElements: !!form.elements.namedItem('curseOfElements')?.checked,
+    judgementOfWisdom: eff.judgementOfWisdom, giftOfArthas: eff.giftOfArthas,
+  });
   base.race = activeRace;
   base.statsIncludeBase = true;
   base.maxHealth = eff.maxHealth;
@@ -956,7 +876,8 @@ form.addEventListener('submit', async event => {
     const config = readForm();
     controller = new AbortController();
     busy(true);
-    currentResult = await runSimulation(config, { signal: controller.signal, onProgress: progress, detailedResults: $('detailed-results')?.checked !== false });
+    const detailedResults = $('detailed-results')?.checked !== false;
+    currentResult = await runSimulation(config, { signal: controller.signal, onProgress: progress, detailedResults, trace: detailedResults });
     render(currentResult);
     setStatus(`Simulation Complete · ${format(currentResult.summary.events)} events · ${format(currentResult.config.iterations)} fights.`);
     const tp = currentResult.config.iterations / (Math.max(1, currentResult.timing.elapsedMs) / 1000);
@@ -1075,8 +996,14 @@ function render(result) {
 }
 
 // Full Preset Loader Function
-export function loadFullPreset(preset) {
+export async function loadFullPreset(preset) {
   if (!preset) return;
+  if(preset.build){
+    try{await applyImportedBuild(preset.build);if($('talent-preset-select'))$('talent-preset-select').value=preset.id;setStatus(`Loaded ${preset.name}: complete build with original stats, buffs, consumables and rotation.`);}
+    catch(error){setStatus(error.message,true);}
+    return;
+  }
+  importedConfig = null;
   setGearMode('direct');
   if (preset.stats) {
     for (const [key, value] of Object.entries(preset.stats)) {
@@ -1131,10 +1058,13 @@ export function loadFullPreset(preset) {
 function getActiveStatsConfig() {
   const eff = getEffectiveBuffsAndStats();
   const duration = Number(form.elements.namedItem('duration')?.value || 180);
-  const distance = Number(form.elements.namedItem('distance')?.value || 30);
   const penetration = Number(form.elements.namedItem('penetration')?.value || 0);
   const tapThreshold = Number(form.elements.namedItem('tapThreshold')?.value || 25);
   return {
+    ...readRuntimeSettings(),
+    seed: importedConfig?.seed ?? Number(form.elements.namedItem('seed')?.value ?? DEFAULTS.seed),
+    externalElements: !!form.elements.namedItem('curseOfElements')?.checked,
+    judgementOfWisdom: eff.judgementOfWisdom, giftOfArthas: eff.giftOfArthas,
     statsIncludeBase: true,
     racialPolicy: form.elements.namedItem('racialPolicy')?.value || 'execute',
     targetIsBeast: !!form.elements.namedItem('targetIsBeast')?.checked,
@@ -1157,7 +1087,6 @@ function getActiveStatsConfig() {
     shadowMultiplier: eff.shadowMultiplier,
     fireMultiplier: eff.fireMultiplier,
     duration,
-    distance,
     penetration,
     tapThreshold
   };
@@ -1165,7 +1094,8 @@ function getActiveStatsConfig() {
 
 // The active talent allocation is translated into supported simulator fields
 // when readForm() builds each fight config.
-initTalents((tf) => {
+const talentsReady = initTalents((tf) => {
+  importedConfig = null;
   updateCombatStatsSummary();
 });
 
@@ -1179,10 +1109,18 @@ initAPL((aplList) => {
 async function populateTalentPresetsDropdown() {
   const select = $('talent-preset-select');
   if (!select) return;
-  const presets = await getPresets();
-  if (!presets || presets.length === 0) return;
+  const presets = (await getPresets()) || [];
 
   select.innerHTML = '<option value="">Load Preset…</option>';
+  const foreverGroup = document.createElement('optgroup');
+  foreverGroup.label = 'Forever defaults (full builds)';
+  for (const preset of FOREVER_PRESETS) {
+    const option = document.createElement('option');
+    option.value = preset.id;
+    option.textContent = preset.name;
+    foreverGroup.appendChild(option);
+  }
+  select.appendChild(foreverGroup);
   let defaultPresetId = '';
   presets.forEach(p => {
     const opt = document.createElement('option');
@@ -1199,9 +1137,17 @@ async function populateTalentPresetsDropdown() {
     select.value = defaultPresetId;
   }
 
-  select.addEventListener('change', (e) => {
+  select.addEventListener('change', async (e) => {
     const val = e.target.value;
     if (!val) return;
+    const foreverPreset = FOREVER_PRESETS.find(preset => preset.id === val);
+    if (foreverPreset) {
+      try {
+        await applyImportedBuild(foreverPreset.build);
+        setStatus(`Loaded ${foreverPreset.name}: complete build with original stats, buffs, consumables and rotation.`);
+      } catch (error) { setStatus(error.message, true); }
+      return;
+    }
     const found = presets.find(p => String(p.id) === String(val) || p.name === val);
     if (found) {
       loadFullPreset(found);
@@ -1238,10 +1184,12 @@ const presetsReady = initPresets((selectedPreset) => {
 $('btn-batch-sim')?.addEventListener('click', async (e) => {
   e?.preventDefault();
   if (controller) return;
+  await startupReady;
+  if (controller) return;
   controller = new AbortController();
   busy(true);
   try {
-    setStatus('Running batch GPU simulation across standard meta presets with current stats…');
+    setStatus('Running batch GPU simulation across the selected preset builds…');
     const currentStats = getActiveStatsConfig();
     const results = await runBatchPresetSimulation(controller.signal, progress, (selectedPreset) => loadFullPreset(selectedPreset), currentStats);
     const numSims = Number(document.getElementById('compare-num-sims')?.value || 1000);
@@ -1530,7 +1478,24 @@ initTooltips();
 setupInteractiveSlots();
 updateRacialsDisplay();
 updateCombatStatsSummary();
-presetsReady.then(populateTalentPresetsDropdown);
+// Wait for talent data before applying the default's ranks and APL.
+if ($('run')) $('run').disabled = true;
+export const startupReady = Promise.all([talentsReady, presetsReady]).then(async ([talentData]) => {
+  if (!talentData) throw new Error('Talent data did not load.');
+  await populateTalentPresetsDropdown();
+  await applyImportedBuild(FOREVER_DEFAULT_BUILD);
+  if ($('talent-preset-select')) $('talent-preset-select').value = FOREVER_DEFAULT_PRESET.id;
+  setStatus('Forever default: Demo (Fire Brand), Orc, no equipment. Ready to simulate.');
+  if ($('run')) $('run').disabled = !capable;
+}).catch(error => setStatus(`Could not load Forever defaults: ${error.message}`, true));
+
+$('btn-forever-defaults')?.addEventListener('click', async () => {
+  try {
+    await applyImportedBuild(FOREVER_DEFAULT_BUILD);
+    if ($('talent-preset-select')) $('talent-preset-select').value = FOREVER_DEFAULT_PRESET.id;
+    setStatus('Restored Forever default: Demo (Fire Brand).');
+  } catch (error) { setStatus(error.message, true); }
+});
 
 // Preload & compile WebGL2 shader asynchronously in the background on page load
 if (capable) {

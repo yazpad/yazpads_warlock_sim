@@ -3,10 +3,15 @@ import assert from 'node:assert/strict';
 import http from 'node:http';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
-import { FRAGMENT, FAST_FRAGMENT } from '../src/kernel.js';
+import { FRAGMENT, FAST_FRAGMENT, simulationVariant } from '../src/kernel.js';
+import { packConfig } from '../src/model.js';
 import { REGRET_FRAGMENT } from '../src/regret.js';
 const browser = process.env.BROWSER_EXECUTABLE || (await import(process.env.PLAYWRIGHT_MODULE || 'playwright')).chromium.executablePath();
 const shaders = { detailed: FRAGMENT, fast: FAST_FRAGMENT, regret: REGRET_FRAGMENT };
+const imp=packConfig({petChoice:'imp'}),succubus=packConfig({petChoice:'succubus'});
+shaders.featureFast=simulationVariant(false,[imp]).build();
+shaders.featureDetailed=simulationVariant(true,[succubus]).build();
+shaders.mixedFast=simulationVariant(false,[imp,succubus]).build();
 const page = `<!doctype html><pre id="result"></pre><script>
 const result = document.getElementById('result');
 try {

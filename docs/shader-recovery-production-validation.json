@@ -1,0 +1,5501 @@
+{
+  "status": "complete",
+  "startedAt": "2026-10-22T04:38:44.191Z",
+  "mode": "fast",
+  "multi": false,
+  "baselineHashes": {
+    "fast": "9b166612f4f0eda7ce15bb2f37bf8d9bbd4a844c3e3125b5faf79f9fa2f57711",
+    "detailed": "597c84f3b29c342e538599e8108fc09e3c8b775a25d566c433d5aee26113cbe3",
+    "model": "8856aae79eaa997fd57f8632a563660732ce8c615704230214ceb87d904fab9b"
+  },
+  "harnessHash": "d3920372e2da9f8d936507d33a5c95a70a9010b0ecddcd0f6470149ce9ab888d",
+  "stages": [],
+  "notes": "Native GPU draw+finish only. Excludes compilation, transfer, JS, and browser overhead. Candidate variants are experimental; no production files changed.",
+  "validation": [
+    {
+      "preset": "sm_ruin",
+      "cases": 120,
+      "identical": true,
+      "comparisons": [
+        {
+          "id": "sm_ruin__human__baseline",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__human__baseline",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__human__sp_250",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__human__sp_250",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__human__sp_1000",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__human__sp_1000",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__human__int_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__human__int_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__human__int_400",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__human__int_400",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__human__hit_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__human__hit_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__human__hit_5",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__human__hit_5",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__human__hit_16",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__human__hit_16",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__human__crit_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__human__crit_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__human__crit_30",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__human__crit_30",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__human__regen_low",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__human__regen_low",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__human__regen_high",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__human__regen_high",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__orc__baseline",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__orc__baseline",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__orc__sp_250",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__orc__sp_250",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__orc__sp_1000",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__orc__sp_1000",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__orc__int_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__orc__int_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__orc__int_400",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__orc__int_400",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__orc__hit_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__orc__hit_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__orc__hit_5",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__orc__hit_5",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__orc__hit_16",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__orc__hit_16",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__orc__crit_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__orc__crit_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__orc__crit_30",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__orc__crit_30",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__orc__regen_low",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__orc__regen_low",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__orc__regen_high",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__orc__regen_high",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__undead__baseline",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__undead__baseline",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__undead__sp_250",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__undead__sp_250",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__undead__sp_1000",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__undead__sp_1000",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__undead__int_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__undead__int_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__undead__int_400",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__undead__int_400",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__undead__hit_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__undead__hit_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__undead__hit_5",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__undead__hit_5",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__undead__hit_16",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__undead__hit_16",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__undead__crit_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__undead__crit_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__undead__crit_30",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__undead__crit_30",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__undead__regen_low",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__undead__regen_low",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__undead__regen_high",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__undead__regen_high",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__troll__baseline",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__troll__baseline",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__troll__sp_250",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__troll__sp_250",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__troll__sp_1000",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__troll__sp_1000",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__troll__int_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__troll__int_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__troll__int_400",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__troll__int_400",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__troll__hit_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__troll__hit_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__troll__hit_5",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__troll__hit_5",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__troll__hit_16",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__troll__hit_16",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__troll__crit_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__troll__crit_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__troll__crit_30",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__troll__crit_30",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__troll__regen_low",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__troll__regen_low",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__troll__regen_high",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__troll__regen_high",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__gnome__baseline",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__gnome__baseline",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__gnome__sp_250",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__gnome__sp_250",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__gnome__sp_1000",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__gnome__sp_1000",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__gnome__int_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__gnome__int_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__gnome__int_400",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__gnome__int_400",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__gnome__hit_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__gnome__hit_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__gnome__hit_5",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__gnome__hit_5",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__gnome__hit_16",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__gnome__hit_16",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__gnome__crit_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__gnome__crit_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__gnome__crit_30",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__gnome__crit_30",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__gnome__regen_low",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__gnome__regen_low",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__gnome__regen_high",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "sm_ruin__gnome__regen_high",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        }
+      ]
+    },
+    {
+      "preset": "aff_wrack",
+      "cases": 120,
+      "identical": false,
+      "comparisons": [
+        {
+          "id": "aff_wrack__human__baseline",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__human__baseline",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__human__sp_250",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__human__sp_250",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__human__sp_1000",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__human__sp_1000",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__human__int_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__human__int_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__human__int_400",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__human__int_400",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__human__hit_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__human__hit_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__human__hit_5",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__human__hit_5",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__human__hit_16",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__human__hit_16",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__human__crit_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__human__crit_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__human__crit_30",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__human__crit_30",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__human__regen_low",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__human__regen_low",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__human__regen_high",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__human__regen_high",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__orc__baseline",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__orc__baseline",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__orc__sp_250",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__orc__sp_250",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__orc__sp_1000",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__orc__sp_1000",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__orc__int_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__orc__int_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__orc__int_400",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__orc__int_400",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__orc__hit_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__orc__hit_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__orc__hit_5",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__orc__hit_5",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__orc__hit_16",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__orc__hit_16",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__orc__crit_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__orc__crit_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__orc__crit_30",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__orc__crit_30",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__orc__regen_low",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__orc__regen_low",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__orc__regen_high",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__orc__regen_high",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__undead__baseline",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__undead__baseline",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__undead__sp_250",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__undead__sp_250",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__undead__sp_1000",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__undead__sp_1000",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__undead__int_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__undead__int_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__undead__int_400",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__undead__int_400",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__undead__hit_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__undead__hit_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__undead__hit_5",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__undead__hit_5",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__undead__hit_16",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__undead__hit_16",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__undead__crit_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__undead__crit_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__undead__crit_30",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__undead__crit_30",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__undead__regen_low",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__undead__regen_low",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__undead__regen_high",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__undead__regen_high",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__troll__baseline",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__troll__baseline",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__troll__sp_250",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__troll__sp_250",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__troll__sp_1000",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__troll__sp_1000",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__troll__int_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__troll__int_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__troll__int_400",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__troll__int_400",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__troll__hit_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__troll__hit_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__troll__hit_5",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__troll__hit_5",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__troll__hit_16",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__troll__hit_16",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__troll__crit_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__troll__crit_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__troll__crit_30",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__troll__crit_30",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__troll__regen_low",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__troll__regen_low",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__troll__regen_high",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__troll__regen_high",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__gnome__baseline",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__gnome__baseline",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__gnome__sp_250",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__gnome__sp_250",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__gnome__sp_1000",
+          "detailed": false,
+          "identical": false,
+          "integerWordsIdentical": true,
+          "floatDifferences": 3,
+          "maxRelativeError": 1.0226058266648356e-07,
+          "maxAbsoluteError": 0.015625
+        },
+        {
+          "id": "aff_wrack__gnome__sp_1000",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__gnome__int_0",
+          "detailed": false,
+          "identical": false,
+          "integerWordsIdentical": true,
+          "floatDifferences": 2,
+          "maxRelativeError": 1.6718166980048707e-07,
+          "maxAbsoluteError": 0.015625
+        },
+        {
+          "id": "aff_wrack__gnome__int_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__gnome__int_400",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__gnome__int_400",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__gnome__hit_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__gnome__hit_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__gnome__hit_5",
+          "detailed": false,
+          "identical": false,
+          "integerWordsIdentical": true,
+          "floatDifferences": 2,
+          "maxRelativeError": 9.205732188496204e-08,
+          "maxAbsoluteError": 0.0078125
+        },
+        {
+          "id": "aff_wrack__gnome__hit_5",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__gnome__hit_16",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__gnome__hit_16",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__gnome__crit_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__gnome__crit_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__gnome__crit_30",
+          "detailed": false,
+          "identical": false,
+          "integerWordsIdentical": true,
+          "floatDifferences": 1,
+          "maxRelativeError": 7.226621428016527e-08,
+          "maxAbsoluteError": 0.0078125
+        },
+        {
+          "id": "aff_wrack__gnome__crit_30",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__gnome__regen_low",
+          "detailed": false,
+          "identical": false,
+          "integerWordsIdentical": true,
+          "floatDifferences": 1,
+          "maxRelativeError": 8.06123182716203e-08,
+          "maxAbsoluteError": 0.0078125
+        },
+        {
+          "id": "aff_wrack__gnome__regen_low",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__gnome__regen_high",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "aff_wrack__gnome__regen_high",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        }
+      ]
+    },
+    {
+      "preset": "destro",
+      "cases": 120,
+      "identical": false,
+      "comparisons": [
+        {
+          "id": "destro__human__baseline",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__human__baseline",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__human__sp_250",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__human__sp_250",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__human__sp_1000",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__human__sp_1000",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__human__int_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__human__int_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__human__int_400",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__human__int_400",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__human__hit_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__human__hit_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__human__hit_5",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__human__hit_5",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__human__hit_16",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__human__hit_16",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__human__crit_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__human__crit_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__human__crit_30",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__human__crit_30",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__human__regen_low",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__human__regen_low",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__human__regen_high",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__human__regen_high",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__orc__baseline",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__orc__baseline",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__orc__sp_250",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__orc__sp_250",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__orc__sp_1000",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__orc__sp_1000",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__orc__int_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__orc__int_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__orc__int_400",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__orc__int_400",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__orc__hit_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__orc__hit_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__orc__hit_5",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__orc__hit_5",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__orc__hit_16",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__orc__hit_16",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__orc__crit_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__orc__crit_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__orc__crit_30",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__orc__crit_30",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__orc__regen_low",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__orc__regen_low",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__orc__regen_high",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__orc__regen_high",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__undead__baseline",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__undead__baseline",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__undead__sp_250",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__undead__sp_250",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__undead__sp_1000",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__undead__sp_1000",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__undead__int_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__undead__int_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__undead__int_400",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__undead__int_400",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__undead__hit_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__undead__hit_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__undead__hit_5",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__undead__hit_5",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__undead__hit_16",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__undead__hit_16",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__undead__crit_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__undead__crit_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__undead__crit_30",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__undead__crit_30",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__undead__regen_low",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__undead__regen_low",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__undead__regen_high",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__undead__regen_high",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__troll__baseline",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__troll__baseline",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__troll__sp_250",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__troll__sp_250",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__troll__sp_1000",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__troll__sp_1000",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__troll__int_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__troll__int_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__troll__int_400",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__troll__int_400",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__troll__hit_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__troll__hit_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__troll__hit_5",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__troll__hit_5",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__troll__hit_16",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__troll__hit_16",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__troll__crit_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__troll__crit_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__troll__crit_30",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__troll__crit_30",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__troll__regen_low",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__troll__regen_low",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__troll__regen_high",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__troll__regen_high",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__gnome__baseline",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__gnome__baseline",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__gnome__sp_250",
+          "detailed": false,
+          "identical": false,
+          "integerWordsIdentical": true,
+          "floatDifferences": 1,
+          "maxRelativeError": 9.215250465439263e-08,
+          "maxAbsoluteError": 0.0078125
+        },
+        {
+          "id": "destro__gnome__sp_250",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__gnome__sp_1000",
+          "detailed": false,
+          "identical": false,
+          "integerWordsIdentical": true,
+          "floatDifferences": 1,
+          "maxRelativeError": 8.944624633907695e-08,
+          "maxAbsoluteError": 0.015625
+        },
+        {
+          "id": "destro__gnome__sp_1000",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__gnome__int_0",
+          "detailed": false,
+          "identical": false,
+          "integerWordsIdentical": true,
+          "floatDifferences": 1,
+          "maxRelativeError": 1.359770166207427e-07,
+          "maxAbsoluteError": 0.015625
+        },
+        {
+          "id": "destro__gnome__int_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__gnome__int_400",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__gnome__int_400",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__gnome__hit_0",
+          "detailed": false,
+          "identical": false,
+          "integerWordsIdentical": true,
+          "floatDifferences": 1,
+          "maxRelativeError": 7.212067751029902e-08,
+          "maxAbsoluteError": 0.0078125
+        },
+        {
+          "id": "destro__gnome__hit_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__gnome__hit_5",
+          "detailed": false,
+          "identical": false,
+          "integerWordsIdentical": true,
+          "floatDifferences": 1,
+          "maxRelativeError": 1.364485352624973e-07,
+          "maxAbsoluteError": 0.015625
+        },
+        {
+          "id": "destro__gnome__hit_5",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__gnome__hit_16",
+          "detailed": false,
+          "identical": false,
+          "integerWordsIdentical": true,
+          "floatDifferences": 2,
+          "maxRelativeError": 7.274802310884602e-08,
+          "maxAbsoluteError": 0.0078125
+        },
+        {
+          "id": "destro__gnome__hit_16",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__gnome__crit_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__gnome__crit_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__gnome__crit_30",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__gnome__crit_30",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__gnome__regen_low",
+          "detailed": false,
+          "identical": false,
+          "integerWordsIdentical": true,
+          "floatDifferences": 1,
+          "maxRelativeError": 1.4839001287728532e-07,
+          "maxAbsoluteError": 0.015625
+        },
+        {
+          "id": "destro__gnome__regen_low",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "destro__gnome__regen_high",
+          "detailed": false,
+          "identical": false,
+          "integerWordsIdentical": true,
+          "floatDifferences": 1,
+          "maxRelativeError": 6.435848810584346e-08,
+          "maxAbsoluteError": 0.0078125
+        },
+        {
+          "id": "destro__gnome__regen_high",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        }
+      ]
+    },
+    {
+      "preset": "demo_shadow_brand",
+      "cases": 120,
+      "identical": false,
+      "comparisons": [
+        {
+          "id": "demo_shadow_brand__human__baseline",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__human__baseline",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__human__sp_250",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__human__sp_250",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__human__sp_1000",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__human__sp_1000",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__human__int_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__human__int_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__human__int_400",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__human__int_400",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__human__hit_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__human__hit_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__human__hit_5",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__human__hit_5",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__human__hit_16",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__human__hit_16",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__human__crit_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__human__crit_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__human__crit_30",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__human__crit_30",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__human__regen_low",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__human__regen_low",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__human__regen_high",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__human__regen_high",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__orc__baseline",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__orc__baseline",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__orc__sp_250",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__orc__sp_250",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__orc__sp_1000",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__orc__sp_1000",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__orc__int_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__orc__int_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__orc__int_400",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__orc__int_400",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__orc__hit_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__orc__hit_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__orc__hit_5",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__orc__hit_5",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__orc__hit_16",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__orc__hit_16",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__orc__crit_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__orc__crit_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__orc__crit_30",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__orc__crit_30",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__orc__regen_low",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__orc__regen_low",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__orc__regen_high",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__orc__regen_high",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__undead__baseline",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__undead__baseline",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__undead__sp_250",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__undead__sp_250",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__undead__sp_1000",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__undead__sp_1000",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__undead__int_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__undead__int_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__undead__int_400",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__undead__int_400",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__undead__hit_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__undead__hit_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__undead__hit_5",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__undead__hit_5",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__undead__hit_16",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__undead__hit_16",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__undead__crit_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__undead__crit_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__undead__crit_30",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__undead__crit_30",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__undead__regen_low",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__undead__regen_low",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__undead__regen_high",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__undead__regen_high",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__troll__baseline",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__troll__baseline",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__troll__sp_250",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__troll__sp_250",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__troll__sp_1000",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__troll__sp_1000",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__troll__int_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__troll__int_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__troll__int_400",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__troll__int_400",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__troll__hit_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__troll__hit_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__troll__hit_5",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__troll__hit_5",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__troll__hit_16",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__troll__hit_16",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__troll__crit_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__troll__crit_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__troll__crit_30",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__troll__crit_30",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__troll__regen_low",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__troll__regen_low",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__troll__regen_high",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__troll__regen_high",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__gnome__baseline",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__gnome__baseline",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__gnome__sp_250",
+          "detailed": false,
+          "identical": false,
+          "integerWordsIdentical": true,
+          "floatDifferences": 3,
+          "maxRelativeError": 1.5778922152872982e-07,
+          "maxAbsoluteError": 0.015625
+        },
+        {
+          "id": "demo_shadow_brand__gnome__sp_250",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__gnome__sp_1000",
+          "detailed": false,
+          "identical": false,
+          "integerWordsIdentical": true,
+          "floatDifferences": 1,
+          "maxRelativeError": 8.253925752801362e-08,
+          "maxAbsoluteError": 0.015625
+        },
+        {
+          "id": "demo_shadow_brand__gnome__sp_1000",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__gnome__int_0",
+          "detailed": false,
+          "identical": false,
+          "integerWordsIdentical": true,
+          "floatDifferences": 1,
+          "maxRelativeError": 6.53135442002879e-08,
+          "maxAbsoluteError": 0.0078125
+        },
+        {
+          "id": "demo_shadow_brand__gnome__int_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__gnome__int_400",
+          "detailed": false,
+          "identical": false,
+          "integerWordsIdentical": true,
+          "floatDifferences": 2,
+          "maxRelativeError": 1.1597019797852348e-07,
+          "maxAbsoluteError": 0.015625
+        },
+        {
+          "id": "demo_shadow_brand__gnome__int_400",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__gnome__hit_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__gnome__hit_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__gnome__hit_5",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__gnome__hit_5",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__gnome__hit_16",
+          "detailed": false,
+          "identical": false,
+          "integerWordsIdentical": true,
+          "floatDifferences": 4,
+          "maxRelativeError": 1.1736280610713793e-07,
+          "maxAbsoluteError": 0.015625
+        },
+        {
+          "id": "demo_shadow_brand__gnome__hit_16",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__gnome__crit_0",
+          "detailed": false,
+          "identical": false,
+          "integerWordsIdentical": true,
+          "floatDifferences": 1,
+          "maxRelativeError": 7.251353446992497e-08,
+          "maxAbsoluteError": 0.0078125
+        },
+        {
+          "id": "demo_shadow_brand__gnome__crit_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__gnome__crit_30",
+          "detailed": false,
+          "identical": false,
+          "integerWordsIdentical": true,
+          "floatDifferences": 2,
+          "maxRelativeError": 1.1589559012643746e-07,
+          "maxAbsoluteError": 0.015625
+        },
+        {
+          "id": "demo_shadow_brand__gnome__crit_30",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__gnome__regen_low",
+          "detailed": false,
+          "identical": false,
+          "integerWordsIdentical": true,
+          "floatDifferences": 1,
+          "maxRelativeError": 6.417118201841341e-08,
+          "maxAbsoluteError": 0.0078125
+        },
+        {
+          "id": "demo_shadow_brand__gnome__regen_low",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_shadow_brand__gnome__regen_high",
+          "detailed": false,
+          "identical": false,
+          "integerWordsIdentical": true,
+          "floatDifferences": 2,
+          "maxRelativeError": 1.1786566496566868e-07,
+          "maxAbsoluteError": 0.015625
+        },
+        {
+          "id": "demo_shadow_brand__gnome__regen_high",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        }
+      ]
+    },
+    {
+      "preset": "demo_fire_brand",
+      "cases": 120,
+      "identical": false,
+      "comparisons": [
+        {
+          "id": "demo_fire_brand__human__baseline",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__human__baseline",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__human__sp_250",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__human__sp_250",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__human__sp_1000",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__human__sp_1000",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__human__int_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__human__int_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__human__int_400",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__human__int_400",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__human__hit_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__human__hit_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__human__hit_5",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__human__hit_5",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__human__hit_16",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__human__hit_16",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__human__crit_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__human__crit_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__human__crit_30",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__human__crit_30",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__human__regen_low",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__human__regen_low",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__human__regen_high",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__human__regen_high",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__orc__baseline",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__orc__baseline",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__orc__sp_250",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__orc__sp_250",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__orc__sp_1000",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__orc__sp_1000",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__orc__int_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__orc__int_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__orc__int_400",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__orc__int_400",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__orc__hit_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__orc__hit_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__orc__hit_5",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__orc__hit_5",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__orc__hit_16",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__orc__hit_16",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__orc__crit_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__orc__crit_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__orc__crit_30",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__orc__crit_30",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__orc__regen_low",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__orc__regen_low",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__orc__regen_high",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__orc__regen_high",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__undead__baseline",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__undead__baseline",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__undead__sp_250",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__undead__sp_250",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__undead__sp_1000",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__undead__sp_1000",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__undead__int_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__undead__int_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__undead__int_400",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__undead__int_400",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__undead__hit_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__undead__hit_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__undead__hit_5",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__undead__hit_5",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__undead__hit_16",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__undead__hit_16",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__undead__crit_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__undead__crit_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__undead__crit_30",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__undead__crit_30",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__undead__regen_low",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__undead__regen_low",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__undead__regen_high",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__undead__regen_high",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__troll__baseline",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__troll__baseline",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__troll__sp_250",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__troll__sp_250",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__troll__sp_1000",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__troll__sp_1000",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__troll__int_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__troll__int_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__troll__int_400",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__troll__int_400",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__troll__hit_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__troll__hit_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__troll__hit_5",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__troll__hit_5",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__troll__hit_16",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__troll__hit_16",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__troll__crit_0",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__troll__crit_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__troll__crit_30",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__troll__crit_30",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__troll__regen_low",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__troll__regen_low",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__troll__regen_high",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__troll__regen_high",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__gnome__baseline",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__gnome__baseline",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__gnome__sp_250",
+          "detailed": false,
+          "identical": false,
+          "integerWordsIdentical": true,
+          "floatDifferences": 1,
+          "maxRelativeError": 7.767160414698015e-08,
+          "maxAbsoluteError": 0.0078125
+        },
+        {
+          "id": "demo_fire_brand__gnome__sp_250",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__gnome__sp_1000",
+          "detailed": false,
+          "identical": false,
+          "integerWordsIdentical": true,
+          "floatDifferences": 3,
+          "maxRelativeError": 1.5461140896140096e-07,
+          "maxAbsoluteError": 0.03125
+        },
+        {
+          "id": "demo_fire_brand__gnome__sp_1000",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__gnome__int_0",
+          "detailed": false,
+          "identical": false,
+          "integerWordsIdentical": true,
+          "floatDifferences": 3,
+          "maxRelativeError": 1.1683527359724941e-07,
+          "maxAbsoluteError": 0.015625
+        },
+        {
+          "id": "demo_fire_brand__gnome__int_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__gnome__int_400",
+          "detailed": false,
+          "identical": false,
+          "integerWordsIdentical": true,
+          "floatDifferences": 2,
+          "maxRelativeError": 1.138382194973906e-07,
+          "maxAbsoluteError": 0.015625
+        },
+        {
+          "id": "demo_fire_brand__gnome__int_400",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__gnome__hit_0",
+          "detailed": false,
+          "identical": false,
+          "integerWordsIdentical": true,
+          "floatDifferences": 1,
+          "maxRelativeError": 6.521523636610269e-08,
+          "maxAbsoluteError": 0.0078125
+        },
+        {
+          "id": "demo_fire_brand__gnome__hit_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__gnome__hit_5",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__gnome__hit_5",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__gnome__hit_16",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__gnome__hit_16",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__gnome__crit_0",
+          "detailed": false,
+          "identical": false,
+          "integerWordsIdentical": true,
+          "floatDifferences": 2,
+          "maxRelativeError": 1.3660061981165234e-07,
+          "maxAbsoluteError": 0.015625
+        },
+        {
+          "id": "demo_fire_brand__gnome__crit_0",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__gnome__crit_30",
+          "detailed": false,
+          "identical": false,
+          "integerWordsIdentical": true,
+          "floatDifferences": 1,
+          "maxRelativeError": 1.0504207197587813e-07,
+          "maxAbsoluteError": 0.015625
+        },
+        {
+          "id": "demo_fire_brand__gnome__crit_30",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__gnome__regen_low",
+          "detailed": false,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__gnome__regen_low",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        },
+        {
+          "id": "demo_fire_brand__gnome__regen_high",
+          "detailed": false,
+          "identical": false,
+          "integerWordsIdentical": true,
+          "floatDifferences": 1,
+          "maxRelativeError": 1.151930803055888e-07,
+          "maxAbsoluteError": 0.015625
+        },
+        {
+          "id": "demo_fire_brand__gnome__regen_high",
+          "detailed": true,
+          "identical": true,
+          "integerWordsIdentical": true,
+          "floatDifferences": 0,
+          "maxRelativeError": 0,
+          "maxAbsoluteError": 0
+        }
+      ]
+    },
+    {
+      "name": "sm_ruin",
+      "detailed": false,
+      "directIdentical": true,
+      "featuresIdentical": true,
+      "fullIdentical": false,
+      "fullDifferentWords": 30
+    },
+    {
+      "name": "sm_ruin",
+      "detailed": true,
+      "directIdentical": true,
+      "featuresIdentical": true,
+      "fullIdentical": false,
+      "fullDifferentWords": 605
+    },
+    {
+      "name": "demo_fire_brand",
+      "detailed": false,
+      "directIdentical": true,
+      "featuresIdentical": true,
+      "fullIdentical": false,
+      "fullDifferentWords": 115
+    },
+    {
+      "name": "demo_fire_brand",
+      "detailed": true,
+      "directIdentical": true,
+      "featuresIdentical": true,
+      "fullIdentical": false,
+      "fullDifferentWords": 1073
+    },
+    {
+      "name": "sm_ruin_no_pet",
+      "detailed": false,
+      "directIdentical": true,
+      "featuresIdentical": true,
+      "fullIdentical": false,
+      "fullDifferentWords": 28
+    },
+    {
+      "name": "sm_ruin_no_pet",
+      "detailed": true,
+      "directIdentical": true,
+      "featuresIdentical": true,
+      "fullIdentical": false,
+      "fullDifferentWords": 615
+    }
+  ],
+  "renderer": "AMD Ryzen 9 9950X 16-Core Processor (radeonsi, raphael_mendocino, LLVM 20.1.2, DRM 3.64, 7.0.0-38-generic)",
+  "completedAt": "2026-10-22T04:44:45.053Z"
+}

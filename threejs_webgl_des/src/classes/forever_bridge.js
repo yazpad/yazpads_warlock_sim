@@ -21,7 +21,7 @@ export const RACE_MAP = {
 };
 
 // Forever's bonusStats are additions to racial/class attributes. Percent hit
-// and crit live in pseudoStats; they are not raw rating values.
+// and crit can be exported as raw ratings or spell-percent pseudo stats.
 export function mapForeverBonusStats(player) {
   const result = { swordEquipped: false, spellPower: 0, shadowPower: 0, firePower: 0,
     intellect: 0, stamina: 0, spirit: 0, hit: 0, crit: 0, mp5: 0, penetration: 0 };
@@ -31,13 +31,17 @@ export function mapForeverBonusStats(player) {
     11: 'shadowPower', 12: 'penetration', 13: 'spirit', 31: 'mp5' };
   stats.forEach((value, index) => {
     if (!value) return;
-    if (!fields[index]) throw new Error(`Unsupported Forever bonus stat index: ${index}`);
-    result[fields[index]] = value;
+    if (index === 17) result.hit += value / 10;
+    else if (index === 18) result.crit += value / 14;
+    else {
+      if (!fields[index]) throw new Error(`Unsupported Forever bonus stat index: ${index}`);
+      result[fields[index]] = value;
+    }
   });
   pseudo.forEach((value, index) => {
     if (!value) return;
-    if (index === 13) result.hit = value;
-    else if (index === 15) result.crit = value;
+    if (index === 13) result.hit += value;
+    else if (index === 15) result.crit += value;
     else throw new Error(`Unsupported Forever bonus pseudo stat index: ${index}`);
   });
   return result;
@@ -144,6 +148,7 @@ export function mapForeverBuffs(foreverBuild) {
   if (playerBuffs.greaterBlessingOfWisdom || playerBuffs.blessingOfWisdom) buffs.blessingOfWisdom = true;
   if (playerBuffs.greaterBlessingOfWisdom) buffs.greaterBlessingOfWisdom = true;
   if (partyBuffs.manaSpringTotem && partyBuffs.manaSpringTotem !== 'TristateEffectMissing') buffs.manaSpringTotem = true;
+  if (partyBuffs.manaSpringTotem === 'TristateEffectImproved' || partyBuffs.manaSpringTotem === 2) buffs.improvedManaSpringTotem = true;
 
   for (const key of ['prayerOfFortitude', 'prayerOfSpirit', 'moonkinAura']) if (raidBuffs[key] === true) buffs[key] = true;
   for (const key of ['judgementOfWisdom', 'sunderArmor', 'exposeArmor', 'faerieFire', 'giftOfArthas']) if (debuffs[key] === true) buffs[key] = true;
@@ -504,7 +509,7 @@ export function extractForeverAPL(priorityList, { valueVariables = [], groups = 
 /**
  * Translates a complete forever build JSON into our app's candidate build object.
  */
-export function convertForeverBuildToCandidate(foreverBuild, { candidateId = 'forever-imported', race: raceOverride = null, distance = null } = {}) {
+export function convertForeverBuildToCandidate(foreverBuild, { candidateId = 'forever-imported', race: raceOverride = null } = {}) {
   const player = foreverBuild.player || {};
   const warlockOpts = player.warlock?.options?.classOptions || {};
 
@@ -531,7 +536,8 @@ export function convertForeverBuildToCandidate(foreverBuild, { candidateId = 'fo
   const importDiagnostics = [];
   let aplText = extractForeverAPL(aplPriorityList, { valueVariables, groups: player.rotation?.groups || [], diagnostics: importDiagnostics });
 
-  if (!warlockOpts.curseOptions || warlockOpts.curseOptions === 'NoCurse') aplText = aplText?.split('\n').filter(line => !line.startsWith('elements')).join('\n');
+  const assignedElements = warlockOpts.curseOptions == null || warlockOpts.curseOptions === 0 || warlockOpts.curseOptions === 'Elements';
+  if (!assignedElements) aplText = aplText?.split('\n').filter(line => !line.startsWith('elements')).join('\n');
 
   // Equipment item mapping
   const equipmentItems = {};
@@ -559,7 +565,6 @@ export function convertForeverBuildToCandidate(foreverBuild, { candidateId = 'fo
     importDiagnostics,
     encounter: {
       duration: foreverBuild.encounter?.duration ?? 180,
-      distance: distance ?? player.distanceFromTarget ?? 0,
       target: {
         level: 63,
         bossArmor: foreverBuild.encounter?.targets?.[0]?.stats?.[27] ?? 3731,
@@ -581,9 +586,8 @@ export function convertForeverBuildToCandidate(foreverBuild, { candidateId = 'fo
       rotation: 'shadow'
     },
     sourceSettings: { armor: warlockOpts.armor || 'NoArmor', profession1: player.profession1, profession2: player.profession2 },
-    soulShards: warlockOpts.soulShards ?? 32,
     externalElements: buffs.curseOfElements === true,
-    assignedElements: warlockOpts.curseOptions === 'Elements',
+    assignedElements,
     demonicRune: consumes.conjuredId === 12662,
     ezThroDynamite: consumes.explosiveId === 18588,
     manualTrinket: hasSpellblastingPot,

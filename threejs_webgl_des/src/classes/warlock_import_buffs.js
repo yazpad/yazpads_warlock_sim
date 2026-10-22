@@ -69,7 +69,7 @@ export function resolveWarlockBuffEffects(stats, buffs, race, target, pet = 'non
   let addedMP5 = 0;
   if (isMageblood) addedMP5 += 12;
   if (isBlessingOfWisdom || buffs.greaterBlessingOfWisdom) addedMP5 += buffs.greaterBlessingOfWisdom ? 40 : 30;
-  if (isManaSpringTotem) addedMP5 += 25;
+  if (isManaSpringTotem || buffs.improvedManaSpringTotem) addedMP5 += buffs.improvedManaSpringTotem ? 30 : 25;
   if (isWarchiefsBlessing) addedMP5 += 10;
   const finalMP5 = baseMp5 + addedMP5;
 

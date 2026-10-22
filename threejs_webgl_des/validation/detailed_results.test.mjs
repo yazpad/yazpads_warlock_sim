@@ -22,8 +22,8 @@ test('Detailed transport decodes all stripes and decodes all uptime pairs across
  for(let lane=0;lane<count;lane++){
   put(lane,0,100,true);put(lane,1,1);
   for(let i=0;i<6;i++)put(lane,model.DETAIL_WORD_OFFSET+i,16384|(49151<<16));
-  put(lane,62,1234,true);put(lane,63,321,true);
-  put(lane,64,40,true);put(lane,65,2|(2<<16));put(lane,66,0);put(lane,67,1);
+  put(lane,model.DETAIL_WORD_OFFSET+6,1234,true);put(lane,model.DETAIL_WORD_OFFSET+7,321,true);
+  put(lane,model.DETAIL_WORD_OFFSET+8,40,true);put(lane,model.DETAIL_WORD_OFFSET+9,2|(2<<16));put(lane,model.DETAIL_WORD_OFFSET+10,0);put(lane,model.DETAIL_WORD_OFFSET+11,1);
   put(lane,17,20,true);put(lane,18,1|(10<<16));
   put(lane,53,40,true);put(lane,54,2|(3<<16));put(lane,55,1);
   for(const [name,value]of Object.entries({ticks3:7+lane,tickCrits3:2,tickDamage3:12.5+lane,critDamage3:9.25,mana:400,gained:600})){
@@ -52,8 +52,9 @@ test('Detailed transport decodes all stripes and decodes all uptime pairs across
 test('Fast schema and generated shader exclude all detailed metrics',()=>{
  for(const key of Object.keys(model.DETAIL_STATE))assert.ok(!(key in model.FAST_STATE));
  assert.doesNotMatch(FAST_FRAGMENT,/uptime_|manaWasted/);
- assert.doesNotMatch(FAST_FRAGMENT,/tickCritDamage|periodicDamage|petBrandHits|amplifyCasts/);
- assert.equal(createHash('sha256').update(FAST_FRAGMENT).digest('hex'),'8f9fbe8611153110a0bdca20292d8f37e88e5711c5797ee18f86dd29a25b972e');
+ // The lean periodic helper also suppresses direct-hit Wisdom procs.
+ assert.doesNotMatch(FAST_FRAGMENT,/tickCritDamage|tickDamage\d|petBrandHits|amplifyCasts/);
+ assert.equal(createHash('sha256').update(FAST_FRAGMENT).digest('hex'),'2cc191d335f31ed4244bf50343c882923f26184b1d00cd8c9da6cb05f52fdab1');
  assert.match(FRAGMENT,/min\(e.at,s.immEnd\)-s.now/);
  assert.match(FRAGMENT,/s.immTicks>0u&&s.immEnd>s.now/);
  const summary=globals.summarize([{total:100,detailed:false}],10);

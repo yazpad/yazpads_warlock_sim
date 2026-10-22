@@ -1,4 +1,4 @@
-import { SPELLS, UPTIME_EFFECTS, DETAIL_WORD_OFFSET, DETAIL_EXTRA_OUTPUT, COMPACT_STRIPES, CONFIG, STATE, FAST_STATE, HEAP_CAPACITY, APL_HEADER0_OFFSET, APL_PARAM0_OFFSET, APL_HEADER1_OFFSET, APL_PARAM1_OFFSET, MAX_APL_RULES } from './model.js';
+import { DEFAULTS, SPELLS, UPTIME_EFFECTS, DETAIL_WORD_OFFSET, DETAIL_EXTRA_OUTPUT, COMPACT_STRIPES, CONFIG, STATE, FAST_STATE, HEAP_CAPACITY, APL_HEADER0_OFFSET, APL_PARAM0_OFFSET, APL_HEADER1_OFFSET, APL_PARAM1_OFFSET, MAX_APL_RULES } from './model.js';
 const type=t=>t==='u32'?'uint':'float';
 const structure=(name,schema)=>`struct ${name} { ${Object.entries(schema).map(([k,t])=>`${type(t)} ${k};`).join('\n')} };`;
 const word=(name,t)=>t==='f32'?`floatBitsToUint(s.${name})`:`s.${name}`;
@@ -66,10 +66,6 @@ bool dealingPeriodic = false;
 uint eventFlags;
 Event lastEvent;
 uint currentCfgIdx;
-uint aplHeaders0[${MAX_APL_RULES}];
-float aplParams0[${MAX_APL_RULES}];
-uint aplHeaders1[${MAX_APL_RULES}];
-float aplParams1[${MAX_APL_RULES}];
 uint numAplRules;
 
 #define APL_HEADER0_OFFSET ${APL_HEADER0_OFFSET}u
@@ -190,7 +186,7 @@ void spend(uint spell){
  if(c.race==4u&&s.now>=s.graveReady&&random01()<0.30){s.graveReady=s.now+25000000u;damage(12u,c.maxHealth*0.05,false);}
 }
 bool racialInAPL(uint action){
- for(uint r=0u;r<numAplRules;r++)if((aplHeaders0[r]&0xFFu)==action)return true;
+ for(uint r=0u;r<numAplRules;r++)if((getConfigWord(currentCfgIdx,APL_HEADER0_OFFSET+r)&0xFFu)==action)return true;
  return false;
 }
 bool eurekaInAPL(){return racialInAPL(20u);}
@@ -293,7 +289,7 @@ void directImpact(uint spell,uint outcome){
  amount*=resistanceMultiplier();damage(spell,amount*s.castBonus,crit);
  if(spell==5u&&c.demonicBrand!=0u){s.brandCharges=c.demonicBrandRank*2u;s.brandEnd=s.now+10000000u;}
 }
-void launchBolt(){enqueue(s.now+c.travel,2u,0u,castHitOutcome(0u));}
+void launchBolt(){enqueue(s.now,2u,0u,castHitOutcome(0u));}
 void tick(Event e){
  float amount,p=currentPower();uint remaining=0u,interval=3000000u;
  uint sp=EV_SPELL(e),gen=EV_GEN(e);
@@ -408,7 +404,7 @@ void castConflagrate(){
  gcd();
 }
 void castShadowburn(){
- s.shadowburnReady=s.now+15000000u;s.soulShards--;spend(9u);
+ s.shadowburnReady=s.now+15000000u;spend(9u);
  if(random01()<c.hit){
   float roll=random01(),p=currentPower();
   // Generated rank-6 row: direct variance applies to base damage plus spell power.
@@ -418,7 +414,6 @@ void castShadowburn(){
   if(crit)amount*=c.directCrit;
   amount*=resistanceMultiplier();
   damage(9u,amount*s.castBonus,crit);
-  if(c.soulShards<1000000u&&c.snfChance>0.0&&random01()<c.snfChance)s.soulShards=min(c.soulShards,s.soulShards+1u);
   if(c.snfBonus>0.0||c.snfChance>0.0){s.snfFireEnd=s.now+20000000u;}
  }else{countMiss(9u);}
  gcd();
@@ -515,21 +510,21 @@ void decide(){
  float playerManaPct=(s.mana/c.maxMana)*100.0;
 
  for(uint r=0u;r<numAplRules;r++){
-  uint header0=aplHeaders0[r];
+  uint header0=getConfigWord(currentCfgIdx,APL_HEADER0_OFFSET+r);
   uint enabled=(header0>>24u)&0xFFu;
   if(enabled==0u)continue;
 
   uint action=header0&0xFFu;
   uint cond1=(header0>>8u)&0xFFu;
   uint targetSpell1=(header0>>16u)&0xFFu;
-  float param1=aplParams0[r];
+  float param1=uintBitsToFloat(getConfigWord(currentCfgIdx,APL_PARAM0_OFFSET+r));
 
   if(!evalCond(cond1,param1,targetSpell1,playerManaPct,targetHpPct))continue;
 
-  uint header1=aplHeaders1[r];
+  uint header1=getConfigWord(currentCfgIdx,APL_HEADER1_OFFSET+r);
   uint cond2=header1&0xFFu;
   uint targetSpell2=(header1>>8u)&0xFFu;
-  float param2=aplParams1[r];
+  float param2=uintBitsToFloat(getConfigWord(currentCfgIdx,APL_PARAM1_OFFSET+r));
 
   if(!evalCond(cond2,param2,targetSpell2,playerManaPct,targetHpPct))continue;
 
@@ -563,7 +558,7 @@ void decide(){
   }else if(action==3u||action==5u||action==13u){ // SEARING_PAIN (Decimation / Brand / Filler)
    if(s.mana>=cost(5u)){beginCast(5u);return;}
   }else if(action==4u){ // DECIMATION_SOUL_FIRE
-   if((s.soulShards>0u||s.now<s.decimationEnd)&&s.now>=s.soulFireReady&&s.mana>=cost(13u)){beginCast(13u);return;}
+   if(s.now>=s.soulFireReady&&s.mana>=cost(13u)){beginCast(13u);return;}
   }else if(action==6u){ // CORRUPTION
    if(c.corr!=0u){
     if(s.mana>=cost(1u)){beginCast(1u);return;}
@@ -609,7 +604,7 @@ void decide(){
     }
    }
   }else if(action==11u){ // SHADOWBURN
-   if(c.shadowburn!=0u&&s.soulShards>0u&&s.now>=s.shadowburnReady){
+   if(c.shadowburn!=0u&&s.now>=s.shadowburnReady){
     if(s.mana>=cost(9u)){castShadowburn();return;}
    }
   }else if(action==12u){ // INCINERATE_FILLER
@@ -648,32 +643,29 @@ ${detailed ? UPTIME_EFFECTS.map(([,key])=>{
  switch(ekind){
  case 13u:s.done=1u;break;
  case 1u:
-  s.casting=0u;if(espell==13u&&s.now>=s.decimationEnd&&s.soulShards>0u)s.soulShards--;spend(espell);
+  s.casting=0u;spend(espell);
   if(espell==1u)applyDot(1u);
   else if(espell==3u)immolateImpact();
-  else if(espell==13u){s.soulFireReady=s.now+60000000u-27000000u*c.decimationRank;enqueue(s.now+c.travel,2u,13u,uint(s.castBonus>1.0));}
+  else if(espell==13u){s.soulFireReady=s.now+60000000u-27000000u*c.decimationRank;enqueue(s.now,2u,13u,uint(s.castBonus>1.0));}
   else if(espell==5u)directImpact(5u,castHitOutcome(5u));
   else if(espell==0u)launchBolt();
-  else enqueue(s.now+c.travel,2u,espell,uint(s.castBonus>1.0));
+  else enqueue(s.now,2u,espell,uint(s.castBonus>1.0));
   decide();break;
  case 2u:s.castBonus=(EV_GEN(e)&1u)!=0u?1.10:1.0;directImpact(espell,EV_GEN(e));break;
  case 3u:tick(e);break;
  case 5u:decide();break;
  case 6u:
-  if(espell==100u){ // Snapshot Firebolt when its cast completes; the next cast may start immediately.
+  if(espell==100u){ // Firebolt resolves immediately when its cast completes.
    s.petCasts++;s.petSpellCasts++;${detailed ? 's.impCasts++;' : ''}s.petMana-=115.0;
-   s.impMissileLanded=uint(random01()<c.hit);s.impMissileCrit=0u;s.impMissileDamage=0.0;
-   if(s.impMissileLanded!=0u){
+   bool landed=random01()<c.hit,crit=false;float dmg=0.0;
+   if(landed){
     s.petSpellHits++;${detailed ? 's.impHits++;' : ''}
-    float dmg=(45.20000076293945+0.5709999799728394*s.petSP)*(1.0+(random01()-0.5)*0.11363636702299118)*c.petFireboltMult*(s.now<s.elementsEnd&&c.externalElements==0u?1.10:1.0);
-    bool crit=random01()<c.fireCrit;
+    dmg=(45.20000076293945+0.5709999799728394*s.petSP)*(1.0+(random01()-0.5)*0.11363636702299118)*c.petFireboltMult*(s.now<s.elementsEnd&&c.externalElements==0u?1.10:1.0);
+    crit=random01()<c.fireCrit;
     if(crit){dmg*=1.5;s.petSpellCrits++;${detailed ? 's.impCrits++;' : ''}}
-    s.impMissileDamage=dmg*resistanceMultiplier();s.impMissileCrit=uint(crit);
+    dmg*=resistanceMultiplier();
    }else{s.petSpellMisses++;${detailed ? 's.impMisses++;' : ''}}
-   // Within Firebolt's 30-yard range, travel takes less than its two-second cast.
-   enqueue(s.now+c.petTravel,6u,103u,0u);queueFirebolt();
-  }else if(espell==103u){ // Impact: damage and on-hit effects happen only on arrival.
-   if(s.impMissileLanded!=0u){
+   if(landed){
     wisdomProc(true);
      if(c.demonicBrand!=0u&&s.brandCharges>0u&&s.now<s.brandEnd){
       s.brandCharges--;
@@ -684,9 +676,9 @@ ${detailed ? UPTIME_EFFECTS.map(([,key])=>{
        brandDmg*=resistanceMultiplier();s.total+=brandDmg;eventDamage+=brandDmg;s.petDamage+=brandDmg;s.petBrandDamage+=brandDmg;${detailed ? 's.petBrandHits++;' : ''}
       }else{${detailed ? 's.petBrandMisses++;' : ''}}
      }
-    float dmg=s.impMissileDamage;
-    s.total+=dmg;eventDamage+=dmg;s.petDamage+=dmg;s.petSpellDamage+=dmg;${detailed ? 's.impDamage+=dmg;' : ''}if(s.impMissileCrit!=0u)eventFlags|=1u;
+    s.total+=dmg;eventDamage+=dmg;s.petDamage+=dmg;s.petSpellDamage+=dmg;${detailed ? 's.impDamage+=dmg;' : ''}if(crit)eventFlags|=1u;
    }
+   queueFirebolt();
   }else if(espell==102u){queueFirebolt();
   }else if(espell==200u){ // Succubus Melee
    s.petCasts++;
@@ -748,7 +740,7 @@ ${detailed ? UPTIME_EFFECTS.map(([,key])=>{
  case 8u:if(s.now>=s.tranceEnd)s.trance=0u;break;
  case 10u:enqueue(s.now+5000000u,10u,0u,0u);break;
  case 16u:
-  s.casting=0u;countCast(14u);enqueue(s.now+uint(float(c.travel)*24.0/14.0),17u,0u,0u);decide();break;
+  s.casting=0u;countCast(14u);enqueue(s.now,17u,0u,0u);decide();break;
  case 17u:
   if(random01()<c.hit){float amount=(213.0+random01()*74.0)*currentFireMult();bool crit=random01()<c.fireCrit;if(crit)amount*=1.5;damage(14u,amount*resistanceMultiplier(),crit);}else countMiss(14u);break;
  case 11u:queuePetInheritance();break;
@@ -798,20 +790,16 @@ void main(){
  for(uint r=0u;r<MAX_APL_RULES;r++){
   uint h0=getConfigWord(currentCfgIdx,APL_HEADER0_OFFSET+r);
   if(h0==0u)break;
-  aplHeaders0[numAplRules]=h0;
-  aplParams0[numAplRules]=uintBitsToFloat(getConfigWord(currentCfgIdx,APL_PARAM0_OFFSET+r));
-  aplHeaders1[numAplRules]=getConfigWord(currentCfgIdx,APL_HEADER1_OFFSET+r);
-  aplParams1[numAplRules]=uintBitsToFloat(getConfigWord(currentCfgIdx,APL_PARAM1_OFFSET+r));
   numAplRules++;
  }
  ${initialState}
- s.initialized=1u;s.soulShards=c.soulShards;s.mana=c.maxMana;eventDamage=0.0;eventFlags=0u;lastEvent=MAKE_EVENT(0u,0u,0u,0u);
+ s.initialized=1u;s.mana=c.maxMana;eventDamage=0.0;eventFlags=0u;lastEvent=MAKE_EVENT(0u,0u,0u,0u);
  seedRandom(mode==2u?0u:(numConfigs>1u?fightInCfg:globalLane));
  enqueue(c.end,13u,0u,0u);enqueue(5000000u,10u,0u,0u);
  if(c.manualTrinket==0u&&c.trinketSP>0.0){s.trinketEnd=c.trinketDuration;s.trinketReady=c.trinketCD;enqueue(s.trinketEnd,11u,0u,0u);}
  if(c.petChoice!=0u){s.petSP=c.petSP;s.petAP=c.petAP;s.petHeartbeatPhase=uint(random01()*5250000.0);if(c.petOwnPower>0.0||c.trinketSP>0.0)queuePetInheritance();}
- if(c.petChoice==1u){s.petMana=c.petMaxMana;enqueue(c.petApproach,6u,102u,0u);}
- else if(c.petChoice==2u){s.petMana=c.petMaxMana;enqueue(uint(random01()*100.0)*1000u,6u,200u,0u);enqueue(c.petApproach,6u,201u,0u);}
+ if(c.petChoice==1u){s.petMana=c.petMaxMana;queueFirebolt();}
+ else if(c.petChoice==2u){s.petMana=c.petMaxMana;enqueue(uint(random01()*100.0)*1000u,6u,200u,0u);enqueue(0u,6u,201u,0u);}
  decide();
  for(uint step=0u;step<eventBudget;step++){
   if(s.done!=0u)break;advance();if(mode==2u&&s.events==lane+1u)break;
@@ -831,3 +819,23 @@ void main(){
 
 export const FRAGMENT = buildFragment(true);
 export const FAST_FRAGMENT = buildFragment(false);
+
+// Specialize only feature words shared by every config in the draw. Stats,
+// duration and APL bytecode remain dynamic so search candidates reuse programs.
+const FEATURE_FIELDS=Object.entries(CONFIG).flatMap(([name,type],index)=>
+ !name.startsWith('apl')&&(typeof DEFAULTS[name]==='boolean'||['petChoice','race','filler','racialPolicy'].includes(name))? [{name,type,index}]:[]);
+export function simulationVariant(detailed,packedConfigs){
+ if(!packedConfigs.length)throw new Error('Shader variants require at least one packed config.');
+ const shared=FEATURE_FIELDS.filter(({index})=>packedConfigs.every(words=>words[index]===packedConfigs[0][index]));
+ const key=`${detailed?'detailed':'fast'}:${shared.map(({index})=>`${index}=${packedConfigs[0][index]}`).join(',')}`;
+ return {key,build(){
+  let shader=detailed?FRAGMENT:FAST_FRAGMENT;
+  for(const {name,type,index} of shared){
+   const bits=packedConfigs[0][index];
+   const literal=type==='u32'?`${bits}u`:`uintBitsToFloat(${bits}u)`;
+   shader=shader.replace(new RegExp(`^ *c\\.${name}=[^;]+;`,'m'),'')
+    .replace(new RegExp(`c\\.${name}\\b`,'g'),`(${literal})`);
+  }
+  return shader;
+ }};
+}

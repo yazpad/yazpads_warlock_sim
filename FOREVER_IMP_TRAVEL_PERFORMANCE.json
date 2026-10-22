@@ -1,0 +1,443 @@
+{
+  "configs": [
+    {
+      "name": "demo_fire_brand",
+      "config": {
+        "race": "HUMAN",
+        "swordEquipped": false,
+        "racialPolicy": "execute",
+        "targetIsBeast": false,
+        "maxHealth": 4624,
+        "statsIncludeBase": true,
+        "duration": 180,
+        "iterations": 1000,
+        "seed": 101,
+        "rotation": "shadow",
+        "spellPower": 560,
+        "shadowPower": 0,
+        "firePower": 0,
+        "intellect": 310,
+        "stamina": 339,
+        "spirit": 225,
+        "hit": 13,
+        "crit": 15,
+        "mp5": 20,
+        "channelClipDelayMs": 50,
+        "distance": 0,
+        "resistance": 0,
+        "penetration": 0,
+        "tapThreshold": 25,
+        "bossArmor": 3731,
+        "autoCooldowns": true,
+        "book": true,
+        "charges": false,
+        "partialResists": true,
+        "piercing": true,
+        "corruption": true,
+        "agony": true,
+        "immolate": true,
+        "instantCorruption": false,
+        "nightfall": false,
+        "isb": false,
+        "ruin": true,
+        "improvedTap": false,
+        "amplifyCurse": false,
+        "demonicPact": true,
+        "demonicSacrifice": true,
+        "felDomination": false,
+        "masterSummoner": 2,
+        "soulLink": true,
+        "sacImp": false,
+        "sacSucc": true,
+        "masterDemo": 5,
+        "petChoice": "imp",
+        "trinketSP": 0,
+        "trinketDuration": 20,
+        "trinketCD": 120,
+        "shadowMultiplier": 1.1330000000000002,
+        "fireMultiplier": 1.433245,
+        "tapBonus": 0,
+        "nightfallChance": 0,
+        "isbBonus": 0,
+        "ruinRank": 5,
+        "shadowMasteryBonus": 0,
+        "improvedCorruptionBonus": 0.02,
+        "conflagrate": false,
+        "shadowburn": false,
+        "curseOfDoom": true,
+        "incinerate": false,
+        "decimation": true,
+        "decimationSearing": false,
+        "demonicBrand": true,
+        "demonicBrandRank": 3,
+        "baneRank": 5,
+        "decimationRank": 2,
+        "siphonLife": false,
+        "drainHope": false,
+        "malevolence": 0,
+        "afBonus": 0.1,
+        "aftermathBonus": 0.5,
+        "cataclysmCostMult": 1,
+        "improvedAgonyBonus": 0,
+        "felVitalityBonus": 0.15000000000000002,
+        "maledictionBonus": 0,
+        "improvedDrainsBonus": 0,
+        "soulSiphonBonus": 0,
+        "demonicEnergies": 2,
+        "demonicKnowledge": 3,
+        "targetSpellMultiplier": 1.1,
+        "snfChance": 0,
+        "snfBonus": 0,
+        "dotCrit": 1.5,
+        "fnbCrit": 0,
+        "petMult": 1,
+        "petFireboltMult": 1.6201900000000005,
+        "petMeleeMult": 1.1330000000000002,
+        "petLashMult": 1.2463000000000002,
+        "brandMult": 1.2463000000000002,
+        "corrMultiplier": 1.1556600000000004,
+        "aplRules": [
+          {
+            "action": 21,
+            "cond": 30,
+            "param": 0,
+            "targetSpell": 22,
+            "cond1": 30,
+            "param1": 0,
+            "targetSpell1": 22,
+            "cond2": 5,
+            "param2": 14,
+            "targetSpell2": 22,
+            "enabled": 1
+          },
+          {
+            "action": 21,
+            "cond": 5,
+            "param": 0,
+            "targetSpell": 22,
+            "cond1": 5,
+            "param1": 0,
+            "targetSpell1": 22,
+            "cond2": 22,
+            "param2": 60,
+            "targetSpell2": 0,
+            "enabled": 1
+          },
+          {
+            "action": 22,
+            "cond": 30,
+            "param": 0,
+            "targetSpell": 22,
+            "cond1": 30,
+            "param1": 0,
+            "targetSpell1": 22,
+            "cond2": 36,
+            "param2": 180,
+            "targetSpell2": 35,
+            "enabled": 1
+          },
+          {
+            "action": 20,
+            "cond": 30,
+            "param": 0,
+            "targetSpell": 22,
+            "cond1": 30,
+            "param1": 0,
+            "targetSpell1": 22,
+            "cond2": 36,
+            "param2": 120,
+            "targetSpell2": 35,
+            "enabled": 1
+          },
+          {
+            "action": 7,
+            "cond": 5,
+            "param": 0,
+            "targetSpell": 22,
+            "cond1": 5,
+            "param1": 0,
+            "targetSpell1": 22,
+            "cond2": 6,
+            "param2": 60,
+            "targetSpell2": 0,
+            "enabled": 1
+          },
+          {
+            "action": 5,
+            "cond": 11,
+            "param": 0,
+            "targetSpell": 0,
+            "cond1": 11,
+            "param1": 0,
+            "targetSpell1": 0,
+            "cond2": 0,
+            "param2": 0,
+            "targetSpell2": 0,
+            "enabled": 1
+          },
+          {
+            "action": 8,
+            "cond": 5,
+            "param": 0,
+            "targetSpell": 2,
+            "cond1": 5,
+            "param1": 0,
+            "targetSpell1": 2,
+            "cond2": 22,
+            "param2": 60,
+            "targetSpell2": 0,
+            "enabled": 1
+          },
+          {
+            "action": 9,
+            "cond": 5,
+            "param": 0,
+            "targetSpell": 3,
+            "cond1": 5,
+            "param1": 0,
+            "targetSpell1": 3,
+            "cond2": 0,
+            "param2": 0,
+            "targetSpell2": 0,
+            "enabled": 1
+          },
+          {
+            "action": 1,
+            "cond": 24,
+            "param": 115,
+            "targetSpell": 0,
+            "cond1": 24,
+            "param1": 115,
+            "targetSpell1": 0,
+            "cond2": 0,
+            "param2": 0,
+            "targetSpell2": 0,
+            "enabled": 1
+          },
+          {
+            "action": 22,
+            "cond": 33,
+            "param": 0,
+            "targetSpell": 0,
+            "cond1": 33,
+            "param1": 0,
+            "targetSpell1": 0,
+            "cond2": 35,
+            "param2": 0,
+            "targetSpell2": 35,
+            "enabled": 1
+          },
+          {
+            "action": 22,
+            "cond": 33,
+            "param": 0,
+            "targetSpell": 0,
+            "cond1": 33,
+            "param1": 0,
+            "targetSpell1": 0,
+            "cond2": 36,
+            "param2": 180,
+            "targetSpell2": 35,
+            "enabled": 1
+          },
+          {
+            "action": 20,
+            "cond": 33,
+            "param": 0,
+            "targetSpell": 0,
+            "cond1": 33,
+            "param1": 0,
+            "targetSpell1": 0,
+            "cond2": 35,
+            "param2": 0,
+            "targetSpell2": 35,
+            "enabled": 1
+          },
+          {
+            "action": 20,
+            "cond": 33,
+            "param": 0,
+            "targetSpell": 0,
+            "cond1": 33,
+            "param1": 0,
+            "targetSpell1": 0,
+            "cond2": 36,
+            "param2": 120,
+            "targetSpell2": 35,
+            "enabled": 1
+          },
+          {
+            "action": 4,
+            "cond": 9,
+            "param": 35,
+            "targetSpell": 13,
+            "cond1": 9,
+            "param1": 35,
+            "targetSpell1": 13,
+            "cond2": 0,
+            "param2": 0,
+            "targetSpell2": 0,
+            "enabled": 1
+          },
+          {
+            "action": 6,
+            "cond": 5,
+            "param": 0,
+            "targetSpell": 1,
+            "cond1": 5,
+            "param1": 0,
+            "targetSpell1": 1,
+            "cond2": 0,
+            "param2": 0,
+            "targetSpell2": 0,
+            "enabled": 1
+          },
+          {
+            "action": 13,
+            "cond": 0,
+            "param": 0,
+            "targetSpell": 0,
+            "cond1": 0,
+            "param1": 0,
+            "targetSpell1": 0,
+            "cond2": 0,
+            "param2": 0,
+            "targetSpell2": 0,
+            "enabled": 1
+          },
+          {
+            "action": 1,
+            "cond": 0,
+            "param": 0,
+            "targetSpell": 0,
+            "cond1": 0,
+            "param1": 0,
+            "targetSpell1": 0,
+            "cond2": 0,
+            "param2": 0,
+            "targetSpell2": 0,
+            "enabled": 1
+          }
+        ]
+      }
+    }
+  ],
+  "harnessHash": "7ece0d110ebd28a23c5b2bea2f6be5af0b25afa161a9da5978d55b4728007f2a",
+  "status": "complete",
+  "backend": "native surfaceless EGL GLES3",
+  "iterations": 16384,
+  "warmups": 2,
+  "repeats": 5,
+  "notes": "GPU draw+finish timings only; compilation, readback, JavaScript decode and summaries excluded. Not the app end-to-end throughput. Historical fixes change gameplay/events.",
+  "stages": [
+    {
+      "revision": "WORKTREE",
+      "resolvedRevision": "diagnostic-working-tree",
+      "fastStateWords": 109,
+      "shaderChars": 60024,
+      "shaderHash": "788461ec1cc4eddd51a91103e98ebad8a6feb2f26824b30cd5fbe2f9169ddf11",
+      "results": [
+        {
+          "name": "demo_fire_brand",
+          "medianMs": 596.3809410004615,
+          "samplesMs": [
+            596.4039239997874,
+            596.2812230000054,
+            596.3809410004615,
+            596.2860800000271,
+            596.9371909995971
+          ],
+          "firstPixel": [
+            1208543197,
+            589825,
+            551,
+            22
+          ],
+          "gpuFightsPerSec": 27472.373567999926
+        }
+      ]
+    },
+    {
+      "revision": "NO_IMP_TRAVEL",
+      "resolvedRevision": "diagnostic-working-tree",
+      "fastStateWords": 109,
+      "shaderChars": 59960,
+      "shaderHash": "f224946c17041f2fd53d87936c9b41076337b7bd0cddbc8b3b9f5526f4b15a8e",
+      "results": [
+        {
+          "name": "demo_fire_brand",
+          "medianMs": 538.5699190001105,
+          "samplesMs": [
+            538.9090850003413,
+            538.5866810001971,
+            538.4148100001767,
+            538.5699190001105,
+            538.5180980001678
+          ],
+          "firstPixel": [
+            1208574857,
+            589825,
+            461,
+            22
+          ],
+          "gpuFightsPerSec": 30421.305427562576
+        }
+      ]
+    },
+    {
+      "revision": "NO_IMP_TRAVEL",
+      "resolvedRevision": "diagnostic-working-tree",
+      "fastStateWords": 109,
+      "shaderChars": 59960,
+      "shaderHash": "f224946c17041f2fd53d87936c9b41076337b7bd0cddbc8b3b9f5526f4b15a8e",
+      "results": [
+        {
+          "name": "demo_fire_brand",
+          "medianMs": 538.1603619998714,
+          "samplesMs": [
+            537.5584650000746,
+            537.6658229997702,
+            538.4027649997734,
+            538.5634270005539,
+            538.1603619998714
+          ],
+          "firstPixel": [
+            1208574857,
+            589825,
+            461,
+            22
+          ],
+          "gpuFightsPerSec": 30444.456999982314
+        }
+      ]
+    },
+    {
+      "revision": "WORKTREE",
+      "resolvedRevision": "diagnostic-working-tree",
+      "fastStateWords": 109,
+      "shaderChars": 60024,
+      "shaderHash": "788461ec1cc4eddd51a91103e98ebad8a6feb2f26824b30cd5fbe2f9169ddf11",
+      "results": [
+        {
+          "name": "demo_fire_brand",
+          "medianMs": 596.2594919992625,
+          "samplesMs": [
+            595.9252940001534,
+            596.3495730002251,
+            596.2594919992625,
+            595.9770400004345,
+            597.5569149995863
+          ],
+          "firstPixel": [
+            1208543197,
+            589825,
+            551,
+            22
+          ],
+          "gpuFightsPerSec": 27477.96927318394
+        }
+      ]
+    }
+  ],
+  "renderer": "AMD Ryzen 9 9950X 16-Core Processor (radeonsi, raphael_mendocino, LLVM 20.1.2, DRM 3.64, 7.0.0-38-generic)"
+}

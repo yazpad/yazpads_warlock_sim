@@ -1,0 +1,59 @@
+{
+  "status": "complete",
+  "startedAt": "2026-10-22T04:19:50.583Z",
+  "mode": "fast",
+  "multi": false,
+  "baselineHashes": {
+    "fast": "9b166612f4f0eda7ce15bb2f37bf8d9bbd4a844c3e3125b5faf79f9fa2f57711",
+    "detailed": "597c84f3b29c342e538599e8108fc09e3c8b775a25d566c433d5aee26113cbe3",
+    "model": "8856aae79eaa997fd57f8632a563660732ce8c615704230214ceb87d904fab9b"
+  },
+  "harnessHash": "8dd87bba4911b17bf5b750548349336ee413f40a657937b04870ce1c06320d1e",
+  "stages": [],
+  "notes": "Native GPU draw+finish only. Excludes compilation, transfer, JS, and browser overhead. Candidate variants are experimental; no production files changed.",
+  "browser": {
+    "checks": [
+      {
+        "name": "directFast",
+        "pass": true,
+        "log": ""
+      },
+      {
+        "name": "directDetailed",
+        "pass": true,
+        "log": ""
+      },
+      {
+        "name": "sm_ruinFast",
+        "pass": true,
+        "log": ""
+      },
+      {
+        "name": "sm_ruinDetailed",
+        "pass": true,
+        "log": ""
+      },
+      {
+        "name": "demo_fire_brandFast",
+        "pass": true,
+        "log": ""
+      },
+      {
+        "name": "demo_fire_brandDetailed",
+        "pass": true,
+        "log": ""
+      },
+      {
+        "name": "sm_ruin_no_petFast",
+        "pass": true,
+        "log": ""
+      },
+      {
+        "name": "sm_ruin_no_petDetailed",
+        "pass": true,
+        "log": ""
+      }
+    ]
+  },
+  "completedAt": "2026-10-22T04:19:51.046Z"
+}

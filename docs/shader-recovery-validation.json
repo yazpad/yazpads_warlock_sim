@@ -1,0 +1,169 @@
+{
+  "status": "complete",
+  "baselineHashes": {
+    "fast": "9b166612f4f0eda7ce15bb2f37bf8d9bbd4a844c3e3125b5faf79f9fa2f57711",
+    "detailed": "597c84f3b29c342e538599e8108fc09e3c8b775a25d566c433d5aee26113cbe3",
+    "model": "8856aae79eaa997fd57f8632a563660732ce8c615704230214ceb87d904fab9b"
+  },
+  "renderer": "AMD Ryzen 9 9950X 16-Core Processor (radeonsi, raphael_mendocino, LLVM 20.1.2, DRM 3.64, 7.0.0-38-generic)",
+  "directMatrix": [
+    {
+      "preset": "sm_ruin",
+      "cases": 120,
+      "identical": true
+    },
+    {
+      "preset": "aff_wrack",
+      "cases": 120,
+      "identical": true
+    },
+    {
+      "preset": "destro",
+      "cases": 120,
+      "identical": true
+    },
+    {
+      "preset": "demo_shadow_brand",
+      "cases": 120,
+      "identical": true
+    },
+    {
+      "preset": "demo_fire_brand",
+      "cases": 120,
+      "identical": true
+    }
+  ],
+  "directFastFightsPerConfig": 128,
+  "directDetailedFightsPerConfig": 16,
+  "seed": 101,
+  "offset": 17,
+  "singleConfigSpecialization": {
+    "status": "complete",
+    "startedAt": "2026-10-22T04:13:25.901Z",
+    "mode": "fast",
+    "baselineHashes": {
+      "fast": "9b166612f4f0eda7ce15bb2f37bf8d9bbd4a844c3e3125b5faf79f9fa2f57711",
+      "detailed": "597c84f3b29c342e538599e8108fc09e3c8b775a25d566c433d5aee26113cbe3",
+      "model": "8856aae79eaa997fd57f8632a563660732ce8c615704230214ceb87d904fab9b"
+    },
+    "harnessHash": "22b08d4a5ea6a1dfdd45bd5b85420ca98f9ca35e9bee1f02d09c48901112c91c",
+    "stages": [],
+    "notes": "Native GPU draw+finish only. Excludes compilation, transfer, JS, and browser overhead. Candidate variants are experimental; no production files changed.",
+    "validation": [
+      {
+        "name": "sm_ruin",
+        "detailed": false,
+        "featuresIdentical": true,
+        "fullIdentical": false,
+        "fullDifferentWords": 30
+      },
+      {
+        "name": "sm_ruin",
+        "detailed": true,
+        "featuresIdentical": true,
+        "fullIdentical": false,
+        "fullDifferentWords": 605
+      },
+      {
+        "name": "demo_fire_brand",
+        "detailed": false,
+        "featuresIdentical": true,
+        "fullIdentical": false,
+        "fullDifferentWords": 115
+      },
+      {
+        "name": "demo_fire_brand",
+        "detailed": true,
+        "featuresIdentical": true,
+        "fullIdentical": false,
+        "fullDifferentWords": 1073
+      },
+      {
+        "name": "sm_ruin_no_pet",
+        "detailed": false,
+        "featuresIdentical": true,
+        "fullIdentical": false,
+        "fullDifferentWords": 28
+      },
+      {
+        "name": "sm_ruin_no_pet",
+        "detailed": true,
+        "featuresIdentical": true,
+        "fullIdentical": false,
+        "fullDifferentWords": 615
+      }
+    ],
+    "completedAt": "2026-10-22T04:14:46.539Z"
+  },
+  "multiConfigSpecialization": {
+    "status": "complete",
+    "startedAt": "2026-10-22T04:19:51.162Z",
+    "mode": "fast",
+    "multi": true,
+    "baselineHashes": {
+      "fast": "9b166612f4f0eda7ce15bb2f37bf8d9bbd4a844c3e3125b5faf79f9fa2f57711",
+      "detailed": "597c84f3b29c342e538599e8108fc09e3c8b775a25d566c433d5aee26113cbe3",
+      "model": "8856aae79eaa997fd57f8632a563660732ce8c615704230214ceb87d904fab9b"
+    },
+    "harnessHash": "8dd87bba4911b17bf5b750548349336ee413f40a657937b04870ce1c06320d1e",
+    "stages": [],
+    "notes": "Native GPU draw+finish only. Excludes compilation, transfer, JS, and browser overhead. Candidate variants are experimental; no production files changed.",
+    "validation": [
+      {
+        "name": "sm_ruin",
+        "detailed": false,
+        "directIdentical": true,
+        "featuresIdentical": true,
+        "fullIdentical": false,
+        "fullDifferentWords": 388
+      },
+      {
+        "name": "sm_ruin",
+        "detailed": true,
+        "directIdentical": true,
+        "featuresIdentical": true,
+        "fullIdentical": false,
+        "fullDifferentWords": 2563
+      },
+      {
+        "name": "demo_fire_brand",
+        "detailed": false,
+        "directIdentical": true,
+        "featuresIdentical": true,
+        "fullIdentical": false,
+        "fullDifferentWords": 413
+      },
+      {
+        "name": "demo_fire_brand",
+        "detailed": true,
+        "directIdentical": true,
+        "featuresIdentical": true,
+        "fullIdentical": false,
+        "fullDifferentWords": 2525
+      },
+      {
+        "name": "sm_ruin_no_pet",
+        "detailed": false,
+        "directIdentical": true,
+        "featuresIdentical": true,
+        "fullIdentical": false,
+        "fullDifferentWords": 106
+      },
+      {
+        "name": "sm_ruin_no_pet",
+        "detailed": true,
+        "directIdentical": true,
+        "featuresIdentical": true,
+        "fullIdentical": false,
+        "fullDifferentWords": 2265
+      }
+    ],
+    "completedAt": "2026-10-22T04:20:48.744Z"
+  },
+  "rejectedCandidate": {
+    "name": "full",
+    "reason": "Full scalar specialization changes floating-point output words; not an exact replacement."
+  },
+  "initialRunStatus": "failed",
+  "initialRunFailure": "Rejected full specialization failed exact equivalence after all direct matrix checks passed."
+}

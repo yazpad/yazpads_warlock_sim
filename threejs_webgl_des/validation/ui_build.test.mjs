@@ -5,12 +5,14 @@ import vm from 'node:vm';
 import { prepareUIBuildImport } from '../src/contracts/ui_build.js';
 import { exportLogicalBuild, exportResolvedBuild } from '../src/contracts/build_io.js';
 import { WARLOCK_IMPORT_BUFF_KEYS } from '../src/classes/warlock_import.js';
+import { DEFAULTS } from '../src/model.js';
+import { WARLOCK_RUNTIME_KEYS } from '../src/classes/warlock_defaults.js';
 const source=readFileSync(new URL('../src/app.js',import.meta.url),'utf8');
 function harness() {
  const calls=[];
  const nodes=new Map();
  const fields=new Map();
- const context={ prepareUIBuildImport, getEquipmentDatabase:()=>({slots:[],items:[]}), WARLOCK_IMPORT_BUFF_KEYS,
+ const context={ prepareUIBuildImport, getEquipmentDatabase:()=>({slots:[],items:[]}), WARLOCK_IMPORT_BUFF_KEYS, DEFAULTS, WARLOCK_RUNTIME_KEYS,
   controller:null, importedConfig:null, importedLogicalBuild:null, currentResult:null, setStatus:message=>calls.push(['status',message]),
   $:id=>{if(!nodes.has(id))nodes.set(id,{value:'original'});return nodes.get(id);},
   form:{elements:{namedItem:key=>{if(!fields.has(key))fields.set(key,{type:'checkbox',checked:true,value:'original'});return fields.get(key);}} } };

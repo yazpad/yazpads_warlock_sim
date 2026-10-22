@@ -159,11 +159,11 @@
 
                 <!-- Direct Stats View -->
                 <div id="direct-stats-view" data-shared-panel="direct-stats">
-                  <p class="muted">Enter bonus stats above racial and class base stats. Equipment is empty.</p>
+                  <p class="muted">Enter bonus stats above racial and class base stats, before buffs and talents. These checked-in Forever presets have empty equipment and zero bonus stats. Imported Forever setups can also include bonus stats; enter those here when configuring manually.</p>
                   <div class="direct-stats-grid">
                     <div class="stat-field">
                       <label>Spell Power</label>
-                      <input class="wow-input" name="spellPower" id="in-spellPower" type="number" min="0" max="10000" value="500" required>
+                      <input class="wow-input" name="spellPower" id="in-spellPower" type="number" min="0" max="10000" value="0" required>
                     </div>
                     <div class="stat-field">
                       <label>Shadow Power</label>
@@ -175,11 +175,11 @@
                     </div>
                     <div class="stat-field">
                       <label>Spell Hit %</label>
-                      <input class="wow-input" name="hit" id="in-hit" type="number" min="0" max="100" value="12" step=".1" required>
+                      <input class="wow-input" name="hit" id="in-hit" type="number" min="0" max="100" value="0" step="any" required>
                     </div>
                     <div class="stat-field">
                       <label>Spell Crit %</label>
-                      <input class="wow-input" name="crit" id="in-crit" type="number" min="0" max="100" value="15" step=".1" required>
+                      <input class="wow-input" name="crit" id="in-crit" type="number" min="0" max="100" value="0" step="any" required>
                     </div>
                     <div class="stat-field">
                       <label>Spell Haste %</label>
@@ -187,19 +187,19 @@
                     </div>
                     <div class="stat-field">
                       <label>Intellect</label>
-                      <input class="wow-input" name="intellect" id="in-intellect" type="number" min="0" max="5000" value="200" required>
+                      <input class="wow-input" name="intellect" id="in-intellect" type="number" min="0" max="5000" value="0" required>
                     </div>
                     <div class="stat-field">
                       <label>Stamina</label>
-                      <input class="wow-input" name="stamina" id="in-stamina" type="number" min="0" max="5000" value="220">
+                      <input class="wow-input" name="stamina" id="in-stamina" type="number" min="0" max="5000" value="0">
                     </div>
                     <div class="stat-field">
                       <label>Spirit</label>
-                      <input class="wow-input" name="spirit" id="in-spirit" type="number" min="0" max="5000" value="100" required>
+                      <input class="wow-input" name="spirit" id="in-spirit" type="number" min="0" max="5000" value="0" required>
                     </div>
                     <div class="stat-field">
                       <label>MP5</label>
-                      <input class="wow-input" name="mp5" id="in-mp5" type="number" min="0" max="10000" value="20" required>
+                      <input class="wow-input" name="mp5" id="in-mp5" type="number" min="0" max="10000" value="0" required>
                     </div>
                   </div>
                 </div>
@@ -366,6 +366,39 @@
                 </div>
               </details>
 
+              <details class="wow-accordion">
+                <summary>Additional Raid Buffs &amp; Debuffs</summary>
+                <div class="accordion-body"><div class="buff-items-list">
+                    <label class="wow-checkbox-label buff-item-row"><input type="checkbox" name="giftOfTheWild"><span>Gift of the Wild (+16 Stats)</span></label>
+                    <label class="wow-checkbox-label buff-item-row"><input type="checkbox" name="prayerOfFortitude"><span>Prayer of Fortitude (+70 Stamina)</span></label>
+                    <label class="wow-checkbox-label buff-item-row"><input type="checkbox" name="prayerOfSpirit"><span>Prayer of Spirit (+40 Spirit)</span></label>
+                    <label class="wow-checkbox-label buff-item-row"><input type="checkbox" name="moonkinAura"><span>Moonkin Aura (+3% Crit)</span></label>
+                    <label class="wow-checkbox-label buff-item-row"><input type="checkbox" name="greaterBlessingOfWisdom"><span>Greater Blessing of Wisdom (+40 MP5)</span></label>
+                    <label class="wow-checkbox-label buff-item-row"><input type="checkbox" name="improvedManaSpringTotem"><span>Improved Mana Spring Totem (+30 MP5)</span></label>
+                    <label class="wow-checkbox-label buff-item-row"><input type="checkbox" name="judgementOfWisdom"><span>Judgement of Wisdom</span></label>
+                    <label class="wow-checkbox-label buff-item-row"><input type="checkbox" name="sunderArmor"><span>Sunder Armor</span></label>
+                    <label class="wow-checkbox-label buff-item-row"><input type="checkbox" name="exposeArmor"><span>Expose Armor</span></label>
+                    <label class="wow-checkbox-label buff-item-row"><input type="checkbox" name="faerieFire"><span>Faerie Fire</span></label>
+                    <label class="wow-checkbox-label buff-item-row"><input type="checkbox" name="giftOfArthas"><span>Gift of Arthas</span></label>
+                </div></div>
+              </details>
+
+              <details class="wow-accordion">
+                <summary>Cooldowns &amp; Resources</summary>
+                <div class="accordion-body"><div class="buff-items-list">
+                    <label class="wow-checkbox-label buff-item-row"><input type="checkbox" name="autoCooldowns"><span>Automatic cooldowns</span></label>
+                    <label class="wow-checkbox-label buff-item-row"><input type="checkbox" name="assignedElements"><span>Apply assigned Curse of Elements</span></label>
+                    <label class="wow-checkbox-label buff-item-row"><input type="checkbox" name="demonicRune"><span>Demonic Rune</span></label>
+                    <label class="wow-checkbox-label buff-item-row"><input type="checkbox" name="ezThroDynamite"><span>Ez-Thro Dynamite II</span></label>
+                    <label class="wow-checkbox-label buff-item-row"><input type="checkbox" name="manualTrinket"><span>APL-controlled Major Spellblasting Potion</span></label>
+                </div><div class="direct-stats-grid">
+                  <div class="stat-field"><label>Potion Spell Power</label><input class="wow-input" name="trinketSP" type="number" min="0" max="10000" value="47"></div>
+                  <div class="stat-field"><label>Potion Duration (s)</label><input class="wow-input" name="trinketDuration" type="number" min="0" max="1800" value="30"></div>
+                  <div class="stat-field"><label>Potion Cooldown (s)</label><input class="wow-input" name="trinketCD" type="number" min="1" max="1800" value="120"></div>
+                  <div class="stat-field"><label>Channel Clip Delay (ms)</label><input class="wow-input" name="channelClipDelayMs" type="number" min="0" max="10000" value="0"></div>
+                </div></div>
+              </details>
+
               <!-- 3. World Buffs Accordion -->
               <details class="wow-accordion">
                 <summary>World Buffs</summary>
@@ -406,12 +439,12 @@
                 <div class="accordion-body">
                   <div class="buff-items-list">
                     <label class="wow-checkbox-label buff-item-row">
-                      <input type="checkbox" name="curseOfShadow" checked>
+                      <input type="checkbox" name="curseOfShadow">
                       <img src="./assets/icons/Spell_Shadow_CurseOfAchimonde.png" alt="Curse of Shadows">
                       <span>Curse of Shadows (+10% Shadow/Arcane Dmg, -75 Resist)</span>
                     </label>
                     <label class="wow-checkbox-label buff-item-row">
-                      <input type="checkbox" name="curseOfElements" checked>
+                      <input type="checkbox" name="curseOfElements">
                       <img src="./assets/icons/Spell_Fire_LavaSpawn.png" alt="Curse of the Elements">
                       <span>Curse of the Elements (+10% Fire/Frost Dmg, -75 Resist)</span>
                     </label>
@@ -496,6 +529,7 @@
                     <select id="talent-preset-select" class="wow-select" style="width: auto;">
                       <option value="">Load Preset…</option>
                     </select>
+                    <button type="button" id="btn-forever-defaults" class="wow-button wow-btn-small">Forever Defaults</button>
                     <button type="button" id="btn-reset-talents" class="wow-button wow-btn-small">Reset All</button>
                   </div>
                 </div>
@@ -508,18 +542,19 @@
                   <span>Combat Stats Summary</span>
                 </div>
                 <div class="stats-summary-grid" style="margin-top: 0.5rem;">
-                  <div class="stat-metric"><span>Shadow SP:</span><strong id="sum-shadow-sp">500</strong></div>
-                  <div class="stat-metric"><span>Max Mana:</span><strong id="sum-max-mana">4,200</strong></div>
-                  <div class="stat-metric"><span>Fire SP:</span><strong id="sum-fire-sp">500</strong></div>
-                  <div class="stat-metric"><span>Max Health:</span><strong id="sum-max-health">3,850</strong></div>
-                  <div class="stat-metric"><span>Spell Hit:</span><strong id="sum-spell-hit">12.0%</strong></div>
-                  <div class="stat-metric"><span>MP5:</span><strong id="sum-mp5">20</strong></div>
-                  <div class="stat-metric"><span>Spell Crit:</span><strong id="sum-spell-crit">15.0%</strong></div>
-                  <div class="stat-metric"><span>Intellect:</span><strong id="sum-intellect">200</strong></div>
+                  <div class="stat-metric"><span>Shadow SP:</span><strong id="sum-shadow-sp">232</strong></div>
+                  <div class="stat-metric"><span>Max Mana:</span><strong id="sum-max-mana">4,172</strong></div>
+                  <div class="stat-metric"><span>Fire SP:</span><strong id="sum-fire-sp">232</strong></div>
+                  <div class="stat-metric"><span>Max Health:</span><strong id="sum-max-health">3,504</strong></div>
+                  <div class="stat-metric"><span>Spell Hit:</span><strong id="sum-spell-hit">1.0%</strong></div>
+                  <div class="stat-metric"><span>MP5:</span><strong id="sum-mp5">65</strong></div>
+                  <div class="stat-metric"><span>Spell Crit:</span><strong id="sum-spell-crit">8.5%</strong></div>
+                  <div class="stat-metric"><span>Intellect:</span><strong id="sum-intellect">169</strong></div>
                   <div class="stat-metric"><span>Spell Pen:</span><strong id="sum-spell-pen">0</strong></div>
-                  <div class="stat-metric"><span>Stamina:</span><strong id="sum-stamina">220</strong></div>
-                  <div class="stat-metric"><span>Shadow Mult:</span><strong id="sum-shadow-mult">1.00x</strong></div>
-                  <div class="stat-metric"><span>Fire Mult:</span><strong id="sum-fire-mult">1.00x</strong></div>
+                  <div class="stat-metric"><span>Stamina:</span><strong id="sum-stamina">227</strong></div>
+                  <div class="stat-metric"><span>Spirit:</span><strong id="sum-spirit">191</strong></div>
+                  <div class="stat-metric"><span>Shadow Mult:</span><strong id="sum-shadow-mult">1.03x</strong></div>
+                  <div class="stat-metric"><span>Fire Mult:</span><strong id="sum-fire-mult">1.30x</strong></div>
                 </div>
                 <div class="build-action-buttons" style="margin-top: 0.65rem; display: flex; gap: 0.4rem; flex-wrap: wrap;">
                   <button type="button" class="wow-button wow-btn-small" id="btn-open-export-modal" title="Open Export String Dialog">Export String</button>
@@ -551,14 +586,6 @@
                   <div class="stat-field">
                     <label>Fight Length (s)</label>
                     <input class="wow-input" name="duration" type="number" min="1" max="1800" step="1" value="180" required>
-                  </div>
-                  <div class="stat-field">
-                    <label>Distance (yds)</label>
-                    <select class="wow-select" name="distance">
-                      <option>0</option>
-                      <option selected>30</option>
-                      <option>60</option>
-                    </select>
                   </div>
                 </div>
 
@@ -680,9 +707,10 @@
         </div>
       </section>
 
+      <p id="compare-preset-note" style="font-size:0.8rem; margin:0.4rem 0;">Our specs use current stats and buffs. Rows labeled Forever use their saved complete builds. All rows use the current fight duration.</p>
       <!-- SPECS BASE STATS SUBHEADER BAR -->
       <div class="specs-stats-subheader-bar">
-        <div class="specs-base-stats-text">
+        <div class="specs-base-stats-text" id="compare-current-stats">
           <span style="color: var(--text-gold); font-weight: 700;">Specs</span>
           <span style="color: #666;">|</span>
           <span>Current Base Stats:</span>

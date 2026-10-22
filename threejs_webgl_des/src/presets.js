@@ -1,6 +1,6 @@
 import { getPresetPetAndSac } from './classes/warlock_preset_options.js';
 export { getPresetPetAndSac };
-import { CLASS_PRESENTATION } from './classes/active_class.js';
+import { ACTIVE_CLASS, CLASS_PRESENTATION } from './classes/active_class.js';
 import { CLASS_SIMULATION } from './classes/active_simulation.js';
 // Standard Meta Presets Comparison Dashboard & Batch Execution Engine
 //
@@ -15,6 +15,7 @@ import { getRaceVisibleAPLRules } from './apl_rules.js';
 const { runSimulation, runMultiSimulation, buildFightConfig } = CLASS_SIMULATION;
 
 let presetsData = [];
+let foreverPresetsData = [];
 let selectedPreset = null;
 let selectedPresetResult = null;
 let activePresetCallback = null;
@@ -35,7 +36,11 @@ export async function initPresets(onSelectPreset, raceGetter) {
     const res = await fetch(CLASS_PRESENTATION.presetDataUrl);
     if (!res.ok) throw new Error('Could not load presets.');
     presetsData = await res.json();
-    presetsData.forEach(p => {
+    if(ACTIVE_CLASS.id==='warlock'){
+      const {loadForeverComparisonPresets}=await import('./classes/warlock_comparison.js');
+      foreverPresetsData=await loadForeverComparisonPresets();
+    }
+    [...presetsData,...foreverPresetsData].forEach(p => {
       p.is_simulated = false;
       p.stat_weights = null;
       p.simulated_result = null;
@@ -83,14 +88,14 @@ export function getPresets() {
 export function getFilteredPresets() {
   const compareAll = document.getElementById('compare-all-races')?.checked;
   if (compareAll) {
-    return [...presetsData];
+    return [...presetsData,...foreverPresetsData];
   }
   const currentRace = (typeof activeRaceGetter === 'function' ? activeRaceGetter() : 'Human').toLowerCase();
   
   // Filter presets strictly matching the active configuration's race
   const filtered = presetsData.filter(p => (p.race || '').toLowerCase() === currentRace);
   if (filtered.length > 0) {
-    return [...filtered];
+    return [...filtered,...foreverPresetsData];
   }
   // Fallback: 1 per unique archetype
   const seenSpecs = new Set();
@@ -102,7 +107,7 @@ export function getFilteredPresets() {
       fallback.push(p);
     }
   }
-  return fallback;
+  return [...fallback,...foreverPresetsData];
 }
 
 // Resolve authentic APL rules for each spec preset
@@ -155,7 +160,7 @@ function getPresetTalentDistribution(p) {
 export function renderPresetsLeaderboard(onSelectPreset) {
   const tbody = document.getElementById('presets-leaderboard-body');
   const thead = document.getElementById('presets-leaderboard-head');
-  if (!tbody || presetsData.length === 0) return;
+  if (!tbody || (!presetsData.length&&!foreverPresetsData.length)) return;
 
   const callback = onSelectPreset || activePresetCallback;
   const list = getFilteredPresets();
@@ -207,7 +212,8 @@ export function renderPresetsLeaderboard(onSelectPreset) {
     const talentDist = getPresetTalentDistribution(p);
 
     // Strip leading x/y/z and trailing (Race) suffix from spec name
-    const cleanSpecName = p.name.replace(/^\s*\d+\s*\/\s*\d+\s*\/\s*\d+\s*/, '').replace(/\s*\([^)]*\)\s*$/, '').trim();
+    const nameWithoutRanks = p.name.replace(/^\s*\d+\s*\/\s*\d+\s*\/\s*\d+\s*/, '');
+    const cleanSpecName = (p.build?nameWithoutRanks:nameWithoutRanks.replace(/\s*\([^)]*\)\s*$/, '')).trim();
 
     const escapeAttr = str => String(str).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
@@ -359,6 +365,17 @@ export async function runBatchPresetSimulation(signal, onProgress, onSelectPrese
   const baseMP5 = activeConfig.mp5 ?? 20;
 
   for (const p of metaPresets) {
+    if(p.resolvedConfig){
+      const baseConfig={...p.resolvedConfig,duration:baseDuration,iterations:numSims,seed:activeConfig.seed??p.resolvedConfig.seed};
+      simConfigs.push(baseConfig);
+      if(calcWeights)simConfigs.push(
+        {...baseConfig,spellPower:baseConfig.spellPower+40},
+        {...baseConfig,hit:baseConfig.hit+3},
+        {...baseConfig,crit:baseConfig.crit+3},
+        {...baseConfig,intellect:baseConfig.intellect+30},
+        {...baseConfig,spirit:baseConfig.spirit+30});
+      continue;
+    }
     const { pet, sac } = getPresetPetAndSac(p);
     const talent = getTalentFlagsFromRanks(p.talents);
     const nameLower = (p.name || '').toLowerCase();

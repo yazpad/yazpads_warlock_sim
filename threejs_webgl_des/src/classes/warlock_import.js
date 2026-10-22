@@ -7,7 +7,7 @@ import { parseAPLText, compileAPLToBytecode, ACTION_INFO } from '../apl.js';
 import { getTalentFlagsFromRanks } from '../talents.js';
 
 const statKeys = ['swordEquipped', 'spellPower', 'shadowPower', 'firePower', 'intellect', 'stamina', 'spirit', 'hit', 'crit', 'mp5', 'penetration'];
-export const WARLOCK_IMPORT_BUFF_KEYS = Object.freeze(['giftOfTheWild', 'greaterBlessingOfWisdom', 'prayerOfFortitude', 'prayerOfSpirit', 'moonkinAura', 'judgementOfWisdom', 'sunderArmor', 'exposeArmor', 'faerieFire', 'giftOfArthas', 'flaskSupremePower', 'greaterArcaneElixir', 'shadowPowerElixir', 'greaterFirepowerElixir', 'wizardOil', 'magebloodElixir', 'nightfinSoup', 'arcaneIntellect', 'markOfTheWild', 'blessingOfKings', 'blessingOfWisdom', 'manaSpringTotem', 'dragonslayer', 'songflower', 'warchiefsBlessing', 'spiritOfZandalar', 'saygesFortune', 'curseOfShadow', 'curseOfElements', 'shadowWeaving', 'improvedScorch', 'nightfallProcDebuff']);
+export const WARLOCK_IMPORT_BUFF_KEYS = Object.freeze(['giftOfTheWild', 'greaterBlessingOfWisdom', 'improvedManaSpringTotem', 'prayerOfFortitude', 'prayerOfSpirit', 'moonkinAura', 'judgementOfWisdom', 'sunderArmor', 'exposeArmor', 'faerieFire', 'giftOfArthas', 'flaskSupremePower', 'greaterArcaneElixir', 'shadowPowerElixir', 'greaterFirepowerElixir', 'wizardOil', 'magebloodElixir', 'nightfinSoup', 'arcaneIntellect', 'markOfTheWild', 'blessingOfKings', 'blessingOfWisdom', 'manaSpringTotem', 'dragonslayer', 'songflower', 'warchiefsBlessing', 'spiritOfZandalar', 'saygesFortune', 'curseOfShadow', 'curseOfElements', 'shadowWeaving', 'improvedScorch', 'nightfallProcDebuff']);
 const trees = ['affliction', 'demonology', 'destruction'];
 function record(value, name) {
   if (!value || typeof value !== 'object' || Array.isArray(value)) throw new Error(`${name} must be an object.`);
@@ -96,11 +96,12 @@ export function normalizeWarlockImport(staged, { itemDatabase } = {}) {
   keys(target, ['level', 'targetCount', 'targetHP', 'bossArmor', 'resistance', 'racialPolicy', 'targetIsBeast'], 'target field');
   if (target.level !== 63 || target.targetCount !== 1) throw new Error('Only level-63 single-target encounters are supported by this import adapter.');
   if (!Number.isFinite(target.targetHP) || target.targetHP <= 0) throw new Error('Invalid target HP.');
-  c.encounter = { duration: DEFAULTS.duration, distance: DEFAULTS.distance, ...c.encounter, target };
+  c.encounter = { duration: DEFAULTS.duration, ...c.encounter, target };
+  delete c.encounter.distance; // Legacy/Forever field is accepted but simulation assumes instant impacts.
   const evaluationDefaults = { iterations: DEFAULTS.iterations, mode: 'detailed', ...staged.evaluationDefaults };
   keys(evaluationDefaults, ['iterations', 'mode'], 'evaluation default');
   if (!['fast', 'detailed'].includes(evaluationDefaults.mode)) throw new Error('Unsupported output mode.');
-  validate({ ...c.stats, duration: c.encounter.duration, distance: c.encounter.distance,
+  validate({ ...c.stats, duration: c.encounter.duration,
     channelClipDelayMs: c.channelClipDelayMs ?? 0,
     iterations: evaluationDefaults.iterations, race: options.race, rotation: options.rotation,
     petChoice: options.pet, bossArmor: target.bossArmor, resistance: target.resistance,
@@ -175,11 +176,11 @@ export function resolveWarlockImport(staged, options) {
   const config = buildFightConfig({
     base: { ...c.stats, ...effective, race: c.classOptions.race,
       statsIncludeBase: true,
-      ...Object.fromEntries(['soulShards', 'externalElements', 'assignedElements', 'demonicRune', 'ezThroDynamite', 'manualTrinket', 'autoCooldowns', 'channelClipDelayMs', 'book', 'trinketSP', 'trinketDuration', 'trinketCD']
+      ...Object.fromEntries(['externalElements', 'assignedElements', 'demonicRune', 'ezThroDynamite', 'manualTrinket', 'autoCooldowns', 'channelClipDelayMs', 'book', 'trinketSP', 'trinketDuration', 'trinketCD']
         .filter(key => Object.hasOwn(c, key)).map(key => [key, c[key]])),
       bossArmor: effective.bossArmor, resistance: effective.resistance,
       racialPolicy: c.encounter.target.racialPolicy, targetIsBeast: c.encounter.target.targetIsBeast,
-      duration: c.encounter.duration, distance: c.encounter.distance,
+      duration: c.encounter.duration,
       iterations: normalized.evaluationDefaults.iterations },
     talent: flags, pet: c.classOptions.pet, sac: c.classOptions.sacrifice,
     actionIds, aplRules, rotation,

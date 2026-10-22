@@ -3,7 +3,7 @@ import { REGRET_FRAGMENT, REGRET_ACTIONS, decodeRegretResults, scanDecisionRegre
 import { WebGLRenderer, WebGLRenderTarget, RawShaderMaterial, BufferGeometry, BufferAttribute,
   Mesh, Scene, Camera, GLSL3, RGBAIntegerFormat, UnsignedIntType, NearestFilter, NoBlending, DataTexture } from 'three';
 import { COMPACT_STRIPES, UPTIME_EFFECTS, DETAIL_WORD_OFFSET, DETAIL_EXTRA_OUTPUT, validate, packConfig, decodeStates, STATE_WORDS, TRACE_CAPACITY, SPELLS, CONFIG, CONFIG_WORDS } from './model.js';
-import { VERTEX, FRAGMENT, FAST_FRAGMENT } from './kernel.js';
+import { VERTEX, FRAGMENT, FAST_FRAGMENT, simulationVariant } from './kernel.js';
 
 const yieldUI=()=>new Promise(resolve=>setTimeout(resolve,0));
 function checkAbort(signal){if(signal?.aborted)throw new DOMException('Run cancelled.','AbortError');}
@@ -32,7 +32,7 @@ function acquire(){
  geometry.setAttribute('position',new BufferAttribute(new Float32Array([-1,-1,0,3,-1,0,-1,3,0]),3));
  const mesh=new Mesh(geometry,material);mesh.frustumCulled=false;
  const scene=new Scene();scene.add(mesh);
- engine={renderer,gl:context,uniforms,material,fastMaterial,mesh,geometry,scene,camera:new Camera(),error:null,compiledVariants:new Set()};
+ engine={renderer,gl:context,uniforms,dummyTex,material,fastMaterial,makeMaterial,variantMaterials:new Map(),mesh,geometry,scene,camera:new Camera(),error:null,compiledVariants:new Set()};
  const owned=engine;
  canvas.addEventListener('webglcontextlost',event=>{event.preventDefault();owned.error=new Error('WebGL context lost. Reload to run again.');});
  renderer.debug.onShaderError=(gl,program,vs,fs)=>{owned.error=new Error(`Simulation shader failed: ${gl.getProgramInfoLog(program)} ${gl.getShaderInfoLog(fs)} ${gl.getShaderInfoLog(vs)}`);};
@@ -42,11 +42,11 @@ function acquire(){
 export async function preloadShader() {
   try {
     const e = acquire();
-    if (!e.compiledVariants.has(true)) {
+    if (!e.compiledVariants.has(e.material)) {
       e.mesh.material=e.material;
       await e.renderer.compileAsync(e.scene, e.camera);
       if (e.error) throw e.error;
-      e.compiledVariants.add(true);
+      e.compiledVariants.add(e.material);
     }
     return true;
   } catch (err) {
@@ -57,7 +57,18 @@ export async function preloadShader() {
 
 export function disposeEngine(){
  if(running)throw new Error('Cannot dispose an active simulation.');
- if(engine){engine.regretMaterial?.dispose();engine.material.dispose();engine.fastMaterial.dispose();engine.geometry.dispose();engine.renderer.dispose();engine.renderer.forceContextLoss();engine=null;}
+ if(engine){engine.regretMaterial?.dispose();for(const material of engine.variantMaterials.values())material.dispose();engine.material.dispose();engine.fastMaterial.dispose();engine.dummyTex.dispose();engine.geometry.dispose();engine.renderer.dispose();engine.renderer.forceContextLoss();engine=null;}
+}
+
+function selectSimulationMaterial(e,detailed,packedConfigs){
+ const variant=simulationVariant(detailed,packedConfigs);
+ let material=e.variantMaterials.get(variant.key);
+ // Keep compiled programs bounded. Search populations with new feature sets
+ // beyond this budget use the generic shader rather than compiling endlessly.
+ if(!material&&e.variantMaterials.size<16){
+  material=e.makeMaterial(variant.build());e.variantMaterials.set(variant.key,material);
+ }
+ e.mesh.material=material||(detailed?e.material:e.fastMaterial);
 }
 
 function target(width,height){
@@ -75,11 +86,11 @@ function target(width,height){
   });
 }
 
-function createConfigTexture(configs){
- const texWidth=Math.ceil(CONFIG_WORDS/4),texHeight=configs.length;
+function createConfigTexture(packedConfigs){
+ const texWidth=Math.ceil(CONFIG_WORDS/4),texHeight=packedConfigs.length;
  const data=new Uint32Array(texWidth*texHeight*4);
- for(let i=0;i<configs.length;i++){
-  const packed=packConfig(configs[i]);
+ for(let i=0;i<packedConfigs.length;i++){
+  const packed=packedConfigs[i];
   for(let j=0;j<packed.length;j++)data[i*texWidth*4+j]=packed[j];
  }
  const tex=new DataTexture(data,texWidth,texHeight,RGBAIntegerFormat,UnsignedIntType);
@@ -188,13 +199,13 @@ function decodeBatch2D(outputs,width,count,config,first,states){
    petMeleeDamage,petMeleeCasts,petMeleeHits,petMeleeCrits,petMeleeMisses,
    petSpellDamage,petSpellCasts,petSpellHits,petSpellCrits,petSpellMisses
   };
-  for(let i=13;i<SPELLS.length;i++){
-   const at=32+(i-6)*3;
-   const read=(word,float=false)=>{
+  const read=(word,float=false)=>{
     const stripe=Math.floor(word/16),attachment=Math.floor(word%16/4);
     const index=((simY*COMPACT_STRIPES+stripe)*width+simX)*4+word%4;
     return float?[f0,f1,f2,f3][attachment][index]:outputs[attachment][index];
-   };
+  };
+  for(let i=13;i<SPELLS.length;i++){
+   const at=32+(i-6)*3;
    s[`damage${i}`]=read(at,true);s[`casts${i}`]=read(at+1)&65535;s[`hits${i}`]=read(at+1)>>>16;
    s[`crits${i}`]=read(at+2)&65535;s[`misses${i}`]=read(at+2)>>>16;
   }
@@ -203,7 +214,8 @@ function decodeBatch2D(outputs,width,count,config,first,states){
    const packed=outputs[attachment][((simY*COMPACT_STRIPES+stripe)*width+simX)*4+word%4];
    s[`uptime_${UPTIME_EFFECTS[i][1]}`]=(i%2?packed>>>16:packed&65535)/65535;
   }
-  s.spent=f3[p3+2];s.manaWasted=f3[p3+3];
+  s.spent=read(DETAIL_WORD_OFFSET+6,true);
+  s.manaWasted=read(DETAIL_WORD_OFFSET+7,true);
   const petWords=Array.from({length:4},(_,i)=>{
    const word=DETAIL_WORD_OFFSET+8+i,stripe=Math.floor(word/16),attachment=Math.floor(word%16/4);
    return outputs[attachment][((simY*COMPACT_STRIPES+stripe)*width+simX)*4+word%4];
@@ -439,13 +451,13 @@ export async function runMultiSimulation(inputs, { signal, onProgress = () => {}
     onProgress({ phase: 'Preparing WebGL2 Multi-Config GPU Kernel', completed: 0, total: totalFights });
     const e = acquire();
     if (e.error) throw e.error;
-    e.mesh.material = detailedResults ? e.material : e.fastMaterial;
-
-    cfgTex = createConfigTexture(configs);
+    const packedConfigs=configs.map(packConfig);
+    selectSimulationMaterial(e,!!detailedResults,packedConfigs);
+    cfgTex = createConfigTexture(packedConfigs);
     e.uniforms.numConfigs.value = numConfigs;
     e.uniforms.fightsPerConfig.value = fightsPerConfig;
     e.uniforms.configTex.value = cfgTex;
-    e.uniforms.seed.value = configs[0].seed || 42;
+    e.uniforms.seed.value = configs[0].seed ?? 42;
     e.uniforms.eventBudget.value = budget;
 
     const maxTexSize = e.gl.getParameter(e.gl.MAX_TEXTURE_SIZE);
@@ -459,13 +471,13 @@ export async function runMultiSimulation(inputs, { signal, onProgress = () => {}
     e.renderer.setRenderTarget(rt);
 
     let compileMs = 0;
-    if (!e.compiledVariants.has(!!detailedResults)) {
+    if (!e.compiledVariants.has(e.mesh.material)) {
       onProgress({ phase: 'Compiling GPU Shader', completed: 0, total: totalFights });
       const t = performance.now();
       await e.renderer.compileAsync(e.scene, e.camera);
       compileMs = performance.now() - t;
       if (e.error) throw e.error;
-      e.compiledVariants.add(!!detailedResults);
+      e.compiledVariants.add(e.mesh.material);
     }
 
     let executeMs = 0, decodeMs = 0, draws = 0;
@@ -506,6 +518,7 @@ export async function runMultiSimulation(inputs, { signal, onProgress = () => {}
     if (engine?.uniforms) {
       engine.uniforms.numConfigs.value = 1;
       engine.uniforms.fightsPerConfig.value = 0;
+      engine.uniforms.configTex.value = engine.dummyTex;
     }
     engine?.renderer.setRenderTarget(null);
     running = false;
@@ -523,10 +536,11 @@ export async function runSimulation(input,{signal,onProgress=()=>{},batchSize=52
  running=true;const started=performance.now();let rt,diagnostic,traceTarget;
  try{
   checkAbort(signal);onProgress({phase:'Preparing WebGL2',completed:0,total:config.iterations});
-  const e=acquire();if(e.error)throw e.error;e.mesh.material=detailedResults?e.material:e.fastMaterial;
+  const e=acquire();if(e.error)throw e.error;
+  const packedConfig=packConfig(config);selectSimulationMaterial(e,!!detailedResults,[packedConfig]);
   e.uniforms.numConfigs.value=1;
   e.uniforms.fightsPerConfig.value=config.iterations;
-  e.uniforms.configWords.value=packConfig(config);e.uniforms.seed.value=config.seed;e.uniforms.eventBudget.value=budget;
+  e.uniforms.configWords.value=packedConfig;e.uniforms.seed.value=config.seed;e.uniforms.eventBudget.value=budget;
   const maxTexSize=e.gl.getParameter(e.gl.MAX_TEXTURE_SIZE);
   const capacity=Math.min(effectiveBatch,config.iterations);
   const gridWidth=Math.min(maxTexSize,Math.max(1,Math.min(1024,capacity)));
@@ -535,9 +549,9 @@ export async function runSimulation(input,{signal,onProgress=()=>{},batchSize=52
   if(gridHeight*outputStripes>maxTexSize)throw new Error(`Simulation batch exceeds maximum texture height (${maxTexSize}).`);
   rt=target(gridWidth,gridHeight*outputStripes);e.renderer.setRenderTarget(rt);
   let compileMs=0;
-  if(!e.compiledVariants.has(!!detailedResults)){
+  if(!e.compiledVariants.has(e.mesh.material)){
     onProgress({phase:'Compiling GPU Shader',completed:0,total:config.iterations});
-    const t=performance.now();await e.renderer.compileAsync(e.scene,e.camera);compileMs=performance.now()-t;if(e.error)throw e.error;e.compiledVariants.add(!!detailedResults);
+    const t=performance.now();await e.renderer.compileAsync(e.scene,e.camera);compileMs=performance.now()-t;if(e.error)throw e.error;e.compiledVariants.add(e.mesh.material);
   }
   let executeMs=0,decodeMs=0,diagnosticMs=0,draws=0;
   const states=[];

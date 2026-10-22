@@ -1,0 +1,1775 @@
+{
+  "iterations": 10000,
+  "seed": 101,
+  "config": {
+    "race": "GNOME",
+    "swordEquipped": false,
+    "racialPolicy": "execute",
+    "targetIsBeast": false,
+    "maxHealth": 2414,
+    "statsIncludeBase": true,
+    "duration": 180,
+    "iterations": 10000,
+    "seed": 101,
+    "rotation": "shadow",
+    "spellPower": 410,
+    "shadowPower": 0,
+    "firePower": 0,
+    "intellect": 113,
+    "stamina": 118,
+    "spirit": 115,
+    "hit": 12,
+    "crit": 7.428571428571429,
+    "mp5": 70,
+    "channelClipDelayMs": 0,
+    "distance": 20,
+    "resistance": 0,
+    "penetration": 0,
+    "tapThreshold": 25,
+    "bossArmor": 976,
+    "autoCooldowns": true,
+    "book": true,
+    "charges": false,
+    "partialResists": true,
+    "piercing": true,
+    "corruption": true,
+    "agony": true,
+    "immolate": true,
+    "instantCorruption": false,
+    "nightfall": false,
+    "isb": false,
+    "ruin": true,
+    "improvedTap": false,
+    "amplifyCurse": false,
+    "demonicPact": true,
+    "demonicSacrifice": true,
+    "felDomination": false,
+    "masterSummoner": 2,
+    "soulLink": true,
+    "sacImp": false,
+    "sacSucc": true,
+    "masterDemo": 5,
+    "petChoice": "imp",
+    "soulShards": 32,
+    "externalElements": false,
+    "assignedElements": true,
+    "demonicRune": false,
+    "ezThroDynamite": false,
+    "manualTrinket": false,
+    "judgementOfWisdom": false,
+    "giftOfArthas": true,
+    "trinketSP": 0,
+    "trinketDuration": 20,
+    "trinketCD": 120,
+    "shadowMultiplier": 1.03,
+    "fireMultiplier": 1.3029499999999998,
+    "tapBonus": 0,
+    "nightfallChance": 0,
+    "isbBonus": 0,
+    "ruinRank": 5,
+    "shadowMasteryBonus": 0,
+    "improvedCorruptionBonus": 0.02,
+    "conflagrate": false,
+    "shadowburn": false,
+    "curseOfDoom": true,
+    "incinerate": false,
+    "decimation": true,
+    "decimationSearing": false,
+    "demonicBrand": true,
+    "demonicBrandRank": 3,
+    "baneRank": 5,
+    "decimationRank": 2,
+    "siphonLife": false,
+    "drainHope": false,
+    "malevolence": 0,
+    "afBonus": 0.1,
+    "aftermathBonus": 0.5,
+    "cataclysmCostMult": 1,
+    "improvedAgonyBonus": 0,
+    "felVitalityBonus": 0.15000000000000002,
+    "maledictionBonus": 0,
+    "improvedDrainsBonus": 0,
+    "soulSiphonBonus": 0,
+    "demonicEnergies": 2,
+    "demonicKnowledge": 3,
+    "targetSpellMultiplier": 1,
+    "snfChance": 0,
+    "snfBonus": 0,
+    "dotCrit": 1.5,
+    "fnbCrit": 0,
+    "petMult": 1,
+    "petFireboltMult": 1.6201900000000005,
+    "petMeleeMult": 1.1330000000000002,
+    "petLashMult": 1.2463000000000002,
+    "brandMult": 1.2463000000000002,
+    "corrMultiplier": 1.0506,
+    "aplRules": [
+      {
+        "action": 21,
+        "cond": 30,
+        "param": 0,
+        "targetSpell": 22,
+        "cond1": 30,
+        "param1": 0,
+        "targetSpell1": 22,
+        "cond2": 5,
+        "param2": 14,
+        "targetSpell2": 22,
+        "enabled": 1
+      },
+      {
+        "action": 21,
+        "cond": 5,
+        "param": 0,
+        "targetSpell": 22,
+        "cond1": 5,
+        "param1": 0,
+        "targetSpell1": 22,
+        "cond2": 22,
+        "param2": 60,
+        "targetSpell2": 0,
+        "enabled": 1
+      },
+      {
+        "action": 26,
+        "cond": 30,
+        "param": 0,
+        "targetSpell": 22,
+        "cond1": 30,
+        "param1": 0,
+        "targetSpell1": 22,
+        "cond2": 5,
+        "param2": 14,
+        "targetSpell2": 22,
+        "enabled": 1
+      },
+      {
+        "action": 26,
+        "cond": 5,
+        "param": 0,
+        "targetSpell": 22,
+        "cond1": 5,
+        "param1": 0,
+        "targetSpell1": 22,
+        "cond2": 22,
+        "param2": 60,
+        "targetSpell2": 0,
+        "enabled": 1
+      },
+      {
+        "action": 22,
+        "cond": 30,
+        "param": 0,
+        "targetSpell": 22,
+        "cond1": 30,
+        "param1": 0,
+        "targetSpell1": 22,
+        "cond2": 36,
+        "param2": 180,
+        "targetSpell2": 35,
+        "enabled": 1
+      },
+      {
+        "action": 20,
+        "cond": 30,
+        "param": 0,
+        "targetSpell": 22,
+        "cond1": 30,
+        "param1": 0,
+        "targetSpell1": 22,
+        "cond2": 36,
+        "param2": 120,
+        "targetSpell2": 35,
+        "enabled": 1
+      },
+      {
+        "action": 7,
+        "cond": 5,
+        "param": 0,
+        "targetSpell": 22,
+        "cond1": 5,
+        "param1": 0,
+        "targetSpell1": 22,
+        "cond2": 6,
+        "param2": 60,
+        "targetSpell2": 0,
+        "enabled": 1
+      },
+      {
+        "action": 13,
+        "cond": 11,
+        "param": 0,
+        "targetSpell": 0,
+        "cond1": 11,
+        "param1": 0,
+        "targetSpell1": 0,
+        "cond2": 0,
+        "param2": 0,
+        "targetSpell2": 0,
+        "enabled": 1
+      },
+      {
+        "action": 8,
+        "cond": 22,
+        "param": 60,
+        "targetSpell": 0,
+        "cond1": 22,
+        "param1": 60,
+        "targetSpell1": 0,
+        "cond2": 40,
+        "param2": 3,
+        "targetSpell2": 0,
+        "enabled": 1
+      },
+      {
+        "action": 9,
+        "cond": 5,
+        "param": 0,
+        "targetSpell": 3,
+        "cond1": 5,
+        "param1": 0,
+        "targetSpell1": 3,
+        "cond2": 0,
+        "param2": 0,
+        "targetSpell2": 0,
+        "enabled": 1
+      },
+      {
+        "action": 25,
+        "cond": 42,
+        "param": 0,
+        "targetSpell": 0,
+        "cond1": 42,
+        "param1": 0,
+        "targetSpell1": 0,
+        "cond2": 0,
+        "param2": 0,
+        "targetSpell2": 0,
+        "enabled": 1
+      },
+      {
+        "action": 1,
+        "cond": 24,
+        "param": 115,
+        "targetSpell": 0,
+        "cond1": 24,
+        "param1": 115,
+        "targetSpell1": 0,
+        "cond2": 0,
+        "param2": 0,
+        "targetSpell2": 0,
+        "enabled": 1
+      },
+      {
+        "action": 22,
+        "cond": 33,
+        "param": 0,
+        "targetSpell": 0,
+        "cond1": 33,
+        "param1": 0,
+        "targetSpell1": 0,
+        "cond2": 35,
+        "param2": 0,
+        "targetSpell2": 35,
+        "enabled": 1
+      },
+      {
+        "action": 22,
+        "cond": 33,
+        "param": 0,
+        "targetSpell": 0,
+        "cond1": 33,
+        "param1": 0,
+        "targetSpell1": 0,
+        "cond2": 36,
+        "param2": 180,
+        "targetSpell2": 35,
+        "enabled": 1
+      },
+      {
+        "action": 20,
+        "cond": 33,
+        "param": 0,
+        "targetSpell": 0,
+        "cond1": 33,
+        "param1": 0,
+        "targetSpell1": 0,
+        "cond2": 35,
+        "param2": 0,
+        "targetSpell2": 35,
+        "enabled": 1
+      },
+      {
+        "action": 20,
+        "cond": 33,
+        "param": 0,
+        "targetSpell": 0,
+        "cond1": 33,
+        "param1": 0,
+        "targetSpell1": 0,
+        "cond2": 36,
+        "param2": 120,
+        "targetSpell2": 35,
+        "enabled": 1
+      },
+      {
+        "action": 4,
+        "cond": 33,
+        "param": 0,
+        "targetSpell": 0,
+        "cond1": 33,
+        "param1": 0,
+        "targetSpell1": 0,
+        "cond2": 0,
+        "param2": 0,
+        "targetSpell2": 0,
+        "enabled": 1
+      },
+      {
+        "action": 6,
+        "cond": 5,
+        "param": 0,
+        "targetSpell": 1,
+        "cond1": 5,
+        "param1": 0,
+        "targetSpell1": 1,
+        "cond2": 0,
+        "param2": 0,
+        "targetSpell2": 0,
+        "enabled": 1
+      },
+      {
+        "action": 13,
+        "cond": 0,
+        "param": 0,
+        "targetSpell": 0,
+        "cond1": 0,
+        "param1": 0,
+        "targetSpell1": 0,
+        "cond2": 0,
+        "param2": 0,
+        "targetSpell2": 0,
+        "enabled": 1
+      },
+      {
+        "action": 1,
+        "cond": 0,
+        "param": 0,
+        "targetSpell": 0,
+        "cond1": 0,
+        "param1": 0,
+        "targetSpell1": 0,
+        "cond2": 0,
+        "param2": 0,
+        "targetSpell2": 0,
+        "enabled": 1
+      }
+    ]
+  },
+  "ours": 565.5476783767355,
+  "oursCi95": 0.33831963535544857,
+  "breakdown": {
+    "rows": [
+      {
+        "key": "player:0",
+        "name": "Shadow Bolt",
+        "actor": "player",
+        "casts": 0,
+        "landed": 0,
+        "crits": 0,
+        "misses": 0,
+        "ticks": 0,
+        "tickCrits": 0,
+        "damage": 0,
+        "periodicDamage": 0,
+        "criticalDamage": 0,
+        "periodicCriticalDamage": 0,
+        "glances": 0,
+        "directDamage": 0,
+        "directLanded": 0,
+        "directCrits": 0,
+        "dps": 0,
+        "periodicDps": 0,
+        "directDps": 0,
+        "damagePerCast": null,
+        "damagePerLandedEvent": null
+      },
+      {
+        "key": "player:1",
+        "name": "Corruption",
+        "actor": "player",
+        "casts": 8.1638,
+        "landed": 45.9466,
+        "crits": 5.0865,
+        "misses": 0.4055,
+        "ticks": 45.9466,
+        "tickCrits": 5.0865,
+        "damage": 8685.856819677734,
+        "periodicDamage": 8685.856819677734,
+        "criticalDamage": 1366.6964842468262,
+        "periodicCriticalDamage": 1366.6964842468262,
+        "glances": 0,
+        "directDamage": 0,
+        "directLanded": 0,
+        "directCrits": 0,
+        "dps": 48.25476010932074,
+        "periodicDps": 48.25476010932074,
+        "directDps": 0,
+        "damagePerCast": 1063.9477718314674,
+        "damagePerLandedEvent": 189.04242794195295
+      },
+      {
+        "key": "player:2",
+        "name": "Bane of Agony",
+        "actor": "player",
+        "casts": 3.1051,
+        "landed": 25.9945,
+        "crits": 2.8755,
+        "misses": 0.1561,
+        "ticks": 25.9945,
+        "tickCrits": 2.8755,
+        "damage": 3069.5805580078127,
+        "periodicDamage": 3069.5805580078127,
+        "criticalDamage": 481.7906071411133,
+        "periodicCriticalDamage": 481.7906071411133,
+        "glances": 0,
+        "directDamage": 0,
+        "directLanded": 0,
+        "directCrits": 0,
+        "dps": 17.053225322265625,
+        "periodicDps": 17.053225322265625,
+        "directDps": 0,
+        "damagePerCast": 988.5609345939946,
+        "damagePerLandedEvent": 118.08577037480286
+      },
+      {
+        "key": "player:3",
+        "name": "Immolate",
+        "actor": "player",
+        "casts": 10.469,
+        "landed": 57.4794,
+        "crits": 6.3273,
+        "misses": 0.5175,
+        "ticks": 47.5279,
+        "tickCrits": 5.2341,
+        "damage": 15226.315434179687,
+        "periodicDamage": 9008.67151328125,
+        "criticalDamage": 3018.5686097930907,
+        "periodicCriticalDamage": 1787.3601197784424,
+        "glances": 0,
+        "directDamage": 6217.6439208984375,
+        "directLanded": 9.951499999999996,
+        "directCrits": 1.0932000000000004,
+        "dps": 84.59064130099826,
+        "periodicDps": 50.04817507378472,
+        "directDps": 34.542466227213545,
+        "damagePerCast": 1454.4192792224364,
+        "damagePerLandedEvent": 264.90038925562357
+      },
+      {
+        "key": "player:4",
+        "name": "Incinerate",
+        "actor": "player",
+        "casts": 0,
+        "landed": 0,
+        "crits": 0,
+        "misses": 0,
+        "ticks": 0,
+        "tickCrits": 0,
+        "damage": 0,
+        "periodicDamage": 0,
+        "criticalDamage": 0,
+        "periodicCriticalDamage": 0,
+        "glances": 0,
+        "directDamage": 0,
+        "directLanded": 0,
+        "directCrits": 0,
+        "dps": 0,
+        "periodicDps": 0,
+        "directDps": 0,
+        "damagePerCast": null,
+        "damagePerLandedEvent": null
+      },
+      {
+        "key": "player:5",
+        "name": "Searing Pain",
+        "actor": "player",
+        "casts": 58.4005,
+        "landed": 55.4695,
+        "crits": 11.6681,
+        "misses": 2.931,
+        "ticks": 0,
+        "tickCrits": 0,
+        "damage": 31459.218938867187,
+        "periodicDamage": 0,
+        "criticalDamage": 10934.463414697266,
+        "periodicCriticalDamage": 0,
+        "glances": 0,
+        "directDamage": 31459.218938867187,
+        "directLanded": 55.4695,
+        "directCrits": 11.6681,
+        "dps": 174.77343854926215,
+        "periodicDps": 0,
+        "directDps": 174.77343854926215,
+        "damagePerCast": 538.6806438107069,
+        "damagePerLandedEvent": 567.1444476490177
+      },
+      {
+        "key": "player:6",
+        "name": "Bane of Doom",
+        "actor": "player",
+        "casts": 2,
+        "landed": 1.903,
+        "crits": 0.2075,
+        "misses": 0.097,
+        "ticks": 1.903,
+        "tickCrits": 0.2075,
+        "damage": 7689.477030371094,
+        "periodicDamage": 7689.477030371094,
+        "criticalDamage": 1192.6496142578126,
+        "periodicCriticalDamage": 1192.6496142578126,
+        "glances": 0,
+        "directDamage": 0,
+        "directLanded": 0,
+        "directCrits": 0,
+        "dps": 42.71931683539496,
+        "periodicDps": 42.71931683539496,
+        "directDps": 0,
+        "damagePerCast": 3844.738515185547,
+        "damagePerLandedEvent": 4040.713100562845
+      },
+      {
+        "key": "player:7",
+        "name": "Soul Fire",
+        "actor": "player",
+        "casts": 5.619,
+        "landed": 5.3015,
+        "crits": 0.5884,
+        "misses": 0.2736,
+        "ticks": 0,
+        "tickCrits": 0,
+        "damage": 8012.556126611328,
+        "periodicDamage": 0,
+        "criticalDamage": 1598.2983080810548,
+        "periodicCriticalDamage": 0,
+        "glances": 0,
+        "directDamage": 8012.556126611328,
+        "directLanded": 5.3015,
+        "directCrits": 0.5884,
+        "dps": 44.51420070339627,
+        "periodicDps": 0,
+        "directDps": 44.51420070339627,
+        "damagePerCast": 1425.97546300255,
+        "damagePerLandedEvent": 1511.3752950318453
+      },
+      {
+        "key": "player:8",
+        "name": "Conflagrate",
+        "actor": "player",
+        "casts": 0,
+        "landed": 0,
+        "crits": 0,
+        "misses": 0,
+        "ticks": 0,
+        "tickCrits": 0,
+        "damage": 0,
+        "periodicDamage": 0,
+        "criticalDamage": 0,
+        "periodicCriticalDamage": 0,
+        "glances": 0,
+        "directDamage": 0,
+        "directLanded": 0,
+        "directCrits": 0,
+        "dps": 0,
+        "periodicDps": 0,
+        "directDps": 0,
+        "damagePerCast": null,
+        "damagePerLandedEvent": null
+      },
+      {
+        "key": "player:9",
+        "name": "Shadowburn",
+        "actor": "player",
+        "casts": 0,
+        "landed": 0,
+        "crits": 0,
+        "misses": 0,
+        "ticks": 0,
+        "tickCrits": 0,
+        "damage": 0,
+        "periodicDamage": 0,
+        "criticalDamage": 0,
+        "periodicCriticalDamage": 0,
+        "glances": 0,
+        "directDamage": 0,
+        "directLanded": 0,
+        "directCrits": 0,
+        "dps": 0,
+        "periodicDps": 0,
+        "directDps": 0,
+        "damagePerCast": null,
+        "damagePerLandedEvent": null
+      },
+      {
+        "key": "player:10",
+        "name": "Siphon Life",
+        "actor": "player",
+        "casts": 0,
+        "landed": 0,
+        "crits": 0,
+        "misses": 0,
+        "ticks": 0,
+        "tickCrits": 0,
+        "damage": 0,
+        "periodicDamage": 0,
+        "criticalDamage": 0,
+        "periodicCriticalDamage": 0,
+        "glances": 0,
+        "directDamage": 0,
+        "directLanded": 0,
+        "directCrits": 0,
+        "dps": 0,
+        "periodicDps": 0,
+        "directDps": 0,
+        "damagePerCast": null,
+        "damagePerLandedEvent": null
+      },
+      {
+        "key": "player:11",
+        "name": "Wrack",
+        "actor": "player",
+        "casts": 0,
+        "landed": 0,
+        "crits": 0,
+        "misses": 0,
+        "ticks": 0,
+        "tickCrits": 0,
+        "damage": 0,
+        "periodicDamage": 0,
+        "criticalDamage": 0,
+        "periodicCriticalDamage": 0,
+        "glances": 0,
+        "directDamage": 0,
+        "directLanded": 0,
+        "directCrits": 0,
+        "dps": 0,
+        "periodicDps": 0,
+        "directDps": 0,
+        "damagePerCast": null,
+        "damagePerLandedEvent": null
+      },
+      {
+        "key": "player:12",
+        "name": "Touch of the Grave",
+        "actor": "player",
+        "casts": 0,
+        "landed": 0,
+        "crits": 0,
+        "misses": 0,
+        "ticks": 0,
+        "tickCrits": 0,
+        "damage": 0,
+        "periodicDamage": 0,
+        "criticalDamage": 0,
+        "periodicCriticalDamage": 0,
+        "glances": 0,
+        "directDamage": 0,
+        "directLanded": 0,
+        "directCrits": 0,
+        "dps": 0,
+        "periodicDps": 0,
+        "directDps": 0,
+        "damagePerCast": null,
+        "damagePerLandedEvent": null
+      },
+      {
+        "key": "player:13",
+        "name": "Hellfire",
+        "actor": "player",
+        "casts": 0,
+        "landed": 0,
+        "crits": 0,
+        "misses": 0,
+        "ticks": 0,
+        "tickCrits": 0,
+        "damage": 0,
+        "periodicDamage": 0,
+        "criticalDamage": 0,
+        "periodicCriticalDamage": 0,
+        "glances": 0,
+        "directDamage": 0,
+        "directLanded": 0,
+        "directCrits": 0,
+        "dps": 0,
+        "periodicDps": 0,
+        "directDps": 0,
+        "damagePerCast": null,
+        "damagePerLandedEvent": null
+      },
+      {
+        "key": "player:14",
+        "name": "Ez-Thro Dynamite II",
+        "actor": "player",
+        "casts": 0,
+        "landed": 0,
+        "crits": 0,
+        "misses": 0,
+        "ticks": 0,
+        "tickCrits": 0,
+        "damage": 0,
+        "periodicDamage": 0,
+        "criticalDamage": 0,
+        "periodicCriticalDamage": 0,
+        "glances": 0,
+        "directDamage": 0,
+        "directLanded": 0,
+        "directCrits": 0,
+        "dps": 0,
+        "periodicDps": 0,
+        "directDps": 0,
+        "damagePerCast": null,
+        "damagePerLandedEvent": null
+      },
+      {
+        "key": "player:15",
+        "name": "Curse of the Elements",
+        "actor": "player",
+        "casts": 1.0525,
+        "landed": 0,
+        "crits": 0,
+        "misses": 0.0525,
+        "ticks": 0,
+        "tickCrits": 0,
+        "damage": 0,
+        "periodicDamage": 0,
+        "criticalDamage": 0,
+        "periodicCriticalDamage": 0,
+        "glances": 0,
+        "directDamage": 0,
+        "directLanded": 0,
+        "directCrits": 0,
+        "dps": 0,
+        "periodicDps": 0,
+        "directDps": 0,
+        "damagePerCast": 0,
+        "damagePerLandedEvent": null
+      },
+      {
+        "key": "pet:melee",
+        "name": "Imp melee",
+        "actor": "Imp",
+        "casts": 0,
+        "landed": 0,
+        "crits": 0,
+        "misses": 0,
+        "ticks": 0,
+        "tickCrits": 0,
+        "damage": 0,
+        "periodicDamage": 0,
+        "criticalDamage": null,
+        "periodicCriticalDamage": 0,
+        "glances": 0,
+        "directDamage": 0,
+        "directLanded": 0,
+        "directCrits": 0,
+        "dps": 0,
+        "periodicDps": 0,
+        "directDps": 0,
+        "damagePerCast": null,
+        "damagePerLandedEvent": null
+      },
+      {
+        "key": "pet:spell",
+        "name": "Imp Firebolt",
+        "actor": "Imp",
+        "casts": 90,
+        "landed": 85.5162,
+        "crits": 9.3931,
+        "misses": 4.4838,
+        "ticks": 0,
+        "tickCrits": 0,
+        "damage": 16315.529720214843,
+        "periodicDamage": 0,
+        "criticalDamage": null,
+        "periodicCriticalDamage": 0,
+        "glances": 0,
+        "directDamage": 16315.529720214843,
+        "directLanded": 85.5162,
+        "directCrits": 9.3931,
+        "dps": 90.64183177897135,
+        "periodicDps": 0,
+        "directDps": 90.64183177897135,
+        "damagePerCast": 181.2836635579427,
+        "damagePerLandedEvent": 190.7887595591811
+      },
+      {
+        "key": "pet:brand",
+        "name": "Imp Demonic Brand",
+        "actor": "Imp",
+        "casts": 83.8536,
+        "landed": 79.6986,
+        "crits": 8.7801,
+        "misses": 4.155,
+        "ticks": 0,
+        "tickCrits": 0,
+        "damage": 11340.060632128907,
+        "periodicDamage": 0,
+        "criticalDamage": null,
+        "periodicCriticalDamage": 0,
+        "glances": 0,
+        "directDamage": 11340.060632128907,
+        "directLanded": 79.6986,
+        "directCrits": 8.7801,
+        "dps": 63.0003368451606,
+        "periodicDps": 0,
+        "directDps": 63.0003368451606,
+        "damagePerCast": 135.23641957088196,
+        "damagePerLandedEvent": 142.28682350918217
+      },
+      {
+        "key": "player:tap",
+        "name": "Life Tap",
+        "actor": "player",
+        "casts": 27.0188,
+        "landed": 0,
+        "crits": 0,
+        "misses": 0,
+        "ticks": 0,
+        "tickCrits": 0,
+        "damage": 0,
+        "periodicDamage": 0,
+        "criticalDamage": 0,
+        "periodicCriticalDamage": 0,
+        "glances": 0,
+        "directDamage": 0,
+        "directLanded": 0,
+        "directCrits": 0,
+        "dps": 0,
+        "periodicDps": 0,
+        "directDps": 0,
+        "damagePerCast": 0,
+        "damagePerLandedEvent": null
+      },
+      {
+        "key": "player:amplify",
+        "name": "Amplify Curse",
+        "actor": "player",
+        "casts": 0,
+        "landed": 0,
+        "crits": 0,
+        "misses": 0,
+        "ticks": 0,
+        "tickCrits": 0,
+        "damage": 0,
+        "periodicDamage": 0,
+        "criticalDamage": 0,
+        "periodicCriticalDamage": 0,
+        "glances": 0,
+        "directDamage": 0,
+        "directLanded": 0,
+        "directCrits": 0,
+        "dps": 0,
+        "periodicDps": 0,
+        "directDps": 0,
+        "damagePerCast": null,
+        "damagePerLandedEvent": null
+      },
+      {
+        "key": "player:racial",
+        "name": "Eureka!",
+        "actor": "player",
+        "casts": 1,
+        "landed": 0,
+        "crits": 0,
+        "misses": 0,
+        "ticks": 0,
+        "tickCrits": 0,
+        "damage": 0,
+        "periodicDamage": 0,
+        "criticalDamage": 0,
+        "periodicCriticalDamage": 0,
+        "glances": 0,
+        "directDamage": 0,
+        "directLanded": 0,
+        "directCrits": 0,
+        "dps": 0,
+        "periodicDps": 0,
+        "directDps": 0,
+        "damagePerCast": 0,
+        "damagePerLandedEvent": null
+      }
+    ],
+    "totalDamage": 101798.5821078125,
+    "accountedDamage": 101798.59526005859,
+    "reconciliationError": 0.013152246086974628,
+    "resources": {
+      "manaSpent": 19873.60118359375,
+      "manaGained": 17085.038753125,
+      "manaWasted": 0,
+      "manaActualGain": 17085.038753125,
+      "manaEnd": 577.9455219499588,
+      "lifeTaps": 27.0188
+    },
+    "procs": {
+      "nightfall": 0,
+      "isbApplications": 0,
+      "isbConsumptions": 0
+    },
+    "uptimes": [
+      {
+        "name": "Corruption",
+        "fraction": 0.7680343953613095
+      },
+      {
+        "name": "Curse of Agony",
+        "fraction": 0.2925862623026122
+      },
+      {
+        "name": "Immolate",
+        "fraction": 0.7972102723736041
+      },
+      {
+        "name": "Siphon Life",
+        "fraction": 0
+      },
+      {
+        "name": "Curse of Doom",
+        "fraction": 0.6343333333333884
+      },
+      {
+        "name": "Improved Shadow Bolt",
+        "fraction": 0
+      },
+      {
+        "name": "Nightfall",
+        "fraction": 0
+      },
+      {
+        "name": "Trinket",
+        "fraction": 0
+      },
+      {
+        "name": "Racial buff",
+        "fraction": 0
+      },
+      {
+        "name": "Decimation",
+        "fraction": 0.33227044632635105
+      },
+      {
+        "name": "Shadow and Flame (shadow)",
+        "fraction": 0
+      },
+      {
+        "name": "Shadow and Flame (fire)",
+        "fraction": 0
+      }
+    ]
+  },
+  "petDps": 153.64216803819448,
+  "note": "Combat inputs transcribed from user export; the same Fire Brand APL is used. Literal exported encounter omits newer execute-phase fields, blocking the phase progression in this local Forever revision. The normal-execute reference supplies those fields explicitly. Forever retains 5s duration variation; GPU duration is fixed 180s. The observed user ~580 DPS has not been reproduced exactly.",
+  "renderer": "AMD Ryzen 9 9950X 16-Core Processor (radeonsi, raphael_mendocino, LLVM 20.1.2, DRM 3.64, 7.0.0-38-generic)",
+  "literalExportForever": 548.1060896368078,
+  "literalExportDelta": 17.441588739927624,
+  "normalExecutePhasesForever": 565.4975030276115,
+  "normalExecutePhasesDelta": 0.050175349123946944,
+  "referenceRevision": "86d0920cae8445eaa90de9c17c3583cf171c19c5",
+  "initialReferenceStats": [
+    40,
+    53,
+    118,
+    113,
+    0,
+    410,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    115,
+    30,
+    0,
+    0,
+    110,
+    104,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    676,
+    0,
+    2414,
+    3366.51,
+    70,
+    0,
+    0,
+    0,
+    0,
+    15,
+    0,
+    570
+  ],
+  "sourceSettings": {
+    "apiVersion": 2,
+    "raidBuffs": {},
+    "partyBuffs": {
+      "manaSpringTotem": "TristateEffectImproved"
+    },
+    "debuffs": {
+      "faerieFire": true,
+      "exposeArmor": true,
+      "sunderArmor": true,
+      "giftOfArthas": true
+    },
+    "player": {
+      "apiVersion": 2,
+      "name": "Player",
+      "race": "RaceGnome",
+      "class": "ClassWarlock",
+      "consumables": {
+        "foodId": 13931
+      },
+      "buffs": {
+        "greaterBlessingOfWisdom": true
+      },
+      "warlock": {
+        "options": {
+          "classOptions": {
+            "summon": "Imp",
+            "armor": "DemonArmor",
+            "soulShards": 32,
+            "sacrificedDemon": "Succubus"
+          }
+        }
+      },
+      "talentsString": "011-0305003201220301351-0050055003",
+      "profession1": "Engineering",
+      "profession2": "Tailoring",
+      "rotation": {
+        "type": "TypeAPL",
+        "priorityList": [
+          {
+            "action": {
+              "autocastOtherCooldowns": {}
+            }
+          },
+          {
+            "action": {
+              "condition": {
+                "or": {
+                  "vals": [
+                    {
+                      "and": {
+                        "vals": [
+                          {
+                            "dotIsActive": {
+                              "spellId": {
+                                "spellId": 603
+                              }
+                            }
+                          },
+                          {
+                            "cmp": {
+                              "op": "OpLe",
+                              "lhs": {
+                                "dotRemainingTime": {
+                                  "spellId": {
+                                    "spellId": 603
+                                  }
+                                }
+                              },
+                              "rhs": {
+                                "variableRef": {
+                                  "name": "Boost window"
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "and": {
+                        "vals": [
+                          {
+                            "not": {
+                              "val": {
+                                "dotIsActive": {
+                                  "spellId": {
+                                    "spellId": 603
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "cmp": {
+                              "op": "OpLt",
+                              "lhs": {
+                                "remainingTime": {}
+                              },
+                              "rhs": {
+                                "variableRef": {
+                                  "name": "Doom tick"
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              "groupReference": {
+                "groupName": "Boosts"
+              }
+            }
+          },
+          {
+            "action": {
+              "condition": {
+                "and": {
+                  "vals": [
+                    {
+                      "dotIsActive": {
+                        "spellId": {
+                          "spellId": 603
+                        }
+                      }
+                    },
+                    {
+                      "not": {
+                        "val": {
+                          "variableRef": {
+                            "name": "In execute"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "groupReference": {
+                "groupName": "Split Boosts"
+              }
+            }
+          },
+          {
+            "action": {
+              "condition": {
+                "and": {
+                  "vals": [
+                    {
+                      "not": {
+                        "val": {
+                          "dotIsActive": {
+                            "spellId": {
+                              "spellId": 603
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "cmp": {
+                        "op": "OpGe",
+                        "lhs": {
+                          "remainingTime": {}
+                        },
+                        "rhs": {
+                          "variableRef": {
+                            "name": "Doom tick"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "castSpell": {
+                "spellId": {
+                  "spellId": 603
+                }
+              }
+            }
+          },
+          {
+            "action": {
+              "condition": {
+                "not": {
+                  "val": {
+                    "auraIsActive": {
+                      "sourceUnit": {
+                        "type": "CurrentTarget"
+                      },
+                      "auraId": {
+                        "spellId": 1293696
+                      }
+                    }
+                  }
+                }
+              },
+              "castSpell": {
+                "spellId": {
+                  "spellId": 17923
+                }
+              }
+            }
+          },
+          {
+            "action": {
+              "condition": {
+                "and": {
+                  "vals": [
+                    {
+                      "not": {
+                        "val": {
+                          "dotIsActive": {
+                            "spellId": {
+                              "spellId": 603
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "not": {
+                        "val": {
+                          "dotIsActive": {
+                            "spellId": {
+                              "spellId": 11713
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "cmp": {
+                        "op": "OpLt",
+                        "lhs": {
+                          "remainingTime": {}
+                        },
+                        "rhs": {
+                          "variableRef": {
+                            "name": "Doom tick"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "castSpell": {
+                "spellId": {
+                  "spellId": 11713
+                }
+              }
+            }
+          },
+          {
+            "action": {
+              "condition": {
+                "not": {
+                  "val": {
+                    "dotIsActive": {
+                      "spellId": {
+                        "spellId": 25309
+                      }
+                    }
+                  }
+                }
+              },
+              "castSpell": {
+                "spellId": {
+                  "spellId": 25309
+                }
+              }
+            }
+          },
+          {
+            "action": {
+              "condition": {
+                "not": {
+                  "val": {
+                    "warlockAssignedCurseIsActive": {}
+                  }
+                }
+              },
+              "castWarlockAssignedCurse": {}
+            }
+          },
+          {
+            "action": {
+              "condition": {
+                "cmp": {
+                  "op": "OpLt",
+                  "lhs": {
+                    "currentMana": {
+                      "sourceUnit": {
+                        "type": "Pet",
+                        "index": 0,
+                        "owner": {
+                          "type": "Self"
+                        }
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "variableRef": {
+                      "name": "Firebolt cost"
+                    }
+                  }
+                }
+              },
+              "castSpell": {
+                "spellId": {
+                  "spellId": 11689
+                }
+              }
+            }
+          },
+          {
+            "action": {
+              "condition": {
+                "auraIsActive": {
+                  "auraId": {
+                    "spellId": 440873
+                  }
+                }
+              },
+              "groupReference": {
+                "groupName": "Split Boosts"
+              }
+            }
+          },
+          {
+            "action": {
+              "condition": {
+                "auraIsActive": {
+                  "auraId": {
+                    "spellId": 440873
+                  }
+                }
+              },
+              "castSpell": {
+                "spellId": {
+                  "spellId": 17924
+                }
+              }
+            }
+          },
+          {
+            "action": {
+              "condition": {
+                "not": {
+                  "val": {
+                    "dotIsActive": {
+                      "spellId": {
+                        "spellId": 25311
+                      }
+                    }
+                  }
+                }
+              },
+              "castSpell": {
+                "spellId": {
+                  "spellId": 25311
+                }
+              }
+            }
+          },
+          {
+            "action": {
+              "castSpell": {
+                "spellId": {
+                  "spellId": 17923
+                }
+              }
+            }
+          },
+          {
+            "action": {
+              "castSpell": {
+                "spellId": {
+                  "spellId": 11689
+                }
+              }
+            }
+          }
+        ],
+        "groups": [
+          {
+            "name": "Boosts",
+            "actions": [
+              {
+                "action": {
+                  "castSpell": {
+                    "spellId": {
+                      "spellId": 20572
+                    }
+                  }
+                }
+              },
+              {
+                "action": {
+                  "castSpell": {
+                    "spellId": {
+                      "itemId": 250937
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "Split Boosts",
+            "actions": [
+              {
+                "action": {
+                  "condition": {
+                    "or": {
+                      "vals": [
+                        {
+                          "variableRef": {
+                            "name": "In execute"
+                          }
+                        },
+                        {
+                          "cmp": {
+                            "op": "OpGe",
+                            "lhs": {
+                              "variableRef": {
+                                "name": "Time to execute"
+                              }
+                            },
+                            "rhs": {
+                              "const": {
+                                "val": "3m"
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "castSpell": {
+                    "spellId": {
+                      "spellId": 20554
+                    }
+                  }
+                }
+              },
+              {
+                "action": {
+                  "condition": {
+                    "or": {
+                      "vals": [
+                        {
+                          "variableRef": {
+                            "name": "In execute"
+                          }
+                        },
+                        {
+                          "cmp": {
+                            "op": "OpGe",
+                            "lhs": {
+                              "variableRef": {
+                                "name": "Time to execute"
+                              }
+                            },
+                            "rhs": {
+                              "const": {
+                                "val": "2m"
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "castSpell": {
+                    "spellId": {
+                      "spellId": 1259821
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "valueVariables": [
+          {
+            "name": "Execute at",
+            "value": {
+              "const": {
+                "val": "35%"
+              }
+            }
+          },
+          {
+            "name": "Time to execute",
+            "value": {
+              "math": {
+                "op": "OpSub",
+                "lhs": {
+                  "remainingTime": {}
+                },
+                "rhs": {
+                  "math": {
+                    "op": "OpMul",
+                    "lhs": {
+                      "math": {
+                        "op": "OpAdd",
+                        "lhs": {
+                          "currentTime": {}
+                        },
+                        "rhs": {
+                          "remainingTime": {}
+                        }
+                      }
+                    },
+                    "rhs": {
+                      "variableRef": {
+                        "name": "Execute at"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "name": "In execute",
+            "value": {
+              "cmp": {
+                "op": "OpLe",
+                "lhs": {
+                  "variableRef": {
+                    "name": "Time to execute"
+                  }
+                },
+                "rhs": {
+                  "const": {
+                    "val": "0s"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "name": "Doom tick",
+            "value": {
+              "const": {
+                "val": "60s"
+              }
+            }
+          },
+          {
+            "name": "Boost window",
+            "value": {
+              "const": {
+                "val": "14s"
+              }
+            }
+          },
+          {
+            "name": "Firebolt cost",
+            "value": {
+              "const": {
+                "val": "115"
+              }
+            }
+          }
+        ]
+      },
+      "distanceFromTarget": 20,
+      "equipment": {
+        "items": [
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {}
+        ]
+      },
+      "bonusStats": {
+        "apiVersion": 2,
+        "stats": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          328,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          110,
+          104,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "pseudoStats": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "reactionTimeMs": 100,
+      "cooldowns": {},
+      "healingModel": {}
+    },
+    "encounter": {
+      "apiVersion": 2,
+      "duration": 180,
+      "durationVariation": 5,
+      "executeProportion20": 0.2,
+      "executeProportion35": 0.35,
+      "targets": [
+        {
+          "id": 31146,
+          "name": "Raid Target",
+          "level": 63,
+          "mobType": "MobTypeMechanical",
+          "stats": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            320,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            54,
+            0,
+            0,
+            3731,
+            0,
+            1428900,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "minBaseDamage": 2601,
+          "damageSpread": 0.5,
+          "swingSpeed": 2,
+          "parryHaste": true,
+          "canCrush": true
+        }
+      ]
+    }
+  },
+  "normalExecutePhaseAdditions": {
+    "executeProportion25": 0.25,
+    "executeProportion45": 0.45,
+    "executeProportion90": 0.9
+  }
+}

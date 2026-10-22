@@ -25,6 +25,14 @@ Current production result (2026-10-20): **MAE 1.945 DPS / MAPE 0.289%**, 300/300
 
 Updated: **2026-10-20**. Active configurations are **gear-free**. Gear, enchants, sets and item procs will return as a separate integration phase.
 
+## Fast-mode throughput regression investigation
+
+- [ ] Reproduce browser fast-mode throughput at the three user-reported checkpoints using the same browser/device, scenario, fight count, warmup, and tracing setting; capture the generated shader, fast-state word count, and event count for each run.
+- [ ] Bisect the drop from `c3e79f53206e20c1b39ff0510fa8709563337dfe` (~550k fights/s) to `a0255f586f1dc9976b51252180dc209fe33a1cc3` (~400k), then the partial recovery at `1ac4e55d6d469f9d69e0577145cc2dc8f78f8d47` (~450k). These are user-reported browser measurements; benchmark settings and environment are not yet recorded.
+- [ ] Separate shader/runtime costs from app configuration, detailed-result tracing, WebGL compilation/cache state, and browser/GPU variability before attributing the regression to a particular feature.
+
+Initial read: the c3→a025 interval changes the combat kernel and model substantially (kernel: 159 changed lines; model and engine also change), so there is enough scope for a real workload regression. The a025→1ac interval also changes kernel/model code and could explain some recovery. Existing diffs mix correctness fixes, new event/state behavior, and fast/detailed paths; code volume alone does not identify the cause. Browser runs must be matched before concluding that the observed 550k→400k change is purely from kernel work.
+
 ## Current configuration contract
 
 - All 115 built-in app presets declare direct bonus stats and empty equipment. Gear selection is disabled, and startup no longer fetches a gear catalog or preloads BiS items.
