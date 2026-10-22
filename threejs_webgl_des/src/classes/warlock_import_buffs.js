@@ -88,7 +88,9 @@ export function resolveWarlockBuffEffects(stats, buffs, race, target, pet = 'non
   let shadowMult = allDamageMult;
   let fireMult = allDamageMult;
 
-  if (isCurseOfShadow) shadowMult *= 1.10;
+  // CoE covers all modeled magic damage, so CoS adds no second 10% when both
+  // curses are active. They still share the resistance reduction below.
+  if (isCurseOfShadow && !isCurseOfElements) shadowMult *= 1.10;
   if (isCurseOfElements) {
     shadowMult *= 1.10;
     fireMult *= 1.10;

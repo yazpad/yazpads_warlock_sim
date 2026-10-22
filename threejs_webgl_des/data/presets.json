@@ -4775,7 +4775,7 @@
     "rotation": "Demonology Fire - Searing Pain + Decimation",
     "pet": "imp",
     "sac": "succubus",
-    "aplText": "decimate_soul_fire if decimation.active\nbane_of_doom if target_ttd >= 61s\nsearing_pain if target_hp <= 12%\ndemonic_brand if debuff.demonic_brand_missing\nimmolate if dot_remains(\"Immolate\") <= 1.6s\ncorruption if dot_remains(\"Corruption\") <= 2.1s\nlife_tap if mana_remaining <= 41%\nbane_of_agony if !target.has_debuff(\"Bane of Doom\") && target.debuff_remains(\"Bane of Agony\") <= 0",
+    "aplText": "spellblasting if target.debuff_remains(\"Bane of Doom\") > 0 && target.debuff_remains(\"Bane of Doom\") <= 14\nspellblasting if target.debuff_remains(\"Bane of Doom\") <= 0 && target_ttd < 60\ndecimate_soul_fire if decimation.active\nbane_of_doom if target_ttd >= 61s\nsearing_pain if target_hp <= 12%\ndemonic_brand if debuff.demonic_brand_missing\nimmolate if dot_remains(\"Immolate\") <= 1.6s\ncorruption if dot_remains(\"Corruption\") <= 2.1s\nlife_tap if mana_remaining <= 41%\nbane_of_agony if !target.has_debuff(\"Bane of Doom\") && target.debuff_remains(\"Bane of Agony\") <= 0",
     "gearMode": "direct",
     "gear": {},
     "stats": {
@@ -4827,7 +4827,7 @@
     "rotation": "Demonology Fire - Searing Pain + Decimation",
     "pet": "imp",
     "sac": "succubus",
-    "aplText": "decimate_soul_fire if decimation.active\nbane_of_doom if target_ttd >= 61s\nsearing_pain if target_hp <= 12%\ndemonic_brand if debuff.demonic_brand_missing\nimmolate if dot_remains(\"Immolate\") <= 1.6s\ncorruption if dot_remains(\"Corruption\") <= 2.1s\nlife_tap if mana_remaining <= 41%\nbane_of_agony if !target.has_debuff(\"Bane of Doom\") && target.debuff_remains(\"Bane of Agony\") <= 0",
+    "aplText": "spellblasting if target.debuff_remains(\"Bane of Doom\") > 0 && target.debuff_remains(\"Bane of Doom\") <= 14\nspellblasting if target.debuff_remains(\"Bane of Doom\") <= 0 && target_ttd < 60\ndecimate_soul_fire if decimation.active\nbane_of_doom if target_ttd >= 61s\nsearing_pain if target_hp <= 12%\ndemonic_brand if debuff.demonic_brand_missing\nimmolate if dot_remains(\"Immolate\") <= 1.6s\ncorruption if dot_remains(\"Corruption\") <= 2.1s\nlife_tap if mana_remaining <= 41%\nbane_of_agony if !target.has_debuff(\"Bane of Doom\") && target.debuff_remains(\"Bane of Agony\") <= 0",
     "gearMode": "direct",
     "gear": {},
     "stats": {
@@ -4879,7 +4879,7 @@
     "rotation": "Demonology Fire - Searing Pain + Decimation",
     "pet": "imp",
     "sac": "succubus",
-    "aplText": "decimate_soul_fire if decimation.active\nbane_of_doom if target_ttd >= 61s\nsearing_pain if target_hp <= 12%\ndemonic_brand if debuff.demonic_brand_missing\nimmolate if dot_remains(\"Immolate\") <= 1.6s\ncorruption if dot_remains(\"Corruption\") <= 2.1s\nlife_tap if mana_remaining <= 41%\nbane_of_agony if !target.has_debuff(\"Bane of Doom\") && target.debuff_remains(\"Bane of Agony\") <= 0",
+    "aplText": "spellblasting if target.debuff_remains(\"Bane of Doom\") > 0 && target.debuff_remains(\"Bane of Doom\") <= 14\nspellblasting if target.debuff_remains(\"Bane of Doom\") <= 0 && target_ttd < 60\ndecimate_soul_fire if decimation.active\nbane_of_doom if target_ttd >= 61s\nsearing_pain if target_hp <= 12%\ndemonic_brand if debuff.demonic_brand_missing\nimmolate if dot_remains(\"Immolate\") <= 1.6s\ncorruption if dot_remains(\"Corruption\") <= 2.1s\nlife_tap if mana_remaining <= 41%\nbane_of_agony if !target.has_debuff(\"Bane of Doom\") && target.debuff_remains(\"Bane of Agony\") <= 0",
     "gearMode": "direct",
     "gear": {},
     "stats": {
@@ -4931,7 +4931,7 @@
     "rotation": "Demonology Fire - Searing Pain + Decimation",
     "pet": "imp",
     "sac": "succubus",
-    "aplText": "decimate_soul_fire if decimation.active\nbane_of_doom if target_ttd >= 61s\nsearing_pain if target_hp <= 12%\ndemonic_brand if debuff.demonic_brand_missing\nimmolate if dot_remains(\"Immolate\") <= 1.6s\ncorruption if dot_remains(\"Corruption\") <= 2.1s\nlife_tap if mana_remaining <= 41%\nbane_of_agony if !target.has_debuff(\"Bane of Doom\") && target.debuff_remains(\"Bane of Agony\") <= 0",
+    "aplText": "spellblasting if target.debuff_remains(\"Bane of Doom\") > 0 && target.debuff_remains(\"Bane of Doom\") <= 14\nspellblasting if target.debuff_remains(\"Bane of Doom\") <= 0 && target_ttd < 60\ndecimate_soul_fire if decimation.active\nbane_of_doom if target_ttd >= 61s\nsearing_pain if target_hp <= 12%\ndemonic_brand if debuff.demonic_brand_missing\nimmolate if dot_remains(\"Immolate\") <= 1.6s\ncorruption if dot_remains(\"Corruption\") <= 2.1s\nlife_tap if mana_remaining <= 41%\nbane_of_agony if !target.has_debuff(\"Bane of Doom\") && target.debuff_remains(\"Bane of Agony\") <= 0",
     "gearMode": "direct",
     "gear": {},
     "stats": {
@@ -4983,7 +4983,7 @@
     "rotation": "Demonology Fire - Searing Pain + Decimation",
     "pet": "imp",
     "sac": "succubus",
-    "aplText": "decimate_soul_fire if decimation.active\nbane_of_doom if target_ttd >= 61s\nsearing_pain if target_hp <= 12%\ndemonic_brand if debuff.demonic_brand_missing\nimmolate if dot_remains(\"Immolate\") <= 1.6s\ncorruption if dot_remains(\"Corruption\") <= 2.1s\nlife_tap if mana_remaining <= 41%\nbane_of_agony if !target.has_debuff(\"Bane of Doom\") && target.debuff_remains(\"Bane of Agony\") <= 0",
+    "aplText": "spellblasting if target.debuff_remains(\"Bane of Doom\") > 0 && target.debuff_remains(\"Bane of Doom\") <= 14\nspellblasting if target.debuff_remains(\"Bane of Doom\") <= 0 && target_ttd < 60\ndecimate_soul_fire if decimation.active\nbane_of_doom if target_ttd >= 61s\nsearing_pain if target_hp <= 12%\ndemonic_brand if debuff.demonic_brand_missing\nimmolate if dot_remains(\"Immolate\") <= 1.6s\ncorruption if dot_remains(\"Corruption\") <= 2.1s\nlife_tap if mana_remaining <= 41%\nbane_of_agony if !target.has_debuff(\"Bane of Doom\") && target.debuff_remains(\"Bane of Agony\") <= 0",
     "gearMode": "direct",
     "gear": {},
     "stats": {
@@ -5032,7 +5032,7 @@
       }
     },
     "rotation": "Demonology Fire - Searing Pain + Decimation",
-    "aplText": "bane_of_doom if target_ttd >= 60 && !target.has_debuff(\"Bane of Doom\")\ndemonic_brand if debuff.demonic_brand_missing\ncorruption if target_ttd >= 12 && target.debuff_remains(\"Corruption\") <= 0\nimmolate if target_ttd >= 12 && target.debuff_remains(\"Immolate\") <= 0\nbane_of_agony if !target.has_debuff(\"Bane of Doom\") && target.debuff_remains(\"Bane of Agony\") <= 0\nshadow_bolt\ndecimate_soul_fire if decimation.active\ndecimate_searing if target_hp_pct <= 35 && decimation.inactive\nhellfire if target_ttd >= 15s\nlife_tap if mana_remaining <= 20%\nsearing_pain",
+    "aplText": "spellblasting if target.debuff_remains(\"Bane of Doom\") > 0 && target.debuff_remains(\"Bane of Doom\") <= 14\nspellblasting if target.debuff_remains(\"Bane of Doom\") <= 0 && target_ttd < 60\nbane_of_doom if target_ttd >= 60 && !target.has_debuff(\"Bane of Doom\")\ndemonic_brand if debuff.demonic_brand_missing\ncorruption if target_ttd >= 12 && target.debuff_remains(\"Corruption\") <= 0\nimmolate if target_ttd >= 12 && target.debuff_remains(\"Immolate\") <= 0\nbane_of_agony if !target.has_debuff(\"Bane of Doom\") && target.debuff_remains(\"Bane of Agony\") <= 0\nshadow_bolt\ndecimate_soul_fire if decimation.active\ndecimate_searing if target_hp_pct <= 35 && decimation.inactive\nhellfire if target_ttd >= 15s\nlife_tap if mana_remaining <= 20%\nsearing_pain",
     "gearMode": "direct",
     "gear": {},
     "stats": {
@@ -5081,7 +5081,7 @@
       }
     },
     "rotation": "Demonology Fire - Searing Pain + Decimation",
-    "aplText": "bane_of_doom if target_ttd >= 60 && !target.has_debuff(\"Bane of Doom\")\ndemonic_brand if debuff.demonic_brand_missing\ncorruption if target_ttd >= 12 && target.debuff_remains(\"Corruption\") <= 0\nimmolate if target_ttd >= 12 && target.debuff_remains(\"Immolate\") <= 0\nbane_of_agony if !target.has_debuff(\"Bane of Doom\") && target.debuff_remains(\"Bane of Agony\") <= 0\nshadow_bolt\ndecimate_soul_fire if decimation.active\ndecimate_searing if target_hp_pct <= 35 && decimation.inactive\nhellfire if target_ttd >= 15s\nlife_tap if mana_remaining <= 20%\nsearing_pain",
+    "aplText": "spellblasting if target.debuff_remains(\"Bane of Doom\") > 0 && target.debuff_remains(\"Bane of Doom\") <= 14\nspellblasting if target.debuff_remains(\"Bane of Doom\") <= 0 && target_ttd < 60\nbane_of_doom if target_ttd >= 60 && !target.has_debuff(\"Bane of Doom\")\ndemonic_brand if debuff.demonic_brand_missing\ncorruption if target_ttd >= 12 && target.debuff_remains(\"Corruption\") <= 0\nimmolate if target_ttd >= 12 && target.debuff_remains(\"Immolate\") <= 0\nbane_of_agony if !target.has_debuff(\"Bane of Doom\") && target.debuff_remains(\"Bane of Agony\") <= 0\nshadow_bolt\ndecimate_soul_fire if decimation.active\ndecimate_searing if target_hp_pct <= 35 && decimation.inactive\nhellfire if target_ttd >= 15s\nlife_tap if mana_remaining <= 20%\nsearing_pain",
     "gearMode": "direct",
     "gear": {},
     "stats": {
@@ -5130,7 +5130,7 @@
       }
     },
     "rotation": "Demonology Fire - Searing Pain + Decimation",
-    "aplText": "bane_of_doom if target_ttd >= 60 && !target.has_debuff(\"Bane of Doom\")\ndemonic_brand if debuff.demonic_brand_missing\ncorruption if target_ttd >= 12 && target.debuff_remains(\"Corruption\") <= 0\nimmolate if target_ttd >= 12 && target.debuff_remains(\"Immolate\") <= 0\nbane_of_agony if !target.has_debuff(\"Bane of Doom\") && target.debuff_remains(\"Bane of Agony\") <= 0\nshadow_bolt\ndecimate_soul_fire if decimation.active\ndecimate_searing if target_hp_pct <= 35 && decimation.inactive\nhellfire if target_ttd >= 15s\nlife_tap if mana_remaining <= 20%\nsearing_pain",
+    "aplText": "spellblasting if target.debuff_remains(\"Bane of Doom\") > 0 && target.debuff_remains(\"Bane of Doom\") <= 14\nspellblasting if target.debuff_remains(\"Bane of Doom\") <= 0 && target_ttd < 60\nbane_of_doom if target_ttd >= 60 && !target.has_debuff(\"Bane of Doom\")\ndemonic_brand if debuff.demonic_brand_missing\ncorruption if target_ttd >= 12 && target.debuff_remains(\"Corruption\") <= 0\nimmolate if target_ttd >= 12 && target.debuff_remains(\"Immolate\") <= 0\nbane_of_agony if !target.has_debuff(\"Bane of Doom\") && target.debuff_remains(\"Bane of Agony\") <= 0\nshadow_bolt\ndecimate_soul_fire if decimation.active\ndecimate_searing if target_hp_pct <= 35 && decimation.inactive\nhellfire if target_ttd >= 15s\nlife_tap if mana_remaining <= 20%\nsearing_pain",
     "gearMode": "direct",
     "gear": {},
     "stats": {
@@ -5179,7 +5179,7 @@
       }
     },
     "rotation": "Demonology Fire - Searing Pain + Decimation",
-    "aplText": "bane_of_doom if target_ttd >= 60 && !target.has_debuff(\"Bane of Doom\")\ndemonic_brand if debuff.demonic_brand_missing\ncorruption if target_ttd >= 12 && target.debuff_remains(\"Corruption\") <= 0\nimmolate if target_ttd >= 12 && target.debuff_remains(\"Immolate\") <= 0\nbane_of_agony if !target.has_debuff(\"Bane of Doom\") && target.debuff_remains(\"Bane of Agony\") <= 0\nshadow_bolt\ndecimate_soul_fire if decimation.active\ndecimate_searing if target_hp_pct <= 35 && decimation.inactive\nhellfire if target_ttd >= 15s\nlife_tap if mana_remaining <= 20%\nsearing_pain",
+    "aplText": "spellblasting if target.debuff_remains(\"Bane of Doom\") > 0 && target.debuff_remains(\"Bane of Doom\") <= 14\nspellblasting if target.debuff_remains(\"Bane of Doom\") <= 0 && target_ttd < 60\nbane_of_doom if target_ttd >= 60 && !target.has_debuff(\"Bane of Doom\")\ndemonic_brand if debuff.demonic_brand_missing\ncorruption if target_ttd >= 12 && target.debuff_remains(\"Corruption\") <= 0\nimmolate if target_ttd >= 12 && target.debuff_remains(\"Immolate\") <= 0\nbane_of_agony if !target.has_debuff(\"Bane of Doom\") && target.debuff_remains(\"Bane of Agony\") <= 0\nshadow_bolt\ndecimate_soul_fire if decimation.active\ndecimate_searing if target_hp_pct <= 35 && decimation.inactive\nhellfire if target_ttd >= 15s\nlife_tap if mana_remaining <= 20%\nsearing_pain",
     "gearMode": "direct",
     "gear": {},
     "stats": {
@@ -5228,7 +5228,7 @@
       }
     },
     "rotation": "Demonology Fire - Searing Pain + Decimation",
-    "aplText": "bane_of_doom if target_ttd >= 60 && !target.has_debuff(\"Bane of Doom\")\ndemonic_brand if debuff.demonic_brand_missing\ncorruption if target_ttd >= 12 && target.debuff_remains(\"Corruption\") <= 0\nimmolate if target_ttd >= 12 && target.debuff_remains(\"Immolate\") <= 0\nbane_of_agony if !target.has_debuff(\"Bane of Doom\") && target.debuff_remains(\"Bane of Agony\") <= 0\nshadow_bolt\ndecimate_soul_fire if decimation.active\ndecimate_searing if target_hp_pct <= 35 && decimation.inactive\nhellfire if target_ttd >= 15s\nlife_tap if mana_remaining <= 20%\nsearing_pain",
+    "aplText": "spellblasting if target.debuff_remains(\"Bane of Doom\") > 0 && target.debuff_remains(\"Bane of Doom\") <= 14\nspellblasting if target.debuff_remains(\"Bane of Doom\") <= 0 && target_ttd < 60\nbane_of_doom if target_ttd >= 60 && !target.has_debuff(\"Bane of Doom\")\ndemonic_brand if debuff.demonic_brand_missing\ncorruption if target_ttd >= 12 && target.debuff_remains(\"Corruption\") <= 0\nimmolate if target_ttd >= 12 && target.debuff_remains(\"Immolate\") <= 0\nbane_of_agony if !target.has_debuff(\"Bane of Doom\") && target.debuff_remains(\"Bane of Agony\") <= 0\nshadow_bolt\ndecimate_soul_fire if decimation.active\ndecimate_searing if target_hp_pct <= 35 && decimation.inactive\nhellfire if target_ttd >= 15s\nlife_tap if mana_remaining <= 20%\nsearing_pain",
     "gearMode": "direct",
     "gear": {},
     "stats": {

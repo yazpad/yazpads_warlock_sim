@@ -1244,6 +1244,12 @@ input[type="checkbox"]:checked::after {
   color: var(--text-parchment);
 }
 
+.buff-item-row:has(input:disabled) {
+  color: var(--text-dim);
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
 .buff-item-row img {
   width: 22px;
   height: 22px;

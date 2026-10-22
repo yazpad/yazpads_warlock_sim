@@ -1,4 +1,4 @@
-const CACHE_NAME = 'warlock-sim-v100';
+const CACHE_NAME = 'warlock-sim-v102';
 const ASSETS = [
   './src/classes/warlock_comparison.js',
   './src/classes/warlock_defaults.js',

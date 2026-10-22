@@ -3,6 +3,7 @@ import { renderDetailedResults } from './detailed_results.js';
 import { initPriestPreview } from './priest_preview.js';
 import { resolveWarlockBuffEffects } from './classes/warlock_import_buffs.js';
 import { FOREVER_DEFAULT_BUILD, FOREVER_DEFAULT_PRESET, FOREVER_PRESETS, WARLOCK_RUNTIME_KEYS } from './classes/warlock_defaults.js';
+import { loadForeverComparisonPresets } from './classes/warlock_comparison.js';
 import { migrateLegacyBuild } from './contracts/legacy_build.js';
 import { WARLOCK_IMPORT_BUFF_KEYS } from './classes/warlock_import.js';
 import { addWarlockBaseStats, warlockBaseResources } from './classes/warlock_base_stats.js';
@@ -574,6 +575,10 @@ export async function applyImportedBuild(input) {
       }
     }
   }
+  for (const key of ['shadowWeaving', 'improvedScorch']) {
+    const el = form.elements.namedItem(key);
+    if (el && el.type === 'checkbox') el.checked = false;
+  }
 
   if (payload.target) {
     if ($('target-level') && payload.target.level !== undefined) $('target-level').value = payload.target.level;
@@ -998,6 +1003,14 @@ function render(result) {
 // Full Preset Loader Function
 export async function loadFullPreset(preset) {
   if (!preset) return;
+  if(preset.useCurrentConfig){
+    importedConfig=null;
+    applyTalentsObject(preset.talents);
+    setAPLFromText(preset.aplText);
+    updateCombatStatsSummary();
+    setStatus(`Loaded ${preset.name} talents and APL using the current configuration.`);
+    return;
+  }
   if(preset.build){
     try{await applyImportedBuild(preset.build);if($('talent-preset-select'))$('talent-preset-select').value=preset.id;setStatus(`Loaded ${preset.name}: complete build with original stats, buffs, consumables and rotation.`);}
     catch(error){setStatus(error.message,true);}
@@ -1061,7 +1074,14 @@ function getActiveStatsConfig() {
   const penetration = Number(form.elements.namedItem('penetration')?.value || 0);
   const tapThreshold = Number(form.elements.namedItem('tapThreshold')?.value || 25);
   return {
+    ...Object.fromEntries(Object.entries(DEFAULTS).map(([key,value])=>{
+      const input=form.elements.namedItem(key);
+      return [key,!input?value:typeof value==='boolean'?(input.type==='checkbox'?input.checked:input.value==='true'):typeof value==='number'?Number(input.value):input.value];
+    })),
     ...readRuntimeSettings(),
+    petChoice: activePet,
+    sacrifice: activeDS,
+    rotation: activeRotation,
     seed: importedConfig?.seed ?? Number(form.elements.namedItem('seed')?.value ?? DEFAULTS.seed),
     externalElements: !!form.elements.namedItem('curseOfElements')?.checked,
     judgementOfWisdom: eff.judgementOfWisdom, giftOfArthas: eff.giftOfArthas,
@@ -1110,10 +1130,11 @@ async function populateTalentPresetsDropdown() {
   const select = $('talent-preset-select');
   if (!select) return;
   const presets = (await getPresets()) || [];
+  const foreverPresets = await loadForeverComparisonPresets();
 
   select.innerHTML = '<option value="">Load Preset…</option>';
   const foreverGroup = document.createElement('optgroup');
-  foreverGroup.label = 'Forever defaults (full builds)';
+  foreverGroup.label = 'WoWSims Forever (talents + APL)';
   for (const preset of FOREVER_PRESETS) {
     const option = document.createElement('option');
     option.value = preset.id;
@@ -1142,10 +1163,8 @@ async function populateTalentPresetsDropdown() {
     if (!val) return;
     const foreverPreset = FOREVER_PRESETS.find(preset => preset.id === val);
     if (foreverPreset) {
-      try {
-        await applyImportedBuild(foreverPreset.build);
-        setStatus(`Loaded ${foreverPreset.name}: complete build with original stats, buffs, consumables and rotation.`);
-      } catch (error) { setStatus(error.message, true); }
+      const resolvedPreset = foreverPresets.find(preset => preset.id === val);
+      if (resolvedPreset) loadFullPreset(resolvedPreset);
       return;
     }
     const found = presets.find(p => String(p.id) === String(val) || p.name === val);
@@ -1179,7 +1198,7 @@ const presetsReady = initPresets((selectedPreset) => {
   loadFullPreset(selectedPreset);
   // Switch to Current Configuration tab
   switchTab('btn-current-build');
-}, () => activeRace);
+}, () => activeRace, () => ({pet:activePet,sac:activeDS}));
 
 $('btn-batch-sim')?.addEventListener('click', async (e) => {
   e?.preventDefault();
@@ -1478,12 +1497,30 @@ initTooltips();
 setupInteractiveSlots();
 updateRacialsDisplay();
 updateCombatStatsSummary();
+function applyDirectStatDefaults() {
+  setRace('HUMAN');
+  const stats = { spellPower: 400, hit: 10, crit: 10, intellect: 100, stamina: 100, spirit: 100 };
+  for (const [key, value] of Object.entries(stats)) {
+    const input = $(`in-${key}`);
+    if (input) input.value = value;
+  }
+  const curseOfShadow = form.elements.namedItem('curseOfShadow');
+  if (curseOfShadow) curseOfShadow.checked = false;
+  const curseOfElements = form.elements.namedItem('curseOfElements');
+  if (curseOfElements) curseOfElements.checked = true;
+  for (const key of ['curseOfShadow', 'shadowWeaving', 'improvedScorch']) {
+    const input = form.elements.namedItem(key);
+    if (input) input.checked = false;
+  }
+  updateCombatStatsSummary();
+}
 // Wait for talent data before applying the default's ranks and APL.
 if ($('run')) $('run').disabled = true;
 export const startupReady = Promise.all([talentsReady, presetsReady]).then(async ([talentData]) => {
   if (!talentData) throw new Error('Talent data did not load.');
   await populateTalentPresetsDropdown();
   await applyImportedBuild(FOREVER_DEFAULT_BUILD);
+  applyDirectStatDefaults();
   if ($('talent-preset-select')) $('talent-preset-select').value = FOREVER_DEFAULT_PRESET.id;
   setStatus('Forever default: Demo (Fire Brand), Orc, no equipment. Ready to simulate.');
   if ($('run')) $('run').disabled = !capable;
@@ -1492,6 +1529,7 @@ export const startupReady = Promise.all([talentsReady, presetsReady]).then(async
 $('btn-forever-defaults')?.addEventListener('click', async () => {
   try {
     await applyImportedBuild(FOREVER_DEFAULT_BUILD);
+    applyDirectStatDefaults();
     if ($('talent-preset-select')) $('talent-preset-select').value = FOREVER_DEFAULT_PRESET.id;
     setStatus('Restored Forever default: Demo (Fire Brand).');
   } catch (error) { setStatus(error.message, true); }

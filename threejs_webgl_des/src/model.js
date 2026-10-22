@@ -81,7 +81,7 @@ export const MAX_APL_RULES = 32;
 
 export const DEFAULTS = Object.freeze({
   race: 'HUMAN', swordEquipped: true, racialPolicy: 'execute', targetIsBeast: false, maxHealth: 0, statsIncludeBase: false, duration: 180, iterations: 4096, seed: 42, rotation: 'shadow',
-  spellPower: 500, shadowPower: 0, firePower: 0, intellect: 200, stamina: 220, spirit: 100, hit: 12, crit: 15, mp5: 20,
+  spellPower: 400, shadowPower: 0, firePower: 0, intellect: 100, stamina: 100, spirit: 100, hit: 10, crit: 10, mp5: 0,
   channelClipDelayMs: 0, resistance: 0, penetration: 0, tapThreshold: 25, bossArmor: 3731,
   autoCooldowns: false, book: false, charges: false, partialResists: true, piercing: true,
   corruption: true, agony: true, immolate: false, instantCorruption: true,

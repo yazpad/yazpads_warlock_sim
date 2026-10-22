@@ -159,11 +159,10 @@
 
                 <!-- Direct Stats View -->
                 <div id="direct-stats-view" data-shared-panel="direct-stats">
-                  <p class="muted">Enter bonus stats above racial and class base stats, before buffs and talents. These checked-in Forever presets have empty equipment and zero bonus stats. Imported Forever setups can also include bonus stats; enter those here when configuring manually.</p>
                   <div class="direct-stats-grid">
                     <div class="stat-field">
                       <label>Spell Power</label>
-                      <input class="wow-input" name="spellPower" id="in-spellPower" type="number" min="0" max="10000" value="0" required>
+                      <input class="wow-input" name="spellPower" id="in-spellPower" type="number" min="0" max="10000" value="400" required>
                     </div>
                     <div class="stat-field">
                       <label>Shadow Power</label>
@@ -175,11 +174,11 @@
                     </div>
                     <div class="stat-field">
                       <label>Spell Hit %</label>
-                      <input class="wow-input" name="hit" id="in-hit" type="number" min="0" max="100" value="0" step="any" required>
+                      <input class="wow-input" name="hit" id="in-hit" type="number" min="0" max="100" value="10" step="any" required>
                     </div>
                     <div class="stat-field">
                       <label>Spell Crit %</label>
-                      <input class="wow-input" name="crit" id="in-crit" type="number" min="0" max="100" value="0" step="any" required>
+                      <input class="wow-input" name="crit" id="in-crit" type="number" min="0" max="100" value="10" step="any" required>
                     </div>
                     <div class="stat-field">
                       <label>Spell Haste %</label>
@@ -187,15 +186,15 @@
                     </div>
                     <div class="stat-field">
                       <label>Intellect</label>
-                      <input class="wow-input" name="intellect" id="in-intellect" type="number" min="0" max="5000" value="0" required>
+                      <input class="wow-input" name="intellect" id="in-intellect" type="number" min="0" max="5000" value="100" required>
                     </div>
                     <div class="stat-field">
                       <label>Stamina</label>
-                      <input class="wow-input" name="stamina" id="in-stamina" type="number" min="0" max="5000" value="0">
+                      <input class="wow-input" name="stamina" id="in-stamina" type="number" min="0" max="5000" value="100">
                     </div>
                     <div class="stat-field">
                       <label>Spirit</label>
-                      <input class="wow-input" name="spirit" id="in-spirit" type="number" min="0" max="5000" value="0" required>
+                      <input class="wow-input" name="spirit" id="in-spirit" type="number" min="0" max="5000" value="100" required>
                     </div>
                     <div class="stat-field">
                       <label>MP5</label>
@@ -439,22 +438,22 @@
                 <div class="accordion-body">
                   <div class="buff-items-list">
                     <label class="wow-checkbox-label buff-item-row">
-                      <input type="checkbox" name="curseOfShadow">
+                      <input type="checkbox" name="curseOfShadow" disabled>
                       <img src="./assets/icons/Spell_Shadow_CurseOfAchimonde.png" alt="Curse of Shadows">
                       <span>Curse of Shadows (+10% Shadow/Arcane Dmg, -75 Resist)</span>
                     </label>
                     <label class="wow-checkbox-label buff-item-row">
-                      <input type="checkbox" name="curseOfElements">
+                      <input type="checkbox" name="curseOfElements" checked>
                       <img src="./assets/icons/Spell_Fire_LavaSpawn.png" alt="Curse of the Elements">
-                      <span>Curse of the Elements (+10% Fire/Frost Dmg, -75 Resist)</span>
+                      <span>Curse of the Elements (+10% Magic Dmg, -75 Resist)</span>
                     </label>
                     <label class="wow-checkbox-label buff-item-row">
-                      <input type="checkbox" name="shadowWeaving">
+                      <input type="checkbox" name="shadowWeaving" disabled>
                       <img src="./assets/icons/Spell_Shadow_BlackPlague.png" alt="Shadow Weaving">
                       <span>Shadow Weaving 5/5 (+15% Shadow Dmg)</span>
                     </label>
                     <label class="wow-checkbox-label buff-item-row">
-                      <input type="checkbox" name="improvedScorch">
+                      <input type="checkbox" name="improvedScorch" disabled>
                       <img src="./assets/icons/Spell_Fire_SoulBurn.png" alt="Improved Scorch">
                       <span>Improved Scorch 5/5 (+15% Fire Dmg)</span>
                     </label>
@@ -707,7 +706,6 @@
         </div>
       </section>
 
-      <p id="compare-preset-note" style="font-size:0.8rem; margin:0.4rem 0;">Our specs use current stats and buffs. Rows labeled Forever use their saved complete builds. All rows use the current fight duration.</p>
       <!-- SPECS BASE STATS SUBHEADER BAR -->
       <div class="specs-stats-subheader-bar">
         <div class="specs-base-stats-text" id="compare-current-stats">

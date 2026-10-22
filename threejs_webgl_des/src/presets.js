@@ -20,6 +20,7 @@ let selectedPreset = null;
 let selectedPresetResult = null;
 let activePresetCallback = null;
 let activeRaceGetter = null;
+let activeOptionsGetter = null;
 
 const SPELL_ICONS = CLASS_PRESENTATION.presetSpellIcons;
 
@@ -29,10 +30,11 @@ export function setActiveRaceGetter(fn) {
   activeRaceGetter = fn;
 }
 
-export async function initPresets(onSelectPreset, raceGetter) {
+export async function initPresets(onSelectPreset, raceGetter, optionsGetter) {
   try {
     activePresetCallback = onSelectPreset;
     if (raceGetter) activeRaceGetter = raceGetter;
+    if (optionsGetter) activeOptionsGetter = optionsGetter;
     const res = await fetch(CLASS_PRESENTATION.presetDataUrl);
     if (!res.ok) throw new Error('Could not load presets.');
     presetsData = await res.json();
@@ -205,9 +207,12 @@ export function renderPresetsLeaderboard(onSelectPreset) {
     tr.className = `preset-row ${selectedPreset?.id === p.id ? 'active' : ''} ${p.is_simulated ? 'simulated-done' : ''}`;
     
     const rankNum = idx + 1;
-    const raceIcon = RACE_ICONS[p.race] || RACE_ICONS.Human;
-    const { pet, sac } = getSpecPetIcons(p);
-    const aplRules = getSpecAPLRules(p);
+    const displayPreset={...p,...(p.useCurrentConfig?{race:activeRaceGetter?.()||p.race,...activeOptionsGetter?.()}:{})};
+    const raceName=String(displayPreset.race||'Human');
+    displayPreset.race=raceName[0].toUpperCase()+raceName.slice(1).toLowerCase();
+    const raceIcon = RACE_ICONS[displayPreset.race] || RACE_ICONS.Human;
+    const { pet, sac } = getSpecPetIcons(displayPreset);
+    const aplRules = getSpecAPLRules(displayPreset);
     const weights = getSpecStatWeights(p);
     const talentDist = getPresetTalentDistribution(p);
 
@@ -291,7 +296,7 @@ export function renderPresetsLeaderboard(onSelectPreset) {
         </div>
       </td>
       <td class="race-col" style="text-align: center;">
-        <img src="./assets/icons/${raceIcon}" class="race-mini-portrait" alt="${p.race}" title="Race: ${p.race}" style="margin: 0 auto;">
+        <img src="./assets/icons/${raceIcon}" class="race-mini-portrait" alt="${displayPreset.race}" title="Race: ${displayPreset.race}" style="margin: 0 auto;">
       </td>
       <td class="pet-sac-col" style="text-align: center;">
         <div style="display:flex; align-items:center; justify-content:center; gap:3px;">
@@ -365,18 +370,9 @@ export async function runBatchPresetSimulation(signal, onProgress, onSelectPrese
   const baseMP5 = activeConfig.mp5 ?? 20;
 
   for (const p of metaPresets) {
-    if(p.resolvedConfig){
-      const baseConfig={...p.resolvedConfig,duration:baseDuration,iterations:numSims,seed:activeConfig.seed??p.resolvedConfig.seed};
-      simConfigs.push(baseConfig);
-      if(calcWeights)simConfigs.push(
-        {...baseConfig,spellPower:baseConfig.spellPower+40},
-        {...baseConfig,hit:baseConfig.hit+3},
-        {...baseConfig,crit:baseConfig.crit+3},
-        {...baseConfig,intellect:baseConfig.intellect+30},
-        {...baseConfig,spirit:baseConfig.spirit+30});
-      continue;
-    }
-    const { pet, sac } = getPresetPetAndSac(p);
+    const presetOptions=getPresetPetAndSac(p);
+    const pet=p.useCurrentConfig?(activeConfig.petChoice??presetOptions.pet):presetOptions.pet;
+    const sac=p.useCurrentConfig?(activeConfig.sacrifice??presetOptions.sac):presetOptions.sac;
     const talent = getTalentFlagsFromRanks(p.talents);
     const nameLower = (p.name || '').toLowerCase();
     const rotLower = (p.rotation || '').toLowerCase();
@@ -389,6 +385,7 @@ export async function runBatchPresetSimulation(signal, onProgress, onSelectPrese
     } else if (nameLower.includes('bolt only') || nameLower.includes('pure shadow bolt')) {
       rot = 'bolt';
     }
+    if(p.useCurrentConfig)rot=activeConfig.rotation??p.rotation??rot;
 
     let presetAPL;
     if (p.aplText) {
@@ -403,7 +400,7 @@ export async function runBatchPresetSimulation(signal, onProgress, onSelectPrese
 
     const rawConfig = {
       ...activeConfig,
-      race: (p.race || activeConfig.race || 'HUMAN').toUpperCase(),
+      race: (p.useCurrentConfig?(activeConfig.race||p.race||'HUMAN'):(p.race||activeConfig.race||'HUMAN')).toUpperCase(),
       duration: baseDuration,
       iterations: numSims,
       rotation: rot,
@@ -427,11 +424,11 @@ export async function runBatchPresetSimulation(signal, onProgress, onSelectPrese
       // 2. +3% Hit
       simConfigs.push({ ...baseConfig, hit: baseConfig.hit + 3 });
       // 3. +3% Crit
-      simConfigs.push({ ...baseConfig, crit: baseCrit + 3 });
+      simConfigs.push({ ...baseConfig, crit: baseConfig.crit + 3 });
       // 4. +30 Intellect
-      simConfigs.push({ ...baseConfig, intellect: baseInt + 30 });
+      simConfigs.push({ ...baseConfig, intellect: baseConfig.intellect + 30 });
       // 5. +30 Spirit
-      simConfigs.push({ ...baseConfig, spirit: baseSpirit + 30 });
+      simConfigs.push({ ...baseConfig, spirit: baseConfig.spirit + 30 });
     }
   }
 

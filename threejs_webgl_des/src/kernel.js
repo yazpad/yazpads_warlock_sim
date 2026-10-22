@@ -183,7 +183,7 @@ float cost(uint spell){return baseCost(spell)*((spell==0u||spell==3u||spell==5u|
 void spend(uint spell){
  float amount=cost(spell);s.mana-=amount;s.spent+=amount;if(amount>0.0)s.spiritRegenAt=s.now+5000000u;countCast(spell==13u?7u:spell==23u?13u:spell);
  s.castBonus=(s.now<s.eurekaEnd&&(spell==0u||spell==3u||spell==5u||spell==8u||spell==9u||spell==13u))?1.10:1.0;
- if(c.race==4u&&s.now>=s.graveReady&&random01()<0.30){s.graveReady=s.now+25000000u;damage(12u,c.maxHealth*0.05,false);}
+ if(c.race==4u&&s.now>=s.graveReady&&random01()<0.30){s.graveReady=s.now+25000000u;damage(12u,c.maxHealth*0.05*((c.externalElements!=0u||s.now<s.elementsEnd)?1.10:1.0),false);}
 }
 bool racialInAPL(uint action){
  for(uint r=0u;r<numAplRules;r++)if((getConfigWord(currentCfgIdx,APL_HEADER0_OFFSET+r)&0xFFu)==action)return true;
